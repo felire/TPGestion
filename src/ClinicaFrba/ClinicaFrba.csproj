@@ -62,7 +62,9 @@
     <Compile Include="Abm Planes\Planes.Designer.cs">
       <DependentUpon>Planes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Profesional\Profesional.cs" />
+    <Compile Include="Abm Profesional\Profesional.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Abm Profesional\Profesional.Designer.cs">
       <DependentUpon>Profesional.cs</DependentUpon>
     </Compile>
@@ -72,13 +74,23 @@
     <Compile Include="AbmRol\Rol.Designer.cs">
       <DependentUpon>Rol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cancelar Atencion\CancelarAtencion.cs" />
+    <Compile Include="Cancelar Atencion\CancelarAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Cancelar Atencion\CancelarAtencion.Designer.cs">
       <DependentUpon>CancelarAtencion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra Bono\CompraBono.cs" />
+    <Compile Include="Compra Bono\CompraBono.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Compra Bono\CompraBono.Designer.cs">
       <DependentUpon>CompraBono.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listados.Designer.cs">
+      <DependentUpon>Listados.cs</DependentUpon>
     </Compile>
     <Compile Include="Logeo.cs">
       <SubType>Form</SubType>
@@ -86,8 +98,32 @@
     <Compile Include="Logeo.Designer.cs">
       <DependentUpon>Logeo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pedir Turno\PedirTurno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pedir Turno\PedirTurno.Designer.cs">
+      <DependentUpon>PedirTurno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registrar Agenta Medico\RegAgendaMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar Agenta Medico\RegAgendaMedico.Designer.cs">
+      <DependentUpon>RegAgendaMedico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registro Llegada\RegLlegada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Llegada\RegLlegada.Designer.cs">
+      <DependentUpon>RegLlegada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registro Resultado\RegResultado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Resultado\RegResultado.Designer.cs">
+      <DependentUpon>RegResultado.cs</DependentUpon>
+    </Compile>
     <Compile Include="UtilConexion\ConexionDB.cs" />
     <Compile Include="UtilConexion\Prueba.cs" />
     <EmbeddedResource Include="AbmRol\Rol.resx">
@@ -118,13 +154,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Listados\" />
-    <Folder Include="Pedir Turno\" />
-    <Folder Include="Registrar Agenta Medico\" />
-    <Folder Include="Registro Llegada\" />
-    <Folder Include="Registro Resultado\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
