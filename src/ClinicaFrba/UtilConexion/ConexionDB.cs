@@ -9,7 +9,7 @@ namespace ClinicaFrba.UtilConexion
     class ConexionDB
     {
         public static SqlConnection ObtenerConexion(){
-            string datosConexion = "Data Source=localhost\\SQLSERVER2012;" +"Initial Catalog=PruebaC;User Id=gd; Password=gd2016";
+            string datosConexion = "Data Source=localhost\\SQLSERVER2012;" +"Initial Catalog=GD2C2016;User Id=gd; Password=gd2016";
             SqlConnection Conn = new SqlConnection(datosConexion);
             Conn.Open();
             return Conn;                   

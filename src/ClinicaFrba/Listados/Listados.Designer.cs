@@ -1,6 +1,6 @@
-﻿namespace ClinicaFrba.Registro_Llegada
+﻿namespace ClinicaFrba.Listados
 {
-    partial class Form1
+    partial class Listados
     {
         /// <summary>
         /// Required designer variable.

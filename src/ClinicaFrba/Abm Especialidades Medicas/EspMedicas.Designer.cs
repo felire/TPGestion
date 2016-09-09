@@ -1,6 +1,6 @@
-﻿namespace ClinicaFrba.Abm_Afiliado
+﻿namespace ClinicaFrba.Abm_Especialidades_Medicas
 {
-    partial class Form1
+    partial class EspMedicas
     {
         /// <summary>
         /// Required designer variable.

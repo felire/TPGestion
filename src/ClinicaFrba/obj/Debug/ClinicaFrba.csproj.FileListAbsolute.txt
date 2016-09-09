@@ -15,3 +15,11 @@ C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicaci
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Logeo.resources
+C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
+C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
+C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
+C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.Rol.resources
+C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Logeo.resources
+C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
+C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache

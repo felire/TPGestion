@@ -1,6 +1,6 @@
-﻿namespace ClinicaFrba.Registrar_Agenta_Medico
+﻿namespace ClinicaFrba.Abm_Planes
 {
-    partial class Form1
+    partial class Planes
     {
         /// <summary>
         /// Required designer variable.

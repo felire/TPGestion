@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClinicaFrba.Compra_Bono
+namespace ClinicaFrba.Registro_Llegada
 {
-    public partial class Form1 : Form
+    public partial class RegLlegada : Form
     {
-        public Form1()
+        public RegLlegada()
         {
             InitializeComponent();
         }

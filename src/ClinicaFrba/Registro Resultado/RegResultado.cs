@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClinicaFrba.Registrar_Agenta_Medico
+namespace ClinicaFrba.Registro_Resultado
 {
-    public partial class Form1 : Form
+    public partial class RegResultado : Form
     {
-        public Form1()
+        public RegResultado()
         {
             InitializeComponent();
         }

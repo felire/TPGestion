@@ -87,7 +87,7 @@
             this.password.Size = new System.Drawing.Size(137, 20);
             this.password.TabIndex = 5;
             // 
-            // Form1
+            // Logeo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -98,8 +98,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logearse);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Logeo";
+            this.Text = "Logeo";
             this.ResumeLayout(false);
             this.PerformLayout();
 
