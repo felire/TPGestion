@@ -1,49 +1,56 @@
+USE [GD2C2016]
+GO
+
+CREATE SCHEMA [kernel_panic] AUTHORIZATION [gd]
+GO
+
+
 CREATE PROCEDURE CrearTablas
 AS
-	CREATE TABLE Roles (
+	CREATE TABLE [kernel_panic].[Roles] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Nombre VARCHAR (20) NOT NULL,
 		Esta_activo BIT NOT NULL); -- El BIT es BOOLEANO, 0 es false y 1 es true.
 
-	CREATE TABLE Funciones (
+	CREATE TABLE [kernel_panic].[Funciones] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Nombre VARCHAR(50) NOT NULL);
 
-	CREATE TABLE Funciones_Roles(
+	CREATE TABLE [kernel_panic].[Funciones_Roles] (
 		Rol_id INT,
 		Funcion_id INT,
 		PRIMARY KEY(Rol_id, Funcion_id),
-		FOREIGN KEY(Rol_id) REFERENCES Roles (Id),
-		FOREIGN KEY(Funcion_id) REFERENCES Funciones (Id));
+		FOREIGN KEY(Rol_id) REFERENCES [kernel_panic].[Roles] (Id),
+		FOREIGN KEY(Funcion_id) REFERENCES [kernel_panic].[Funciones] (Id));
 
-	CREATE TABLE Usuarios(
+	CREATE TABLE [kernel_panic].[Usuarios] (
 		Nombre_usuario VARCHAR(50) PRIMARY KEY, --Nombre usuario
 		Password_usuario CHAR(32) NOT NULL,
 		Nombre VARCHAR(255),
 		Intentos_fallidos INT DEFAULT 0,
 		Habilitado BIT NOT NULL DEFAULT 1); --1 es habilitado, 0 no.
 
-	CREATE TABLE Roles_Usuario(
+	CREATE TABLE [kernel_panic].[Roles_Usuario] (
 		Rol_id INT,
 		Usuario_id VARCHAR(50),
 		PRIMARY KEY(Rol_id,Usuario_id),
-		FOREIGN KEY(Rol_id) REFERENCES Roles (Id),
-		FOREIGN KEY(Usuario_id) REFERENCES Usuarios (Nombre_usuario)); 
+		FOREIGN KEY(Rol_id) REFERENCES [kernel_panic].[Roles] (Id),
+		FOREIGN KEY(Usuario_id) REFERENCES [kernel_panic].[Usuarios] (Nombre_usuario)); 
 
-	CREATE TABLE Planes(	--Todos valores de tabla maestra
+	CREATE TABLE [kernel_panic].[Planes] (	--Todos valores de tabla maestra
 		Codigo numeric(18,0) PRIMARY KEY,
 		Descripcion VARCHAR(255),
 		Precio_bono_consulta numeric(18,0),
 		Precio_bono_farmacia numeric(18,0));
 
-	CREATE TABLE Grupos_Familiares(
+	CREATE TABLE [kernel_panic].[Grupos_Familiares] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
-		Plan_Grupo numeric(18,0),
-		FOREIGN KEY (Plan_Grupo) REFERENCES Planes (Codigo));
+		Plan_grupo numeric(18,0),
+		FOREIGN KEY (Plan_Grupo) REFERENCES [kernel_panic].[Planes] (Codigo));
 
-	CREATE TABLE Afiliados(
+	CREATE TABLE [kernel_panic].[Afiliados] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
-		Numero_de_Grupo INT,
+		Numero_de_grupo INT,
 		Numero_en_el_grupo INT, --Dentro del grupo familiar
 		Nombre VARCHAR(255) NOT NULL,
 		Apellido VARCHAR(255) NOT NULL,
@@ -58,26 +65,26 @@ AS
 		Familiares_a_cargo INT,
 		Esta_activo BIT, -- 1 activo, 0 desactivado
 		Nombre_usuario VARCHAR(50),
-		FOREIGN KEY (Nombre_usuario) REFERENCES Usuarios (Nombre_usuario),
-		FOREIGN KEY (Numero_de_Grupo) REFERENCES Grupos_Familiares(Id));
+		FOREIGN KEY (Nombre_usuario) REFERENCES [kernel_panic].[Usuarios] (Nombre_usuario),
+		FOREIGN KEY (Numero_de_grupo) REFERENCES [kernel_panic].[Grupos_Familiares] (Id));
 
-	CREATE TABLE LogsCambioAfiliados(
+	CREATE TABLE [kernel_panic].[LogsCambioAfiliados] (
 		Id INT IDENTITY (1,1) PRIMARY KEY,
 		Afiliado INT,
 		Fecha DATETIME,
 		Descripcion VARCHAR(255)
-		FOREIGN KEY(Afiliado) REFERENCES Afiliados (Id));
+		FOREIGN KEY(Afiliado) REFERENCES [kernel_panic].[Afiliados] (Id));
 
 
-	CREATE TABLE Transacciones(
+	CREATE TABLE [kernel_panic].[Transacciones] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Cantidad INT NOT NULL,
 		Precio INT NOT NULL,
 		Fecha DATETIME NOT NULL,
 		Afiliado INT,
-		FOREIGN KEY (Afiliado) REFERENCES Afiliados (Id));
+		FOREIGN KEY (Afiliado) REFERENCES [kernel_panic].[Afiliados] (Id));
 
-	CREATE TABLE Profesionales(
+	CREATE TABLE [kernel_panic].[Profesionales] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Nombre VARCHAR(255) NOT NULL,
 		Apellido VARCHAR(255) NOT NULL,
@@ -89,33 +96,33 @@ AS
 		Fecha_nacimiento DATETIME NOT NULL,
 		Sexo CHAR CHECK (Sexo IN ('M', 'F')),
 		Usuario_id VARCHAR(50),
-		FOREIGN KEY (Usuario_id) REFERENCES Usuarios (Nombre_usuario),
+		FOREIGN KEY (Usuario_id) REFERENCES [kernel_panic].[Usuarios] (Nombre_usuario),
 		Profesional_matricula VARCHAR (50));
 
-	CREATE TABLE Tipo_Especialidad(
+	CREATE TABLE [kernel_panic].[Tipo_Especialidad] (
 		Codigo numeric(18,0) PRIMARY KEY,
 		Descripcion VARCHAR(255) NOT NULL);
 
-	CREATE TABLE Especialidades(
+	CREATE TABLE [kernel_panic].[Especialidades] (
 		Codigo numeric(18,0) PRIMARY KEY,
 		Descripcion VARCHAR(255) NOT NULL,
 		Tipo numeric(18,0)
-		FOREIGN KEY (Tipo) REFERENCES Tipo_Especialidad (Codigo));
+		FOREIGN KEY (Tipo) REFERENCES [kernel_panic].[Tipo_Especialidad] (Codigo));
 
-	CREATE TABLE Especialidad_Profesional(
+	CREATE TABLE [kernel_panic].[Especialidad_Profesional] (
 		Especialidad_codigo numeric(18,0),
 		Profesional_id INT,
 		PRIMARY KEY(Especialidad_codigo,Profesional_id),
-		FOREIGN KEY(Especialidad_codigo) REFERENCES Especialidades (Codigo),
-		FOREIGN KEY(Profesional_id) REFERENCES Profesionales (Id));
+		FOREIGN KEY(Especialidad_codigo) REFERENCES [kernel_panic].[Especialidades] (Codigo),
+		FOREIGN KEY(Profesional_id) REFERENCES [kernel_panic].[Profesionales] (Id));
 
-	CREATE TABLE Cancelaciones(
+	CREATE TABLE [kernel_panic].[Cancelaciones] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Tipo VARCHAR(30) CHECK (Tipo IN ('Afiliado', 'Profesional')),
 		Detalle VARCHAR(400),
 		Fecha DATETIME);
 
-	CREATE TABLE Turnos(
+	CREATE TABLE [kernel_panic].[Turnos] (
 		Id INT IDENTITY(202165,1) PRIMARY KEY,
 		Afiliado_id INT NOT NULL,
 		Profesional_id INT NOT NULL,
@@ -123,82 +130,82 @@ AS
 		Especialidad numeric(18,0) NOT NULL,
 		Fecha_llegada DATETIME NULL,
 		Cancelacion INT NULL,
-		FOREIGN KEY(Afiliado_id) REFERENCES Afiliados (Id),
-		FOREIGN KEY(Profesional_id) REFERENCES Profesionales (Id),
-		FOREIGN KEY(Especialidad) REFERENCES Especialidades (Codigo),
-		FOREIGN KEY(Cancelacion) REFERENCES Cancelaciones (Id));
+		FOREIGN KEY(Afiliado_id) REFERENCES [kernel_panic].[Afiliados] (Id),
+		FOREIGN KEY(Profesional_id) REFERENCES [kernel_panic].[Profesionales] (Id),
+		FOREIGN KEY(Especialidad) REFERENCES [kernel_panic].[Especialidades] (Codigo),
+		FOREIGN KEY(Cancelacion) REFERENCES [kernel_panic].[Cancelaciones] (Id));
 
-	CREATE TABLE Diagnosticos(
+	CREATE TABLE [kernel_panic].[Diagnosticos] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
-		Af_Id INT NOT NULL,
-		Pf_Id INT NOT NULL,
+		Afiliado_id INT NOT NULL,
+		Profesional_id INT NOT NULL,
 		Fecha DATETIME NOT NULL,
 		Sintoma VARCHAR(255) NOT NULL,
 		Enfermedad VARCHAR(255),
-		FOREIGN KEY(Af_Id) REFERENCES Afiliados (Id),
-		FOREIGN KEY(Pf_Id) REFERENCES Profesionales (Id));
+		FOREIGN KEY(Afiliado_id) REFERENCES [kernel_panic].[Afiliados] (Id),
+		FOREIGN KEY(Profesional_id) REFERENCES [kernel_panic].[Profesionales] (Id));
 
-	CREATE TABLE Bonos_Consultas(
+	CREATE TABLE [kernel_panic].[Bonos_Consultas] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
-		Nro_Consulta INT NULL,
-		GrupAf INT NOT NULL,
+		Nro_consulta INT NULL,
+		Grupo_afiliado INT NOT NULL,
 		Plan_Uso numeric(18,0) NOT NULL,
-		Af_Uso INT NULL, --Afiliado que lo utilizo
-		Fecha_Bono DATETIME,
-		Fecha_Imp DATETIME,
+		Afiliado_Uso INT NULL, --Afiliado que lo utilizo
+		Fecha_Bono_compra DATETIME,
+		Fecha_Impresion DATETIME, --Es fecha de uso
 		Turno INT NULL,
-		FOREIGN KEY(GrupAf) REFERENCES Grupos_Familiares (Id),
-		FOREIGN KEY(Plan_Uso) REFERENCES Planes (Codigo),
-		FOREIGN KEY(Turno) REFERENCES Turnos (Id),
-		FOREIGN KEY(Af_Uso) REFERENCES Afiliados (Id));
+		FOREIGN KEY(Grupo_afiliado) REFERENCES [kernel_panic].[Grupos_Familiares] (Id),
+		FOREIGN KEY(Plan_Uso) REFERENCES [kernel_panic].[Planes] (Codigo),
+		FOREIGN KEY(Turno) REFERENCES [kernel_panic].[Turnos] (Id),
+		FOREIGN KEY(Afiliado_Uso) REFERENCES [kernel_panic].[Afiliados] (Id));
 
-	CREATE TABLE Bonos_Farmacia(
+	CREATE TABLE [kernel_panic].[Bonos_Farmacia] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Afiliado_uso INT NULL,
-		Grupo_Afiliado INT NOT NULL,
-		Plan_Uso numeric(18,0) NOT NULL,
-		Fecha DATETIME,
-		FOREIGN KEY(Grupo_Afiliado) REFERENCES Grupos_Familiares (Id),
-		FOREIGN KEY(Plan_Uso) REFERENCES Planes (Codigo),
-		FOREIGN KEY(Afiliado_uso) REFERENCES Afiliados (Id));
+		Grupo_afiliado INT NOT NULL,
+		Plan_uso numeric(18,0) NOT NULL,
+		Fecha_compra DATETIME,
+		FOREIGN KEY(Grupo_afiliado) REFERENCES [kernel_panic].[Grupos_Familiares] (Id),
+		FOREIGN KEY(Plan_uso) REFERENCES [kernel_panic].[Planes] (Codigo),
+		FOREIGN KEY(Afiliado_uso) REFERENCES [kernel_panic].[Afiliados] (Id));
 
-	CREATE TABLE Agenda_Laboral(
+	CREATE TABLE [kernel_panic].[Agenda_Laboral] (
 		Id INT IDENTITY(1,1),
 		Profesional INT,
 		Dia DATETIME,
 		Desde TIME,
 		Hasta TIME,
 		Cancelado INT NULL,
-		FOREIGN KEY (Profesional) REFERENCES Profesionales (Id),
-		FOREIGN KEY(Cancelado) REFERENCES Cancelaciones (Id));
+		FOREIGN KEY (Profesional) REFERENCES [kernel_panic].[Profesionales] (Id),
+		FOREIGN KEY(Cancelado) REFERENCES [kernel_panic].[Cancelaciones] (Id));
 GO
 
 
 CREATE PROCEDURE BorrarTablas
 AS
-	DROP TABLE Agenda_Laboral
-	DROP TABLE Bonos_Farmacia
-	DROP TABLE Bonos_Consultas
-	DROP TABLE Diagnosticos
-	DROP TABLE Turnos
-	DROP TABLE Cancelaciones
-	DROP TABLE Especialidad_Profesional
-	DROP TABLE Especialidades
-	DROP TABLE Tipo_Especialidad
-	DROP TABLE Profesionales
-	DROP TABLE Transacciones
-	DROP TABLE LogsCambioAfiliados
-	DROP TABLE Afiliados
-	DROP TABLE Grupos_Familiares
-	DROP TABLE Planes
-	DROP TABLE Roles_Usuario
-	DROP TABLE Usuarios
-	DROP TABLE Funciones_Roles
-	DROP TABLE Funciones
-	DROP TABLE Roles
-GO
+	DROP TABLE [kernel_panic].[Agenda_Laboral]
+	DROP TABLE [kernel_panic].[Bonos_Farmacia]
+	DROP TABLE [kernel_panic].[Bonos_Consultas]
+	DROP TABLE [kernel_panic].[Diagnosticos]
+	DROP TABLE [kernel_panic].[Turnos]
+	DROP TABLE [kernel_panic].[Cancelaciones]
+	DROP TABLE [kernel_panic].[Especialidad_Profesional]
+	DROP TABLE [kernel_panic].[Especialidades]
+	DROP TABLE [kernel_panic].[Tipo_Especialidad]
+	DROP TABLE [kernel_panic].[Profesionales]
+	DROP TABLE [kernel_panic].[Transacciones]
+	DROP TABLE [kernel_panic].[LogsCambioAfiliados]
+	DROP TABLE [kernel_panic].[Afiliados]
+	DROP TABLE [kernel_panic].[Grupos_Familiares]
+	DROP TABLE [kernel_panic].[Planes]
+	DROP TABLE [kernel_panic].[Roles_Usuario]
+	DROP TABLE [kernel_panic].[Usuarios]
+	DROP TABLE [kernel_panic].[Funciones_Roles]
+	DROP TABLE [kernel_panic].[Funciones]
+	DROP TABLE [kernel_panic].[Roles]
+GO					
 
-CREATE PROCEDURE RegistroAfiliados
+CREATE PROCEDURE Cargar_registro_afiliados
 AS
 	SELECT DISTINCT Paciente_Nombre, Paciente_Apellido, Paciente_Dni, Paciente_Direccion, Paciente_Telefono, Paciente_Mail, Paciente_Fecha_Nac, Plan_Med_Codigo
 	INTO #auxiliarPaciente
@@ -218,10 +225,10 @@ AS
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
-		INSERT INTO dbo.Grupos_Familiares (Plan_Grupo) VALUES (@PlanMed)
-		INSERT INTO dbo.Afiliados (Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
+		INSERT INTO kernel_panic.Grupos_Familiares (Plan_Grupo) VALUES (@PlanMed)
+		INSERT INTO kernel_panic.Afiliados (Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
 		VALUES
-		((SELECT TOP 1 Id FROM dbo.Grupos_Familiares ORDER BY Id DESC),01, @PacienteNombre, @PacienteApellido,'DNI', @PacienteDNI, @PacienteDireccion, @PacienteTelefono,@PacienteMail,@PacienteFechaNac,NULL,NULL,NULL,1,NULL)
+		((SELECT TOP 1 Id FROM kernel_panic.Grupos_Familiares ORDER BY Id DESC),01, @PacienteNombre, @PacienteApellido,'DNI', @PacienteDNI, @PacienteDireccion, @PacienteTelefono,@PacienteMail,@PacienteFechaNac,NULL,NULL,NULL,1,NULL)
 		FETCH NEXT FROM CursorPaciente INTO @PacienteNombre, @PacienteApellido, @PacienteDNI, @PacienteDireccion, @PacienteTelefono, @PacienteMail, @PacienteFechaNac, @PlanMed
 		
 	END
@@ -230,74 +237,86 @@ AS
 	DROP TABLE #auxiliarPaciente
 GO
 
-CREATE PROCEDURE CrearTipoEspecialidad
+CREATE PROCEDURE Cargar_tipo_especialidad
 AS
-	INSERT INTO dbo.Tipo_Especialidad (Codigo, Descripcion) 
+	INSERT INTO kernel_panic.Tipo_Especialidad (Codigo, Descripcion) 
 	SELECT DISTINCT Tipo_Especialidad_Codigo, Tipo_Especialidad_Descripcion
 	FROM gd_esquema.Maestra
 	WHERE Tipo_Especialidad_Codigo IS NOT NULL
 GO
 
-CREATE PROCEDURE CrearEspecialidades
+CREATE PROCEDURE Cargar_especialidades
 AS
-	INSERT INTO dbo.Especialidades (Codigo, Descripcion,Tipo)
+	INSERT INTO kernel_panic.Especialidades (Codigo, Descripcion,Tipo)
 	SELECT DISTINCT Especialidad_Codigo, Especialidad_Descripcion, Tipo_Especialidad_Codigo
 	FROM gd_esquema.Maestra
 	WHERE Especialidad_Codigo IS NOT NULL
 GO
 
-CREATE PROCEDURE RegistrarPlanes
+CREATE PROCEDURE Cargar_planes
 AS
-	INSERT INTO dbo.Planes (Codigo, Descripcion, Precio_bono_consulta, Precio_bono_farmacia)
+	INSERT INTO kernel_panic.Planes (Codigo, Descripcion, Precio_bono_consulta, Precio_bono_farmacia)
 	SELECT DISTINCT Plan_Med_Codigo, Plan_Med_Descripcion, Plan_Med_Precio_Bono_Consulta, Plan_Med_Precio_Bono_Farmacia
 	FROM gd_esquema.Maestra
 GO
 
-CREATE PROCEDURE CrearProfesionales
+CREATE PROCEDURE Cargar_profesionales
 AS
-	INSERT INTO dbo.Profesionales (Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Usuario_id, Profesional_matricula)
+	INSERT INTO kernel_panic.Profesionales (Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Usuario_id, Profesional_matricula)
 	SELECT DISTINCT Medico_Nombre, Medico_Apellido, 'DNI',Medico_Dni,Medico_Direccion,Medico_Telefono,Medico_Mail,Medico_Fecha_Nac,NULL,NULL,NULL
 	FROM gd_esquema.Maestra
 	WHERE Medico_Nombre IS NOT NULL
 GO
 
-CREATE PROCEDURE CargarEspecialidadProfesional
+CREATE PROCEDURE Cargar_especialidad_profesional
 AS
-	INSERT INTO dbo.Especialidad_Profesional (Especialidad_codigo, Profesional_id)
+	INSERT INTO kernel_panic.Especialidad_Profesional (Especialidad_codigo, Profesional_id)
 	SELECT M.Especialidad_Codigo, P.Id
-	FROM gd_esquema.Maestra AS M JOIN dbo.Profesionales AS P ON (P.Numero_doc = M.Medico_Dni)
+	FROM gd_esquema.Maestra AS M JOIN kernel_panic.Profesionales AS P ON (P.Numero_doc = M.Medico_Dni)
 	GROUP BY M.Especialidad_Codigo, P.Id
 GO
 
-CREATE PROCEDURE CargarTurnos
+CREATE PROCEDURE Cargar_turnos
 AS
-	SET IDENTITY_INSERT dbo.Turnos ON
-	INSERT INTO dbo.Turnos (Id,Afiliado_id, Profesional_id, Fecha, Especialidad)
+	SET IDENTITY_INSERT kernel_panic.Turnos ON
+	INSERT INTO kernel_panic.Turnos (Id,Afiliado_id, Profesional_id, Fecha, Especialidad)
 	SELECT M.Turno_Numero, A.Id, P.Id, M.Turno_Fecha, M.Especialidad_Codigo
-	FROM gd_esquema.Maestra AS M JOIN dbo.Profesionales AS P ON (P.Numero_doc = M.Medico_Dni)
-								 JOIN dbo.Afiliados AS A ON (M.Paciente_Dni = A.Numero_doc)
+	FROM gd_esquema.Maestra AS M JOIN kernel_panic.Profesionales AS P ON (P.Numero_doc = M.Medico_Dni)
+								 JOIN kernel_panic.Afiliados AS A ON (M.Paciente_Dni = A.Numero_doc)
 	GROUP BY M.Especialidad_Codigo, P.Id, A.Id, M.Turno_Numero, M.Turno_Fecha
-	SET IDENTITY_INSERT dbo.Turnos OFF
+	SET IDENTITY_INSERT kernel_panic.Turnos OFF
 GO
 
-CREATE PROCEDURE CargarDiagnosticos
+CREATE PROCEDURE Cargar_diagnosticos
 AS
-	INSERT INTO dbo.Diagnosticos (Af_Id, Pf_Id, Fecha, Sintoma, Enfermedad)
+	INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Fecha, Sintoma, Enfermedad)
 	SELECT A.Id, P.Id, M.Turno_Fecha, M.Consulta_Sintomas, M.Consulta_Enfermedades
-	FROM gd_esquema.Maestra AS M JOIN dbo.Profesionales AS P ON (P.Numero_doc = M.Medico_Dni)
-								 JOIN dbo.Afiliados AS A ON (M.Paciente_Dni = A.Numero_doc)
+	FROM gd_esquema.Maestra AS M JOIN kernel_panic.Profesionales AS P ON (P.Numero_doc = M.Medico_Dni)
+								 JOIN kernel_panic.Afiliados AS A ON (M.Paciente_Dni = A.Numero_doc)
 	WHERE M.Consulta_Sintomas IS NOT NULL
 	GROUP BY A.Id, P.Id, M.Turno_Fecha, M.Consulta_Sintomas, M.Consulta_Enfermedades
 GO
 
-
 EXEC BorrarTablas
 EXEC CrearTablas
-EXEC RegistrarPlanes
-EXEC RegistroAfiliados
-EXEC CrearTipoEspecialidad
-EXEC CrearEspecialidades
-EXEC CrearProfesionales
-EXEC CargarEspecialidadProfesional
-EXEC CargarTurnos
-EXEC CargarDiagnosticos
+EXEC Cargar_planes
+EXEC Cargar_registro_afiliados
+EXEC Cargar_tipo_especialidad
+EXEC Cargar_especialidades
+EXEC Cargar_profesionales
+EXEC Cargar_especialidad_profesional
+EXEC Cargar_turnos
+EXEC Cargar_diagnosticos
+
+
+
+DROP PROCEDURE BorrarTablas
+DROP PROCEDURE CrearTablas
+DROP PROCEDURE Cargar_planes
+DROP PROCEDURE Cargar_registro_afiliados
+DROP PROCEDURE Cargar_tipo_especialidad
+DROP PROCEDURE Cargar_especialidades
+DROP PROCEDURE Cargar_profesionales
+DROP PROCEDURE Cargar_especialidad_profesional
+DROP PROCEDURE Cargar_turnos
+DROP PROCEDURE Cargar_diagnosticos
