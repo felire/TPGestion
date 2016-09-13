@@ -306,6 +306,55 @@ WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL
 GROUP BY Bono_Consulta_Fecha_Impresion,A.Id
 GO
 
+CREATE PROCEDURE kernel_panic.CargarBonoConsulta
+@numeroBono numeric(18,0),
+@numeroGrupo int,
+@codigoPlan numeric(18,0),
+@afiliadoId int,
+@fechaCompra datetime,
+@codigoTurno numeric(18,0)
+AS
+	DECLARE @nroConsultaActual AS int
+	SET @nroConsultaActual = (SELECT COUNT(B.Id) FROM kernel_panic.Bonos_Consultas B WHERE B.Afiliado_Uso = @afiliadoId) + 1 
+	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas ON
+	INSERT INTO kernel_panic.Bonos_Consultas (Id,Nro_consulta,Grupo_afiliado,Plan_Uso,Afiliado_Uso,Fecha_Bono_compra,Fecha_Impresion,Turno)
+	VALUES
+	(@numeroBono,@nroConsultaActual,@numeroGrupo, @codigoPlan, @afiliadoId, @fechaCompra, @fechaCompra, @codigoTurno)
+	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas OFF
+GO
+
+
+CREATE PROCEDURE kernel_panic.CargarBonos
+AS
+
+	SELECT M.Bono_Consulta_Numero numeroBono, A.Numero_de_grupo numeroGrupo, M.Plan_Med_Codigo codigoPlan, A.Id afiliadoId, M.Bono_Consulta_Fecha_Impresion fechaCompra, M.Turno_Numero codigoTurno
+	INTO #auxiliarBonos
+	FROM gd_esquema.Maestra M JOIN kernel_panic.Afiliados A ON (A.Numero_doc = M.Paciente_Dni)
+	WHERE Turno_Numero IS NOT NULL AND Bono_Consulta_Fecha_Impresion IS NOT NULL
+
+
+	DECLARE @numeroBono AS numeric(18,0)
+	DECLARE @numeroGrupo AS int
+	DECLARE @codigoPlan AS numeric(18,0)
+	DECLARE @afiliadoId AS int
+	DECLARE @fechaCompra AS datetime
+	DECLARE @codigoTurno AS numeric(18,0)
+
+	DECLARE CursorBonos CURSOR FOR SELECT numeroBono,numeroGrupo,codigoPlan,afiliadoId,fechaCompra,codigoTurno FROM #auxiliarBonos ORDER BY afiliadoId ASC
+	--Abrimos cursor
+	OPEN CursorBonos
+	FETCH NEXT FROM CursorBonos INTO @numeroBono,@numeroGrupo,@codigoPlan,@afiliadoId,@fechaCompra,@codigoTurno
+
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		EXEC CargarBonoConsulta @numeroBono, @numeroGrupo, @codigoPlan, @afiliadoId,@fechaCompra,@codigoTurno;
+		FETCH NEXT FROM CursorBonos INTO @numeroBono,@numeroGrupo,@codigoPlan,@afiliadoId,@fechaCompra,@codigoTurno
+		
+	END
+	CLOSE CursorBonos
+	DEALLOCATE CursorBonos
+	DROP TABLE #auxiliarBonos
+GO
 
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
@@ -318,7 +367,7 @@ EXEC kernel_panic.Cargar_especialidad_profesional
 EXEC kernel_panic.Cargar_turnos
 EXEC kernel_panic.Cargar_diagnosticos
 EXEC kernel_panic.Cargar_transacciones
-
+EXEC kernel_panic.CargarBonos
 
 DROP PROCEDURE kernel_panic.BorrarTablas
 DROP PROCEDURE kernel_panic.CrearTablas
