@@ -5,7 +5,7 @@ CREATE SCHEMA [kernel_panic] AUTHORIZATION [gd]
 GO
 
 
-CREATE PROCEDURE CrearTablas
+CREATE PROCEDURE kernel_panic.CrearTablas
 AS
 	CREATE TABLE [kernel_panic].[Roles] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -181,7 +181,7 @@ AS
 GO
 
 
-CREATE PROCEDURE BorrarTablas
+CREATE PROCEDURE kernel_panic.BorrarTablas
 AS
 	DROP TABLE [kernel_panic].[Agenda_Laboral]
 	DROP TABLE [kernel_panic].[Bonos_Farmacia]
@@ -205,7 +205,7 @@ AS
 	DROP TABLE [kernel_panic].[Roles]
 GO					
 
-CREATE PROCEDURE Cargar_registro_afiliados
+CREATE PROCEDURE kernel_panic.Cargar_registro_afiliados
 AS
 	SELECT DISTINCT Paciente_Nombre, Paciente_Apellido, Paciente_Dni, Paciente_Direccion, Paciente_Telefono, Paciente_Mail, Paciente_Fecha_Nac, Plan_Med_Codigo
 	INTO #auxiliarPaciente
@@ -237,7 +237,7 @@ AS
 	DROP TABLE #auxiliarPaciente
 GO
 
-CREATE PROCEDURE Cargar_tipo_especialidad
+CREATE PROCEDURE kernel_panic.Cargar_tipo_especialidad
 AS
 	INSERT INTO kernel_panic.Tipo_Especialidad (Codigo, Descripcion) 
 	SELECT DISTINCT Tipo_Especialidad_Codigo, Tipo_Especialidad_Descripcion
@@ -245,7 +245,7 @@ AS
 	WHERE Tipo_Especialidad_Codigo IS NOT NULL
 GO
 
-CREATE PROCEDURE Cargar_especialidades
+CREATE PROCEDURE kernel_panic.Cargar_especialidades
 AS
 	INSERT INTO kernel_panic.Especialidades (Codigo, Descripcion,Tipo)
 	SELECT DISTINCT Especialidad_Codigo, Especialidad_Descripcion, Tipo_Especialidad_Codigo
@@ -253,14 +253,14 @@ AS
 	WHERE Especialidad_Codigo IS NOT NULL
 GO
 
-CREATE PROCEDURE Cargar_planes
+CREATE PROCEDURE kernel_panic.Cargar_planes
 AS
 	INSERT INTO kernel_panic.Planes (Codigo, Descripcion, Precio_bono_consulta, Precio_bono_farmacia)
 	SELECT DISTINCT Plan_Med_Codigo, Plan_Med_Descripcion, Plan_Med_Precio_Bono_Consulta, Plan_Med_Precio_Bono_Farmacia
 	FROM gd_esquema.Maestra
 GO
 
-CREATE PROCEDURE Cargar_profesionales
+CREATE PROCEDURE kernel_panic.Cargar_profesionales
 AS
 	INSERT INTO kernel_panic.Profesionales (Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Usuario_id, Profesional_matricula)
 	SELECT DISTINCT Medico_Nombre, Medico_Apellido, 'DNI',Medico_Dni,Medico_Direccion,Medico_Telefono,Medico_Mail,Medico_Fecha_Nac,NULL,NULL,NULL
@@ -268,7 +268,7 @@ AS
 	WHERE Medico_Nombre IS NOT NULL
 GO
 
-CREATE PROCEDURE Cargar_especialidad_profesional
+CREATE PROCEDURE kernel_panic.Cargar_especialidad_profesional
 AS
 	INSERT INTO kernel_panic.Especialidad_Profesional (Especialidad_codigo, Profesional_id)
 	SELECT M.Especialidad_Codigo, P.Id
@@ -276,7 +276,7 @@ AS
 	GROUP BY M.Especialidad_Codigo, P.Id
 GO
 
-CREATE PROCEDURE Cargar_turnos
+CREATE PROCEDURE kernel_panic.Cargar_turnos
 AS
 	SET IDENTITY_INSERT kernel_panic.Turnos ON
 	INSERT INTO kernel_panic.Turnos (Id,Afiliado_id, Profesional_id, Fecha, Especialidad)
@@ -287,7 +287,7 @@ AS
 	SET IDENTITY_INSERT kernel_panic.Turnos OFF
 GO
 
-CREATE PROCEDURE Cargar_diagnosticos
+CREATE PROCEDURE kernel_panic.Cargar_diagnosticos
 AS
 	INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Fecha, Sintoma, Enfermedad)
 	SELECT A.Id, P.Id, M.Turno_Fecha, M.Consulta_Sintomas, M.Consulta_Enfermedades
@@ -297,26 +297,37 @@ AS
 	GROUP BY A.Id, P.Id, M.Turno_Fecha, M.Consulta_Sintomas, M.Consulta_Enfermedades
 GO
 
-EXEC BorrarTablas
-EXEC CrearTablas
-EXEC Cargar_planes
-EXEC Cargar_registro_afiliados
-EXEC Cargar_tipo_especialidad
-EXEC Cargar_especialidades
-EXEC Cargar_profesionales
-EXEC Cargar_especialidad_profesional
-EXEC Cargar_turnos
-EXEC Cargar_diagnosticos
+CREATE PROCEDURE kernel_panic.Cargar_transacciones
+AS
+INSERT INTO kernel_panic.Transacciones (Cantidad, Precio, Fecha, Afiliado)
+SELECT COUNT(Bono_Consulta_Numero) /2, SUM(Plan_Med_Precio_Bono_Farmacia)/2 , Bono_Consulta_Fecha_Impresion, A.Id
+FROM gd_esquema.Maestra M JOIN kernel_panic.Afiliados A ON (A.Numero_doc = M.Paciente_Dni)
+WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL
+GROUP BY Bono_Consulta_Fecha_Impresion,A.Id
+GO
 
 
+EXEC kernel_panic.BorrarTablas
+EXEC kernel_panic.CrearTablas
+EXEC kernel_panic.Cargar_planes
+EXEC kernel_panic.Cargar_registro_afiliados
+EXEC kernel_panic.Cargar_tipo_especialidad
+EXEC kernel_panic.Cargar_especialidades
+EXEC kernel_panic.Cargar_profesionales
+EXEC kernel_panic.Cargar_especialidad_profesional
+EXEC kernel_panic.Cargar_turnos
+EXEC kernel_panic.Cargar_diagnosticos
+EXEC kernel_panic.Cargar_transacciones
 
-DROP PROCEDURE BorrarTablas
-DROP PROCEDURE CrearTablas
-DROP PROCEDURE Cargar_planes
-DROP PROCEDURE Cargar_registro_afiliados
-DROP PROCEDURE Cargar_tipo_especialidad
-DROP PROCEDURE Cargar_especialidades
-DROP PROCEDURE Cargar_profesionales
-DROP PROCEDURE Cargar_especialidad_profesional
-DROP PROCEDURE Cargar_turnos
-DROP PROCEDURE Cargar_diagnosticos
+
+DROP PROCEDURE kernel_panic.BorrarTablas
+DROP PROCEDURE kernel_panic.CrearTablas
+DROP PROCEDURE kernel_panic.Cargar_planes
+DROP PROCEDURE kernel_panic.Cargar_registro_afiliados
+DROP PROCEDURE kernel_panic.Cargar_tipo_especialidad
+DROP PROCEDURE kernel_panic.Cargar_especialidades
+DROP PROCEDURE kernel_panic.Cargar_profesionales
+DROP PROCEDURE kernel_panic.Cargar_especialidad_profesional
+DROP PROCEDURE kernel_panic.Cargar_turnos
+DROP PROCEDURE kernel_panic.Cargar_diagnosticos
+DROP PROCEDURE kernel_panic.Cargar_transacciones
