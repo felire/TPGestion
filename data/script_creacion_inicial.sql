@@ -347,13 +347,28 @@ AS
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
-		EXEC CargarBonoConsulta @numeroBono, @numeroGrupo, @codigoPlan, @afiliadoId,@fechaCompra,@codigoTurno;
+		EXEC kernel_panic.CargarBonoConsulta @numeroBono, @numeroGrupo, @codigoPlan, @afiliadoId,@fechaCompra,@codigoTurno;
 		FETCH NEXT FROM CursorBonos INTO @numeroBono,@numeroGrupo,@codigoPlan,@afiliadoId,@fechaCompra,@codigoTurno
 		
 	END
 	CLOSE CursorBonos
 	DEALLOCATE CursorBonos
 	DROP TABLE #auxiliarBonos
+GO
+
+CREATE PROCEDURE kernel_panic.CargarRoles
+AS
+	INSERT INTO kernel_panic.Roles (Nombre, Esta_activo) VALUES ('Administrativo',1), ('Afiliado',1), ('Profesional',1)
+GO
+
+CREATE PROCEDURE kernel_panic.CargarFuncionalidades
+AS
+	INSERT INTO kernel_panic.Funciones (Nombre) VALUES ('ABM Roles'), ('ABM Afiliado'), ('ABM Agenda'), ('ABM Bonos'), ('ABM Turnos'), ('Llegada afiliado'), ('Resultado atencion medica'), ('ABM Cancelaciones'), ('Listado Estadistico')
+GO
+
+CREATE PROCEDURE kernel_panic.CargarRoles_Funcionalidad
+AS
+	INSERT INTO kernel_panic.Funciones_Roles (Rol_id,Funcion_id) VALUES (1,1),(1,2),(1,3),(1,4),(1,6),(1,9),(2,4),(2,5),(2,8),(3,7),(3,8)
 GO
 
 EXEC kernel_panic.BorrarTablas
@@ -368,6 +383,10 @@ EXEC kernel_panic.Cargar_turnos
 EXEC kernel_panic.Cargar_diagnosticos
 EXEC kernel_panic.Cargar_transacciones
 EXEC kernel_panic.CargarBonos
+EXEC kernel_panic.CargarRoles
+EXEC kernel_panic.CargarFuncionalidades
+EXEC kernel_panic.CargarRoles_Funcionalidad
+
 
 DROP PROCEDURE kernel_panic.BorrarTablas
 DROP PROCEDURE kernel_panic.CrearTablas
@@ -380,3 +399,8 @@ DROP PROCEDURE kernel_panic.Cargar_especialidad_profesional
 DROP PROCEDURE kernel_panic.Cargar_turnos
 DROP PROCEDURE kernel_panic.Cargar_diagnosticos
 DROP PROCEDURE kernel_panic.Cargar_transacciones
+DROP PROCEDURE kernel_panic.CargarBonos
+DROP PROCEDURE kernel_panic.CargarBonoConsulta
+DROP PROCEDURE kernel_panic.CargarRoles
+DROP PROCEDURE kernel_panic.CargarFuncionalidades
+DROP PROCEDURE kernel_panic.CargarRoles_Funcionalidad
