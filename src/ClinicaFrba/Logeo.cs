@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using ClinicaFrba.UtilConexion;
+using ClinicaFrba.Menu;
 namespace ClinicaFrba
 {
     public partial class Logeo : Form
@@ -16,7 +17,6 @@ namespace ClinicaFrba
         public Logeo()
         {
             InitializeComponent();
-            hola2ToolStripMenuItem.Visible = false;
         }
 
         private void logeoAccion(object sender, EventArgs e)
@@ -31,10 +31,6 @@ namespace ClinicaFrba
             //UtilConexion.Prueba.Agregar("Pepe");
         }
 
-        public void noUsuario()
-        {
-            MessageBox.Show("Usuario no existente", "Error!", MessageBoxButtons.OK);
-        }
         public void noContrasena()
         {
             MessageBox.Show("Usuario o contraseña incorrectos", "Error!", MessageBoxButtons.OK);
@@ -47,7 +43,9 @@ namespace ClinicaFrba
 
         public void logeoExitoso()
         {
-            MessageBox.Show("Logeo exitoso!", "Error!", MessageBoxButtons.OK);
+            MenuClinica menu = new MenuClinica();
+            menu.Show();
+            this.Hide();
         }
 
         private void Logeo_Load(object sender, EventArgs e)
