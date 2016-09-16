@@ -32,3 +32,5 @@ C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\Clinica
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.MenuClinica.resources

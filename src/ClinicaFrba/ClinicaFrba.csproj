@@ -98,6 +98,12 @@
     <Compile Include="Logeo.Designer.cs">
       <DependentUpon>Logeo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Menu\MenuClinica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuClinica.Designer.cs">
+      <DependentUpon>MenuClinica.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pedir Turno\PedirTurno.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,11 +132,15 @@
     </Compile>
     <Compile Include="UtilConexion\ConexionDB.cs" />
     <Compile Include="UtilConexion\Prueba.cs" />
+    <Compile Include="UtilConexion\Usuario.cs" />
     <EmbeddedResource Include="AbmRol\Rol.resx">
       <DependentUpon>Rol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logeo.resx">
       <DependentUpon>Logeo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuClinica.resx">
+      <DependentUpon>MenuClinica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
