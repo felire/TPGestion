@@ -375,45 +375,41 @@ CREATE PROCEDURE kernel_panic.chequearUsuario
 @pass CHAR(64),
 @fallo INT OUTPUT
 AS
-	SELECT COUNT(Nombre_usuario) cantidad, Nombre_usuario, Password_usuario, Intentos_fallidos, Habilitado INTO #user FROM kernel_panic.Usuarios WHERE Nombre_usuario = @nombreUsuario GROUP BY Nombre_usuario, Password_usuario, Intentos_fallidos, Habilitado
-
-	/*IF NOT EXISTS (SELECT cantidad FROM #user)
-	BEGIN
-		SET @fallo = 0 /*El usuario no existe*/
-		return
-	END*/
+	SELECT Nombre_usuario, Password_usuario, Intentos_fallidos, Habilitado 
+	INTO #user 
+	FROM kernel_panic.Usuarios 
+	WHERE Nombre_usuario = @nombreUsuario 
 
 	IF (SELECT Password_usuario FROM #user) LIKE @pass
-	BEGIN
-		IF (SELECT Habilitado FROM #user) = 0
 		BEGIN
-			SET @fallo = -1 /*No habilitado*/
-			return
+			IF (SELECT Habilitado FROM #user) = 0
+				BEGIN
+					SET @fallo = -1 /*No habilitado*/
+					return
+				END
+			ELSE
+				BEGIN
+					UPDATE kernel_panic.Usuarios
+					SET Intentos_fallidos = 0
+					WHERE Nombre_usuario = @nombreUsuario
+					SET @fallo = 1 /*Logeo exitoso*/
+					return
+				END
 		END
-		ELSE
-		BEGIN
-			UPDATE kernel_panic.Usuarios
-			SET Intentos_fallidos = 0
-			WHERE Nombre_usuario = @nombreUsuario
-
-			SET @fallo = 1 /*Logeo exitoso*/
-			return
-		END
-	END
 	ELSE
-	BEGIN
-		UPDATE kernel_panic.Usuarios
-		SET Intentos_fallidos = (SELECT Intentos_fallidos FROM #user) + 1
-		WHERE Nombre_usuario = @nombreUsuario
-		IF ((SELECT Intentos_fallidos FROM #user) + 1) = 3
 		BEGIN
 			UPDATE kernel_panic.Usuarios
-			SET Habilitado = 0
+			SET Intentos_fallidos = (SELECT Intentos_fallidos FROM #user) + 1
 			WHERE Nombre_usuario = @nombreUsuario
+			IF ((SELECT Intentos_fallidos FROM #user) + 1) = 3
+				BEGIN
+					UPDATE kernel_panic.Usuarios
+					SET Habilitado = 0
+					WHERE Nombre_usuario = @nombreUsuario
+				END
+			SET @fallo = 2 /*Contraseña Incorrecta*/
+			return
 		END
-		SET @fallo = 2 /*Contraseña Incorrecta*/
-		return
-	END
 	DROP TABLE #user
 GO
 
