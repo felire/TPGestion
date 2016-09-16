@@ -34,6 +34,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.userName = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.holaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hola2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hola3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // logearse
@@ -87,6 +92,36 @@
             this.password.Size = new System.Drawing.Size(137, 20);
             this.password.TabIndex = 5;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.holaToolStripMenuItem,
+            this.hola2ToolStripMenuItem,
+            this.hola3ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // holaToolStripMenuItem
+            // 
+            this.holaToolStripMenuItem.Name = "holaToolStripMenuItem";
+            this.holaToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.holaToolStripMenuItem.Text = "Hola";
+            // 
+            // hola2ToolStripMenuItem
+            // 
+            this.hola2ToolStripMenuItem.Name = "hola2ToolStripMenuItem";
+            this.hola2ToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.hola2ToolStripMenuItem.Text = "Hola2";
+            // 
+            // hola3ToolStripMenuItem
+            // 
+            this.hola3ToolStripMenuItem.Name = "hola3ToolStripMenuItem";
+            this.hola3ToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.hola3ToolStripMenuItem.Text = "Hola3";
+            // 
             // Logeo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -98,8 +133,13 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logearse);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Logeo";
             this.Text = "Logeo";
+            this.Load += new System.EventHandler(this.Logeo_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,6 +153,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox userName;
         private System.Windows.Forms.TextBox password;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem holaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hola2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hola3ToolStripMenuItem;
     }
 }
 

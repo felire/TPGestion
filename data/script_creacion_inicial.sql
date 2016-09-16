@@ -25,11 +25,10 @@ AS
 
 	CREATE TABLE [kernel_panic].[Usuarios] (
 		Nombre_usuario VARCHAR(50) PRIMARY KEY, --Nombre usuario
-		Password_usuario CHAR(32) NOT NULL,
+		Password_usuario CHAR(64) NOT NULL,
 		Nombre VARCHAR(255),
 		Intentos_fallidos INT DEFAULT 0,
 		Habilitado BIT NOT NULL DEFAULT 1); --1 es habilitado, 0 no.
-
 	CREATE TABLE [kernel_panic].[Roles_Usuario] (
 		Rol_id INT,
 		Usuario_id VARCHAR(50),
@@ -371,6 +370,55 @@ AS
 	INSERT INTO kernel_panic.Funciones_Roles (Rol_id,Funcion_id) VALUES (1,1),(1,2),(1,3),(1,4),(1,6),(1,9),(2,4),(2,5),(2,8),(3,7),(3,8)
 GO
 
+CREATE PROCEDURE kernel_panic.chequearUsuario
+@nombreUsuario VARCHAR(50),
+@pass CHAR(64),
+@fallo INT OUTPUT
+AS
+	SELECT COUNT(Nombre_usuario) cantidad, Nombre_usuario, Password_usuario, Intentos_fallidos, Habilitado INTO #user FROM kernel_panic.Usuarios WHERE Nombre_usuario = @nombreUsuario GROUP BY Nombre_usuario, Password_usuario, Intentos_fallidos, Habilitado
+	IF (SELECT Habilitado FROM #user) = 0
+	BEGIN
+		SET @fallo = -1 /*No habilitado*/
+		return
+	END
+
+	IF NOT EXISTS (SELECT cantidad FROM #user)
+	BEGIN
+		SET @fallo = 0 /*El usuario no existe*/
+		return
+	END
+
+	IF (SELECT Password_usuario FROM #user) LIKE @pass
+	BEGIN
+		UPDATE kernel_panic.Usuarios
+		SET Intentos_fallidos = 0
+		WHERE Nombre_usuario = @nombreUsuario
+
+		SET @fallo = 1 /*Logeo exitoso*/
+		return
+	END
+	IF (SELECT Password_usuario FROM #user) NOT LIKE @pass
+	BEGIN
+		UPDATE kernel_panic.Usuarios
+		SET Intentos_fallidos = (SELECT Intentos_fallidos FROM #user) + 1
+		WHERE Nombre_usuario = @nombreUsuario
+		IF ((SELECT Intentos_fallidos FROM #user) + 1) = 3
+		BEGIN
+			UPDATE kernel_panic.Usuarios
+			SET Habilitado = 0
+			WHERE Nombre_usuario = @nombreUsuario
+		END
+		SET @fallo = 2 /*Contraseña Incorrecta*/
+		return
+	END
+	DROP TABLE #user
+GO
+
+
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('folita', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff')
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('folitix', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff')
+DROP PROCEDURE kernel_panic.registrarUsuario
+
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
 EXEC kernel_panic.Cargar_planes
@@ -386,6 +434,8 @@ EXEC kernel_panic.CargarBonos
 EXEC kernel_panic.CargarRoles
 EXEC kernel_panic.CargarFuncionalidades
 EXEC kernel_panic.CargarRoles_Funcionalidad
+
+
 
 
 DROP PROCEDURE kernel_panic.BorrarTablas
