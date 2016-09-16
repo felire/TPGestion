@@ -31,10 +31,6 @@ namespace ClinicaFrba.UtilConexion
                 {
                     formu.noHabilitado();
                 }
-                if (resultado == 0)
-                {
-                    formu.noUsuario();
-                }
                 if (resultado == 1)
                 {
                     formu.logeoExitoso();

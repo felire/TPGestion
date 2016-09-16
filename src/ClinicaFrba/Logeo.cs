@@ -37,7 +37,7 @@ namespace ClinicaFrba
         }
         public void noContrasena()
         {
-            MessageBox.Show("Contraseña erronea", "Error!", MessageBoxButtons.OK);
+            MessageBox.Show("Usuario o contraseña incorrectos", "Error!", MessageBoxButtons.OK);
         }
 
         public void noHabilitado()

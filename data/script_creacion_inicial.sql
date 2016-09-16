@@ -376,28 +376,31 @@ CREATE PROCEDURE kernel_panic.chequearUsuario
 @fallo INT OUTPUT
 AS
 	SELECT COUNT(Nombre_usuario) cantidad, Nombre_usuario, Password_usuario, Intentos_fallidos, Habilitado INTO #user FROM kernel_panic.Usuarios WHERE Nombre_usuario = @nombreUsuario GROUP BY Nombre_usuario, Password_usuario, Intentos_fallidos, Habilitado
-	IF (SELECT Habilitado FROM #user) = 0
-	BEGIN
-		SET @fallo = -1 /*No habilitado*/
-		return
-	END
 
-	IF NOT EXISTS (SELECT cantidad FROM #user)
+	/*IF NOT EXISTS (SELECT cantidad FROM #user)
 	BEGIN
 		SET @fallo = 0 /*El usuario no existe*/
 		return
-	END
+	END*/
 
 	IF (SELECT Password_usuario FROM #user) LIKE @pass
 	BEGIN
-		UPDATE kernel_panic.Usuarios
-		SET Intentos_fallidos = 0
-		WHERE Nombre_usuario = @nombreUsuario
+		IF (SELECT Habilitado FROM #user) = 0
+		BEGIN
+			SET @fallo = -1 /*No habilitado*/
+			return
+		END
+		ELSE
+		BEGIN
+			UPDATE kernel_panic.Usuarios
+			SET Intentos_fallidos = 0
+			WHERE Nombre_usuario = @nombreUsuario
 
-		SET @fallo = 1 /*Logeo exitoso*/
-		return
+			SET @fallo = 1 /*Logeo exitoso*/
+			return
+		END
 	END
-	IF (SELECT Password_usuario FROM #user) NOT LIKE @pass
+	ELSE
 	BEGIN
 		UPDATE kernel_panic.Usuarios
 		SET Intentos_fallidos = (SELECT Intentos_fallidos FROM #user) + 1
@@ -415,6 +418,7 @@ AS
 GO
 
 
+DROP PROCEDURE kernel_panic.chequearUsuario
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('folita', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff')
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('folitix', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff')
 DROP PROCEDURE kernel_panic.registrarUsuario
