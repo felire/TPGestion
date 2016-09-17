@@ -131,7 +131,9 @@
       <DependentUpon>RegResultado.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilConexion\ConexionDB.cs" />
+    <Compile Include="UtilConexion\Funcionalidad.cs" />
     <Compile Include="UtilConexion\Prueba.cs" />
+    <Compile Include="UtilConexion\Rol.cs" />
     <Compile Include="UtilConexion\Usuario.cs" />
     <EmbeddedResource Include="AbmRol\Rol.resx">
       <DependentUpon>Rol.cs</DependentUpon>

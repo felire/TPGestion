@@ -12,7 +12,7 @@ using ClinicaFrba.UtilConexion;
 using ClinicaFrba.Menu;
 namespace ClinicaFrba
 {
-    public partial class Logeo : Form
+    partial class Logeo : Form
     {
         public Logeo()
         {
@@ -41,9 +41,9 @@ namespace ClinicaFrba
             MessageBox.Show("Usuario no habilitado", "Error!", MessageBoxButtons.OK);
         }
 
-        public void logeoExitoso()
+        public void logeoExitoso(Usuario usuario)
         {
-            MenuClinica menu = new MenuClinica();
+            MenuClinica menu = new MenuClinica(usuario);
             menu.Show();
             this.Hide();
         }

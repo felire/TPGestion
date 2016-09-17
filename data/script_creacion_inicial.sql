@@ -417,7 +417,16 @@ GO
 DROP PROCEDURE kernel_panic.chequearUsuario
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('folita', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff')
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('folitix', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff')
-DROP PROCEDURE kernel_panic.registrarUsuario
+
+
+
+CREATE PROCEDURE kernel_panic.crearUsuarioYRolesxU
+AS
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('afiliado', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff') -- feli1234 la pass
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('profesional', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff') --feli1234 la pass
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7') --w23e la pass
+INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (1, 'admin'), (2, 'afiliado'), (3,'profesional')
+GO
 
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
@@ -434,7 +443,7 @@ EXEC kernel_panic.CargarBonos
 EXEC kernel_panic.CargarRoles
 EXEC kernel_panic.CargarFuncionalidades
 EXEC kernel_panic.CargarRoles_Funcionalidad
-
+EXEC kernel_panic.crearUsuarioYRolesxU
 
 
 

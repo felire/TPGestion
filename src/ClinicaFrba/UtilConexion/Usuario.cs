@@ -14,8 +14,12 @@ namespace ClinicaFrba.UtilConexion
 {
     class Usuario
     {
-        public string Name { get; set; }
+        public string usuario { get; set; }
+        public List<Rol> roles;
 
+        public List<Rol> getRoles(){
+            return roles;
+        }
         public Usuario(string user, string pass, Logeo formu)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
@@ -26,14 +30,15 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(parametroSalida);
             SqlCommand comando =  ConexionDB.ExecuteNoQuery("kernel_panic.chequearUsuario", "SP", ListaParametros);
             int resultado = Int32.Parse(comando.Parameters["@fallo"].Value.ToString());
-                Name = user;
+                usuario = user;
                 if (resultado == -1)
                 {
                     formu.noHabilitado();
                 }
                 if (resultado == 1)
                 {
-                    formu.logeoExitoso();
+                    this.ObtenerRoles();
+                    formu.logeoExitoso(this);
                 }
                 if (resultado == 2)
                 {
@@ -41,5 +46,34 @@ namespace ClinicaFrba.UtilConexion
                 }
 
         }
+
+        public void ObtenerRoles()
+        {
+            List<int> Lista = new List<int>();
+            this.roles = new List<Rol>();
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@nombre", this.usuario));
+            SqlDataReader lector = ConexionDB.ObtenerDataReader("SELECT Rol_id FROM kernel_panic.Roles_Usuario WHERE Usuario_id = @nombre", "T", ListaParametros);
+
+            if (lector.HasRows)
+            {
+                while (lector.Read())
+                {
+                    Lista.Add((int) lector["Rol_id"]);
+                }
+            }
+
+            foreach (int rol_id in Lista)
+            {
+                this.roles.Add(new Rol(rol_id));
+            }
+        }
+
+
+        public Boolean masDeUnRol()
+        {
+            return roles.Count > 1;
+        }
+
     }
 }

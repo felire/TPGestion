@@ -41,7 +41,8 @@ namespace ClinicaFrba.UtilConexion
                     comando.CommandType = CommandType.StoredProcedure;
                     break;
             }
-            return comando.ExecuteReader();
+            SqlDataReader reader = comando.ExecuteReader();
+            return reader;
         }
 
         public static SqlCommand ExecuteNoQuery(string commandtext, string commandtype, List<SqlParameter> ListaParametro)
