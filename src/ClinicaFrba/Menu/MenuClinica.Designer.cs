@@ -1,4 +1,4 @@
-﻿namespace ClinicaFrba.Menu
+namespace ClinicaFrba.Menu
 {
     partial class MenuClinica
     {
@@ -44,6 +44,10 @@
             this.textElegirRol = new System.Windows.Forms.Label();
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
+            this.altaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.bajaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.visualizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificaciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,23 +82,28 @@
             // altaToolStripMenuItem
             // 
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
-            this.altaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.altaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.altaToolStripMenuItem.Text = "Alta";
             // 
             // bajaToolStripMenuItem
             // 
             this.bajaToolStripMenuItem.Name = "bajaToolStripMenuItem";
-            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.bajaToolStripMenuItem.Text = "Baja";
             // 
             // modificaciónToolStripMenuItem
             // 
             this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
-            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.modificaciónToolStripMenuItem.Text = "Modificación";
             // 
             // afiliadoToolStripMenuItem
             // 
+            this.afiliadoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.altaToolStripMenuItem1,
+            this.bajaToolStripMenuItem1,
+            this.visualizaciónToolStripMenuItem,
+            this.modificaciónToolStripMenuItem1});
             this.afiliadoToolStripMenuItem.Name = "afiliadoToolStripMenuItem";
             this.afiliadoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.afiliadoToolStripMenuItem.Text = "Afiliado";
@@ -172,6 +181,32 @@
             this.listaFunciones.UseCompatibleStateImageBehavior = false;
             this.listaFunciones.View = System.Windows.Forms.View.List;
             // 
+            // altaToolStripMenuItem1
+            // 
+            this.altaToolStripMenuItem1.Name = "altaToolStripMenuItem1";
+            this.altaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.altaToolStripMenuItem1.Text = "Alta";
+            // 
+            // bajaToolStripMenuItem1
+            // 
+            this.bajaToolStripMenuItem1.Name = "bajaToolStripMenuItem1";
+            this.bajaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.bajaToolStripMenuItem1.Text = "Baja";
+            // 
+            // visualizaciónToolStripMenuItem
+            // 
+            this.visualizaciónToolStripMenuItem.Name = "visualizaciónToolStripMenuItem";
+            this.visualizaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.visualizaciónToolStripMenuItem.Text = "Visualización";
+            this.visualizaciónToolStripMenuItem.Click += new System.EventHandler(this.visualizacionAficlick);
+      
+            // 
+            // modificaciónToolStripMenuItem1
+            // 
+            this.modificaciónToolStripMenuItem1.Name = "modificaciónToolStripMenuItem1";
+            this.modificaciónToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.modificaciónToolStripMenuItem1.Text = "Modificación";
+            // 
             // MenuClinica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,5 +246,9 @@
         private System.Windows.Forms.Label textElegirRol;
         private System.Windows.Forms.Button botonElegirRol;
         private System.Windows.Forms.ListView listaFunciones;
+        private System.Windows.Forms.ToolStripMenuItem altaToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem bajaToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem visualizaciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modificaciónToolStripMenuItem1;
     }
 }
