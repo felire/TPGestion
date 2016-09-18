@@ -37,3 +37,4 @@ C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\Clinica
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.Afiliado.resources

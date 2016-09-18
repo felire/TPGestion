@@ -135,6 +135,9 @@
     <Compile Include="UtilConexion\Prueba.cs" />
     <Compile Include="UtilConexion\Rol.cs" />
     <Compile Include="UtilConexion\Usuario.cs" />
+    <EmbeddedResource Include="Abm Afiliado\Afiliado.resx">
+      <DependentUpon>Afiliado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\Rol.resx">
       <DependentUpon>Rol.cs</DependentUpon>
     </EmbeddedResource>

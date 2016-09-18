@@ -1,4 +1,4 @@
-namespace ClinicaFrba.Menu
+﻿namespace ClinicaFrba.Menu
 {
     partial class MenuClinica
     {
@@ -34,9 +34,12 @@ namespace ClinicaFrba.Menu
             this.bajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.afiliadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.altaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.bajaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.visualizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificaciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.turnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diagnosticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoEstadisticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,10 +47,6 @@ namespace ClinicaFrba.Menu
             this.textElegirRol = new System.Windows.Forms.Label();
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
-            this.altaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.bajaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.visualizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificaciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +57,6 @@ namespace ClinicaFrba.Menu
             this.afiliadoToolStripMenuItem,
             this.bonoToolStripMenuItem,
             this.turnoToolStripMenuItem,
-            this.lToolStripMenuItem,
             this.diagnosticoToolStripMenuItem,
             this.cancelarToolStripMenuItem,
             this.listadoEstadisticoToolStripMenuItem});
@@ -82,19 +80,19 @@ namespace ClinicaFrba.Menu
             // altaToolStripMenuItem
             // 
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
-            this.altaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.altaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.altaToolStripMenuItem.Text = "Alta";
             // 
             // bajaToolStripMenuItem
             // 
             this.bajaToolStripMenuItem.Name = "bajaToolStripMenuItem";
-            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.bajaToolStripMenuItem.Text = "Baja";
             // 
             // modificaciónToolStripMenuItem
             // 
             this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
-            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.modificaciónToolStripMenuItem.Text = "Modificación";
             // 
             // afiliadoToolStripMenuItem
@@ -107,7 +105,31 @@ namespace ClinicaFrba.Menu
             this.afiliadoToolStripMenuItem.Name = "afiliadoToolStripMenuItem";
             this.afiliadoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.afiliadoToolStripMenuItem.Text = "Afiliado";
-            this.afiliadoToolStripMenuItem.Click += new System.EventHandler(this.merlusaToolStripMenuItem_Click);
+            // 
+            // altaToolStripMenuItem1
+            // 
+            this.altaToolStripMenuItem1.Name = "altaToolStripMenuItem1";
+            this.altaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.altaToolStripMenuItem1.Text = "Alta";
+            // 
+            // bajaToolStripMenuItem1
+            // 
+            this.bajaToolStripMenuItem1.Name = "bajaToolStripMenuItem1";
+            this.bajaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.bajaToolStripMenuItem1.Text = "Baja";
+            // 
+            // visualizaciónToolStripMenuItem
+            // 
+            this.visualizaciónToolStripMenuItem.Name = "visualizaciónToolStripMenuItem";
+            this.visualizaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.visualizaciónToolStripMenuItem.Text = "Visualización";
+            this.visualizaciónToolStripMenuItem.Click += new System.EventHandler(this.visualizacionAficlick);
+            // 
+            // modificaciónToolStripMenuItem1
+            // 
+            this.modificaciónToolStripMenuItem1.Name = "modificaciónToolStripMenuItem1";
+            this.modificaciónToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.modificaciónToolStripMenuItem1.Text = "Modificación";
             // 
             // bonoToolStripMenuItem
             // 
@@ -120,11 +142,6 @@ namespace ClinicaFrba.Menu
             this.turnoToolStripMenuItem.Name = "turnoToolStripMenuItem";
             this.turnoToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.turnoToolStripMenuItem.Text = "Turno";
-            // 
-            // lToolStripMenuItem
-            // 
-            this.lToolStripMenuItem.Name = "lToolStripMenuItem";
-            this.lToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
             // 
             // diagnosticoToolStripMenuItem
             // 
@@ -181,32 +198,6 @@ namespace ClinicaFrba.Menu
             this.listaFunciones.UseCompatibleStateImageBehavior = false;
             this.listaFunciones.View = System.Windows.Forms.View.List;
             // 
-            // altaToolStripMenuItem1
-            // 
-            this.altaToolStripMenuItem1.Name = "altaToolStripMenuItem1";
-            this.altaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.altaToolStripMenuItem1.Text = "Alta";
-            // 
-            // bajaToolStripMenuItem1
-            // 
-            this.bajaToolStripMenuItem1.Name = "bajaToolStripMenuItem1";
-            this.bajaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.bajaToolStripMenuItem1.Text = "Baja";
-            // 
-            // visualizaciónToolStripMenuItem
-            // 
-            this.visualizaciónToolStripMenuItem.Name = "visualizaciónToolStripMenuItem";
-            this.visualizaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.visualizaciónToolStripMenuItem.Text = "Visualización";
-            this.visualizaciónToolStripMenuItem.Click += new System.EventHandler(this.visualizacionAficlick);
-      
-            // 
-            // modificaciónToolStripMenuItem1
-            // 
-            this.modificaciónToolStripMenuItem1.Name = "modificaciónToolStripMenuItem1";
-            this.modificaciónToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.modificaciónToolStripMenuItem1.Text = "Modificación";
-            // 
             // MenuClinica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,7 +229,6 @@ namespace ClinicaFrba.Menu
         private System.Windows.Forms.ToolStripMenuItem afiliadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bonoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem turnoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diagnosticoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoEstadisticoToolStripMenuItem;
