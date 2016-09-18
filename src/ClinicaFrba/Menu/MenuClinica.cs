@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,9 +21,14 @@ namespace ClinicaFrba.Menu
         public Usuario usuario { get; set; }
         private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+ 
         }
-
+        private void visualizacionAficlick (object sender, EventArgs e){
+            Abm_Afiliado.Afiliado formAf = new Abm_Afiliado.Afiliado();
+            formAf.ShowDialog();
+            this.Hide();
+            
+        }
         private void merlusaToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
