@@ -47,6 +47,7 @@
             this.textElegirRol = new System.Windows.Forms.Label();
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
+            this.funcionalidadesLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,19 +81,19 @@
             // altaToolStripMenuItem
             // 
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
-            this.altaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.altaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.altaToolStripMenuItem.Text = "Alta";
             // 
             // bajaToolStripMenuItem
             // 
             this.bajaToolStripMenuItem.Name = "bajaToolStripMenuItem";
-            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.bajaToolStripMenuItem.Text = "Baja";
             // 
             // modificaciónToolStripMenuItem
             // 
             this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
-            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.modificaciónToolStripMenuItem.Text = "Modificación";
             // 
             // afiliadoToolStripMenuItem
@@ -109,26 +110,26 @@
             // altaToolStripMenuItem1
             // 
             this.altaToolStripMenuItem1.Name = "altaToolStripMenuItem1";
-            this.altaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.altaToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.altaToolStripMenuItem1.Text = "Alta";
             // 
             // bajaToolStripMenuItem1
             // 
             this.bajaToolStripMenuItem1.Name = "bajaToolStripMenuItem1";
-            this.bajaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.bajaToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.bajaToolStripMenuItem1.Text = "Baja";
             // 
             // visualizaciónToolStripMenuItem
             // 
             this.visualizaciónToolStripMenuItem.Name = "visualizaciónToolStripMenuItem";
-            this.visualizaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.visualizaciónToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.visualizaciónToolStripMenuItem.Text = "Visualización";
             this.visualizaciónToolStripMenuItem.Click += new System.EventHandler(this.visualizacionAficlick);
             // 
             // modificaciónToolStripMenuItem1
             // 
             this.modificaciónToolStripMenuItem1.Name = "modificaciónToolStripMenuItem1";
-            this.modificaciónToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.modificaciónToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.modificaciónToolStripMenuItem1.Text = "Modificación";
             // 
             // bonoToolStripMenuItem
@@ -198,11 +199,21 @@
             this.listaFunciones.UseCompatibleStateImageBehavior = false;
             this.listaFunciones.View = System.Windows.Forms.View.List;
             // 
+            // funcionalidadesLabel
+            // 
+            this.funcionalidadesLabel.AutoSize = true;
+            this.funcionalidadesLabel.Location = new System.Drawing.Point(174, 37);
+            this.funcionalidadesLabel.Name = "funcionalidadesLabel";
+            this.funcionalidadesLabel.Size = new System.Drawing.Size(87, 13);
+            this.funcionalidadesLabel.TabIndex = 5;
+            this.funcionalidadesLabel.Text = "Funcionalidades:";
+            // 
             // MenuClinica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 350);
+            this.Controls.Add(this.funcionalidadesLabel);
             this.Controls.Add(this.listaFunciones);
             this.Controls.Add(this.botonElegirRol);
             this.Controls.Add(this.textElegirRol);
@@ -240,5 +251,6 @@
         private System.Windows.Forms.ToolStripMenuItem bajaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem visualizaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificaciónToolStripMenuItem1;
+        private System.Windows.Forms.Label funcionalidadesLabel;
     }
 }

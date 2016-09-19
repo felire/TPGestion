@@ -59,6 +59,7 @@ namespace ClinicaFrba.Menu
             textElegirRol.Visible = true;
             comboElegirRol.Visible = true;
             botonElegirRol.Visible = true;
+            funcionalidadesLabel.Visible = true;
             List<Rol> roles = usuario.getRoles();
             comboElegirRol.DataSource = roles;
             comboElegirRol.DisplayMember = "nombreRol";
@@ -88,6 +89,7 @@ namespace ClinicaFrba.Menu
             textElegirRol.Visible = false;
             comboElegirRol.Visible = false;
             botonElegirRol.Visible = false;
+            funcionalidadesLabel.Visible = false;
         }
         private void listarFuncionalidades(List<Funcionalidad> funciones)
         {
