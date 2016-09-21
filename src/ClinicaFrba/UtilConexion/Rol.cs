@@ -103,5 +103,14 @@ namespace ClinicaFrba.UtilConexion
 
             return roles;
         }
+        public void deshabilitar()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
+            ConexionDB.ExecuteNoQuery("DELETE FROM kernel_panic.Roles_Usuario WHERE Rol_id = @rol_id", "T", ListaParametros);
+            ListaParametros.Clear();
+            ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
+            ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Roles SET Esta_activo = 0 WHERE Id = @rol_id", "T", ListaParametros);
+        }
     }
 }

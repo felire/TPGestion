@@ -127,6 +127,12 @@ namespace ClinicaFrba.Menu
             rol.Show();
         }
 
+        private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClinicaFrba.AbmRol.BajaRol rol = new ClinicaFrba.AbmRol.BajaRol();
+            rol.Show();
+        }
+
 
     }
 }
