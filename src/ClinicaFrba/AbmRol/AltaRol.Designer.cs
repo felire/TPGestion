@@ -138,6 +138,7 @@
             this.Controls.Add(this.nombreRol);
             this.Name = "AltaRol";
             this.Text = "AltaRol";
+            this.Load += new System.EventHandler(this.AltaRol_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

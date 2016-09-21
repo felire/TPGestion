@@ -96,6 +96,7 @@
             this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
             this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.modificaciónToolStripMenuItem.Text = "Modificación";
+            this.modificaciónToolStripMenuItem.Click += new System.EventHandler(this.modificaciónToolStripMenuItem_Click);
             // 
             // afiliadoToolStripMenuItem
             // 

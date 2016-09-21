@@ -117,5 +117,10 @@ namespace ClinicaFrba.AbmRol
             return funcionalidadesAAgregar;
         }
 
+        private void AltaRol_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

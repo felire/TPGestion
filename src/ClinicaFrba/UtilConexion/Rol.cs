@@ -16,6 +16,7 @@ namespace ClinicaFrba.UtilConexion
     {
         public int rol_id { get; set;}
         public string nombreRol { get; set; }
+        public Boolean activo { get; set; }
         public List<Funcionalidad> funcionalidades;
 
         public List<Funcionalidad> getFuncionalidades()
@@ -83,6 +84,24 @@ namespace ClinicaFrba.UtilConexion
                 ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Funciones_Roles (Rol_id, Funcion_id) VALUES (@rol_id, @funcionalidad_id)", "T", ListaParametros);
             }
             return true;
+        }
+
+
+        public static List<Rol> obtenerTodosLosRoles()
+        {
+            List<Rol> roles = new List<Rol>();
+            SqlDataReader lector = ConexionDB.ObtenerDataReader("SELECT Id,Esta_activo FROM kernel_panic.Roles", "T", new List<SqlParameter>());
+            if (lector.HasRows)
+            {
+                while (lector.Read())
+                {
+                    Rol rol = new Rol((int)lector["Id"]);
+                    rol.activo = (Boolean)lector["Esta_activo"];
+                    roles.Add(rol);
+                }
+            }
+
+            return roles;
         }
     }
 }
