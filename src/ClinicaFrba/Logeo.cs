@@ -26,11 +26,14 @@ namespace ClinicaFrba
             byte[] bytesDeHasheo = hasher.ComputeHash(encoderHash.GetBytes(password.Text));
             string pass = bytesDeHasheoToString(bytesDeHasheo).ToLower();
             string user = userName.Text;
-            //MessageBox.Show("Usuario inactivo para acceder al sistema", "Error!", MessageBoxButtons.OK);
             Usuario usuario = new Usuario(user, pass, this);
-            //UtilConexion.Prueba.Agregar("Pepe");
+
         }
 
+        public void sinRoles()
+        {
+            MessageBox.Show("El usuario elegido no tiene roles asignados", "Error!", MessageBoxButtons.OK);
+        }
         public void noContrasena()
         {
             MessageBox.Show("Usuario o contraseña incorrectos", "Error!", MessageBoxButtons.OK);

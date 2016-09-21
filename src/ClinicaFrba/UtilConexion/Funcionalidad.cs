@@ -22,7 +22,7 @@ namespace ClinicaFrba.UtilConexion
             this.obtenerFuncionalidad();
         }
 
-
+        public Funcionalidad() { }
         public void obtenerFuncionalidad()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
@@ -34,6 +34,25 @@ namespace ClinicaFrba.UtilConexion
                 lector.Read();
                 this.descripcion = (string) lector["Nombre"];
             }
+        }
+
+        public static List<Funcionalidad> darTodasLasFuncionalidades()
+        {
+            List<Funcionalidad> funcionalidades = new List<Funcionalidad>();
+            SqlDataReader lector = ConexionDB.ObtenerDataReader("SELECT Id,Nombre FROM kernel_panic.Funciones", "T", new List<SqlParameter>());
+            if (lector.HasRows)
+            {
+                while (lector.Read())
+                {
+                    Funcionalidad funcionalidad = new Funcionalidad();
+                    funcionalidad.funcionalidad_id = (int)lector["Id"];
+                    funcionalidad.descripcion = (string)lector["Nombre"];
+                    funcionalidades.Add(funcionalidad);
+                }
+            }
+
+            return funcionalidades;
+
         }
     }
 

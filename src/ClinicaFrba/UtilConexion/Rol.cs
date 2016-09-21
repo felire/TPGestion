@@ -22,6 +22,9 @@ namespace ClinicaFrba.UtilConexion
         {
             return funcionalidades;
         }
+
+
+        public Rol() { }
         public Rol(int id)
         {
             this.rol_id = id;
@@ -43,9 +46,9 @@ namespace ClinicaFrba.UtilConexion
                     idsFunc.Add((int)lector["Funcion_id"]);
                 }
             }
-            List<SqlParameter> ListaParametros2 = new List<SqlParameter>();
-            ListaParametros2.Add(new SqlParameter("@rol_id", this.rol_id));
-            lector = ConexionDB.ObtenerDataReader("SELECT Nombre FROM kernel_panic.Roles WHERE Id = @rol_id", "T", ListaParametros2);
+            ListaParametros.Clear();
+            ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
+            lector = ConexionDB.ObtenerDataReader("SELECT Nombre FROM kernel_panic.Roles WHERE Id = @rol_id", "T", ListaParametros);
             if (lector.HasRows)
             {
                     lector.Read();
@@ -56,6 +59,30 @@ namespace ClinicaFrba.UtilConexion
             {
                 this.funcionalidades.Add(new Funcionalidad(fun_id));
             }
+        }
+        public Boolean darAlta()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@nombreRol", this.nombreRol));
+            SqlParameter parametroSalida = new SqlParameter("@id_rol", 0);
+            parametroSalida.Direction = ParameterDirection.Output;
+            ListaParametros.Add(parametroSalida);
+            SqlCommand comando = ConexionDB.ExecuteNoQuery("kernel_panic.agregarRol", "SP", ListaParametros);
+            int resultado = Int32.Parse(comando.Parameters["@id_rol"].Value.ToString());
+            if(resultado == -1)
+            {
+                return false;
+            }
+
+            this.rol_id = resultado;
+            foreach (Funcionalidad funcionalidad in funcionalidades)
+            {
+                ListaParametros.Clear();
+                ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
+                ListaParametros.Add(new SqlParameter("@funcionalidad_id", funcionalidad.funcionalidad_id));
+                ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Funciones_Roles (Rol_id, Funcion_id) VALUES (@rol_id, @funcionalidad_id)", "T", ListaParametros);
+            }
+            return true;
         }
     }
 }

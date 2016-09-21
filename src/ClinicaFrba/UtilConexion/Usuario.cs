@@ -38,7 +38,14 @@ namespace ClinicaFrba.UtilConexion
                 if (resultado == 1)
                 {
                     this.ObtenerRoles();
-                    formu.logeoExitoso(this);
+                    if (roles.Count == 0)
+                    {
+                        formu.sinRoles();
+                    }
+                    else
+                    {
+                        formu.logeoExitoso(this);
+                    }                   
                 }
                 if (resultado == 2)
                 {

@@ -9,8 +9,8 @@ CREATE PROCEDURE kernel_panic.CrearTablas
 AS
 	CREATE TABLE [kernel_panic].[Roles] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
-		Nombre VARCHAR (20) NOT NULL,
-		Esta_activo BIT NOT NULL); -- El BIT es BOOLEANO, 0 es false y 1 es true.
+		Nombre VARCHAR (20) NOT NULL UNIQUE,
+		Esta_activo BIT NOT NULL DEFAULT 1); -- El BIT es BOOLEANO, 0 es false y 1 es true.
 
 	CREATE TABLE [kernel_panic].[Funciones] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -425,8 +425,29 @@ AS
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('afiliado', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff') -- feli1234 la pass
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('profesional', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff') --feli1234 la pass
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7') --w23e la pass
-INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (1, 'admin'), (2, 'afiliado'), (3,'profesional')
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('a', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb')
+INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (1, 'admin'), (2, 'afiliado'), (3,'profesional'), (1, 'a')
 GO
+
+
+CREATE PROCEDURE kernel_panic.agregarRol
+@nombreRol VARCHAR(20),
+@id_rol INT OUTPUT
+AS
+	DECLARE @repetido AS INT
+	SET @repetido = (SELECT COUNT(Id) FROM kernel_panic.Roles WHERE Nombre = @nombreRol)
+	IF  @repetido = 0
+		BEGIN
+			INSERT INTO kernel_panic.Roles (Nombre) VALUES (@nombreRol)
+			SET @id_rol = @@IDENTITY
+		END
+	ELSE
+		BEGIN 
+			SET @id_rol = -1
+		END
+GO
+
+DROP PROCEDURE kernel_panic.agregarRol
 
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas

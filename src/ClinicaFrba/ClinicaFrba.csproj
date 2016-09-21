@@ -68,11 +68,11 @@
     <Compile Include="Abm Profesional\Profesional.Designer.cs">
       <DependentUpon>Profesional.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRol\Rol.cs">
+    <Compile Include="AbmRol\AltaRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRol\Rol.Designer.cs">
-      <DependentUpon>Rol.cs</DependentUpon>
+    <Compile Include="AbmRol\AltaRol.Designer.cs">
+      <DependentUpon>AltaRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Cancelar Atencion\CancelarAtencion.cs">
       <SubType>Form</SubType>
@@ -138,8 +138,8 @@
     <EmbeddedResource Include="Abm Afiliado\Afiliado.resx">
       <DependentUpon>Afiliado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmRol\Rol.resx">
-      <DependentUpon>Rol.cs</DependentUpon>
+    <EmbeddedResource Include="AbmRol\AltaRol.resx">
+      <DependentUpon>AltaRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logeo.resx">
       <DependentUpon>Logeo.cs</DependentUpon>

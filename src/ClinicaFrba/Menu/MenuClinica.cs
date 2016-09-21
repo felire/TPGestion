@@ -115,16 +115,11 @@ namespace ClinicaFrba.Menu
             mostrarMenuRol(rol);
         }
 
-        
-        /*private void comboElegirRol_SelectionChangeCommitted(object sender, EventArgs e)
+        private void altaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            ComboBox senderComboBox = (ComboBox)sender;
-
-            // Change the length of the text box depending on what the user has 
-            // selected and committed using the SelectionLength property.
-            
-        }*/
+            ClinicaFrba.AbmRol.AltaRol rol = new ClinicaFrba.AbmRol.AltaRol();
+            rol.Show();
+        }
 
 
     }

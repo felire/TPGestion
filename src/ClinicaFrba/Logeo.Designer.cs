@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.logearse = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.userName = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // logearse
@@ -88,6 +91,10 @@
             this.password.Size = new System.Drawing.Size(137, 20);
             this.password.TabIndex = 5;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // Logeo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,6 +109,7 @@
             this.Name = "Logeo";
             this.Text = "Logeo";
             this.Load += new System.EventHandler(this.Logeo_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,6 +123,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox userName;
         private System.Windows.Forms.TextBox password;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 
