@@ -60,6 +60,7 @@
             this.modifRol.TabIndex = 2;
             this.modifRol.Text = "Modificar Rol";
             this.modifRol.UseVisualStyleBackColor = true;
+            this.modifRol.Click += new System.EventHandler(this.modifRol_Click);
             // 
             // habilitarRol
             // 
@@ -69,6 +70,7 @@
             this.habilitarRol.TabIndex = 3;
             this.habilitarRol.Text = "Habilitar Rol";
             this.habilitarRol.UseVisualStyleBackColor = true;
+            this.habilitarRol.Click += new System.EventHandler(this.habilitarRol_Click);
             // 
             // ModificarRol
             // 

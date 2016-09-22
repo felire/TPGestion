@@ -27,29 +27,31 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@fun_id", this.funcionalidad_id));
-            SqlDataReader lector = ConexionDB.ObtenerDataReader("SELECT Nombre FROM kernel_panic.Funciones WHERE Id = @fun_id", "T", ListaParametros);
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Nombre FROM kernel_panic.Funciones WHERE Id = @fun_id", "T", ListaParametros);
 
-            if (lector.HasRows)
+            if (speaker.reader.HasRows)
             {
-                lector.Read();
-                this.descripcion = (string) lector["Nombre"];
+                speaker.reader.Read();
+                this.descripcion = (string)speaker.reader["Nombre"];
             }
+            speaker.close();
         }
 
         public static List<Funcionalidad> darTodasLasFuncionalidades()
         {
             List<Funcionalidad> funcionalidades = new List<Funcionalidad>();
-            SqlDataReader lector = ConexionDB.ObtenerDataReader("SELECT Id,Nombre FROM kernel_panic.Funciones", "T", new List<SqlParameter>());
-            if (lector.HasRows)
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id,Nombre FROM kernel_panic.Funciones", "T", new List<SqlParameter>());
+            if (speaker.reader.HasRows)
             {
-                while (lector.Read())
+                while (speaker.reader.Read())
                 {
                     Funcionalidad funcionalidad = new Funcionalidad();
-                    funcionalidad.funcionalidad_id = (int)lector["Id"];
-                    funcionalidad.descripcion = (string)lector["Nombre"];
+                    funcionalidad.funcionalidad_id = (int)speaker.reader["Id"];
+                    funcionalidad.descripcion = (string)speaker.reader["Nombre"];
                     funcionalidades.Add(funcionalidad);
                 }
             }
+            speaker.close();
 
             return funcionalidades;
 

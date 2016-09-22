@@ -93,6 +93,7 @@
             this.funcionalidadesAgregadas.TabIndex = 5;
             this.funcionalidadesAgregadas.UseCompatibleStateImageBehavior = false;
             this.funcionalidadesAgregadas.View = System.Windows.Forms.View.List;
+            this.funcionalidadesAgregadas.SelectedIndexChanged += new System.EventHandler(this.funcionalidadesAgregadas_SelectedIndexChanged);
             // 
             // agregarRol
             // 

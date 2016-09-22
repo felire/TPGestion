@@ -22,14 +22,16 @@ namespace ClinicaFrba.UtilConexion
         }
         public Usuario(string user, string pass, Logeo formu)
         {
+            //MessageBox.Show("Usuario o contraseña incorrectos", "Error!", MessageBoxButtons.OK);
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombreUsuario", user));
             ListaParametros.Add(new SqlParameter("@pass", pass));
             SqlParameter parametroSalida = new SqlParameter("@fallo",0);
             parametroSalida.Direction = ParameterDirection.Output;
             ListaParametros.Add(parametroSalida);
-            SqlCommand comando =  ConexionDB.ExecuteNoQuery("kernel_panic.chequearUsuario", "SP", ListaParametros);
-            int resultado = Int32.Parse(comando.Parameters["@fallo"].Value.ToString());
+            SpeakerDB speaker =  ConexionDB.ExecuteNoQuery("kernel_panic.chequearUsuario", "SP", ListaParametros);
+            int resultado = Int32.Parse(speaker.comando.Parameters["@fallo"].Value.ToString());
+            
                 usuario = user;
                 if (resultado == -1)
                 {
@@ -51,6 +53,7 @@ namespace ClinicaFrba.UtilConexion
                 {
                     formu.noContrasena();
                 }
+                speaker.conection.Close();
 
         }
 
@@ -60,13 +63,13 @@ namespace ClinicaFrba.UtilConexion
             this.roles = new List<Rol>();
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombre", this.usuario));
-            SqlDataReader lector = ConexionDB.ObtenerDataReader("SELECT Rol_id FROM kernel_panic.Roles_Usuario WHERE Usuario_id = @nombre", "T", ListaParametros);
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Rol_id FROM kernel_panic.Roles_Usuario WHERE Usuario_id = @nombre", "T", ListaParametros);
 
-            if (lector.HasRows)
+            if (speaker.reader.HasRows)
             {
-                while (lector.Read())
+                while (speaker.reader.Read())
                 {
-                    Lista.Add((int) lector["Rol_id"]);
+                    Lista.Add((int)speaker.reader["Rol_id"]);
                 }
             }
 
@@ -74,6 +77,8 @@ namespace ClinicaFrba.UtilConexion
             {
                 this.roles.Add(new Rol(rol_id));
             }
+            speaker.reader.Close();
+            speaker.conection.Close();
         }
 
 

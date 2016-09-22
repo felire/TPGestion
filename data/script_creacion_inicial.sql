@@ -168,21 +168,33 @@ AS
 		FOREIGN KEY(Plan_uso) REFERENCES [kernel_panic].[Planes] (Codigo),
 		FOREIGN KEY(Afiliado_uso) REFERENCES [kernel_panic].[Afiliados] (Id));
 
-	CREATE TABLE [kernel_panic].[Agenda_Laboral] (
-		Id INT IDENTITY(1,1),
+	CREATE TABLE [kernel_panic].[Esquema_Trabajo] (
+		Id INT IDENTITY (1,1) PRIMARY KEY,
 		Profesional INT,
-		Dia DATETIME,
+		Desde DATETIME,
+		Hasta DATETIME,
+		FOREIGN KEY (Profesional) REFERENCES [kernel_panic].[Profesionales] (Id));
+
+
+	CREATE TABLE [kernel_panic].[Agenda_Diaria] (
+		Id INT IDENTITY(1,1) PRIMARY KEY,
+		EsquemaTrabajo INT,
+		Dia INT, --El numero del dia esta en el codigo de c#
 		Desde TIME,
 		Hasta TIME,
-		Cancelado INT NULL,
-		FOREIGN KEY (Profesional) REFERENCES [kernel_panic].[Profesionales] (Id),
-		FOREIGN KEY(Cancelado) REFERENCES [kernel_panic].[Cancelaciones] (Id));
+		Especialidad numeric(18,0),
+		FOREIGN KEY (Especialidad) REFERENCES [kernel_panic].[Especialidades] (Codigo),
+		FOREIGN KEY (EsquemaTrabajo) REFERENCES [kernel_panic].[Esquema_Trabajo] (Id));
+		
+
+	
 GO
 
 
 CREATE PROCEDURE kernel_panic.BorrarTablas
 AS
 	DROP TABLE [kernel_panic].[Agenda_Laboral]
+	DROP TABLE [kernel_panic].[Esquema_Trabajo]
 	DROP TABLE [kernel_panic].[Bonos_Farmacia]
 	DROP TABLE [kernel_panic].[Bonos_Consultas]
 	DROP TABLE [kernel_panic].[Diagnosticos]
@@ -412,7 +424,6 @@ AS
 		END
 	DROP TABLE #user
 GO
-
 
 DROP PROCEDURE kernel_panic.chequearUsuario
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('folita', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff')

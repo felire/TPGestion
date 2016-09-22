@@ -122,5 +122,10 @@ namespace ClinicaFrba.AbmRol
 
         }
 
+        private void funcionalidadesAgregadas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

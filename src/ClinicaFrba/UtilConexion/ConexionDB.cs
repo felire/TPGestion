@@ -19,11 +19,12 @@ namespace ClinicaFrba.UtilConexion
             return Conn;                   
         }
 
-        public static SqlDataReader ObtenerDataReader(string commandtext, string commandtype, List<SqlParameter> ListaParametro)
+        public static SpeakerDB ObtenerDataReader(string commandtext, string commandtype, List<SqlParameter> ListaParametro)
         {
 
             SqlCommand comando = new SqlCommand();
-            comando.Connection = ObtenerConexion();
+            SqlConnection conexion = ObtenerConexion();
+            comando.Connection = conexion;
             comando.CommandText = commandtext;
             foreach (SqlParameter elemento in ListaParametro)
             {
@@ -41,15 +42,18 @@ namespace ClinicaFrba.UtilConexion
                     comando.CommandType = CommandType.StoredProcedure;
                     break;
             }
-            SqlDataReader reader = comando.ExecuteReader();
-            return reader;
+            SpeakerDB speaker = new SpeakerDB();
+            speaker.conection = conexion;
+            speaker.reader = comando.ExecuteReader();
+            return speaker;
         }
 
-        public static SqlCommand ExecuteNoQuery(string commandtext, string commandtype, List<SqlParameter> ListaParametro)
+        public static SpeakerDB ExecuteNoQuery(string commandtext, string commandtype, List<SqlParameter> ListaParametro)
         {
 
             SqlCommand comando = new SqlCommand();
-            comando.Connection = ObtenerConexion();
+            SqlConnection conexion = ObtenerConexion();
+            comando.Connection = conexion;
             comando.CommandText = commandtext;
             foreach (SqlParameter elemento in ListaParametro)
             {
@@ -67,8 +71,12 @@ namespace ClinicaFrba.UtilConexion
                     comando.CommandType = CommandType.StoredProcedure;
                     break;
             }
+            SpeakerDB speaker = new SpeakerDB();
+            speaker.conection = conexion;
+            speaker.reader = null;
+            speaker.comando = comando;
             comando.ExecuteNonQuery();
-            return comando;
+            return speaker;
         }
 
     }

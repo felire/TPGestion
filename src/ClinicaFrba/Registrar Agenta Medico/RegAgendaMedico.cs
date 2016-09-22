@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClinicaFrba.UtilConexion;
 
 namespace ClinicaFrba.Registrar_Agenta_Medico
 {
-    public partial class RegAgendaMedico : Form
+    partial class RegAgendaMedico : Form
     {
-        public RegAgendaMedico()
+        public RegAgendaMedico(Profesional profesional)
         {
             InitializeComponent();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

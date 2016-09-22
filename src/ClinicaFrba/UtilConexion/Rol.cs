@@ -38,28 +38,32 @@ namespace ClinicaFrba.UtilConexion
             List<int> idsFunc = new List<int>();
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
-            SqlDataReader lector = ConexionDB.ObtenerDataReader("SELECT Funcion_id FROM kernel_panic.Funciones_Roles WHERE Rol_id = @rol_id", "T", ListaParametros);
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Funcion_id FROM kernel_panic.Funciones_Roles WHERE Rol_id = @rol_id", "T", ListaParametros);
 
-            if (lector.HasRows)
+            if (speaker.reader.HasRows)
             {
-                while (lector.Read())
+                while (speaker.reader.Read())
                 {
-                    idsFunc.Add((int)lector["Funcion_id"]);
+                    idsFunc.Add((int)speaker.reader["Funcion_id"]);
                 }
             }
+            speaker.reader.Close();
+            speaker.conection.Close();
             ListaParametros.Clear();
             ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
-            lector = ConexionDB.ObtenerDataReader("SELECT Nombre FROM kernel_panic.Roles WHERE Id = @rol_id", "T", ListaParametros);
-            if (lector.HasRows)
+            speaker = ConexionDB.ObtenerDataReader("SELECT Nombre FROM kernel_panic.Roles WHERE Id = @rol_id", "T", ListaParametros);
+            if (speaker.reader.HasRows)
             {
-                    lector.Read();
-                    this.nombreRol = (string)lector["Nombre"];
+                speaker.reader.Read();
+                this.nombreRol = (string)speaker.reader["Nombre"];
             }
 
             foreach (int fun_id in idsFunc)
             {
                 this.funcionalidades.Add(new Funcionalidad(fun_id));
             }
+            speaker.reader.Close();
+            speaker.conection.Close();
         }
         public Boolean darAlta()
         {
@@ -68,21 +72,23 @@ namespace ClinicaFrba.UtilConexion
             SqlParameter parametroSalida = new SqlParameter("@id_rol", 0);
             parametroSalida.Direction = ParameterDirection.Output;
             ListaParametros.Add(parametroSalida);
-            SqlCommand comando = ConexionDB.ExecuteNoQuery("kernel_panic.agregarRol", "SP", ListaParametros);
-            int resultado = Int32.Parse(comando.Parameters["@id_rol"].Value.ToString());
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.agregarRol", "SP", ListaParametros);
+            int resultado = Int32.Parse(speaker.comando.Parameters["@id_rol"].Value.ToString());
             if(resultado == -1)
             {
                 return false;
             }
 
             this.rol_id = resultado;
+            speaker.close();
             foreach (Funcionalidad funcionalidad in funcionalidades)
             {
                 ListaParametros.Clear();
                 ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
                 ListaParametros.Add(new SqlParameter("@funcionalidad_id", funcionalidad.funcionalidad_id));
-                ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Funciones_Roles (Rol_id, Funcion_id) VALUES (@rol_id, @funcionalidad_id)", "T", ListaParametros);
-            }
+                speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Funciones_Roles (Rol_id, Funcion_id) VALUES (@rol_id, @funcionalidad_id)", "T", ListaParametros);
+                speaker.close();
+            }            
             return true;
         }
 
@@ -90,27 +96,43 @@ namespace ClinicaFrba.UtilConexion
         public static List<Rol> obtenerTodosLosRoles()
         {
             List<Rol> roles = new List<Rol>();
-            SqlDataReader lector = ConexionDB.ObtenerDataReader("SELECT Id,Esta_activo FROM kernel_panic.Roles", "T", new List<SqlParameter>());
-            if (lector.HasRows)
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id,Esta_activo FROM kernel_panic.Roles", "T", new List<SqlParameter>());
+            if (speaker.reader.HasRows)
             {
-                while (lector.Read())
+                while (speaker.reader.Read())
                 {
-                    Rol rol = new Rol((int)lector["Id"]);
-                    rol.activo = (Boolean)lector["Esta_activo"];
+                    Rol rol = new Rol((int)speaker.reader["Id"]);
+                    rol.activo = (Boolean)speaker.reader["Esta_activo"];
                     roles.Add(rol);
                 }
             }
+            speaker.close();
 
             return roles;
         }
-        public void deshabilitar()
+
+        public void habilitarRol()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
-            ConexionDB.ExecuteNoQuery("DELETE FROM kernel_panic.Roles_Usuario WHERE Rol_id = @rol_id", "T", ListaParametros);
-            ListaParametros.Clear();
-            ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
-            ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Roles SET Esta_activo = 0 WHERE Id = @rol_id", "T", ListaParametros);
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Roles SET Esta_activo = 1 WHERE Id = @rol_id", "T", ListaParametros);
+            speaker.close();
+        }
+
+        public void actualizarFuncionalidades(List<Funcionalidad> funcionalidades)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@idRol", this.rol_id));
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("DELETE FROM kernel_panic.Funciones_Roles WHERE Rol_id = @idRol", "T", ListaParametros);
+            speaker.close();
+            foreach (Funcionalidad funcionalidad in funcionalidades)
+            {
+                ListaParametros.Clear();
+                ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
+                ListaParametros.Add(new SqlParameter("@funcionalidad_id", funcionalidad.funcionalidad_id));
+                speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Funciones_Roles (Rol_id, Funcion_id) VALUES (@rol_id, @funcionalidad_id)", "T", ListaParametros);
+                speaker.close();
+            }
         }
     }
 }

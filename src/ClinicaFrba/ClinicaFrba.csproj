@@ -74,11 +74,11 @@
     <Compile Include="AbmRol\AltaRol.Designer.cs">
       <DependentUpon>AltaRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRol\BajaRol.cs">
+    <Compile Include="AbmRol\ModificarFuncionalidadesRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRol\BajaRol.Designer.cs">
-      <DependentUpon>BajaRol.cs</DependentUpon>
+    <Compile Include="AbmRol\ModificarFuncionalidadesRol.Designer.cs">
+      <DependentUpon>ModificarFuncionalidadesRol.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\ModificarRol.cs">
       <SubType>Form</SubType>
@@ -130,6 +130,12 @@
     <Compile Include="Registrar Agenta Medico\RegAgendaMedico.Designer.cs">
       <DependentUpon>RegAgendaMedico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registrar Agenta Medico\SeleccionarProfesional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar Agenta Medico\SeleccionarProfesional.Designer.cs">
+      <DependentUpon>SeleccionarProfesional.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro Llegada\RegLlegada.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,9 +149,13 @@
       <DependentUpon>RegResultado.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilConexion\ConexionDB.cs" />
+    <Compile Include="UtilConexion\Especialidad.cs" />
     <Compile Include="UtilConexion\Funcionalidad.cs" />
+    <Compile Include="UtilConexion\Profesional.cs" />
     <Compile Include="UtilConexion\Prueba.cs" />
     <Compile Include="UtilConexion\Rol.cs" />
+    <Compile Include="UtilConexion\SpeakerDB.cs" />
+    <Compile Include="UtilConexion\TipoEspecialidad.cs" />
     <Compile Include="UtilConexion\Usuario.cs" />
     <EmbeddedResource Include="Abm Afiliado\Afiliado.resx">
       <DependentUpon>Afiliado.cs</DependentUpon>
@@ -153,8 +163,8 @@
     <EmbeddedResource Include="AbmRol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmRol\BajaRol.resx">
-      <DependentUpon>BajaRol.cs</DependentUpon>
+    <EmbeddedResource Include="AbmRol\ModificarFuncionalidadesRol.resx">
+      <DependentUpon>ModificarFuncionalidadesRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\ModificarRol.resx">
       <DependentUpon>ModificarRol.cs</DependentUpon>
@@ -174,6 +184,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registrar Agenta Medico\RegAgendaMedico.resx">
+      <DependentUpon>RegAgendaMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registrar Agenta Medico\SeleccionarProfesional.resx">
+      <DependentUpon>SeleccionarProfesional.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

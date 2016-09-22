@@ -82,6 +82,7 @@ namespace ClinicaFrba.Menu
             diagnosticoToolStripMenuItem.Visible = idFun.Contains(7);
             cancelarToolStripMenuItem.Visible = idFun.Contains(8);
             listadoEstadisticoToolStripMenuItem.Visible = idFun.Contains(9);
+            agendaProfesional.Visible = idFun.Contains(3);
         }
         private void ocultarComboBox()
         {
@@ -127,10 +128,10 @@ namespace ClinicaFrba.Menu
             rol.Show();
         }
 
-        private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void agendaProfesional_Click(object sender, EventArgs e)
         {
-            ClinicaFrba.AbmRol.BajaRol rol = new ClinicaFrba.AbmRol.BajaRol();
-            rol.Show();
+            ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional agenda = new ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional();
+            agenda.Show();
         }
 
 
