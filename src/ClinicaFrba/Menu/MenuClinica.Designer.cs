@@ -43,12 +43,12 @@
             this.diagnosticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoEstadisticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agendaProfesional = new System.Windows.Forms.ToolStripMenuItem();
             this.comboElegirRol = new System.Windows.Forms.ComboBox();
             this.textElegirRol = new System.Windows.Forms.Label();
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
-            this.agendaProfesional = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,20 +83,21 @@
             // altaToolStripMenuItem
             // 
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
-            this.altaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.altaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.altaToolStripMenuItem.Text = "Alta";
             this.altaToolStripMenuItem.Click += new System.EventHandler(this.altaToolStripMenuItem_Click);
             // 
             // bajaToolStripMenuItem
             // 
             this.bajaToolStripMenuItem.Name = "bajaToolStripMenuItem";
-            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.bajaToolStripMenuItem.Text = "Baja";
+            this.bajaToolStripMenuItem.Click += new System.EventHandler(this.bajaToolStripMenuItem_Click_1);
             // 
             // modificaciónToolStripMenuItem
             // 
             this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
-            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.modificaciónToolStripMenuItem.Text = "Modificación";
             this.modificaciónToolStripMenuItem.Click += new System.EventHandler(this.modificaciónToolStripMenuItem_Click);
             // 
@@ -166,6 +167,13 @@
             this.listadoEstadisticoToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.listadoEstadisticoToolStripMenuItem.Text = "Listado Estadistico";
             // 
+            // agendaProfesional
+            // 
+            this.agendaProfesional.Name = "agendaProfesional";
+            this.agendaProfesional.Size = new System.Drawing.Size(122, 20);
+            this.agendaProfesional.Text = "Agenda Profesional";
+            this.agendaProfesional.Click += new System.EventHandler(this.agendaProfesional_Click);
+            // 
             // comboElegirRol
             // 
             this.comboElegirRol.FormattingEnabled = true;
@@ -211,13 +219,6 @@
             this.labelFuncionalidades.Size = new System.Drawing.Size(87, 13);
             this.labelFuncionalidades.TabIndex = 5;
             this.labelFuncionalidades.Text = "Funcionalidades:";
-            // 
-            // agendaProfesional
-            // 
-            this.agendaProfesional.Name = "agendaProfesional";
-            this.agendaProfesional.Size = new System.Drawing.Size(122, 20);
-            this.agendaProfesional.Text = "Agenda Profesional";
-            this.agendaProfesional.Click += new System.EventHandler(this.agendaProfesional_Click);
             // 
             // MenuClinica
             // 

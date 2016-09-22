@@ -23,7 +23,8 @@ namespace ClinicaFrba
         {
             UTF8Encoding encoderHash = new UTF8Encoding();
             SHA256Managed hasher = new SHA256Managed();
-            byte[] bytesDeHasheo = hasher.ComputeHash(encoderHash.GetBytes(password.Text));
+            string passConSalt = password.Text + "MeRluSsA";
+            byte[] bytesDeHasheo = hasher.ComputeHash(encoderHash.GetBytes(passConSalt));
             string pass = bytesDeHasheoToString(bytesDeHasheo).ToLower();
             string user = userName.Text;
             Usuario usuario = new Usuario(user, pass, this);

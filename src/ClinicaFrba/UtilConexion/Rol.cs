@@ -24,8 +24,8 @@ namespace ClinicaFrba.UtilConexion
             return funcionalidades;
         }
 
+        public Rol() {}
 
-        public Rol() { }
         public Rol(int id)
         {
             this.rol_id = id;
@@ -133,6 +133,17 @@ namespace ClinicaFrba.UtilConexion
                 speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Funciones_Roles (Rol_id, Funcion_id) VALUES (@rol_id, @funcionalidad_id)", "T", ListaParametros);
                 speaker.close();
             }
+        }
+        public void deshabilitar()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("DELETE FROM kernel_panic.Roles_Usuario WHERE Rol_id = @rol_id", "T", ListaParametros);
+            speaker.close();
+            ListaParametros.Clear();
+            ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
+            speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Roles SET Esta_activo = 0 WHERE Id = @rol_id", "T", ListaParametros);
+            speaker.close();
         }
     }
 }
