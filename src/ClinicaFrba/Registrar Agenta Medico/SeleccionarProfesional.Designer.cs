@@ -60,9 +60,9 @@
             this.filtros.Controls.Add(this.label2);
             this.filtros.Controls.Add(this.nombre);
             this.filtros.Controls.Add(this.label1);
-            this.filtros.Location = new System.Drawing.Point(40, 26);
+            this.filtros.Location = new System.Drawing.Point(22, 26);
             this.filtros.Name = "filtros";
-            this.filtros.Size = new System.Drawing.Size(521, 142);
+            this.filtros.Size = new System.Drawing.Size(577, 142);
             this.filtros.TabIndex = 0;
             this.filtros.TabStop = false;
             this.filtros.Text = "Filtros";
@@ -165,16 +165,18 @@
             // listaProfesionales
             // 
             this.listaProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.listaProfesionales.Location = new System.Drawing.Point(40, 174);
+            this.listaProfesionales.Location = new System.Drawing.Point(22, 174);
+            this.listaProfesionales.MultiSelect = false;
             this.listaProfesionales.Name = "listaProfesionales";
-            this.listaProfesionales.Size = new System.Drawing.Size(521, 155);
+            this.listaProfesionales.ReadOnly = true;
+            this.listaProfesionales.Size = new System.Drawing.Size(577, 155);
             this.listaProfesionales.TabIndex = 1;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(40, 356);
+            this.button2.Location = new System.Drawing.Point(22, 356);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(521, 23);
+            this.button2.Size = new System.Drawing.Size(577, 23);
             this.button2.TabIndex = 2;
             this.button2.Text = "Registrar Agenda Profesional";
             this.button2.UseVisualStyleBackColor = true;

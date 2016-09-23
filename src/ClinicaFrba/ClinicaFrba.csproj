@@ -74,9 +74,6 @@
     <Compile Include="AbmRol\AltaRol.Designer.cs">
       <DependentUpon>AltaRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRol\BajaRol.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="AbmRol\ModificarFuncionalidadesRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,9 +148,13 @@
     <Compile Include="Registro Resultado\RegResultado.Designer.cs">
       <DependentUpon>RegResultado.cs</DependentUpon>
     </Compile>
+    <Compile Include="UtilConexion\AgendaDiaria.cs" />
     <Compile Include="UtilConexion\ConexionDB.cs" />
+    <Compile Include="UtilConexion\Dia.cs" />
     <Compile Include="UtilConexion\Especialidad.cs" />
+    <Compile Include="UtilConexion\EsquemaTrabajo.cs" />
     <Compile Include="UtilConexion\Funcionalidad.cs" />
+    <Compile Include="UtilConexion\Hora.cs" />
     <Compile Include="UtilConexion\Profesional.cs" />
     <Compile Include="UtilConexion\Prueba.cs" />
     <Compile Include="UtilConexion\Rol.cs" />
@@ -165,9 +166,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AbmRol\BajaRol.resx">
-      <DependentUpon>BajaRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\ModificarFuncionalidadesRol.resx">
       <DependentUpon>ModificarFuncionalidadesRol.cs</DependentUpon>

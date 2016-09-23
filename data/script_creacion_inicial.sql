@@ -317,54 +317,66 @@ WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL
 GROUP BY Bono_Consulta_Fecha_Impresion,A.Id
 GO
 
-CREATE PROCEDURE kernel_panic.CargarBonoConsulta
-@numeroBono numeric(18,0),
-@numeroGrupo int,
-@codigoPlan numeric(18,0),
-@afiliadoId int,
-@fechaCompra datetime,
-@codigoTurno numeric(18,0)
-AS
-	DECLARE @nroConsultaActual AS int
-	SET @nroConsultaActual = (SELECT COUNT(B.Id) FROM kernel_panic.Bonos_Consultas B WHERE B.Afiliado_Uso = @afiliadoId) + 1 
-	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas ON
-	INSERT INTO kernel_panic.Bonos_Consultas (Id,Nro_consulta,Grupo_afiliado,Plan_Uso,Afiliado_Uso,Fecha_Bono_compra,Fecha_Impresion,Turno)
-	VALUES
-	(@numeroBono,@nroConsultaActual,@numeroGrupo, @codigoPlan, @afiliadoId, @fechaCompra, @fechaCompra, @codigoTurno)
-	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas OFF
-GO
-
 
 CREATE PROCEDURE kernel_panic.CargarBonos
 AS
 
-	SELECT M.Bono_Consulta_Numero numeroBono, A.Numero_de_grupo numeroGrupo, M.Plan_Med_Codigo codigoPlan, A.Id afiliadoId, M.Bono_Consulta_Fecha_Impresion fechaCompra, M.Turno_Numero codigoTurno
-	INTO #auxiliarBonos
-	FROM gd_esquema.Maestra M JOIN kernel_panic.Afiliados A ON (A.Numero_doc = M.Paciente_Dni)
-	WHERE Turno_Numero IS NOT NULL AND Bono_Consulta_Fecha_Impresion IS NOT NULL
+	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas ON
+	--
+	SELECT A.Id afiliadoId, A.Numero_doc afiliadoDoc, A.Numero_de_grupo afiliadoGrupo
+	INTO #auxiliarAfiliado
+	FROM kernel_panic.Afiliados A
 
+	--Datos afiliado
+	DECLARE @afiliadoId AS INT
+	DECLARE @afiliadoDoc AS numeric(18,0)
+	DECLARE @numGrupo AS INT
+
+	--Datos bono
 
 	DECLARE @numeroBono AS numeric(18,0)
-	DECLARE @numeroGrupo AS int
 	DECLARE @codigoPlan AS numeric(18,0)
-	DECLARE @afiliadoId AS int
 	DECLARE @fechaCompra AS datetime
 	DECLARE @codigoTurno AS numeric(18,0)
+	DECLARE @contador AS INT
+	--Cursor Afiliado
+	DECLARE CursorAfiliado CURSOR FOR SELECT afiliadoId, afiliadoDoc, afiliadoGrupo FROM #auxiliarAfiliado
+	--abrimos cursor afiliado para comenzar migracion
+	OPEN CursorAfiliado
 
-	DECLARE CursorBonos CURSOR FOR SELECT numeroBono,numeroGrupo,codigoPlan,afiliadoId,fechaCompra,codigoTurno FROM #auxiliarBonos ORDER BY afiliadoId ASC
-	--Abrimos cursor
-	OPEN CursorBonos
-	FETCH NEXT FROM CursorBonos INTO @numeroBono,@numeroGrupo,@codigoPlan,@afiliadoId,@fechaCompra,@codigoTurno
+	FETCH NEXT FROM CursorAfiliado INTO @afiliadoId, @afiliadoDoc, @numGrupo
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
-		EXEC kernel_panic.CargarBonoConsulta @numeroBono, @numeroGrupo, @codigoPlan, @afiliadoId,@fechaCompra,@codigoTurno;
-		FETCH NEXT FROM CursorBonos INTO @numeroBono,@numeroGrupo,@codigoPlan,@afiliadoId,@fechaCompra,@codigoTurno
-		
+		SELECT M.Bono_Consulta_Numero numeroBono, M.Plan_Med_Codigo codigoPlan, M.Bono_Consulta_Fecha_Impresion fecha, M.Turno_Numero turno
+		INTO #auxBonos
+		FROM gd_esquema.Maestra M
+		WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL AND Turno_Numero IS NOT NULL AND M.Paciente_Dni = @afiliadoDoc
+		ORDER BY fecha ASC
+
+
+		DECLARE CursorBono CURSOR FOR SELECT numeroBono, codigoPlan, fecha, turno FROM #auxBonos
+
+		OPEN CursorBono
+		FETCH NEXT FROM CursorBono INTO @numeroBono, @codigoPlan, @fechaCompra, @codigoTurno
+		SET @contador = 1
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			
+			INSERT INTO kernel_panic.Bonos_Consultas (Id, Nro_consulta, Grupo_afiliado, Plan_Uso, Afiliado_Uso, Fecha_Bono_compra, Fecha_Impresion, Turno)
+			VALUES (@numeroBono,@contador ,@numGrupo, @codigoPlan, @afiliadoId, @fechaCompra, @fechaCompra, @codigoTurno)
+			SET @contador = @contador + 1
+			FETCH NEXT FROM CursorBono INTO @numeroBono, @codigoPlan, @fechaCompra, @codigoTurno
+		END
+		DROP TABLE #auxBonos
+		FETCH NEXT FROM CursorAfiliado INTO @afiliadoId, @afiliadoDoc, @numGrupo
+		CLOSE CursorBono
+		DEALLOCATE CursorBono
 	END
-	CLOSE CursorBonos
-	DEALLOCATE CursorBonos
-	DROP TABLE #auxiliarBonos
+	CLOSE CursorAfiliado
+	DEALLOCATE CursorAfiliado
+	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas OFF
+	--
 GO
 
 CREATE PROCEDURE kernel_panic.CargarRoles
@@ -433,13 +445,13 @@ INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('fo
 
 CREATE PROCEDURE kernel_panic.crearUsuarioYRolesxU
 AS
-INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('afiliado', '6b3f098db13fa8125179e832290d47df03bc6964fc76438f369e7d521cf0f15d') -- feli1234 la pass
-INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('profesional', '6b3f098db13fa8125179e832290d47df03bc6964fc76438f369e7d521cf0f15d') --feli1234 la pass
-INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('admin', 'dab4730e1ca848e8e23706ab952f88bb1df47d2410396b6f8389e1b35e77f496') --w23e la pass
-INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('a', '8f064368a44028fa577ccedd966721ef7b00de5537f04c5df084b3bcf6ec4d32')
-INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (1, 'admin'), (2, 'afiliado'), (3,'profesional')
-INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (1, 'a')
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('afiliado', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff') -- feli1234 la pass
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('profesional', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff') --feli1234 la pass
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7') --w23e la pass
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('a', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb')
+INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (1, 'admin'), (2, 'afiliado'), (3,'profesional'), (1, 'a')
 GO
+
 
 CREATE PROCEDURE kernel_panic.agregarRol
 @nombreRol VARCHAR(20),
@@ -456,6 +468,33 @@ AS
 		BEGIN 
 			SET @id_rol = -1
 		END
+GO
+
+CREATE PROCEDURE kernel_panic.agregarEsquemaAgenda --Aca se podria validar si ya existe una franja con esos valores, etc..
+@profesional INT,
+@fechaDesde DATETIME,
+@fechaHasta DATETIME,
+@id INT OUTPUT
+AS
+	IF(SELECT COUNT(*) FROM kernel_panic.Esquema_Trabajo WHERE @fechaDesde BETWEEN Desde AND Hasta OR @fechaHasta BETWEEN Desde AND Hasta) > 0
+	BEGIN
+		SET @id = -1
+	END
+	ELSE
+	BEGIN
+		INSERT INTO kernel_panic.Esquema_Trabajo (Profesional, Desde, Hasta) VALUES (@profesional, @fechaDesde, @fechaHasta)
+		SET @id = @@IDENTITY
+	END
+GO
+
+CREATE PROCEDURE kernel_panic.agregarDiaAgenda
+@esquema INT,
+@dia INT,
+@horaDesde TIME,
+@horaHasta TIME,
+@especialidad numeric(18,0)
+AS
+	INSERT INTO kernel_panic.Agenda_Diaria (EsquemaTrabajo, Dia, Desde, Hasta, Especialidad) VALUES (@esquema, @dia, @horaDesde, @horaHasta, @especialidad)
 GO
 
 DROP PROCEDURE kernel_panic.agregarRol
@@ -491,10 +530,6 @@ DROP PROCEDURE kernel_panic.Cargar_turnos
 DROP PROCEDURE kernel_panic.Cargar_diagnosticos
 DROP PROCEDURE kernel_panic.Cargar_transacciones
 DROP PROCEDURE kernel_panic.CargarBonos
-DROP PROCEDURE kernel_panic.CargarBonoConsulta
 DROP PROCEDURE kernel_panic.CargarRoles
 DROP PROCEDURE kernel_panic.CargarFuncionalidades
 DROP PROCEDURE kernel_panic.CargarRoles_Funcionalidad
-
-DROP PROCEDURE kernel_panic.crearUsuarioYRolesxU
-DROP PROCEDURE kernel_panic.agregarRol
