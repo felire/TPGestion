@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Data;
 using System.Windows.Forms;
 
@@ -24,8 +23,8 @@ namespace ClinicaFrba.UtilConexion
             return funcionalidades;
         }
 
+        public Rol() {}
 
-        public Rol() { }
         public Rol(int id)
         {
             this.rol_id = id;
@@ -47,8 +46,7 @@ namespace ClinicaFrba.UtilConexion
                     idsFunc.Add((int)speaker.reader["Funcion_id"]);
                 }
             }
-            speaker.reader.Close();
-            speaker.conection.Close();
+            speaker.close();
             ListaParametros.Clear();
             ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
             speaker = ConexionDB.ObtenerDataReader("SELECT Nombre FROM kernel_panic.Roles WHERE Id = @rol_id", "T", ListaParametros);
@@ -62,9 +60,9 @@ namespace ClinicaFrba.UtilConexion
             {
                 this.funcionalidades.Add(new Funcionalidad(fun_id));
             }
-            speaker.reader.Close();
-            speaker.conection.Close();
+            speaker.close();
         }
+
         public Boolean darAlta()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
@@ -88,10 +86,9 @@ namespace ClinicaFrba.UtilConexion
                 ListaParametros.Add(new SqlParameter("@funcionalidad_id", funcionalidad.funcionalidad_id));
                 speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Funciones_Roles (Rol_id, Funcion_id) VALUES (@rol_id, @funcionalidad_id)", "T", ListaParametros);
                 speaker.close();
-            }            
+            }
             return true;
         }
-
 
         public static List<Rol> obtenerTodosLosRoles()
         {
@@ -107,7 +104,6 @@ namespace ClinicaFrba.UtilConexion
                 }
             }
             speaker.close();
-
             return roles;
         }
 
@@ -136,5 +132,18 @@ namespace ClinicaFrba.UtilConexion
                 this.funcionalidades.Add(funcionalidad);
             }
         }
+
+        public void deshabilitar()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("DELETE FROM kernel_panic.Roles_Usuario WHERE Rol_id = @rol_id", "T", ListaParametros);
+            speaker.close();
+            ListaParametros.Clear();
+            ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
+            speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Roles SET Esta_activo = 0 WHERE Id = @rol_id", "T", ListaParametros);
+            speaker.close();
+        }
     }
 }
+

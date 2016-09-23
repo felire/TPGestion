@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Data;
-
 
 namespace ClinicaFrba.UtilConexion
 {
@@ -17,12 +15,14 @@ namespace ClinicaFrba.UtilConexion
         public int funcionalidad_id {get;set;}
         public string descripcion { get; set; }
 
-        public Funcionalidad(int fun_id){
+        public Funcionalidad(int fun_id)
+        {
             this.funcionalidad_id = fun_id;
             this.obtenerFuncionalidad();
         }
 
-        public Funcionalidad() { }
+        public Funcionalidad() {}
+
         public void obtenerFuncionalidad()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
@@ -52,11 +52,8 @@ namespace ClinicaFrba.UtilConexion
                 }
             }
             speaker.close();
-
             return funcionalidades;
-
         }
     }
-
-  
 }
+

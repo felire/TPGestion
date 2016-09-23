@@ -12,7 +12,8 @@ namespace ClinicaFrba.UtilConexion
 {
     class ConexionDB
     {
-        public static SqlConnection ObtenerConexion(){
+        public static SqlConnection ObtenerConexion()
+        {
             string datosConexion = "Data Source=localhost\\SQLSERVER2012;" +"Initial Catalog=GD2C2016;User Id=gd; Password=gd2016";
             SqlConnection Conn = new SqlConnection(datosConexion);
             Conn.Open();
@@ -21,7 +22,6 @@ namespace ClinicaFrba.UtilConexion
 
         public static SpeakerDB ObtenerDataReader(string commandtext, string commandtype, List<SqlParameter> ListaParametro)
         {
-
             SqlCommand comando = new SqlCommand();
             SqlConnection conexion = ObtenerConexion();
             comando.Connection = conexion;
@@ -50,7 +50,6 @@ namespace ClinicaFrba.UtilConexion
 
         public static SpeakerDB ExecuteNoQuery(string commandtext, string commandtype, List<SqlParameter> ListaParametro)
         {
-
             SqlCommand comando = new SqlCommand();
             SqlConnection conexion = ObtenerConexion();
             comando.Connection = conexion;
@@ -78,6 +77,6 @@ namespace ClinicaFrba.UtilConexion
             comando.ExecuteNonQuery();
             return speaker;
         }
-
     }
 }
+

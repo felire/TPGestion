@@ -18,15 +18,12 @@ namespace ClinicaFrba.UtilConexion
 
         public void close()
         {
-            if (reader == null)
-            {
-                conection.Close();
-            }
-            else
+            if (reader != null)
             {
                 reader.Close();
-                conection.Close();
+                
             }
+            conection.Close();
         }
     }
 }

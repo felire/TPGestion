@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Data;
 
 namespace ClinicaFrba.UtilConexion
@@ -23,7 +22,8 @@ namespace ClinicaFrba.UtilConexion
             cargarEspecialidad();
         }
 
-        public Especialidad() { }
+        public Especialidad() {}
+
         public void cargarEspecialidad()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
@@ -37,6 +37,7 @@ namespace ClinicaFrba.UtilConexion
             }
             speaker.close();
         }
+
         public static List<Especialidad> darTodasEspecialidades()
         {
              List<Especialidad> especialidades = new List<Especialidad>();
@@ -53,7 +54,6 @@ namespace ClinicaFrba.UtilConexion
                 }
              }
              speaker.close();
-
             return especialidades;
         }
     }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using ClinicaFrba.UtilConexion;
 using ClinicaFrba.Menu;
+
 namespace ClinicaFrba
 {
     partial class Logeo : Form
@@ -23,11 +24,11 @@ namespace ClinicaFrba
         {
             UTF8Encoding encoderHash = new UTF8Encoding();
             SHA256Managed hasher = new SHA256Managed();
-            byte[] bytesDeHasheo = hasher.ComputeHash(encoderHash.GetBytes(password.Text));
+            string passConSalt = password.Text + "MeRluSsA";
+            byte[] bytesDeHasheo = hasher.ComputeHash(encoderHash.GetBytes(passConSalt));
             string pass = bytesDeHasheoToString(bytesDeHasheo).ToLower();
             string user = userName.Text;
             Usuario usuario = new Usuario(user, pass, this);
-
         }
 
         public void sinRoles()
@@ -56,7 +57,6 @@ namespace ClinicaFrba
 
         }
 
-
         private string bytesDeHasheoToString(byte[] array)
         {
             StringBuilder salida = new StringBuilder("");
@@ -66,7 +66,6 @@ namespace ClinicaFrba
             }
             return salida.ToString();
         }
-
-
     }
 }
+

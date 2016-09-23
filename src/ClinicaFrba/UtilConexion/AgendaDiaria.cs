@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Data;
-
 
 namespace ClinicaFrba.UtilConexion
 {
@@ -21,6 +19,7 @@ namespace ClinicaFrba.UtilConexion
         public Especialidad especialidad { get; set; }
         public EsquemaTrabajo esquema { get; set;}
         public string especialidadString { get; set; }
+
         public AgendaDiaria(Dia dia, TimeSpan horaDesde, TimeSpan horaHasta, Especialidad especialidad)
         {
             this.dia = dia;
@@ -42,19 +41,18 @@ namespace ClinicaFrba.UtilConexion
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.agregarDiaAgenda", "SP", ListaParametros);
             speaker.close();
         }
-        public static Boolean agendaTotalLegal(List<AgendaDiaria> lista) //Se fija que no supere las 48 horas de laburo
+
+        public static Boolean agendaTotalLegal(List<AgendaDiaria> lista) //Se fija que no supere las 48 horas de trabajo en una semana
         {
             int cont = 0;
             foreach (AgendaDiaria r in lista)
             {
                 cont = cont + (int)(r.horaHasta.TotalMinutes - r.horaDesde.TotalMinutes);
             }
-
             if (cont <= (48 * 60))
             {
                 return true;
             }
-
             else
             {
                 return false;
@@ -62,3 +60,4 @@ namespace ClinicaFrba.UtilConexion
         }
     }
 }
+

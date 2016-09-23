@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Data;
 using System.Windows.Forms;
 
@@ -21,22 +20,24 @@ namespace ClinicaFrba.UtilConexion
         public string tipoDoc { get; set; }
         public decimal documento { get; set; }
 
-        public Profesional(){
+        public Profesional()
+        {
             especialidades = new List<Especialidad>();
         }
+
         public static List<Profesional> buscar(string nombre, string apellido, string especialidad ,string tipoDoc, string doc)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombre", "%" + nombre + "%"));
             ListaParametros.Add(new SqlParameter("@apellido", "%" + apellido + "%"));
 
-            SpeakerDB speaker = null;
+            SpeakerDB speaker;
 
-            if (doc.Equals(""))
+            if (doc.Equals("")) /*no quiere buscar por documento*/
             {
                 speaker = ConexionDB.ObtenerDataReader("SELECT Id, Nombre, Apellido, Tipo_doc, Numero_doc  FROM kernel_panic.Profesionales WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido ", "T", ListaParametros);
             }
-            else
+            else /*busca por documento*/
             {
                 ListaParametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
                 ListaParametros.Add(new SqlParameter("@doc", Decimal.Parse(doc)));
@@ -57,7 +58,6 @@ namespace ClinicaFrba.UtilConexion
                     profesionales.Add(profesional);
                 }
             }
-
             speaker.close();
             if (especialidad.Equals(""))
             {
@@ -86,6 +86,7 @@ namespace ClinicaFrba.UtilConexion
             }
             return listafiltrada;
         }
+
         private void cargarEspecialidades()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();

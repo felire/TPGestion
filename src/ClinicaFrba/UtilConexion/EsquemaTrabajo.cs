@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Data;
 using System.Windows.Forms;
 
@@ -37,6 +36,7 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(parametroSalida);
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.agregarEsquemaAgenda", "SP", ListaParametros);
             int resultado = Int32.Parse(speaker.comando.Parameters["@id"].Value.ToString());
+            speaker.close();
             if (resultado == -1)
             {
                 return false;
@@ -44,9 +44,9 @@ namespace ClinicaFrba.UtilConexion
             else
             {
                 this.id = resultado;
+                return true;
             }
-            speaker.close();
-            return true;
         }
     }
 }
+

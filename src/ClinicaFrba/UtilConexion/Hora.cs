@@ -19,7 +19,7 @@ namespace ClinicaFrba.UtilConexion
 
         public static List<Hora> obtenerHorasDia(Dia dia)
         {
-             int cont = 0;
+            int cont = 0;
             List<Hora> lista = new List<Hora>();
             for (int i = dia.horaDesde.Hours; i <= dia.horaHasta.Hours; i++)
             {
@@ -45,9 +45,18 @@ namespace ClinicaFrba.UtilConexion
 
         public static Boolean horasValidas(TimeSpan desde, TimeSpan hasta)
         {
-            if(desde.Hours < hasta.Hours){ return true; }
-            else if (desde.Hours == hasta.Hours && desde.Minutes < hasta.Minutes) { return true; }
-            else { return false; }
+            if(desde.Hours < hasta.Hours)
+            { 
+                return true; 
+            }
+            else if (desde.Hours == hasta.Hours && desde.Minutes < hasta.Minutes) 
+            { 
+                return true; 
+            }
+            else 
+            { 
+                return false; 
+            }
         }
     }
 }

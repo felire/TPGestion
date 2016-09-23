@@ -19,6 +19,7 @@ namespace ClinicaFrba.UtilConexion
             this.nombre = nombre;
             setFranja();
         }
+
         public Dia(int id)
         {
             this.id = id;
@@ -51,7 +52,8 @@ namespace ClinicaFrba.UtilConexion
 
         public void setFranja()
         {
-            if(id >= 2 && id <=6){
+            if(id >= 2 && id <=6)
+            {
                 this.horaDesde = new TimeSpan(7, 00, 0);
                 this.horaHasta = new TimeSpan(20, 00, 0);
             }
@@ -61,6 +63,7 @@ namespace ClinicaFrba.UtilConexion
                 this.horaHasta = new TimeSpan(15, 00, 0);
             }
         }
+
         public static List<Dia> ObtenerTodosLosDias()
         {
             List<Dia> lista = new List<Dia>();
@@ -70,9 +73,8 @@ namespace ClinicaFrba.UtilConexion
             lista.Add(new Dia(5, "Jueves"));
             lista.Add(new Dia(6, "Viernes"));
             lista.Add(new Dia(7, "Sábado"));
-
             return lista;
         }
-
     }
 }
+

@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Data;
-
 
 namespace ClinicaFrba.UtilConexion
 {
@@ -20,7 +18,7 @@ namespace ClinicaFrba.UtilConexion
         public TipoEspecialidad(decimal codigo)
         {
             this.codigo = codigo;
-            cargarTipo(); //si se comenta anda mejr el buscar
+            cargarTipo();
         }
 
         private void cargarTipo()
@@ -37,3 +35,4 @@ namespace ClinicaFrba.UtilConexion
         }
     }
 }
+

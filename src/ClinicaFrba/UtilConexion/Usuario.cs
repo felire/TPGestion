@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Data;
 
 namespace ClinicaFrba.UtilConexion
@@ -17,12 +16,13 @@ namespace ClinicaFrba.UtilConexion
         public string usuario { get; set; }
         public List<Rol> roles;
 
-        public List<Rol> getRoles(){
+        public List<Rol> getRoles()
+        {
             return roles;
         }
+
         public Usuario(string user, string pass, Logeo formu)
         {
-            //MessageBox.Show("Usuario o contraseña incorrectos", "Error!", MessageBoxButtons.OK);
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombreUsuario", user));
             ListaParametros.Add(new SqlParameter("@pass", pass));
@@ -31,30 +31,28 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(parametroSalida);
             SpeakerDB speaker =  ConexionDB.ExecuteNoQuery("kernel_panic.chequearUsuario", "SP", ListaParametros);
             int resultado = Int32.Parse(speaker.comando.Parameters["@fallo"].Value.ToString());
-            
-                usuario = user;
-                if (resultado == -1)
+            usuario = user;
+            if (resultado == -1)
+            {
+                formu.noHabilitado();
+            }
+            if (resultado == 1)
+            {
+                this.ObtenerRoles();
+                if (roles.Count == 0)
                 {
-                    formu.noHabilitado();
+                    formu.sinRoles();
                 }
-                if (resultado == 1)
+                else
                 {
-                    this.ObtenerRoles();
-                    if (roles.Count == 0)
-                    {
-                        formu.sinRoles();
-                    }
-                    else
-                    {
-                        formu.logeoExitoso(this);
-                    }                   
-                }
-                if (resultado == 2)
-                {
-                    formu.noContrasena();
-                }
-                speaker.conection.Close();
-
+                    formu.logeoExitoso(this);
+                }                   
+            }
+            if (resultado == 2)
+            {
+                formu.noContrasena();
+            }
+            speaker.conection.Close();
         }
 
         public void ObtenerRoles()
@@ -81,11 +79,10 @@ namespace ClinicaFrba.UtilConexion
             speaker.conection.Close();
         }
 
-
         public Boolean masDeUnRol()
         {
             return roles.Count > 1;
         }
-
     }
 }
+

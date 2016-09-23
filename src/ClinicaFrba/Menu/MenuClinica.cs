@@ -133,7 +133,10 @@ namespace ClinicaFrba.Menu
             ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional agenda = new ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional();
             agenda.Show();
         }
-
-
+        private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClinicaFrba.AbmRol.BajaRol rol = new ClinicaFrba.AbmRol.BajaRol();
+            rol.Show();
+        }
     }
 }

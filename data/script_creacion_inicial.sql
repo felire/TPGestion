@@ -438,9 +438,6 @@ AS
 GO
 
 DROP PROCEDURE kernel_panic.chequearUsuario
-INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('folita', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff')
-INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('folitix', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff')
-
 
 
 CREATE PROCEDURE kernel_panic.crearUsuarioYRolesxU
@@ -448,7 +445,7 @@ AS
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('afiliado', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff') -- feli1234 la pass
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('profesional', 'dcca7b504206b4b8f8092211107951cef33e20b227d22e4cb7d2f8831bf14cff') --feli1234 la pass
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7') --w23e la pass
-INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('a', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb')
+INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('a', '8f064368a44028fa577ccedd966721ef7b00de5537f04c5df084b3bcf6ec4d32') --a la pass
 INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (1, 'admin'), (2, 'afiliado'), (3,'profesional'), (1, 'a')
 GO
 
