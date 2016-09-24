@@ -186,13 +186,19 @@ AS
 		FOREIGN KEY (Especialidad) REFERENCES [kernel_panic].[Especialidades] (Codigo),
 		FOREIGN KEY (EsquemaTrabajo) REFERENCES [kernel_panic].[Esquema_Trabajo] (Id));
 		
-
+	CREATE TABLE [kernel_panic].[Franjas_Canceladas] (
+		Id INT IDENTITY(1,1) PRIMARY KEY,
+		EsquemaTrabajo INT,
+		Desde DATETIME,
+		Hasta DATETIME,
+		FOREIGN KEY (EsquemaTrabajo) REFERENCES [kernel_panic].[Esquema_Trabajo] (Id));
 	
 GO
 
 
 CREATE PROCEDURE kernel_panic.BorrarTablas
 AS
+	DROP TABLE [kernel_panic].[Franjas_Canceladas]
 	DROP TABLE [kernel_panic].[Agenda_Diaria]
 	DROP TABLE [kernel_panic].[Esquema_Trabajo]
 	DROP TABLE [kernel_panic].[Bonos_Farmacia]
@@ -317,7 +323,7 @@ WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL
 GROUP BY Bono_Consulta_Fecha_Impresion,A.Id
 GO
 
-
+/* NO BORRAR, ME GUSTARIA COMPARARLO Y CHEQUEAR QUE EL OTRO FUNCIONA CORRECTAMENTE
 CREATE PROCEDURE kernel_panic.CargarBonos
 AS
 
@@ -377,7 +383,54 @@ AS
 	DEALLOCATE CursorAfiliado
 	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas OFF
 	--
+GO*/
+
+
+CREATE PROCEDURE kernel_panic.CargarBonos
+AS
+
+	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas ON
+	--
+	SELECT A.Id afiliadoId, A.Numero_doc afiliadoDoc, A.Numero_de_grupo afiliadoGrupo
+	INTO #auxiliarAfiliado
+	FROM kernel_panic.Afiliados A
+
+	SELECT M.Bono_Consulta_Numero numeroBono, M.Plan_Med_Codigo codigoPlan, M.Bono_Consulta_Fecha_Impresion fecha, M.Turno_Numero turno, M.Paciente_Dni dni
+	INTO #auxBonos
+	FROM gd_esquema.Maestra M
+	WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL AND Turno_Numero IS NOT NULL
+	ORDER BY numeroBono
+
+	--Datos afiliado
+	DECLARE @afiliadoId AS INT
+	DECLARE @afiliadoDoc AS numeric(18,0)
+	DECLARE @numGrupo AS INT
+
+	--Datos bono
+
+	--Cursor Afiliado
+	DECLARE CursorAfiliado CURSOR FOR SELECT afiliadoId, afiliadoDoc, afiliadoGrupo FROM #auxiliarAfiliado
+	--abrimos cursor afiliado para comenzar migracion
+	OPEN CursorAfiliado
+
+	FETCH NEXT FROM CursorAfiliado INTO @afiliadoId, @afiliadoDoc, @numGrupo
+
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+
+		INSERT INTO kernel_panic.Bonos_Consultas (Id,Nro_consulta,Grupo_afiliado,Plan_Uso,Afiliado_Uso,Fecha_Bono_compra,Fecha_Impresion,Turno)
+		SELECT numeroBono, ROW_NUMBER() OVER (ORDER BY numeroBono), @numGrupo, codigoPlan, @afiliadoId, fecha,fecha, turno
+		FROM #auxBonos
+		WHERE dni = @afiliadoDoc
+
+		FETCH NEXT FROM CursorAfiliado INTO @afiliadoId, @afiliadoDoc, @numGrupo		
+	END
+	CLOSE CursorAfiliado
+	DEALLOCATE CursorAfiliado
+	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas OFF
+	--
 GO
+
 
 CREATE PROCEDURE kernel_panic.CargarRoles
 AS
