@@ -24,7 +24,7 @@ namespace ClinicaFrba.Compra_Bono
             InitializeComponent();
             this.afiliado = afiliado;
             this.bono = new BonoConsulta(afiliado);
-            cargarDatos();
+            this.cargarDatos();
         }
 
         private void cargarDatos()
@@ -48,16 +48,10 @@ namespace ClinicaFrba.Compra_Bono
 
         private void comprar_Click(object sender, EventArgs e)
         {
-            if (cantidadAComprar.Text.Equals(""))    /* Santi: no checkeo que solo me ingrese numeros, hay que hacerlo*/
-            {
-                MessageBox.Show("Debe ingresar cuantos bonos va a comprar", "Error!", MessageBoxButtons.OK);
-                return;
-            }
-            int cantidad = Int32.Parse(cantidadAComprar.Text);
-            bono.cantidad = cantidad;
-            int total = cantidad * (int)bono.precioUnitario;
+            bono.cantidad = Int32.Parse(cantidadAComprar.Text);
+            int total = bono.cantidad * (int)bono.precioUnitario;
             System.Windows.Forms.DialogResult resultado;
-            if (cantidad == 1)
+            if (bono.cantidad == 1)
             {
                 resultado = MessageBox.Show("Esta seguro que desea comprar un bono a " + total + " pesos?", "Seguro?", MessageBoxButtons.YesNo);
             }

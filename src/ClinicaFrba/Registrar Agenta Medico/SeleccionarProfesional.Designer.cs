@@ -119,7 +119,6 @@
             this.tipoDoc.Name = "tipoDoc";
             this.tipoDoc.Size = new System.Drawing.Size(121, 21);
             this.tipoDoc.TabIndex = 5;
-            this.tipoDoc.SelectedIndexChanged += new System.EventHandler(this.tipoDoc_SelectedIndexChanged);
             // 
             // label3
             // 

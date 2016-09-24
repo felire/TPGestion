@@ -23,11 +23,6 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             cargarFormulario();
         }
 
-        private void tipoDoc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void cargarFormulario()
         {
             Especialidad noElige = new Especialidad();
@@ -57,6 +52,7 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             profesionalesActuales.Clear();
             profesionalesActuales = Profesional.buscar(nombre.Text, apellido.Text, ((Especialidad)comboEspecialidades.SelectedItem).descripcion, (string)tipoDoc.SelectedItem, numeroDoc.Text);
             listaProfesionales.DataSource = profesionalesActuales;
+            listaProfesionales.ClearSelection();
         }
 
         private void button2_Click(object sender, EventArgs e)

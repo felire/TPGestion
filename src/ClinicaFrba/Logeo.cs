@@ -22,11 +22,6 @@ namespace ClinicaFrba
 
         private void logeoAccion(object sender, EventArgs e)
         {
-            if (userName.Text.Length > 50)
-            {
-                MessageBox.Show("El nombre de usuario tiene un máximo de 50 caracteres", "Error!", MessageBoxButtons.OK);
-                return;
-            }
             UTF8Encoding encoderHash = new UTF8Encoding();
             SHA256Managed hasher = new SHA256Managed();
             string passConSalt = password.Text + "MeRluSsA";

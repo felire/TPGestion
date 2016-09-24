@@ -18,6 +18,7 @@ namespace ClinicaFrba.Compra_Bono
         public ElegirAfiliado()
         {
             InitializeComponent();
+
             cargarFormulario();
         }
 
@@ -35,6 +36,7 @@ namespace ClinicaFrba.Compra_Bono
         {
            afiliadosActuales = Afiliado.buscar(nombre.Text, apellido.Text, grupo.Text, (string)tipoDoc.SelectedItem, numeroDoc.Text);
            listaAfiliados.DataSource = afiliadosActuales;
+           listaAfiliados.ClearSelection();
         }
 
         private void elegir_Click(object sender, EventArgs e)

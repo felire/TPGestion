@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cantidadAComprar = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.precio = new System.Windows.Forms.TextBox();
             this.comprar = new System.Windows.Forms.Button();
@@ -39,6 +38,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
             this.apellido = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cantidadAComprar = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.cantidadAComprar)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -58,13 +60,6 @@
             this.label2.Size = new System.Drawing.Size(148, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "cantidad de bonos a comprar:";
-            // 
-            // cantidadAComprar
-            // 
-            this.cantidadAComprar.Location = new System.Drawing.Point(167, 77);
-            this.cantidadAComprar.Name = "cantidadAComprar";
-            this.cantidadAComprar.Size = new System.Drawing.Size(43, 20);
-            this.cantidadAComprar.TabIndex = 2;
             // 
             // label3
             // 
@@ -98,10 +93,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 110);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(428, 13);
+            this.label4.Size = new System.Drawing.Size(379, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Los bonos se pueden intercambiar unicamente entre miembros de un mismo grupo fami" +
-    "liar";
+            this.label4.Text = "Los bonos pueden ser usados una unica vez por un miembro del grupo familiar,";
             // 
             // label5
             // 
@@ -137,11 +131,39 @@
             this.apellido.Size = new System.Drawing.Size(100, 20);
             this.apellido.TabIndex = 10;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(13, 127);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(153, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "siempre que el plan no cambie.";
+            // 
+            // cantidadAComprar
+            // 
+            this.cantidadAComprar.Location = new System.Drawing.Point(161, 78);
+            this.cantidadAComprar.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.cantidadAComprar.Name = "cantidadAComprar";
+            this.cantidadAComprar.Size = new System.Drawing.Size(38, 20);
+            this.cantidadAComprar.TabIndex = 12;
+            this.cantidadAComprar.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // CompraBono
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(536, 262);
+            this.Controls.Add(this.cantidadAComprar);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.apellido);
             this.Controls.Add(this.nombre);
             this.Controls.Add(this.label6);
@@ -150,11 +172,11 @@
             this.Controls.Add(this.comprar);
             this.Controls.Add(this.precio);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.cantidadAComprar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "CompraBono";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.cantidadAComprar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,7 +186,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox cantidadAComprar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox precio;
         private System.Windows.Forms.Button comprar;
@@ -173,5 +194,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox nombre;
         private System.Windows.Forms.TextBox apellido;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown cantidadAComprar;
     }
 }

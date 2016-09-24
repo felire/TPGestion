@@ -41,9 +41,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.grupo = new System.Windows.Forms.TextBox();
+            this.grupo = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).BeginInit();
             this.filtros.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grupo)).BeginInit();
             this.SuspendLayout();
             // 
             // elegir
@@ -173,10 +174,15 @@
             // 
             // grupo
             // 
-            this.grupo.Location = new System.Drawing.Point(86, 99);
+            this.grupo.Location = new System.Drawing.Point(86, 96);
+            this.grupo.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
             this.grupo.Name = "grupo";
-            this.grupo.Size = new System.Drawing.Size(121, 20);
-            this.grupo.TabIndex = 11;
+            this.grupo.Size = new System.Drawing.Size(36, 20);
+            this.grupo.TabIndex = 12;
             // 
             // ElegirAfiliado
             // 
@@ -191,6 +197,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).EndInit();
             this.filtros.ResumeLayout(false);
             this.filtros.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grupo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -200,7 +207,6 @@
         private System.Windows.Forms.Button elegir;
         private System.Windows.Forms.DataGridView listaAfiliados;
         private System.Windows.Forms.GroupBox filtros;
-        private System.Windows.Forms.TextBox grupo;
         private System.Windows.Forms.Button buscar;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox numeroDoc;
@@ -211,5 +217,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox nombre;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown grupo;
     }
 }
