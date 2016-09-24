@@ -49,6 +49,7 @@
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
+            this.seleccionarAfiliado = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,21 +84,21 @@
             // altaToolStripMenuItem
             // 
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
-            this.altaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.altaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.altaToolStripMenuItem.Text = "Alta";
             this.altaToolStripMenuItem.Click += new System.EventHandler(this.altaToolStripMenuItem_Click);
             // 
             // bajaToolStripMenuItem
             // 
             this.bajaToolStripMenuItem.Name = "bajaToolStripMenuItem";
-            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.bajaToolStripMenuItem.Text = "Baja";
             this.bajaToolStripMenuItem.Click += new System.EventHandler(this.bajaToolStripMenuItem_Click);
             // 
             // modificaciónToolStripMenuItem
             // 
             this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
-            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.modificaciónToolStripMenuItem.Text = "Modificación";
             this.modificaciónToolStripMenuItem.Click += new System.EventHandler(this.modificaciónToolStripMenuItem_Click);
             // 
@@ -139,6 +140,8 @@
             // 
             // bonoToolStripMenuItem
             // 
+            this.bonoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.seleccionarAfiliado});
             this.bonoToolStripMenuItem.Name = "bonoToolStripMenuItem";
             this.bonoToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.bonoToolStripMenuItem.Text = "Bono";
@@ -220,6 +223,13 @@
             this.labelFuncionalidades.TabIndex = 5;
             this.labelFuncionalidades.Text = "Funcionalidades:";
             // 
+            // seleccionarAfiliado
+            // 
+            this.seleccionarAfiliado.Name = "seleccionarAfiliado";
+            this.seleccionarAfiliado.Size = new System.Drawing.Size(178, 22);
+            this.seleccionarAfiliado.Text = "Seleccionar Afiliado";
+            this.seleccionarAfiliado.Click += new System.EventHandler(this.seleccionarAfiliado_Click);
+            // 
             // MenuClinica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,5 +275,6 @@
         private System.Windows.Forms.ToolStripMenuItem modificaciónToolStripMenuItem1;
         private System.Windows.Forms.Label labelFuncionalidades;
         private System.Windows.Forms.ToolStripMenuItem agendaProfesional;
+        private System.Windows.Forms.ToolStripMenuItem seleccionarAfiliado;
     }
 }

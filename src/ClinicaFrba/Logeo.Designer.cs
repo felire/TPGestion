@@ -108,7 +108,6 @@
             this.Controls.Add(this.logearse);
             this.Name = "Logeo";
             this.Text = "Logeo";
-            this.Load += new System.EventHandler(this.Logeo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

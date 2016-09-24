@@ -449,7 +449,6 @@ INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('a'
 INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (1, 'admin'), (2, 'afiliado'), (3,'profesional'), (1, 'a')
 GO
 
-
 CREATE PROCEDURE kernel_panic.agregarRol
 @nombreRol VARCHAR(20),
 @id_rol INT OUTPUT

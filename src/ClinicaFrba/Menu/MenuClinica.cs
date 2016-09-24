@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClinicaFrba.UtilConexion;
+
 namespace ClinicaFrba.Menu
 {
     partial class MenuClinica : Form
@@ -137,6 +138,12 @@ namespace ClinicaFrba.Menu
         {
             ClinicaFrba.AbmRol.BajaRol rol = new ClinicaFrba.AbmRol.BajaRol();
             rol.Show();
+        }
+
+        private void seleccionarAfiliado_Click(object sender, EventArgs e)
+        {
+            ClinicaFrba.Compra_Bono.ElegirAfiliado form = new ClinicaFrba.Compra_Bono.ElegirAfiliado();
+            form.Show();
         }
     }
 }

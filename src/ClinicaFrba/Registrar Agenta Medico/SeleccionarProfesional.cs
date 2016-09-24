@@ -57,7 +57,6 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             profesionalesActuales.Clear();
             profesionalesActuales = Profesional.buscar(nombre.Text, apellido.Text, ((Especialidad)comboEspecialidades.SelectedItem).descripcion, (string)tipoDoc.SelectedItem, numeroDoc.Text);
             listaProfesionales.DataSource = profesionalesActuales;
-            //Profesional.buscar(nombre.Text, apellido.Text, ((Especialidad)comboEspecialidades.SelectedItem).descripcion, (string)tipoDoc.SelectedItem, numeroDoc.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
