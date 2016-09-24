@@ -16,15 +16,14 @@ namespace ClinicaFrba.Compra_Bono
 {
     partial class CompraBono : Form
     {
-        public decimal precioUnitario { get; set; }
-        public decimal plan { get; set; }
-        public int cantidad { get; set; }
+        public BonoConsulta bono { get; set; }
         public Afiliado afiliado { get; set; }
 
         public CompraBono(Afiliado afiliado)
         {
             InitializeComponent();
             this.afiliado = afiliado;
+            this.bono = new BonoConsulta(afiliado);
             cargarDatos();
         }
 
@@ -40,9 +39,9 @@ namespace ClinicaFrba.Compra_Bono
             if (speaker.reader.HasRows)
             {
                 speaker.reader.Read();
-                precioUnitario = (decimal)speaker.reader["Precio_bono_consulta"];
-                plan = (decimal)speaker.reader["Plan_grupo"];
-                precio.Text = precioUnitario.ToString();
+                bono.precioUnitario = (decimal)speaker.reader["Precio_bono_consulta"];
+                bono.plan = (decimal)speaker.reader["Plan_grupo"];
+                precio.Text = bono.precioUnitario.ToString();
             }
             speaker.close();
         }
@@ -54,10 +53,11 @@ namespace ClinicaFrba.Compra_Bono
                 MessageBox.Show("Debe ingresar cuantos bonos va a comprar", "Error!", MessageBoxButtons.OK);
                 return;
             }
-            cantidad = Int32.Parse(cantidadAComprar.Text);
-            int total = cantidad * (int)precioUnitario;
+            int cantidad = Int32.Parse(cantidadAComprar.Text);
+            bono.cantidad = cantidad;
+            int total = cantidad * (int)bono.precioUnitario;
             System.Windows.Forms.DialogResult resultado;
-            if (Int32.Parse(cantidadAComprar.Text) == 1)
+            if (cantidad == 1)
             {
                 resultado = MessageBox.Show("Esta seguro que desea comprar un bono a " + total + " pesos?", "Seguro?", MessageBoxButtons.YesNo);
             }
@@ -67,25 +67,9 @@ namespace ClinicaFrba.Compra_Bono
             }
             if (resultado == DialogResult.Yes)
             {
-                comprarBonos();
+                bono.comprar();
+                this.Hide();
             }
-        }
-
-        private void comprarBonos()
-        {
-            List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            for (int i = 0; i < cantidad; i++)
-            {
-
-                ListaParametros.Clear();
-                ListaParametros.Add(new SqlParameter("@grupo", afiliado.numeroDeGrupo));
-                ListaParametros.Add(new SqlParameter("@plan", plan));
-                ListaParametros.Add(new SqlParameter("@hoy", DateTime.Now));
-                SpeakerDB speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Bonos_Consultas (Nro_consulta, Grupo_afiliado, Plan_Uso, Afiliado_Uso, Fecha_Bono_compra, Fecha_Impresion, Turno) VALUES (NULL, @grupo, @plan, NULL, @hoy, @hoy, NULL)", "T", ListaParametros);
-                speaker.close();
-            }
-            MessageBox.Show("Compra realizada con exito", "", MessageBoxButtons.OK);
-            this.Hide();
         }
     }
 }

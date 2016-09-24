@@ -159,6 +159,7 @@
     </Compile>
     <Compile Include="UtilConexion\Afiliado.cs" />
     <Compile Include="UtilConexion\AgendaDiaria.cs" />
+    <Compile Include="UtilConexion\BonoConsulta.cs" />
     <Compile Include="UtilConexion\ConexionDB.cs" />
     <Compile Include="UtilConexion\Dia.cs" />
     <Compile Include="UtilConexion\Especialidad.cs" />
