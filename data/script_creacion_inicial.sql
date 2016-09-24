@@ -437,7 +437,6 @@ AS
 	DROP TABLE #user
 GO
 
-DROP PROCEDURE kernel_panic.chequearUsuario
 
 
 CREATE PROCEDURE kernel_panic.crearUsuarioYRolesxU
@@ -448,6 +447,7 @@ INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('ad
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('a', '8f064368a44028fa577ccedd966721ef7b00de5537f04c5df084b3bcf6ec4d32') --a la pass
 INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (1, 'admin'), (2, 'afiliado'), (3,'profesional'), (1, 'a')
 GO
+
 
 CREATE PROCEDURE kernel_panic.agregarRol
 @nombreRol VARCHAR(20),
@@ -529,3 +529,8 @@ DROP PROCEDURE kernel_panic.CargarBonos
 DROP PROCEDURE kernel_panic.CargarRoles
 DROP PROCEDURE kernel_panic.CargarFuncionalidades
 DROP PROCEDURE kernel_panic.CargarRoles_Funcionalidad
+DROP PROCEDURE kernel_panic.chequearUsuario
+DROP PROCEDURE kernel_panic.crearUsuarioYRolesxU
+DROP PROCEDURE kernel_panic.agregarRol
+DROP PROCEDURE kernel_panic.agregarEsquemaAgenda
+DROP PROCEDURE kernel_panic.agregarDiaAgenda
