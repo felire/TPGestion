@@ -74,7 +74,6 @@ AS
 		Descripcion VARCHAR(255)
 		FOREIGN KEY(Afiliado) REFERENCES [kernel_panic].[Afiliados] (Id));
 
-
 	CREATE TABLE [kernel_panic].[Transacciones] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Cantidad INT NOT NULL,
@@ -175,7 +174,6 @@ AS
 		Hasta DATETIME,
 		FOREIGN KEY (Profesional) REFERENCES [kernel_panic].[Profesionales] (Id));
 
-
 	CREATE TABLE [kernel_panic].[Agenda_Diaria] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		EsquemaTrabajo INT,
@@ -192,9 +190,7 @@ AS
 		Desde DATETIME,
 		Hasta DATETIME,
 		FOREIGN KEY (EsquemaTrabajo) REFERENCES [kernel_panic].[Esquema_Trabajo] (Id));
-	
 GO
-
 
 CREATE PROCEDURE kernel_panic.BorrarTablas
 AS
@@ -316,84 +312,16 @@ GO
 
 CREATE PROCEDURE kernel_panic.Cargar_transacciones
 AS
-INSERT INTO kernel_panic.Transacciones (Cantidad, Precio, Fecha, Afiliado)
-SELECT COUNT(Bono_Consulta_Numero) /2, SUM(Plan_Med_Precio_Bono_Farmacia)/2 , Bono_Consulta_Fecha_Impresion, A.Id
-FROM gd_esquema.Maestra M JOIN kernel_panic.Afiliados A ON (A.Numero_doc = M.Paciente_Dni)
-WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL
-GROUP BY Bono_Consulta_Fecha_Impresion,A.Id
+	INSERT INTO kernel_panic.Transacciones (Cantidad, Precio, Fecha, Afiliado)
+	SELECT COUNT(Bono_Consulta_Numero) /2, SUM(Plan_Med_Precio_Bono_Farmacia)/2 , Bono_Consulta_Fecha_Impresion, A.Id
+	FROM gd_esquema.Maestra M JOIN kernel_panic.Afiliados A ON (A.Numero_doc = M.Paciente_Dni)
+	WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL
+	GROUP BY Bono_Consulta_Fecha_Impresion,A.Id
 GO
 
-/* NO BORRAR, ME GUSTARIA COMPARARLO Y CHEQUEAR QUE EL OTRO FUNCIONA CORRECTAMENTE
 CREATE PROCEDURE kernel_panic.CargarBonos
 AS
-
 	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas ON
-	--
-	SELECT A.Id afiliadoId, A.Numero_doc afiliadoDoc, A.Numero_de_grupo afiliadoGrupo
-	INTO #auxiliarAfiliado
-	FROM kernel_panic.Afiliados A
-
-	--Datos afiliado
-	DECLARE @afiliadoId AS INT
-	DECLARE @afiliadoDoc AS numeric(18,0)
-	DECLARE @numGrupo AS INT
-
-	--Datos bono
-
-	DECLARE @numeroBono AS numeric(18,0)
-	DECLARE @codigoPlan AS numeric(18,0)
-	DECLARE @fechaCompra AS datetime
-	DECLARE @codigoTurno AS numeric(18,0)
-	DECLARE @contador AS INT
-	--Cursor Afiliado
-	DECLARE CursorAfiliado CURSOR FOR SELECT afiliadoId, afiliadoDoc, afiliadoGrupo FROM #auxiliarAfiliado
-	--abrimos cursor afiliado para comenzar migracion
-	OPEN CursorAfiliado
-
-	FETCH NEXT FROM CursorAfiliado INTO @afiliadoId, @afiliadoDoc, @numGrupo
-
-	WHILE @@FETCH_STATUS = 0
-	BEGIN
-		SELECT M.Bono_Consulta_Numero numeroBono, M.Plan_Med_Codigo codigoPlan, M.Bono_Consulta_Fecha_Impresion fecha, M.Turno_Numero turno
-		INTO #auxBonos
-		FROM gd_esquema.Maestra M
-		WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL AND Turno_Numero IS NOT NULL AND M.Paciente_Dni = @afiliadoDoc
-		ORDER BY fecha ASC
-
-
-		DECLARE CursorBono CURSOR FOR SELECT numeroBono, codigoPlan, fecha, turno FROM #auxBonos
-
-		OPEN CursorBono
-		FETCH NEXT FROM CursorBono INTO @numeroBono, @codigoPlan, @fechaCompra, @codigoTurno
-		SET @contador = 1
-		WHILE @@FETCH_STATUS = 0
-		BEGIN
-			
-			INSERT INTO kernel_panic.Bonos_Consultas (Id, Nro_consulta, Grupo_afiliado, Plan_Uso, Afiliado_Uso, Fecha_Bono_compra, Fecha_Impresion, Turno)
-			VALUES (@numeroBono,@contador ,@numGrupo, @codigoPlan, @afiliadoId, @fechaCompra, @fechaCompra, @codigoTurno)
-			SET @contador = @contador + 1
-			FETCH NEXT FROM CursorBono INTO @numeroBono, @codigoPlan, @fechaCompra, @codigoTurno
-		END
-		DROP TABLE #auxBonos
-		FETCH NEXT FROM CursorAfiliado INTO @afiliadoId, @afiliadoDoc, @numGrupo
-		CLOSE CursorBono
-		DEALLOCATE CursorBono
-	END
-	CLOSE CursorAfiliado
-	DEALLOCATE CursorAfiliado
-	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas OFF
-	--
-GO*/
-
-
-CREATE PROCEDURE kernel_panic.CargarBonos
-AS
-
-	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas ON
-	--
-	SELECT A.Id afiliadoId, A.Numero_doc afiliadoDoc, A.Numero_de_grupo afiliadoGrupo
-	INTO #auxiliarAfiliado
-	FROM kernel_panic.Afiliados A
 
 	SELECT M.Bono_Consulta_Numero numeroBono, M.Plan_Med_Codigo codigoPlan, M.Bono_Consulta_Fecha_Impresion fecha, M.Turno_Numero turno, M.Paciente_Dni dni
 	INTO #auxBonos
@@ -409,28 +337,26 @@ AS
 	--Datos bono
 
 	--Cursor Afiliado
-	DECLARE CursorAfiliado CURSOR FOR SELECT afiliadoId, afiliadoDoc, afiliadoGrupo FROM #auxiliarAfiliado
+	DECLARE CursorAfiliado CURSOR FOR SELECT Id, Numero_doc, Numero_de_grupo FROM kernel_panic.Afiliados
 	--abrimos cursor afiliado para comenzar migracion
 	OPEN CursorAfiliado
 
 	FETCH NEXT FROM CursorAfiliado INTO @afiliadoId, @afiliadoDoc, @numGrupo
 
 	WHILE @@FETCH_STATUS = 0
-	BEGIN
+		BEGIN
 
-		INSERT INTO kernel_panic.Bonos_Consultas (Id,Nro_consulta,Grupo_afiliado,Plan_Uso,Afiliado_Uso,Fecha_Bono_compra,Fecha_Impresion,Turno)
-		SELECT numeroBono, ROW_NUMBER() OVER (ORDER BY numeroBono), @numGrupo, codigoPlan, @afiliadoId, fecha,fecha, turno
-		FROM #auxBonos
-		WHERE dni = @afiliadoDoc
+			INSERT INTO kernel_panic.Bonos_Consultas (Id,Nro_consulta,Grupo_afiliado,Plan_Uso,Afiliado_Uso,Fecha_Bono_compra,Fecha_Impresion,Turno)
+			SELECT numeroBono, ROW_NUMBER() OVER (ORDER BY numeroBono), @numGrupo, codigoPlan, @afiliadoId, fecha,fecha, turno
+			FROM #auxBonos
+			WHERE dni = @afiliadoDoc
 
-		FETCH NEXT FROM CursorAfiliado INTO @afiliadoId, @afiliadoDoc, @numGrupo		
-	END
+			FETCH NEXT FROM CursorAfiliado INTO @afiliadoId, @afiliadoDoc, @numGrupo		
+		END
 	CLOSE CursorAfiliado
 	DEALLOCATE CursorAfiliado
 	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas OFF
-	--
 GO
-
 
 CREATE PROCEDURE kernel_panic.CargarRoles
 AS
@@ -546,8 +472,6 @@ AS
 	INSERT INTO kernel_panic.Agenda_Diaria (EsquemaTrabajo, Dia, Desde, Hasta, Especialidad) VALUES (@esquema, @dia, @horaDesde, @horaHasta, @especialidad)
 GO
 
-DROP PROCEDURE kernel_panic.agregarRol
-
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
 EXEC kernel_panic.Cargar_planes
@@ -564,8 +488,6 @@ EXEC kernel_panic.CargarRoles
 EXEC kernel_panic.CargarFuncionalidades
 EXEC kernel_panic.CargarRoles_Funcionalidad
 EXEC kernel_panic.crearUsuarioYRolesxU
-
-
 
 DROP PROCEDURE kernel_panic.BorrarTablas
 DROP PROCEDURE kernel_panic.CrearTablas
