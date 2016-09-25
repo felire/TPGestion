@@ -25,8 +25,7 @@ AS
 
 	CREATE TABLE [kernel_panic].[Usuarios] (
 		Nombre_usuario VARCHAR(50) PRIMARY KEY, --Nombre usuario
-		Password_usuario CHAR(64) NOT NULL,
-		Nombre VARCHAR(255),
+		Password_usuario CHAR(64),
 		Intentos_fallidos INT DEFAULT 0,
 		Habilitado BIT NOT NULL DEFAULT 1); --1 es habilitado, 0 no.
 	CREATE TABLE [kernel_panic].[Roles_Usuario] (
@@ -48,7 +47,7 @@ AS
 		FOREIGN KEY (Plan_Grupo) REFERENCES [kernel_panic].[Planes] (Codigo));
 
 	CREATE TABLE [kernel_panic].[Afiliados] (
-		Id INT IDENTITY(1,1) PRIMARY KEY,
+		Id INT PRIMARY KEY,
 		Numero_de_grupo INT,
 		Numero_en_el_grupo INT, --Dentro del grupo familiar
 		Nombre VARCHAR(255) NOT NULL,
@@ -231,6 +230,8 @@ AS
 	DECLARE @PacienteMail AS varchar(255)
 	DECLARE @PlanMed AS numeric(18,0)
 	DECLARE @PacienteNombre AS varchar(255)
+	DECLARE @IdAfiliadoReal AS INT
+	DECLARE @UltimoGrupo AS INT
 	DECLARE CursorPaciente CURSOR FOR SELECT Paciente_Nombre, Paciente_Apellido, Paciente_Dni, Paciente_Direccion, Paciente_Telefono, Paciente_Mail, Paciente_Fecha_Nac, Plan_Med_Codigo FROM #auxiliarPaciente
 	--Abrimos cursor
 	OPEN CursorPaciente
@@ -239,9 +240,17 @@ AS
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
 		INSERT INTO kernel_panic.Grupos_Familiares (Plan_Grupo) VALUES (@PlanMed)
-		INSERT INTO kernel_panic.Afiliados (Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
+		SET @UltimoGrupo = @@IDENTITY
+		SET @IdAfiliadoReal = CONVERT(INT,CONVERT(VARCHAR(20),@UltimoGrupo)+'01')
+
+		INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario)
 		VALUES
-		((SELECT TOP 1 Id FROM kernel_panic.Grupos_Familiares ORDER BY Id DESC),01, @PacienteNombre, @PacienteApellido,'DNI', @PacienteDNI, @PacienteDireccion, @PacienteTelefono,@PacienteMail,@PacienteFechaNac,NULL,NULL,NULL,1,NULL)
+		(CONVERT(VARCHAR(50), @IdAfiliadoReal), NULL)	
+
+		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
+		VALUES
+		(@IdAfiliadoReal,@UltimoGrupo,1, @PacienteNombre, @PacienteApellido,'DNI', @PacienteDNI, @PacienteDireccion, @PacienteTelefono,@PacienteMail,@PacienteFechaNac,NULL,NULL,NULL,1,(CONVERT(VARCHAR(50), @IdAfiliadoReal)))
+				
 		FETCH NEXT FROM CursorPaciente INTO @PacienteNombre, @PacienteApellido, @PacienteDNI, @PacienteDireccion, @PacienteTelefono, @PacienteMail, @PacienteFechaNac, @PlanMed
 		
 	END
@@ -279,6 +288,25 @@ AS
 	SELECT DISTINCT Medico_Nombre, Medico_Apellido, 'DNI',Medico_Dni,Medico_Direccion,Medico_Telefono,Medico_Mail,Medico_Fecha_Nac,NULL,NULL,NULL
 	FROM gd_esquema.Maestra
 	WHERE Medico_Nombre IS NOT NULL
+
+
+	DECLARE @MedicoDNI AS numeric(18,0)
+	DECLARE CursorMedico CURSOR FOR SELECT Numero_doc FROM kernel_panic.Profesionales
+	--Abrimos cursor
+	OPEN CursorMedico
+	FETCH NEXT FROM CursorMedico INTO @MedicoDNI
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario)
+		VALUES
+		(CONVERT(VARCHAR(50), @MedicoDNI), NULL)	
+		
+		UPDATE kernel_panic.Profesionales SET Usuario_id = CONVERT(VARCHAR(50), @MedicoDNI) WHERE Numero_doc = @MedicoDNI				
+		FETCH NEXT FROM CursorMedico INTO @MedicoDNI		
+	END
+	CLOSE CursorMedico
+	DEALLOCATE CursorMedico
+	
 GO
 
 CREATE PROCEDURE kernel_panic.Cargar_especialidad_profesional
@@ -509,3 +537,4 @@ DROP PROCEDURE kernel_panic.crearUsuarioYRolesxU
 DROP PROCEDURE kernel_panic.agregarRol
 DROP PROCEDURE kernel_panic.agregarEsquemaAgenda
 DROP PROCEDURE kernel_panic.agregarDiaAgenda
+
