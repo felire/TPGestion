@@ -58,3 +58,7 @@ C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_A
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.ElegirAfiliado.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.CompraBono.resources
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.BajaRol.resources
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.CompraBono.resources
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.ElegirAfiliado.resources
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.LogeoPrimer.PrimerLogeo.resources

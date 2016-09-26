@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using ClinicaFrba.UtilConexion;
 using ClinicaFrba.Menu;
+using ClinicaFrba.LogeoPrimer;
 
 namespace ClinicaFrba
 {
@@ -52,6 +53,11 @@ namespace ClinicaFrba
             this.Hide();
         }
 
+        public void primerLogeo(Usuario usuario)
+        {
+            PrimerLogeo primer = new PrimerLogeo(usuario, this);
+            primer.Show();
+        }
         private string bytesDeHasheoToString(byte[] array)
         {
             StringBuilder salida = new StringBuilder("");

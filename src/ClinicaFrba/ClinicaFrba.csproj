@@ -119,6 +119,12 @@
     <Compile Include="Logeo.Designer.cs">
       <DependentUpon>Logeo.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogeoPrimer\PrimerLogeo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogeoPrimer\PrimerLogeo.Designer.cs">
+      <DependentUpon>PrimerLogeo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menu\MenuClinica.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Logeo.resx">
       <DependentUpon>Logeo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogeoPrimer\PrimerLogeo.resx">
+      <DependentUpon>PrimerLogeo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu\MenuClinica.resx">
       <DependentUpon>MenuClinica.cs</DependentUpon>

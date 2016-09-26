@@ -250,7 +250,10 @@ AS
 		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
 		VALUES
 		(@IdAfiliadoReal,@UltimoGrupo,1, @PacienteNombre, @PacienteApellido,'DNI', @PacienteDNI, @PacienteDireccion, @PacienteTelefono,@PacienteMail,@PacienteFechaNac,NULL,NULL,NULL,1,(CONVERT(VARCHAR(50), @IdAfiliadoReal)))
-				
+		
+		INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (2,CONVERT(VARCHAR(50), @IdAfiliadoReal))
+
+
 		FETCH NEXT FROM CursorPaciente INTO @PacienteNombre, @PacienteApellido, @PacienteDNI, @PacienteDireccion, @PacienteTelefono, @PacienteMail, @PacienteFechaNac, @PlanMed
 		
 	END
@@ -301,7 +304,10 @@ AS
 		VALUES
 		(CONVERT(VARCHAR(50), @MedicoDNI), NULL)	
 		
-		UPDATE kernel_panic.Profesionales SET Usuario_id = CONVERT(VARCHAR(50), @MedicoDNI) WHERE Numero_doc = @MedicoDNI				
+		UPDATE kernel_panic.Profesionales SET Usuario_id = CONVERT(VARCHAR(50), @MedicoDNI) WHERE Numero_doc = @MedicoDNI
+		
+		INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (3,CONVERT(VARCHAR(50), @MedicoDNI))
+						
 		FETCH NEXT FROM CursorMedico INTO @MedicoDNI		
 	END
 	CLOSE CursorMedico
@@ -429,17 +435,25 @@ AS
 		END
 	ELSE
 		BEGIN
-			UPDATE kernel_panic.Usuarios
-			SET Intentos_fallidos = (SELECT Intentos_fallidos FROM #user) + 1
-			WHERE Nombre_usuario = @nombreUsuario
-			IF ((SELECT Intentos_fallidos FROM #user) + 1) = 3
+			IF (SELECT Password_usuario FROM #user) IS NULL
 				BEGIN
-					UPDATE kernel_panic.Usuarios
-					SET Habilitado = 0
-					WHERE Nombre_usuario = @nombreUsuario
+					SET @fallo = 3 --Primer logeo usuario
+					return
 				END
-			SET @fallo = 2 /*Contraseña Incorrecta*/
-			return
+			ELSE
+				BEGIN
+				UPDATE kernel_panic.Usuarios
+				SET Intentos_fallidos = (SELECT Intentos_fallidos FROM #user) + 1
+				WHERE Nombre_usuario = @nombreUsuario
+				IF ((SELECT Intentos_fallidos FROM #user) + 1) = 3
+					BEGIN
+						UPDATE kernel_panic.Usuarios
+						SET Habilitado = 0
+						WHERE Nombre_usuario = @nombreUsuario
+					END
+				SET @fallo = 2 /*Contraseña Incorrecta*/
+				return
+				END
 		END
 	DROP TABLE #user
 GO
@@ -503,6 +517,10 @@ GO
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
 EXEC kernel_panic.Cargar_planes
+EXEC kernel_panic.CargarRoles
+EXEC kernel_panic.CargarFuncionalidades
+EXEC kernel_panic.CargarRoles_Funcionalidad
+EXEC kernel_panic.crearUsuarioYRolesxU
 EXEC kernel_panic.Cargar_registro_afiliados
 EXEC kernel_panic.Cargar_tipo_especialidad
 EXEC kernel_panic.Cargar_especialidades
@@ -512,10 +530,7 @@ EXEC kernel_panic.Cargar_turnos
 EXEC kernel_panic.Cargar_diagnosticos
 EXEC kernel_panic.Cargar_transacciones
 EXEC kernel_panic.CargarBonos
-EXEC kernel_panic.CargarRoles
-EXEC kernel_panic.CargarFuncionalidades
-EXEC kernel_panic.CargarRoles_Funcionalidad
-EXEC kernel_panic.crearUsuarioYRolesxU
+
 
 DROP PROCEDURE kernel_panic.BorrarTablas
 DROP PROCEDURE kernel_panic.CrearTablas

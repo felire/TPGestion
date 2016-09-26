@@ -52,9 +52,30 @@ namespace ClinicaFrba.UtilConexion
             {
                 formu.noContrasena();
             }
+            if (resultado == 3)
+            {
+                this.ObtenerRoles();
+                if (roles.Count == 0)
+                {
+                    formu.sinRoles();
+                }
+                else
+                {
+                    formu.primerLogeo(this);
+                }  
+                
+            }
             speaker.conection.Close();
         }
 
+        public void actualizarPass(string pass)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@nombreUsuario", this.usuario));
+            ListaParametros.Add(new SqlParameter("@pass", pass));
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Usuarios SET Password_usuario = @pass WHERE Nombre_usuario = @nombreUsuario", "T", ListaParametros);
+            speaker.close();
+        }
         public void ObtenerRoles()
         {
             List<int> Lista = new List<int>();
