@@ -106,6 +106,7 @@ namespace ClinicaFrba.UtilConexion
         public void cargarReferencias()
         {
             this.afiliado = new Afiliado(this.usuario);
+            this.profesional = new Profesional(this.usuario);
         }
         public Boolean masDeUnRol()
         {

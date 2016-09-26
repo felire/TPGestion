@@ -81,7 +81,6 @@
             this.userName.Location = new System.Drawing.Point(123, 76);
             this.userName.MaxLength = 50;
             this.userName.Name = "userName";
-            this.userName.ShortcutsEnabled = false;
             this.userName.Size = new System.Drawing.Size(137, 20);
             this.userName.TabIndex = 4;
             // 
@@ -91,7 +90,6 @@
             this.password.MaxLength = 70;
             this.password.Name = "password";
             this.password.PasswordChar = '•';
-            this.password.ShortcutsEnabled = false;
             this.password.Size = new System.Drawing.Size(137, 20);
             this.password.TabIndex = 5;
             // 

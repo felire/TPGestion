@@ -70,13 +70,13 @@ namespace ClinicaFrba.Pedir_Turno
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@profesional", turno.profesional.id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT c.Desde, c.Hasta FROM kernel_panic.Franjas_Canceladas c JOIN kernel_panic.Esquema_Trabajo et ON(c.EsquemaTrabajo = et.Id) WHERE et.Profesional = @profesional ", "T", ListaParametros);
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT c.Desde AS fechaDesde, c.Hasta AS fechaHasta FROM kernel_panic.Franjas_Canceladas c JOIN kernel_panic.Esquema_Trabajo et ON(c.EsquemaTrabajo = et.Id) WHERE et.Profesional = @profesional ", "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 while (speaker.reader.Read())
                 {
-                    DateTime fechaDesde = (DateTime)speaker.reader["c.Desde"];
-                    DateTime fechaHasta = (DateTime)speaker.reader["c.Hasta"];
+                    DateTime fechaDesde = (DateTime)speaker.reader["fechaDesde"];
+                    DateTime fechaHasta = (DateTime)speaker.reader["fechaHasta"];
                     this.borrarFechas(fechaDesde, fechaHasta);
                 }
             }
@@ -85,7 +85,15 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void borrarFechas(DateTime desde, DateTime hasta)
         {
+            List<Fecha> fechasClonadas = new List<Fecha>();
+
             foreach (Fecha fecha in fechas)
+            {
+
+                fechasClonadas.Add(fecha);
+            }
+
+            foreach (Fecha fecha in fechasClonadas)
             {
                 if (fecha.CompareTo(desde) >= 0 && fecha.CompareTo(hasta) <= 0)
                 {

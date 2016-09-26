@@ -326,8 +326,8 @@ GO
 CREATE PROCEDURE kernel_panic.Cargar_turnos
 AS
 	SET IDENTITY_INSERT kernel_panic.Turnos ON
-	INSERT INTO kernel_panic.Turnos (Id,Afiliado_id, Profesional_id, Fecha, Especialidad)
-	SELECT M.Turno_Numero, A.Id, P.Id, M.Turno_Fecha, M.Especialidad_Codigo
+	INSERT INTO kernel_panic.Turnos (Id,Afiliado_id, Profesional_id, Fecha, Especialidad, Fecha_llegada)
+	SELECT M.Turno_Numero, A.Id, P.Id, M.Turno_Fecha, M.Especialidad_Codigo, M.Turno_Fecha
 	FROM gd_esquema.Maestra AS M JOIN kernel_panic.Profesionales AS P ON (P.Numero_doc = M.Medico_Dni)
 								 JOIN kernel_panic.Afiliados AS A ON (M.Paciente_Dni = A.Numero_doc)
 	GROUP BY M.Especialidad_Codigo, P.Id, A.Id, M.Turno_Numero, M.Turno_Fecha
@@ -512,6 +512,58 @@ AS
 	INSERT INTO kernel_panic.Agenda_Diaria (EsquemaTrabajo, Dia, Desde, Hasta, Especialidad) VALUES (@esquema, @dia, @horaDesde, @horaHasta, @especialidad)
 GO
 
+CREATE PROCEDURE kernel_panic.cancelarTurnoAfi
+@idTurno INT,
+@detalle VARCHAR(400),
+@tipo VARCHAR(30)
+AS
+	INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, GETDATE())
+	UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Id = @idTurno
+GO
+
+CREATE PROCEDURE kernel_panic.cancelarDiaProfesional
+@dia DATETIME,
+@profesional INT,
+@detalle VARCHAR(400),
+@tipo VARCHAR(30),
+@fallo INT OUTPUT
+AS
+	IF EXISTS (SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE @dia BETWEEN EM.Desde AND EM.Hasta)
+		BEGIN
+		INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, GETDATE())
+		UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Profesional_id = @profesional AND Fecha = @dia
+		INSERT INTO kernel_panic.Franjas_Canceladas (EsquemaTrabajo, Desde, Hasta) VALUES ((SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE @dia BETWEEN EM.Desde AND EM.Hasta),@dia,@dia)
+		SET @fallo = 1 --funco
+		END
+	ELSE
+		BEGIN
+		SET @fallo = -1 --fallo
+		END
+GO
+
+CREATE PROCEDURE kernel_panic.cancelarFranjaProfesional
+@desde DATETIME,
+@hasta DATETIME,
+@profesional INT,
+@detalle VARCHAR(400),
+@tipo VARCHAR(30),
+@fallo INT OUTPUT
+AS
+	IF EXISTS (SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE @desde BETWEEN EM.Desde AND EM.Hasta OR @hasta BETWEEN EM.Desde AND EM.Hasta)
+		BEGIN
+		INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, GETDATE())
+		UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Profesional_id = @profesional AND Fecha BETWEEN @desde AND @hasta
+		INSERT INTO kernel_panic.Franjas_Canceladas (EsquemaTrabajo, Desde, Hasta)
+		SELECT EM.Id,@desde,@hasta FROM kernel_panic.Esquema_Trabajo EM WHERE @desde BETWEEN EM.Desde AND EM.Hasta OR @hasta BETWEEN EM.Desde AND EM.Hasta
+		SET @fallo = 1
+		END
+	ELSE
+		BEGIN
+		SET @fallo = -1
+		END
+GO
+
+
 /*
 CREATE PROCEDURE kernel_panic.agregarRegistroDeLogs
 AS
@@ -559,4 +611,7 @@ DROP PROCEDURE kernel_panic.crearUsuarioYRolesxU
 DROP PROCEDURE kernel_panic.agregarRol
 DROP PROCEDURE kernel_panic.agregarEsquemaAgenda
 DROP PROCEDURE kernel_panic.agregarDiaAgenda
+DROP PROCEDURE kernel_panic.cancelarTurnoAfi
+DROP PROCEDURE kernel_panic.cancelarDiaProfesional
+DROP PROCEDURE kernel_panic.cancelarFranjaProfesional
 DROP PROCEDURE kernel_panic.agregarRegistroDeLogs

@@ -101,12 +101,34 @@ namespace ClinicaFrba.Menu
             bonoToolStripMenuItem.Visible = idFun.Contains(4);
             turnoToolStripMenuItem.Visible = idFun.Contains(5);
             diagnosticoToolStripMenuItem.Visible = idFun.Contains(7);
-            cancelarToolStripMenuItem.Visible = idFun.Contains(8);
+            if (idFun.Contains(8))
+            {
+                mostrarCancelacion(rol);
+            }
+            else
+            {
+                cancelarToolStripMenuItem.Visible = false;
+                cancelarDiaOFranjaToolStripMenuItem.Visible = false;
+            }
+            //cancelarToolStripMenuItem.Visible = idFun.Contains(8);
             listadoEstadisticoToolStripMenuItem.Visible = idFun.Contains(9);
             compraBono(rol);
             agendaProfesional.Visible = idFun.Contains(3);
         }
 
+        private void mostrarCancelacion(Rol rol)
+        {
+            if (rol.nombreRol.Equals("Afiliado"))
+            {
+                cancelarToolStripMenuItem.Visible = true;
+                cancelarDiaOFranjaToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                cancelarToolStripMenuItem.Visible = false;
+                cancelarDiaOFranjaToolStripMenuItem.Visible = true;
+            }
+        }
         private void compraBono(Rol rol)
         {
             if (rol.nombreRol.Equals("Afiliado"))
@@ -190,6 +212,19 @@ namespace ClinicaFrba.Menu
         private void cancelarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cancelar_Atencion.CancelarAfiliado canc = new Cancelar_Atencion.CancelarAfiliado(usuario.afiliado);
+            if (canc.listaTurnos.Count == 0)
+            {
+                MessageBox.Show("No tiene turnos disponibles para cancelar", "Error!", MessageBoxButtons.OK);
+            }
+            else
+            {
+                canc.Show();
+            }          
+        }
+
+        private void cancelarDiaOFranjaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClinicaFrba.Cancelar_Atencion.CancelarProfesional canc = new ClinicaFrba.Cancelar_Atencion.CancelarProfesional(usuario.profesional);
             canc.Show();
         }
 

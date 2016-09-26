@@ -33,6 +33,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.turnos = new System.Windows.Forms.DataGridView();
             this.cancelar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.motivoCancelacion = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.turnos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +59,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 54);
+            this.label2.Location = new System.Drawing.Point(16, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(167, 13);
             this.label2.TabIndex = 2;
@@ -66,25 +68,45 @@
             // turnos
             // 
             this.turnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.turnos.Location = new System.Drawing.Point(19, 84);
+            this.turnos.Location = new System.Drawing.Point(19, 57);
             this.turnos.Name = "turnos";
-            this.turnos.Size = new System.Drawing.Size(579, 150);
+            this.turnos.Size = new System.Drawing.Size(579, 156);
             this.turnos.TabIndex = 3;
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(422, 265);
+            this.cancelar.Location = new System.Drawing.Point(422, 284);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(176, 23);
             this.cancelar.TabIndex = 4;
-            this.cancelar.Text = "Cancelar";
+            this.cancelar.Text = "Cancelar Turno";
             this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 234);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Motivo: ";
+            // 
+            // motivoCancelacion
+            // 
+            this.motivoCancelacion.Location = new System.Drawing.Point(19, 250);
+            this.motivoCancelacion.Multiline = true;
+            this.motivoCancelacion.Name = "motivoCancelacion";
+            this.motivoCancelacion.Size = new System.Drawing.Size(397, 57);
+            this.motivoCancelacion.TabIndex = 14;
             // 
             // CancelarAfiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 319);
+            this.Controls.Add(this.motivoCancelacion);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cancelar);
             this.Controls.Add(this.turnos);
             this.Controls.Add(this.label2);
@@ -105,5 +127,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView turnos;
         private System.Windows.Forms.Button cancelar;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox motivoCancelacion;
     }
 }

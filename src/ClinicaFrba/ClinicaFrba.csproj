@@ -223,6 +223,12 @@
     <Compile Include="Registrar Agenta Medico\SeleccionarProfesional.Designer.cs">
       <DependentUpon>SeleccionarProfesional.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registro Llegada\RegLlegada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Llegada\RegLlegada.Designer.cs">
+      <DependentUpon>RegLlegada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro Resultado\RegResultado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +269,9 @@
     <EmbeddedResource Include="Cancelar Atencion\CancelarAfiliado.resx">
       <DependentUpon>CancelarAfiliado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\CancelarProfesional.resx">
+      <DependentUpon>CancelarProfesional.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra Bono\CompraBono.resx">
       <DependentUpon>CompraBono.cs</DependentUpon>
     </EmbeddedResource>
@@ -286,9 +295,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pedir Turno\ElegirProfesional.resx">
       <DependentUpon>ElegirProfesional.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pedir Turno\PedirTurno.resx">
-      <DependentUpon>PedirTurno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -318,9 +324,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Registro Llegada\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

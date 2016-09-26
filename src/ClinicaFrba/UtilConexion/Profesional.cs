@@ -32,6 +32,30 @@ namespace ClinicaFrba.UtilConexion
             cargarProfesional();
         }
 
+        public Profesional(string nombreUser)
+        {
+            especialidades = new List<Especialidad>();
+            cargarProfesional(nombreUser);
+        }
+
+        public void cargarProfesional(string nombreUser)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@nombreUser", nombreUser));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id,Nombre, Apellido, Tipo_doc, Numero_doc  FROM kernel_panic.Profesionales WHERE Usuario_id = @nombreUser ", "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                speaker.reader.Read();
+                this.id = (int)speaker.reader["Id"];
+                this.nombre = (string)speaker.reader["Nombre"];
+                this.apellido = (string)speaker.reader["Apellido"];
+                this.tipoDoc = (string)speaker.reader["Tipo_doc"];
+                this.documento = (decimal)speaker.reader["Numero_doc"];
+                this.cargarEspecialidades();
+            }
+            speaker.close();
+
+        }
         public void cargarProfesional()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
@@ -123,6 +147,40 @@ namespace ClinicaFrba.UtilConexion
                 }
             }
             speaker.close();
+        }
+
+        public int cancelarDia(DateTime dia, string detalle, string tipo)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@dia", dia));
+            ListaParametros.Add(new SqlParameter("@profesional", this.id));
+            ListaParametros.Add(new SqlParameter("@detalle", detalle));
+            ListaParametros.Add(new SqlParameter("@tipo", tipo));
+            SqlParameter parametroSalida = new SqlParameter("@fallo", 0);
+            parametroSalida.Direction = ParameterDirection.Output;
+            ListaParametros.Add(parametroSalida);
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.cancelarDiaProfesional", "SP", ListaParametros);
+            int resultado = Int32.Parse(speaker.comando.Parameters["@fallo"].Value.ToString());
+            speaker.close();
+            return resultado;
+        }
+
+        public int cancelarFranja(DateTime desde, DateTime hasta, string detalle, string tipo)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@desde", desde));
+            ListaParametros.Add(new SqlParameter("@hasta", hasta));
+            ListaParametros.Add(new SqlParameter("@profesional", this.id));
+            ListaParametros.Add(new SqlParameter("@detalle", detalle));
+            ListaParametros.Add(new SqlParameter("@tipo", tipo));
+            SqlParameter parametroSalida = new SqlParameter("@fallo", 0);
+            parametroSalida.Direction = ParameterDirection.Output;
+            ListaParametros.Add(parametroSalida);
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.cancelarFranjaProfesional", "SP", ListaParametros);
+            int resultado = Int32.Parse(speaker.comando.Parameters["@fallo"].Value.ToString());
+            speaker.close();
+            return resultado;
+
         }
     }
 }

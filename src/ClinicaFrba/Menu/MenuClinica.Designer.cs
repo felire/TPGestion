@@ -47,6 +47,7 @@
             this.cancelarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoEstadisticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agendaProfesional = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelarDiaOFranjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboElegirRol = new System.Windows.Forms.ComboBox();
             this.textElegirRol = new System.Windows.Forms.Label();
             this.botonElegirRol = new System.Windows.Forms.Button();
@@ -67,6 +68,7 @@
             this.cancelarToolStripMenuItem,
             this.listadoEstadisticoToolStripMenuItem,
             this.agendaProfesional,
+            this.cancelarDiaOFranjaToolStripMenuItem,
             this.pedirTurnoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -191,8 +193,8 @@
             // cancelarToolStripMenuItem
             // 
             this.cancelarToolStripMenuItem.Name = "cancelarToolStripMenuItem";
-            this.cancelarToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.cancelarToolStripMenuItem.Text = "Cancelar";
+            this.cancelarToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.cancelarToolStripMenuItem.Text = "Cancelar Turno";
             this.cancelarToolStripMenuItem.Click += new System.EventHandler(this.cancelarToolStripMenuItem_Click);
             // 
             // listadoEstadisticoToolStripMenuItem
@@ -207,6 +209,13 @@
             this.agendaProfesional.Size = new System.Drawing.Size(122, 20);
             this.agendaProfesional.Text = "Agenda Profesional";
             this.agendaProfesional.Click += new System.EventHandler(this.agendaProfesional_Click);
+            // 
+            // cancelarDiaOFranjaToolStripMenuItem
+            // 
+            this.cancelarDiaOFranjaToolStripMenuItem.Name = "cancelarDiaOFranjaToolStripMenuItem";
+            this.cancelarDiaOFranjaToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
+            this.cancelarDiaOFranjaToolStripMenuItem.Text = "Cancelar Dia o Franja";
+            this.cancelarDiaOFranjaToolStripMenuItem.Click += new System.EventHandler(this.cancelarDiaOFranjaToolStripMenuItem_Click);
             // 
             // comboElegirRol
             // 
@@ -309,6 +318,7 @@
         private System.Windows.Forms.ToolStripMenuItem seleccionarAfiliado;
         private System.Windows.Forms.ToolStripMenuItem registroDeCambiosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comprarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancelarDiaOFranjaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedirTurnoToolStripMenuItem;
     }
 }
