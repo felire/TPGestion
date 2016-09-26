@@ -103,7 +103,22 @@ namespace ClinicaFrba.Menu
             diagnosticoToolStripMenuItem.Visible = idFun.Contains(7);
             cancelarToolStripMenuItem.Visible = idFun.Contains(8);
             listadoEstadisticoToolStripMenuItem.Visible = idFun.Contains(9);
+            compraBono(rol);
             agendaProfesional.Visible = idFun.Contains(3);
+        }
+
+        private void compraBono(Rol rol)
+        {
+            if (rol.nombreRol.Equals("Afiliado"))
+            {
+                comprarToolStripMenuItem.Visible = true;
+                seleccionarAfiliado.Visible = false;
+            }
+            else
+            {
+                comprarToolStripMenuItem.Visible = false;
+                seleccionarAfiliado.Visible = true;
+            }
         }
         private void ocultarComboBox()
         {
@@ -164,6 +179,12 @@ namespace ClinicaFrba.Menu
         {
             ClinicaFrba.Compra_Bono.ElegirAfiliado form = new ClinicaFrba.Compra_Bono.ElegirAfiliado();
             form.Show();
+        }
+
+        private void comprarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Compra_Bono.CompraBono compraBono = new Compra_Bono.CompraBono(usuario.afiliado);
+            compraBono.Show();
         }
     }
 }

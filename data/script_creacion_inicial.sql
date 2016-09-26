@@ -417,7 +417,7 @@ AS
 	FROM kernel_panic.Usuarios 
 	WHERE Nombre_usuario = @nombreUsuario 
 
-	IF (SELECT Password_usuario FROM #user) LIKE @pass
+	IF (SELECT Password_usuario FROM #user) = @pass
 		BEGIN
 			IF (SELECT Habilitado FROM #user) = 0
 				BEGIN
@@ -435,7 +435,7 @@ AS
 		END
 	ELSE
 		BEGIN
-			IF (SELECT Password_usuario FROM #user) IS NULL
+			IF EXISTS (SELECT Password_usuario FROM #user) AND (SELECT Password_usuario FROM #user) IS NULL
 				BEGIN
 					SET @fallo = 3 --Primer logeo usuario
 					return
@@ -457,8 +457,6 @@ AS
 		END
 	DROP TABLE #user
 GO
-
-
 
 CREATE PROCEDURE kernel_panic.crearUsuarioYRolesxU
 AS

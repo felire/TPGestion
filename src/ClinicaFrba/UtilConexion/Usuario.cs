@@ -15,7 +15,8 @@ namespace ClinicaFrba.UtilConexion
     {
         public string usuario { get; set; }
         public List<Rol> roles;
-
+        public Afiliado afiliado {get;set;}
+        public Profesional profesional { get; set; }
         public List<Rol> getRoles()
         {
             return roles;
@@ -39,6 +40,7 @@ namespace ClinicaFrba.UtilConexion
             if (resultado == 1)
             {
                 this.ObtenerRoles();
+                this.cargarReferencias();
                 if (roles.Count == 0)
                 {
                     formu.sinRoles();
@@ -54,6 +56,7 @@ namespace ClinicaFrba.UtilConexion
             }
             if (resultado == 3)
             {
+                this.cargarReferencias();
                 this.ObtenerRoles();
                 if (roles.Count == 0)
                 {
@@ -100,6 +103,10 @@ namespace ClinicaFrba.UtilConexion
             speaker.conection.Close();
         }
 
+        public void cargarReferencias()
+        {
+            this.afiliado = new Afiliado(this.usuario);
+        }
         public Boolean masDeUnRol()
         {
             return roles.Count > 1;

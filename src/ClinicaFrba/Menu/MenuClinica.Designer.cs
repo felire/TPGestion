@@ -38,6 +38,7 @@
             this.bajaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.modifToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visuToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.registroDeCambiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seleccionarAfiliado = new System.Windows.Forms.ToolStripMenuItem();
             this.turnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,7 +51,7 @@
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
-            this.registroDeCambiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comprarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,35 +116,35 @@
             this.afiliadoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.afiliadoToolStripMenuItem.Text = "Afiliado";
             // 
-            // altaToolStripMenuItem1 Alta afiliado
+            // altaToolStripMenuItem1
             // 
             this.altaToolStripMenuItem1.Name = "altaToolStripMenuItem1";
             this.altaToolStripMenuItem1.Size = new System.Drawing.Size(183, 22);
             this.altaToolStripMenuItem1.Text = "Alta";
             this.altaToolStripMenuItem1.Click += new System.EventHandler(this.altaToolStripMenuAF_Click);
             // 
-            // bajaToolStripMenuItem1 Baja afiliado
+            // bajaToolStripMenuItem1
             // 
             this.bajaToolStripMenuItem1.Name = "bajaToolStripMenuItem1";
             this.bajaToolStripMenuItem1.Size = new System.Drawing.Size(183, 22);
             this.bajaToolStripMenuItem1.Text = "Baja";
             this.bajaToolStripMenuItem1.Click += new System.EventHandler(this.bajaToolStripMenuAF_Click);
             // 
-            // modifToolStripMenuItem- Modif Afiliado
+            // modifToolStripMenuItem
             // 
             this.modifToolStripMenuItem.Name = "modifToolStripMenuItem";
             this.modifToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.modifToolStripMenuItem.Text = "Modificacion";
             this.modifToolStripMenuItem.Click += new System.EventHandler(this.modificacionAficlick);
             // 
-            // visuToolStripMenuItem1 - Visu afiliado
+            // visuToolStripMenuItem1
             // 
             this.visuToolStripMenuItem1.Name = "visuToolStripMenuItem1";
             this.visuToolStripMenuItem1.Size = new System.Drawing.Size(183, 22);
             this.visuToolStripMenuItem1.Text = "Visualización";
             this.visuToolStripMenuItem1.Click += new System.EventHandler(this.visualizacionAficlick);
             // 
-            // registroDeCambiosToolStripMenuItem - Logs Afiliados
+            // registroDeCambiosToolStripMenuItem
             // 
             this.registroDeCambiosToolStripMenuItem.Name = "registroDeCambiosToolStripMenuItem";
             this.registroDeCambiosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
@@ -153,7 +154,8 @@
             // bonoToolStripMenuItem
             // 
             this.bonoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.seleccionarAfiliado});
+            this.seleccionarAfiliado,
+            this.comprarToolStripMenuItem});
             this.bonoToolStripMenuItem.Name = "bonoToolStripMenuItem";
             this.bonoToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.bonoToolStripMenuItem.Text = "Bono";
@@ -242,6 +244,13 @@
             this.labelFuncionalidades.TabIndex = 5;
             this.labelFuncionalidades.Text = "Funcionalidades:";
             // 
+            // comprarToolStripMenuItem
+            // 
+            this.comprarToolStripMenuItem.Name = "comprarToolStripMenuItem";
+            this.comprarToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.comprarToolStripMenuItem.Text = "Comprar";
+            this.comprarToolStripMenuItem.Click += new System.EventHandler(this.comprarToolStripMenuItem_Click);
+            // 
             // MenuClinica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,5 +298,6 @@
         private System.Windows.Forms.ToolStripMenuItem agendaProfesional;
         private System.Windows.Forms.ToolStripMenuItem seleccionarAfiliado;
         private System.Windows.Forms.ToolStripMenuItem registroDeCambiosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem comprarToolStripMenuItem;
     }
 }
