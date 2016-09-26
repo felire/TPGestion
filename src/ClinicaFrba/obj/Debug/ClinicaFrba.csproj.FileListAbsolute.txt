@@ -62,3 +62,6 @@ C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\Clinica
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.CompraBono.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.ElegirAfiliado.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.LogeoPrimer.PrimerLogeo.resources
+C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
+C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
+C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb

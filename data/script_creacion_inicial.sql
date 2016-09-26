@@ -68,8 +68,8 @@ AS
 
 	CREATE TABLE [kernel_panic].[LogsCambioAfiliados] (
 		Id INT IDENTITY (1,1) PRIMARY KEY,
-		Afiliado INT,
-		Fecha DATETIME,
+		Afiliado INT NOT NULL,
+		Fecha DATETIME NOT NULL DEFAULT GETDATE(),
 		Descripcion VARCHAR(255)
 		FOREIGN KEY(Afiliado) REFERENCES [kernel_panic].[Afiliados] (Id));
 
@@ -514,6 +514,13 @@ AS
 	INSERT INTO kernel_panic.Agenda_Diaria (EsquemaTrabajo, Dia, Desde, Hasta, Especialidad) VALUES (@esquema, @dia, @horaDesde, @horaHasta, @especialidad)
 GO
 
+CREATE PROCEDURE kernel_panic.agregarRegistroDeLogs
+AS
+insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values ('994','M','se modifico')
+insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values ('994','B','se elimino')
+insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values ('994','M','se habilito')
+GO
+
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
 EXEC kernel_panic.Cargar_planes
@@ -530,6 +537,7 @@ EXEC kernel_panic.Cargar_turnos
 EXEC kernel_panic.Cargar_diagnosticos
 EXEC kernel_panic.Cargar_transacciones
 EXEC kernel_panic.CargarBonos
+EXEC kernel_panic.agregarRegistroDeLogs
 
 
 DROP PROCEDURE kernel_panic.BorrarTablas
@@ -552,4 +560,4 @@ DROP PROCEDURE kernel_panic.crearUsuarioYRolesxU
 DROP PROCEDURE kernel_panic.agregarRol
 DROP PROCEDURE kernel_panic.agregarEsquemaAgenda
 DROP PROCEDURE kernel_panic.agregarDiaAgenda
-
+DROP PROCEDURE kernel_panic.agregarRegistroDeLogs
