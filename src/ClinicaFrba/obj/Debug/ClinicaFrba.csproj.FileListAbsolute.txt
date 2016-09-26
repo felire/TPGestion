@@ -82,3 +82,4 @@ C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\D
 C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.RegAgendaMedico.resources
 C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional.resources
 C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.CancelarAfiliado.resources

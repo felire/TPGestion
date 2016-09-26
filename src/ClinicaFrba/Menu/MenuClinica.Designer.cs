@@ -184,6 +184,7 @@
             this.cancelarToolStripMenuItem.Name = "cancelarToolStripMenuItem";
             this.cancelarToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.cancelarToolStripMenuItem.Text = "Cancelar";
+            this.cancelarToolStripMenuItem.Click += new System.EventHandler(this.cancelarToolStripMenuItem_Click);
             // 
             // listadoEstadisticoToolStripMenuItem
             // 

@@ -137,11 +137,17 @@
     <Compile Include="AbmRol\ModificarRol.Designer.cs">
       <DependentUpon>ModificarRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cancelar Atencion\CancelarAtencion.cs">
+    <Compile Include="Cancelar Atencion\CancelarAfiliado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Cancelar Atencion\CancelarAtencion.Designer.cs">
-      <DependentUpon>CancelarAtencion.cs</DependentUpon>
+    <Compile Include="Cancelar Atencion\CancelarAfiliado.Designer.cs">
+      <DependentUpon>CancelarAfiliado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cancelar Atencion\CancelarProfesional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Atencion\CancelarProfesional.Designer.cs">
+      <DependentUpon>CancelarProfesional.cs</DependentUpon>
     </Compile>
     <Compile Include="Compra Bono\CompraBono.cs">
       <SubType>Form</SubType>
@@ -224,6 +230,7 @@
     <Compile Include="UtilConexion\Rol.cs" />
     <Compile Include="UtilConexion\SpeakerDB.cs" />
     <Compile Include="UtilConexion\TipoEspecialidad.cs" />
+    <Compile Include="UtilConexion\Turno.cs" />
     <Compile Include="UtilConexion\Usuario.cs" />
     <EmbeddedResource Include="Abm Afiliado\Afiliado.resx">
       <DependentUpon>Afiliado.cs</DependentUpon>
@@ -239,6 +246,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\ModificarRol.resx">
       <DependentUpon>ModificarRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\CancelarAfiliado.resx">
+      <DependentUpon>CancelarAfiliado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra Bono\CompraBono.resx">
       <DependentUpon>CompraBono.cs</DependentUpon>

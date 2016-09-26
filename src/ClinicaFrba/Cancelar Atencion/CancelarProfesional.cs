@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Cancelar_Atencion
 {
-    public partial class CancelarAtencion : Form
+    public partial class CancelarProfesional : Form
     {
-        public CancelarAtencion()
+        public CancelarProfesional()
         {
             InitializeComponent();
         }

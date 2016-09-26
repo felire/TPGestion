@@ -25,6 +25,28 @@ namespace ClinicaFrba.UtilConexion
             especialidades = new List<Especialidad>();
         }
 
+        public Profesional(int id)
+        {
+            this.id = id;
+            cargarProfesional();
+        }
+
+        public void cargarProfesional()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@id", this.id));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc  FROM kernel_panic.Profesionales WHERE Id = @id ", "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                    speaker.reader.Read();
+                    this.nombre = (string)speaker.reader["Nombre"];
+                    this.apellido = (string)speaker.reader["Apellido"];
+                    this.tipoDoc = (string)speaker.reader["Tipo_doc"];
+                    this.documento = (decimal)speaker.reader["Numero_doc"];
+                    //this.cargarEspecialidades();
+            }
+            speaker.close();
+        }
         public static List<Profesional> buscar(string nombre, string apellido, string especialidad ,string tipoDoc, string doc)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();

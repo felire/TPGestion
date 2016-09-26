@@ -186,5 +186,11 @@ namespace ClinicaFrba.Menu
             Compra_Bono.CompraBono compraBono = new Compra_Bono.CompraBono(usuario.afiliado);
             compraBono.Show();
         }
+
+        private void cancelarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Cancelar_Atencion.CancelarAfiliado canc = new Cancelar_Atencion.CancelarAfiliado(usuario.afiliado);
+            canc.Show();
+        }
     }
 }

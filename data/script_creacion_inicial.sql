@@ -512,13 +512,14 @@ AS
 	INSERT INTO kernel_panic.Agenda_Diaria (EsquemaTrabajo, Dia, Desde, Hasta, Especialidad) VALUES (@esquema, @dia, @horaDesde, @horaHasta, @especialidad)
 GO
 
+/*
 CREATE PROCEDURE kernel_panic.agregarRegistroDeLogs
 AS
 insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values ('994','M','se modifico')
 insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values ('994','B','se elimino')
 insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values ('994','M','se habilito')
 GO
-
+*/
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
 EXEC kernel_panic.Cargar_planes
