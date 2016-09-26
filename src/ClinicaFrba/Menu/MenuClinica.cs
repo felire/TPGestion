@@ -24,10 +24,30 @@ namespace ClinicaFrba.Menu
         {
  
         }
-        private void visualizacionAficlick (object sender, EventArgs e){
-            Abm_Afiliado.Afiliado formAf = new Abm_Afiliado.Afiliado();
+        private void altaToolStripMenuAF_Click(object sender, EventArgs e)
+        {
+            Abm_Afiliado.AfiliadoAlta formAf = new Abm_Afiliado.AfiliadoAlta();
             formAf.ShowDialog();
-            
+        }
+        private void bajaToolStripMenuAF_Click(object sender, EventArgs e)
+        {
+            Abm_Afiliado.AfiliadoBaja formAf = new Abm_Afiliado.AfiliadoBaja();
+            formAf.ShowDialog();
+        }
+        private void visualizacionAficlick(object sender, EventArgs e)
+        {
+            Abm_Afiliado.AfiliadoVisualiza formAf = new Abm_Afiliado.AfiliadoVisualiza();
+            formAf.ShowDialog();
+        }
+        private void modificacionAficlick(object sender, EventArgs e)
+        {
+            Abm_Afiliado.Modificacion formAf = new Abm_Afiliado.Modificacion();
+            formAf.ShowDialog();
+        }
+        private void logsAficlick(object sender, EventArgs e)
+        {
+            Abm_Afiliado.Cambios formAf = new Abm_Afiliado.Cambios();
+            formAf.ShowDialog();
         }
 
         private void MenuClinica_Load(object sender, EventArgs e)

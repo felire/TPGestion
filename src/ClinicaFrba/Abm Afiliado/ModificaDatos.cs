@@ -12,9 +12,17 @@ namespace ClinicaFrba.Abm_Afiliado
 {
     public partial class ModificaDatos : Form
     {
-        public ModificaDatos()
+        public Afiliado afiliado { get; set; }
+        //recibe objeto afiliado con esos datos busco y modifico con el store procedure
+        public ModificaDatos(Afiliado afi)
         {
             InitializeComponent();
+            this.afiliado = afi;
+        }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

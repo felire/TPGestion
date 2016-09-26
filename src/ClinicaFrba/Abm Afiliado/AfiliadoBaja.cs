@@ -16,5 +16,32 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             InitializeComponent();
         }
+        public void confirmaEliminacion(){
+            // Display a message box asking users if they
+            // want to exit the application.
+            if (MessageBox.Show("Quiere eliminar definitivamente el/los afiliados?", "Eliminar Afiliado",
+                  MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                  == DialogResult.Yes) 
+            { // elimino
+            }
+                else {//limpio todo
+            }
+        }
+
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonL_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AfiliadoBaja_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

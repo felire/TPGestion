@@ -16,5 +16,15 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             InitializeComponent();
         }
+
+        private void labelCantHij_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxHijos_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

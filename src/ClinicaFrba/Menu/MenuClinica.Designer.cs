@@ -36,9 +36,10 @@
             this.afiliadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.altaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bajaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.visualizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificaciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.visuToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.seleccionarAfiliado = new System.Windows.Forms.ToolStripMenuItem();
             this.turnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diagnosticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +50,7 @@
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
-            this.seleccionarAfiliado = new System.Windows.Forms.ToolStripMenuItem();
+            this.registroDeCambiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,36 +108,47 @@
             this.afiliadoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.altaToolStripMenuItem1,
             this.bajaToolStripMenuItem1,
-            this.visualizaciónToolStripMenuItem,
-            this.modificaciónToolStripMenuItem1});
+            this.modifToolStripMenuItem,
+            this.visuToolStripMenuItem1,
+            this.registroDeCambiosToolStripMenuItem});
             this.afiliadoToolStripMenuItem.Name = "afiliadoToolStripMenuItem";
             this.afiliadoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.afiliadoToolStripMenuItem.Text = "Afiliado";
             // 
-            // altaToolStripMenuItem1
+            // altaToolStripMenuItem1 Alta afiliado
             // 
             this.altaToolStripMenuItem1.Name = "altaToolStripMenuItem1";
-            this.altaToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
+            this.altaToolStripMenuItem1.Size = new System.Drawing.Size(183, 22);
             this.altaToolStripMenuItem1.Text = "Alta";
+            this.altaToolStripMenuItem1.Click += new System.EventHandler(this.altaToolStripMenuAF_Click);
             // 
-            // bajaToolStripMenuItem1
+            // bajaToolStripMenuItem1 Baja afiliado
             // 
             this.bajaToolStripMenuItem1.Name = "bajaToolStripMenuItem1";
-            this.bajaToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
+            this.bajaToolStripMenuItem1.Size = new System.Drawing.Size(183, 22);
             this.bajaToolStripMenuItem1.Text = "Baja";
+            this.bajaToolStripMenuItem1.Click += new System.EventHandler(this.bajaToolStripMenuAF_Click);
             // 
-            // visualizaciónToolStripMenuItem
+            // modifToolStripMenuItem- Modif Afiliado
             // 
-            this.visualizaciónToolStripMenuItem.Name = "visualizaciónToolStripMenuItem";
-            this.visualizaciónToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.visualizaciónToolStripMenuItem.Text = "Visualización";
-            this.visualizaciónToolStripMenuItem.Click += new System.EventHandler(this.visualizacionAficlick);
+            this.modifToolStripMenuItem.Name = "modifToolStripMenuItem";
+            this.modifToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.modifToolStripMenuItem.Text = "Modificacion";
+            this.modifToolStripMenuItem.Click += new System.EventHandler(this.modificacionAficlick);
             // 
-            // modificaciónToolStripMenuItem1
+            // visuToolStripMenuItem1 - Visu afiliado
             // 
-            this.modificaciónToolStripMenuItem1.Name = "modificaciónToolStripMenuItem1";
-            this.modificaciónToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
-            this.modificaciónToolStripMenuItem1.Text = "Modificación";
+            this.visuToolStripMenuItem1.Name = "visuToolStripMenuItem1";
+            this.visuToolStripMenuItem1.Size = new System.Drawing.Size(183, 22);
+            this.visuToolStripMenuItem1.Text = "Visualización";
+            this.visuToolStripMenuItem1.Click += new System.EventHandler(this.visualizacionAficlick);
+            // 
+            // registroDeCambiosToolStripMenuItem - Logs Afiliados
+            // 
+            this.registroDeCambiosToolStripMenuItem.Name = "registroDeCambiosToolStripMenuItem";
+            this.registroDeCambiosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.registroDeCambiosToolStripMenuItem.Text = "Registro de Cambios";
+            this.registroDeCambiosToolStripMenuItem.Click += new System.EventHandler(this.logsAficlick);
             // 
             // bonoToolStripMenuItem
             // 
@@ -145,6 +157,13 @@
             this.bonoToolStripMenuItem.Name = "bonoToolStripMenuItem";
             this.bonoToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.bonoToolStripMenuItem.Text = "Bono";
+            // 
+            // seleccionarAfiliado
+            // 
+            this.seleccionarAfiliado.Name = "seleccionarAfiliado";
+            this.seleccionarAfiliado.Size = new System.Drawing.Size(178, 22);
+            this.seleccionarAfiliado.Text = "Seleccionar Afiliado";
+            this.seleccionarAfiliado.Click += new System.EventHandler(this.seleccionarAfiliado_Click);
             // 
             // turnoToolStripMenuItem
             // 
@@ -223,13 +242,6 @@
             this.labelFuncionalidades.TabIndex = 5;
             this.labelFuncionalidades.Text = "Funcionalidades:";
             // 
-            // seleccionarAfiliado
-            // 
-            this.seleccionarAfiliado.Name = "seleccionarAfiliado";
-            this.seleccionarAfiliado.Size = new System.Drawing.Size(178, 22);
-            this.seleccionarAfiliado.Text = "Seleccionar Afiliado";
-            this.seleccionarAfiliado.Click += new System.EventHandler(this.seleccionarAfiliado_Click);
-            // 
             // MenuClinica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,10 +283,11 @@
         private System.Windows.Forms.ListView listaFunciones;
         private System.Windows.Forms.ToolStripMenuItem altaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem bajaToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem visualizaciónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem modificaciónToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem modifToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem visuToolStripMenuItem1;
         private System.Windows.Forms.Label labelFuncionalidades;
         private System.Windows.Forms.ToolStripMenuItem agendaProfesional;
         private System.Windows.Forms.ToolStripMenuItem seleccionarAfiliado;
+        private System.Windows.Forms.ToolStripMenuItem registroDeCambiosToolStripMenuItem;
     }
 }
