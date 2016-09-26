@@ -192,5 +192,13 @@ namespace ClinicaFrba.Menu
             Cancelar_Atencion.CancelarAfiliado canc = new Cancelar_Atencion.CancelarAfiliado(usuario.afiliado);
             canc.Show();
         }
+
+        private void pedirTurnoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Turno turno = new Turno();
+            turno.afiliado = usuario.afiliado;
+            Pedir_Turno.ElegirProfesional elegirProfesional = new Pedir_Turno.ElegirProfesional(turno);
+            elegirProfesional.Show();
+        }
     }
 }

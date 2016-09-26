@@ -41,6 +41,7 @@
             this.registroDeCambiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seleccionarAfiliado = new System.Windows.Forms.ToolStripMenuItem();
+            this.comprarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.turnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diagnosticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,7 +52,7 @@
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
-            this.comprarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pedirTurnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +66,8 @@
             this.diagnosticoToolStripMenuItem,
             this.cancelarToolStripMenuItem,
             this.listadoEstadisticoToolStripMenuItem,
-            this.agendaProfesional});
+            this.agendaProfesional,
+            this.pedirTurnoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(933, 24);
@@ -167,6 +169,13 @@
             this.seleccionarAfiliado.Text = "Seleccionar Afiliado";
             this.seleccionarAfiliado.Click += new System.EventHandler(this.seleccionarAfiliado_Click);
             // 
+            // comprarToolStripMenuItem
+            // 
+            this.comprarToolStripMenuItem.Name = "comprarToolStripMenuItem";
+            this.comprarToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.comprarToolStripMenuItem.Text = "Comprar";
+            this.comprarToolStripMenuItem.Click += new System.EventHandler(this.comprarToolStripMenuItem_Click);
+            // 
             // turnoToolStripMenuItem
             // 
             this.turnoToolStripMenuItem.Name = "turnoToolStripMenuItem";
@@ -245,12 +254,12 @@
             this.labelFuncionalidades.TabIndex = 5;
             this.labelFuncionalidades.Text = "Funcionalidades:";
             // 
-            // comprarToolStripMenuItem
+            // pedirTurnoToolStripMenuItem
             // 
-            this.comprarToolStripMenuItem.Name = "comprarToolStripMenuItem";
-            this.comprarToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.comprarToolStripMenuItem.Text = "Comprar";
-            this.comprarToolStripMenuItem.Click += new System.EventHandler(this.comprarToolStripMenuItem_Click);
+            this.pedirTurnoToolStripMenuItem.Name = "pedirTurnoToolStripMenuItem";
+            this.pedirTurnoToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.pedirTurnoToolStripMenuItem.Text = "Pedir Turno";
+            this.pedirTurnoToolStripMenuItem.Click += new System.EventHandler(this.pedirTurnoToolStripMenuItem_Click);
             // 
             // MenuClinica
             // 
@@ -300,5 +309,6 @@
         private System.Windows.Forms.ToolStripMenuItem seleccionarAfiliado;
         private System.Windows.Forms.ToolStripMenuItem registroDeCambiosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comprarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pedirTurnoToolStripMenuItem;
     }
 }

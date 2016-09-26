@@ -16,6 +16,7 @@ namespace ClinicaFrba.UtilConexion
         public DateTime fecha { get; set; }
         public Especialidad especialidad { get; set; }
         public Profesional profesional { get; set; }
+        public Afiliado afiliado { get; set; }
 
         public static List<Turno> darTodosLosTurnosDe(Afiliado afiliado)
         {

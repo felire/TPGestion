@@ -27,6 +27,7 @@ namespace ClinicaFrba.UtilConexion
 
         public Profesional(int id)
         {
+            especialidades = new List<Especialidad>();
             this.id = id;
             cargarProfesional();
         }
@@ -43,7 +44,7 @@ namespace ClinicaFrba.UtilConexion
                     this.apellido = (string)speaker.reader["Apellido"];
                     this.tipoDoc = (string)speaker.reader["Tipo_doc"];
                     this.documento = (decimal)speaker.reader["Numero_doc"];
-                    //this.cargarEspecialidades();
+                    this.cargarEspecialidades();
             }
             speaker.close();
         }
