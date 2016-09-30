@@ -529,11 +529,11 @@ CREATE PROCEDURE kernel_panic.cancelarDiaProfesional
 @tipo VARCHAR(30),
 @fallo INT OUTPUT
 AS
-	IF EXISTS (SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE @dia BETWEEN EM.Desde AND EM.Hasta)
+	IF EXISTS (SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE (@dia BETWEEN EM.Desde AND EM.Hasta) AND Profesional = @profesional)
 		BEGIN
 		INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, GETDATE())
-		UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Profesional_id = @profesional AND Fecha = @dia
-		INSERT INTO kernel_panic.Franjas_Canceladas (EsquemaTrabajo, Desde, Hasta) VALUES ((SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE @dia BETWEEN EM.Desde AND EM.Hasta),@dia,@dia)
+		UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Profesional_id = @profesional AND CONVERT(DATE,Fecha) = @dia
+		INSERT INTO kernel_panic.Franjas_Canceladas (EsquemaTrabajo, Desde, Hasta) VALUES ((SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE (@dia BETWEEN EM.Desde AND EM.Hasta) AND Profesional = @profesional),@dia,@dia)
 		SET @fallo = 1 --funco
 		END
 	ELSE
@@ -550,12 +550,12 @@ CREATE PROCEDURE kernel_panic.cancelarFranjaProfesional
 @tipo VARCHAR(30),
 @fallo INT OUTPUT
 AS
-	IF EXISTS (SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE @desde BETWEEN EM.Desde AND EM.Hasta OR @hasta BETWEEN EM.Desde AND EM.Hasta)
+	IF EXISTS (SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE (@desde BETWEEN EM.Desde AND EM.Hasta OR @hasta BETWEEN EM.Desde AND EM.Hasta) AND Profesional = @profesional)
 		BEGIN
 		INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, GETDATE())
 		UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Profesional_id = @profesional AND Fecha BETWEEN @desde AND @hasta
 		INSERT INTO kernel_panic.Franjas_Canceladas (EsquemaTrabajo, Desde, Hasta)
-		SELECT EM.Id,@desde,@hasta FROM kernel_panic.Esquema_Trabajo EM WHERE @desde BETWEEN EM.Desde AND EM.Hasta OR @hasta BETWEEN EM.Desde AND EM.Hasta
+		SELECT EM.Id,@desde,@hasta FROM kernel_panic.Esquema_Trabajo EM WHERE (@desde BETWEEN EM.Desde AND EM.Hasta OR @hasta BETWEEN EM.Desde AND EM.Hasta) AND Profesional = @profesional
 		SET @fallo = 1
 		END
 	ELSE

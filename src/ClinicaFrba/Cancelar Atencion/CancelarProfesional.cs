@@ -38,6 +38,10 @@ namespace ClinicaFrba.Cancelar_Atencion
                 {
                     MessageBox.Show("El motivo de cancelacion tiene que tener menos de 400 caracteres", "Exito!", MessageBoxButtons.OK);
                 }
+                if (motivoCancelacion.Text.Equals(""))
+                {
+                    MessageBox.Show("Debe ingresar un motivo de cancelacion", "Exito!", MessageBoxButtons.OK);
+                }
                 else
                 {
                     int resultado = profesional.cancelarFranja(desde.Value, hasta.Value, motivoCancelacion.Text, "Profesional");
@@ -61,6 +65,10 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (motivoCancelacion.Text.Length >= 400)
             {
                 MessageBox.Show("El motivo de cancelacion tiene que tener menos de 400 caracteres", "Exito!", MessageBoxButtons.OK);
+            }
+            if (motivoCancelacion.Text.Equals(""))
+            {
+                MessageBox.Show("Debe ingresar un motivo de cancelacion", "Exito!", MessageBoxButtons.OK);
             }
             else
             {
