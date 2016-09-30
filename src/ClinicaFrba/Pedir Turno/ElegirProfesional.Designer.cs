@@ -42,6 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.listaProfesionales)).BeginInit();
             this.filtros.SuspendLayout();
             this.SuspendLayout();
@@ -59,11 +60,11 @@
             // listaProfesionales
             // 
             this.listaProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.listaProfesionales.Location = new System.Drawing.Point(12, 163);
+            this.listaProfesionales.Location = new System.Drawing.Point(12, 185);
             this.listaProfesionales.MultiSelect = false;
             this.listaProfesionales.Name = "listaProfesionales";
             this.listaProfesionales.ReadOnly = true;
-            this.listaProfesionales.Size = new System.Drawing.Size(577, 155);
+            this.listaProfesionales.Size = new System.Drawing.Size(577, 141);
             this.listaProfesionales.TabIndex = 4;
             // 
             // filtros
@@ -79,9 +80,9 @@
             this.filtros.Controls.Add(this.label2);
             this.filtros.Controls.Add(this.nombre);
             this.filtros.Controls.Add(this.label1);
-            this.filtros.Location = new System.Drawing.Point(12, 15);
+            this.filtros.Location = new System.Drawing.Point(12, 48);
             this.filtros.Name = "filtros";
-            this.filtros.Size = new System.Drawing.Size(577, 142);
+            this.filtros.Size = new System.Drawing.Size(577, 131);
             this.filtros.TabIndex = 3;
             this.filtros.TabStop = false;
             this.filtros.Text = "Filtros";
@@ -180,11 +181,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre: ";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 20);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(239, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Elija con cual profesional desea reservar un turno";
+            // 
             // ElegirProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(615, 385);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listaProfesionales);
             this.Controls.Add(this.filtros);
@@ -194,6 +205,7 @@
             this.filtros.ResumeLayout(false);
             this.filtros.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -213,5 +225,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox nombre;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
     }
 }

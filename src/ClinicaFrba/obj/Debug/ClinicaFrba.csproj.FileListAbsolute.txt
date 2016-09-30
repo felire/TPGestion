@@ -90,3 +90,10 @@ C:\Users\Felipe\Desktop\BACKUP\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirEspecialidad.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirFecha.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirProfesional.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.CancelarAfiliado.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.CancelarProfesional.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.LogeoPrimer.PrimerLogeo.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirEspecialidad.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirFecha.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirProfesional.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.PedirTurno.resources

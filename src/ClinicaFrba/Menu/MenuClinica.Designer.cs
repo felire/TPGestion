@@ -48,12 +48,12 @@
             this.listadoEstadisticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agendaProfesional = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelarDiaOFranjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pedirTurnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboElegirRol = new System.Windows.Forms.ComboBox();
             this.textElegirRol = new System.Windows.Forms.Label();
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
-            this.pedirTurnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -217,6 +217,13 @@
             this.cancelarDiaOFranjaToolStripMenuItem.Text = "Cancelar Dia o Franja";
             this.cancelarDiaOFranjaToolStripMenuItem.Click += new System.EventHandler(this.cancelarDiaOFranjaToolStripMenuItem_Click);
             // 
+            // pedirTurnoToolStripMenuItem
+            // 
+            this.pedirTurnoToolStripMenuItem.Name = "pedirTurnoToolStripMenuItem";
+            this.pedirTurnoToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.pedirTurnoToolStripMenuItem.Text = "Pedir Turno";
+            this.pedirTurnoToolStripMenuItem.Click += new System.EventHandler(this.pedirTurnoToolStripMenuItem_Click);
+            // 
             // comboElegirRol
             // 
             this.comboElegirRol.FormattingEnabled = true;
@@ -262,13 +269,6 @@
             this.labelFuncionalidades.Size = new System.Drawing.Size(87, 13);
             this.labelFuncionalidades.TabIndex = 5;
             this.labelFuncionalidades.Text = "Funcionalidades:";
-            // 
-            // pedirTurnoToolStripMenuItem
-            // 
-            this.pedirTurnoToolStripMenuItem.Name = "pedirTurnoToolStripMenuItem";
-            this.pedirTurnoToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
-            this.pedirTurnoToolStripMenuItem.Text = "Pedir Turno";
-            this.pedirTurnoToolStripMenuItem.Click += new System.EventHandler(this.pedirTurnoToolStripMenuItem_Click);
             // 
             // MenuClinica
             // 

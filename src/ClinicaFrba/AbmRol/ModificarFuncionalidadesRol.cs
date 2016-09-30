@@ -16,6 +16,7 @@ namespace ClinicaFrba.AbmRol
         public Rol rol { get; set; }
         public List<Funcionalidad> funcionalidadesDelRol { get; set;}
         public List<Funcionalidad> funcionalidades { get; set; }
+
         public ModificarFuncionalidadesRol(Rol rol)
         {
             InitializeComponent();
@@ -24,7 +25,6 @@ namespace ClinicaFrba.AbmRol
             this.funcionalidadesDelRol = rol.funcionalidades;
             cargarPantalla();
         }
-
 
         private void cargarPantalla()
         {
@@ -38,14 +38,7 @@ namespace ClinicaFrba.AbmRol
             {
                 funcionalidadesAgregadas.Items.Add(funcionalidad.descripcion);
             }
-            
         }
-
-        private void ModificarFuncionalidadesRol_Load(object sender, EventArgs e)
-        {
-            
-        }
-
 
         private List<Funcionalidad> restoDeLasFuncionalidades()
         {
@@ -68,29 +61,22 @@ namespace ClinicaFrba.AbmRol
         private void agregarFun_Click(object sender, EventArgs e)
         {
             int cantidadSeleccionadas = funcionalidadesAgregables.SelectedItems.Count;
-            if (cantidadSeleccionadas > 0)
+            for (int i = 0; i < cantidadSeleccionadas; i++)
             {
-                for (int i = 0; i < cantidadSeleccionadas; i++)
-                {
-                    ListViewItem descripcion = funcionalidadesAgregables.SelectedItems[0];
-                    funcionalidadesAgregadas.Items.Add(descripcion.Text);
-                    funcionalidadesAgregables.Items.Remove(descripcion);
-                }
-
+                ListViewItem descripcion = funcionalidadesAgregables.SelectedItems[0];
+                funcionalidadesAgregadas.Items.Add(descripcion.Text);
+                funcionalidadesAgregables.Items.Remove(descripcion);
             }
         }
 
         private void quitarFun_Click(object sender, EventArgs e)
         {
             int cantidadSeleccionadas = funcionalidadesAgregadas.SelectedItems.Count;
-            if (cantidadSeleccionadas > 0)
+            for (int i = 0; i < cantidadSeleccionadas; i++)
             {
-                for (int i = 0; i < cantidadSeleccionadas; i++)
-                {
-                    ListViewItem descripcion = funcionalidadesAgregadas.SelectedItems[0];
-                    funcionalidadesAgregables.Items.Add(descripcion.Text);
-                    funcionalidadesAgregadas.Items.Remove(descripcion);
-                }
+                ListViewItem descripcion = funcionalidadesAgregadas.SelectedItems[0];
+                funcionalidadesAgregables.Items.Add(descripcion.Text);
+                funcionalidadesAgregadas.Items.Remove(descripcion);
             }
         }
 
@@ -99,7 +85,7 @@ namespace ClinicaFrba.AbmRol
             if (formularioValido())
             {
                 rol.actualizarFuncionalidades(funcionalidadesElegidas());
-                MessageBox.Show("Funcionalidades modificadas con exito!", "Exito", MessageBoxButtons.OK);
+                MessageBox.Show("Funcionalidades modificadas con exito!", "Info", MessageBoxButtons.OK);
                 this.Hide();
             }
         }
@@ -117,7 +103,6 @@ namespace ClinicaFrba.AbmRol
                     }
                 }
             }
-
             return funcionalidadesAAgregar;
         }
 
@@ -130,7 +115,5 @@ namespace ClinicaFrba.AbmRol
             }
             return true;
         }
-
-
     }
 }

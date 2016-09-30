@@ -15,6 +15,7 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
     {
         public List<Especialidad> especialidades { get; set; }
         public List<Profesional> profesionalesActuales { get; set; }
+
         public SeleccionarProfesional()
         {
             InitializeComponent();
@@ -77,8 +78,6 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
                 MessageBox.Show("Debe seleccionar un profesional", "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            
         }
-
     }
 }

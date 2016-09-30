@@ -63,7 +63,6 @@
             this.funcionalidadesAgregables.TabIndex = 2;
             this.funcionalidadesAgregables.UseCompatibleStateImageBehavior = false;
             this.funcionalidadesAgregables.View = System.Windows.Forms.View.List;
-            this.funcionalidadesAgregables.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // agregarFun
             // 
@@ -93,7 +92,6 @@
             this.funcionalidadesAgregadas.TabIndex = 5;
             this.funcionalidadesAgregadas.UseCompatibleStateImageBehavior = false;
             this.funcionalidadesAgregadas.View = System.Windows.Forms.View.List;
-            this.funcionalidadesAgregadas.SelectedIndexChanged += new System.EventHandler(this.funcionalidadesAgregadas_SelectedIndexChanged);
             // 
             // agregarRol
             // 
@@ -139,7 +137,6 @@
             this.Controls.Add(this.nombreRol);
             this.Name = "AltaRol";
             this.Text = "AltaRol";
-            this.Load += new System.EventHandler(this.AltaRol_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

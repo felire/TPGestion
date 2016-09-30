@@ -138,7 +138,6 @@
             this.Controls.Add(this.nombreRol);
             this.Name = "ModificarFuncionalidadesRol";
             this.Text = "ModificarFuncionalidadesRol";
-            this.Load += new System.EventHandler(this.ModificarFuncionalidadesRol_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

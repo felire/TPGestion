@@ -36,21 +36,6 @@ namespace ClinicaFrba.AbmRol
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bajaRol_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rolesExistentes_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void Eliminar_Click(object sender, EventArgs e)
         {
             int cantidadSeleccionados = rolesExistentes.SelectedItems.Count;

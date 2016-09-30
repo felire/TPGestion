@@ -22,11 +22,6 @@ namespace ClinicaFrba.AbmRol
             cargarOpciones();
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void cargarOpciones()
         {
             foreach (Funcionalidad funcionalidad in funcionalidades)
@@ -38,29 +33,22 @@ namespace ClinicaFrba.AbmRol
         private void agregarFun_Click(object sender, EventArgs e)
         {
             int cantidadSeleccionadas = funcionalidadesAgregables.SelectedItems.Count;
-            if (cantidadSeleccionadas > 0)
+            for (int i = 0; i < cantidadSeleccionadas; i++)
             {
-                for (int i = 0; i < cantidadSeleccionadas; i++)
-                {
-                    ListViewItem descripcion = funcionalidadesAgregables.SelectedItems[0];
-                    funcionalidadesAgregadas.Items.Add(descripcion.Text);
-                    funcionalidadesAgregables.Items.Remove(descripcion);  
-                }
-                              
+                ListViewItem descripcion = funcionalidadesAgregables.SelectedItems[0];
+                funcionalidadesAgregadas.Items.Add(descripcion.Text);
+                funcionalidadesAgregables.Items.Remove(descripcion);  
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             int cantidadSeleccionadas = funcionalidadesAgregadas.SelectedItems.Count;
-            if (cantidadSeleccionadas > 0)
+            for (int i = 0; i < cantidadSeleccionadas; i++)
             {
-                for (int i = 0; i < cantidadSeleccionadas; i++)
-                {
-                    ListViewItem descripcion = funcionalidadesAgregadas.SelectedItems[0];
-                    funcionalidadesAgregables.Items.Add(descripcion.Text);
-                    funcionalidadesAgregadas.Items.Remove(descripcion);
-                }
+                ListViewItem descripcion = funcionalidadesAgregadas.SelectedItems[0];
+                funcionalidadesAgregables.Items.Add(descripcion.Text);
+                funcionalidadesAgregadas.Items.Remove(descripcion);
             }
         }
 
@@ -80,7 +68,6 @@ namespace ClinicaFrba.AbmRol
                 {
                     MessageBox.Show("Ya existe un Rol con ese nombre", "Error!", MessageBoxButtons.OK);
                 }
-                
             }
         }
 
@@ -91,14 +78,16 @@ namespace ClinicaFrba.AbmRol
                 MessageBox.Show("No a asignado un nombre al rol", "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            if (funcionalidadesAgregadas.Items.Count == 0)
+            else if (funcionalidadesAgregadas.Items.Count == 0)
             {
                 MessageBox.Show("No a asignado funcionalidades al rol", "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            return true;
+            else
+            {
+                return true;
+            }
         }
-
 
         private List<Funcionalidad> funcionalidadesElegidas()
         {
@@ -113,19 +102,7 @@ namespace ClinicaFrba.AbmRol
                     }
                 }
             }
-
             return funcionalidadesAAgregar;
         }
-
-        private void AltaRol_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void funcionalidadesAgregadas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

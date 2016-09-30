@@ -87,7 +87,6 @@
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 3;
             this.label6.Text = "Hasta:";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 

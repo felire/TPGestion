@@ -15,6 +15,7 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
     {
         public Profesional profesional { get; set; }
         public List<AgendaDiaria> agendaDeTrabajo { get; set; }
+
         public RegAgendaMedico(Profesional profesional)
         {
             InitializeComponent();
@@ -23,14 +24,8 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             cargarPantalla();
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cargarPantalla()
         {
-
             //Dias a mostrar
             rangoFechas.Visible = false;
             dias.DataSource = Dia.ObtenerTodosLosDias();
@@ -144,7 +139,6 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
         {
             horarios.DataSource = null;
             horarios.DataSource = agendaDeTrabajo;
-
         }
 
         private void eliminar_Click(object sender, EventArgs e)
@@ -153,7 +147,6 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             agendaDeTrabajo.Remove(dia);
             actualizarLista();
         }
-
 
         private void confirmar_Click(object sender, EventArgs e)
         {
@@ -177,7 +170,7 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             if (fechasValidas(fechaDesdeDT, fechaHastaDT))
             {
                 EsquemaTrabajo esquema = new EsquemaTrabajo(fechaDesdeDT, fechaHastaDT, profesional);
-                //Persistimos el esuqema antes para tener el id que se autogenera y ademas necesito el dia.
+                //Persistimos el esquema antes para tener el id que se autogenera y ademas necesito el dia.
                 if (esquema.persistirEsquema())
                 {
                     foreach (AgendaDiaria dia in agendaDeTrabajo)
@@ -209,6 +202,5 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             } 
             return true;
         }
-
     }
 }

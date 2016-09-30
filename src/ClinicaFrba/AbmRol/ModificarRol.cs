@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClinicaFrba.UtilConexion;
+
 namespace ClinicaFrba.AbmRol
 {
     partial class ModificarRol : Form
     {
-
         public List<Rol> roles { get; set; }
+
         public ModificarRol()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace ClinicaFrba.AbmRol
 
         private void habilitarRol_Click(object sender, EventArgs e)
         {
-            if (seleccionUnaria())
+            if (seleccionoUno())
             {
                 Rol rol = darRolSeleccionado();
                 rol.habilitarRol();
@@ -39,20 +40,22 @@ namespace ClinicaFrba.AbmRol
             }
         }
 
-
-        private Boolean seleccionUnaria()
+        private Boolean seleccionoUno()
         {
             if (rolesExistentes.SelectedItems.Count == 0)
             {
                 MessageBox.Show("No selecciono ningun rol", "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            if (rolesExistentes.SelectedItems.Count > 1)
+            else if (rolesExistentes.SelectedItems.Count > 1)
             {
                 MessageBox.Show("No puede seleccionar mas de un rol a modificar", "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            return true;
+            else
+            {
+                return true;
+            }
         }
 
         private Rol darRolSeleccionado()
@@ -71,13 +74,12 @@ namespace ClinicaFrba.AbmRol
 
         private void modifRol_Click(object sender, EventArgs e)
         {
-            if (seleccionUnaria())
+            if (seleccionoUno())
             {
                 Rol rol = darRolSeleccionado();
                 ModificarFuncionalidadesRol mod = new ModificarFuncionalidadesRol(rol);
                 mod.Show();
             }
         }
-
     }
 }

@@ -13,37 +13,43 @@ namespace ClinicaFrba.Menu
 {
     partial class MenuClinica : Form
     {
+        public Usuario usuario { get; set; }
+        
         public MenuClinica(Usuario usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
         }
-
-        public Usuario usuario { get; set; }
+        
         private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
         {
  
         }
+
         private void altaToolStripMenuAF_Click(object sender, EventArgs e)
         {
             Abm_Afiliado.AfiliadoAlta formAf = new Abm_Afiliado.AfiliadoAlta();
             formAf.ShowDialog();
         }
+
         private void bajaToolStripMenuAF_Click(object sender, EventArgs e)
         {
             Abm_Afiliado.AfiliadoBaja formAf = new Abm_Afiliado.AfiliadoBaja();
             formAf.ShowDialog();
         }
+
         private void visualizacionAficlick(object sender, EventArgs e)
         {
             Abm_Afiliado.AfiliadoVisualiza formAf = new Abm_Afiliado.AfiliadoVisualiza();
             formAf.ShowDialog();
         }
+
         private void modificacionAficlick(object sender, EventArgs e)
         {
             Abm_Afiliado.Modificacion formAf = new Abm_Afiliado.Modificacion();
             formAf.ShowDialog();
         }
+
         private void logsAficlick(object sender, EventArgs e)
         {
             Abm_Afiliado.Cambios formAf = new Abm_Afiliado.Cambios();
@@ -74,6 +80,7 @@ namespace ClinicaFrba.Menu
         {
             menuStrip1.Visible = false;
         }
+
         private void mostrarComboBox(Usuario usuario)
         {
             listaFunciones.Visible = true;
@@ -93,7 +100,8 @@ namespace ClinicaFrba.Menu
             menuStrip1.Visible = true;
             List<Funcionalidad> func = rol.getFuncionalidades();
             List<int> idFun = new List<int>();
-            foreach(Funcionalidad fun in func){
+            foreach(Funcionalidad fun in func)
+            {
                 idFun.Add(fun.funcionalidad_id);
             }
             rolesToolStripMenuItem.Visible = idFun.Contains(1);
@@ -110,7 +118,6 @@ namespace ClinicaFrba.Menu
                 cancelarToolStripMenuItem.Visible = false;
                 cancelarDiaOFranjaToolStripMenuItem.Visible = false;
             }
-            //cancelarToolStripMenuItem.Visible = idFun.Contains(8);
             listadoEstadisticoToolStripMenuItem.Visible = idFun.Contains(9);
             compraBono(rol);
             agendaProfesional.Visible = idFun.Contains(3);
@@ -129,6 +136,7 @@ namespace ClinicaFrba.Menu
                 cancelarDiaOFranjaToolStripMenuItem.Visible = true;
             }
         }
+
         private void compraBono(Rol rol)
         {
             if (rol.nombreRol.Equals("Afiliado"))
@@ -142,6 +150,7 @@ namespace ClinicaFrba.Menu
                 seleccionarAfiliado.Visible = true;
             }
         }
+
         private void ocultarComboBox()
         {
             listaFunciones.Visible = false;
@@ -150,13 +159,13 @@ namespace ClinicaFrba.Menu
             botonElegirRol.Visible = false;
             labelFuncionalidades.Visible = false;
         }
+
         private void listarFuncionalidades(List<Funcionalidad> funciones)
         {
             foreach(Funcionalidad fun in funciones){
                 listaFunciones.Items.Add(fun.descripcion);
             }
         }
-
 
         //Esto es un evento de cambio de elemento del combo box, cada vez que elige uno, se dispara
         private void cambioRolEvento(object sender, EventArgs e)
@@ -191,6 +200,7 @@ namespace ClinicaFrba.Menu
             ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional agenda = new ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional();
             agenda.Show();
         }
+
         private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClinicaFrba.AbmRol.BajaRol rol = new ClinicaFrba.AbmRol.BajaRol();
