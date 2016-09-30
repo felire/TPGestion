@@ -25,7 +25,7 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@afiliadoId", afiliado.id));
             List<Turno> turnos = new List<Turno>();
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id, Fecha, Especialidad, Profesional_id FROM kernel_panic.Turnos WHERE Afiliado_id = @afiliadoId AND Fecha >= GETDATE() AND Fecha_llegada IS NULL AND Cancelacion IS NULL ORDER BY Fecha ASC", "T", ListaParametros);
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id, Fecha, Especialidad, Profesional_id FROM kernel_panic.Turnos WHERE Afiliado_id = @afiliadoId AND Fecha >= CONVERT(DATE,GETDATE()) AND Fecha_llegada IS NULL AND Cancelacion IS NULL ORDER BY Fecha ASC", "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 while (speaker.reader.Read())

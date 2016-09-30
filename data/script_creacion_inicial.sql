@@ -169,8 +169,8 @@ AS
 	CREATE TABLE [kernel_panic].[Esquema_Trabajo] (
 		Id INT IDENTITY (1,1) PRIMARY KEY,
 		Profesional INT,
-		Desde DATETIME,
-		Hasta DATETIME,
+		Desde DATE,
+		Hasta DATE,
 		FOREIGN KEY (Profesional) REFERENCES [kernel_panic].[Profesionales] (Id));
 
 	CREATE TABLE [kernel_panic].[Agenda_Diaria] (
@@ -186,8 +186,8 @@ AS
 	CREATE TABLE [kernel_panic].[Franjas_Canceladas] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		EsquemaTrabajo INT,
-		Desde DATETIME,
-		Hasta DATETIME,
+		Desde DATE,
+		Hasta DATE,
 		FOREIGN KEY (EsquemaTrabajo) REFERENCES [kernel_panic].[Esquema_Trabajo] (Id));
 GO
 
@@ -487,11 +487,11 @@ GO
 
 CREATE PROCEDURE kernel_panic.agregarEsquemaAgenda --Aca se podria validar si ya existe una franja con esos valores, etc..
 @profesional INT,
-@fechaDesde DATETIME,
-@fechaHasta DATETIME,
+@fechaDesde DATE,
+@fechaHasta DATE,
 @id INT OUTPUT
 AS
-	IF(SELECT COUNT(*) FROM kernel_panic.Esquema_Trabajo WHERE @fechaDesde BETWEEN Desde AND Hasta OR @fechaHasta BETWEEN Desde AND Hasta) > 0
+	IF(SELECT COUNT(*) FROM kernel_panic.Esquema_Trabajo WHERE (@fechaDesde BETWEEN Desde AND Hasta OR @fechaHasta BETWEEN Desde AND Hasta) AND Profesional = @profesional) > 0
 	BEGIN
 		SET @id = -1
 	END
@@ -501,6 +501,7 @@ AS
 		SET @id = @@IDENTITY
 	END
 GO
+
 
 CREATE PROCEDURE kernel_panic.agregarDiaAgenda
 @esquema INT,
@@ -522,7 +523,7 @@ AS
 GO
 
 CREATE PROCEDURE kernel_panic.cancelarDiaProfesional
-@dia DATETIME,
+@dia DATE,
 @profesional INT,
 @detalle VARCHAR(400),
 @tipo VARCHAR(30),
@@ -542,8 +543,8 @@ AS
 GO
 
 CREATE PROCEDURE kernel_panic.cancelarFranjaProfesional
-@desde DATETIME,
-@hasta DATETIME,
+@desde DATE,
+@hasta DATE,
 @profesional INT,
 @detalle VARCHAR(400),
 @tipo VARCHAR(30),

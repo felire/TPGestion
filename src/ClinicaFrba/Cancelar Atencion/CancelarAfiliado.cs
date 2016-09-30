@@ -72,7 +72,7 @@ namespace ClinicaFrba.Cancelar_Atencion
                     {
                         Turno turno = (Turno)turnos.CurrentRow.DataBoundItem;
 
-                        if ((turno.fecha - DateTime.Now).Days >= 1)
+                        if ((turno.fecha.Date - DateTime.Now.Date).Days >= 1)
                         {
                             turno.cancelar(motivoCancelacion.Text, "Afiliado");
                             MessageBox.Show("Turno cancelado con exito!", "Exito!", MessageBoxButtons.OK);

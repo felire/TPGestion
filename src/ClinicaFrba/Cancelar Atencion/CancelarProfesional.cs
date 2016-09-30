@@ -21,9 +21,9 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.desde.Value = DateTime.Now;
             this.hasta.Value = DateTime.Now;
             this.dia.Value = DateTime.Now;
-            this.desde.MinDate = DateTime.Now;
-            this.hasta.MinDate = DateTime.Now;
-            this.dia.MinDate = DateTime.Now;
+            this.desde.MinDate = DateTime.Now.AddDays(1);
+            this.hasta.MinDate = DateTime.Now.AddDays(1);
+            this.dia.MinDate = DateTime.Now.AddDays(1);
         }
 
         private void cancelarFranja_Click(object sender, EventArgs e)

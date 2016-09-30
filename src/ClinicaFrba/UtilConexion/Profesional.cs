@@ -152,7 +152,7 @@ namespace ClinicaFrba.UtilConexion
         public int cancelarDia(DateTime dia, string detalle, string tipo)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            ListaParametros.Add(new SqlParameter("@dia", dia));
+            ListaParametros.Add(new SqlParameter("@dia", dia.Date));
             ListaParametros.Add(new SqlParameter("@profesional", this.id));
             ListaParametros.Add(new SqlParameter("@detalle", detalle));
             ListaParametros.Add(new SqlParameter("@tipo", tipo));
@@ -168,8 +168,8 @@ namespace ClinicaFrba.UtilConexion
         public int cancelarFranja(DateTime desde, DateTime hasta, string detalle, string tipo)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            ListaParametros.Add(new SqlParameter("@desde", desde));
-            ListaParametros.Add(new SqlParameter("@hasta", hasta));
+            ListaParametros.Add(new SqlParameter("@desde", desde.Date));
+            ListaParametros.Add(new SqlParameter("@hasta", hasta.Date));
             ListaParametros.Add(new SqlParameter("@profesional", this.id));
             ListaParametros.Add(new SqlParameter("@detalle", detalle));
             ListaParametros.Add(new SqlParameter("@tipo", tipo));
