@@ -16,18 +16,18 @@ namespace ClinicaFrba.UtilConexion
         public string diaString { get; set; }
         public TimeSpan horaDesde { get; set; }
         public TimeSpan horaHasta { get; set; }
-        public Especialidad especialidad { get; set; }
         public EsquemaTrabajo esquema { get; set;}
         public string especialidadString { get; set; }
+        public decimal especialidadCodigo { get; set; }
 
-        public AgendaDiaria(Dia dia, TimeSpan horaDesde, TimeSpan horaHasta, Especialidad especialidad)
+        public AgendaDiaria(Dia dia, string especialidadString, decimal especialidadCodigo)
         {
             this.dia = dia;
-            this.horaDesde = horaDesde;
-            this.horaHasta = horaHasta;
-            this.especialidad = especialidad;
+            this.horaDesde = dia.horaDesde;
+            this.horaHasta = dia.horaHasta;
             this.diaString = dia.nombre;
-            this.especialidadString = especialidad.descripcion;
+            this.especialidadString = especialidadString;
+            this.especialidadCodigo = especialidadCodigo;
         }
 
         public void persistirDiaAgenda()
@@ -37,7 +37,7 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(new SqlParameter("@dia", this.dia.id));
             ListaParametros.Add(new SqlParameter("@horaDesde", this.horaDesde));
             ListaParametros.Add(new SqlParameter("@horaHasta", this.horaHasta));
-            ListaParametros.Add(new SqlParameter("@especialidad", this.especialidad.codigo));
+            ListaParametros.Add(new SqlParameter("@especialidad", this.especialidadCodigo));
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.agregarDiaAgenda", "SP", ListaParametros);
             speaker.close();
         }

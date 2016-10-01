@@ -106,7 +106,10 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             TimeSpan horaHastaT = horaH.LaHora;
             if (Hora.horasValidas(horaDesdeT, horaHastaT))
             {
-                AgendaDiaria diaLaboral = new AgendaDiaria(unDia, horaDesdeT, horaHastaT, (Especialidad)especialidades.SelectedItem);
+                unDia.horaDesde = horaDesdeT;
+                unDia.horaHasta = horaHastaT;
+                Especialidad especialidad = (Especialidad)especialidades.SelectedItem;
+                AgendaDiaria diaLaboral = new AgendaDiaria(unDia, especialidad.descripcion, especialidad.codigo);
                 if (noEstaUsado(diaLaboral))
                 {
                     agendaDeTrabajo.Add(diaLaboral);
