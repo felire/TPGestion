@@ -15,15 +15,15 @@ namespace ClinicaFrba.UtilConexion
 
         public Dia(int id, string nombre)
         {
-            this.id = id;
+            this.id = id + 1;
             this.nombre = nombre;
             setFranja();
         }
 
         public Dia(int id)
         {
-            this.id = id;
-            switch (id)
+            this.id = id +1 ;
+            switch (this.id)
             {
                 case (int)DayOfWeek.Monday:
                     nombre = "Lunes";
@@ -52,12 +52,12 @@ namespace ClinicaFrba.UtilConexion
 
         public void setFranja()
         {
-            if (id >= 0 && id <= 5)
+            if (id >= 1 && id <= 6)
             {
                 this.horaDesde = new TimeSpan(7, 00, 0);
                 this.horaHasta = new TimeSpan(20, 00, 0);
             }
-            if (id == 6)
+            if (id == 7)
             {
                 this.horaDesde = new TimeSpan(10, 00, 0);
                 this.horaHasta = new TimeSpan(15, 00, 0);
