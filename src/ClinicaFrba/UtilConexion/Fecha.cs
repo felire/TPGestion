@@ -21,9 +21,20 @@ namespace ClinicaFrba.UtilConexion
             this.horasOcupadas = new List<TimeSpan>();
         }
 
+        public Fecha(DateTime dia)
+        {
+            this.dia = dia;
+            this.horasOcupadas = new List<TimeSpan>();
+        }
+
         public int CompareTo(DateTime desde)
         {
             return dia.CompareTo(desde);
+        }
+
+        public Fecha AddDays(double n)
+        {
+            return new Fecha( dia.AddDays(n));
         }
 
         public static Fecha parsearDateTime(DateTime date)

@@ -27,22 +27,22 @@ namespace ClinicaFrba.UtilConexion
             agendas = new List<AgendaDiaria>();
             this.cargarAgendas();
         }
-        
 
-            public EsquemaTrabajo(int id, DateTime desde, DateTime hasta)
-            {
-                this.id = id;
-                this.desde = desde;
-                this.hasta = hasta;
-                this.profesional = null;
-                this.cargarAgendas();
-            }
+        public EsquemaTrabajo(int id, DateTime desde, DateTime hasta)
+        {
+            this.id = id;
+            this.desde = desde;
+            this.hasta = hasta;
+            this.profesional = null;
+            agendas = new List<AgendaDiaria>();
+            this.cargarAgendas();
+        }
 
         private void cargarAgendas()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@id", id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Dia, Desde, Hasta, Codigo, Descripcion FROM kernel_panic.Agenda_Diaria ad JOIN kernel_panic.Especialidades esp ON (esp.Codigo = ad.Espacilidad) WHERE EsquemaTrabajo = @id", "T", ListaParametros);
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Dia, Desde, Hasta, Codigo, Descripcion FROM kernel_panic.Agenda_Diaria ad JOIN kernel_panic.Especialidades esp ON (esp.Codigo = ad.Especialidad) WHERE EsquemaTrabajo = @id", "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 while (speaker.reader.Read())
@@ -79,6 +79,41 @@ namespace ClinicaFrba.UtilConexion
             }
             speaker.close();
             return esquemas;
+        }
+
+        public List<Fecha> darFechas(decimal codigoEspecilidad)
+        {
+            List<AgendaDiaria> agendasEspecialidad = new List<AgendaDiaria>();//agendas de la especialidad que nos interesa
+            foreach (AgendaDiaria agenda in agendas)
+            {
+                if (agenda.especialidadCodigo == codigoEspecilidad)
+                {
+                    agendasEspecialidad.Add(agenda);
+                }
+            }
+
+            List<Fecha> todasLasFechas = new List<Fecha>();//todas las fechas comprendidas entre el desde y hasta del esquema
+            Fecha fecha = new Fecha(desde);
+            while (fecha.CompareTo(hasta) <= 0)
+            {
+                todasLasFechas.Add(fecha);
+                fecha = fecha.AddDays(1);
+            }
+
+            List<Fecha> fechas = new List<Fecha>();//solo las fechas que se corresponden en las agendas
+            foreach (Fecha unaFecha in todasLasFechas)
+            {
+                foreach (AgendaDiaria agenda in agendasEspecialidad)
+                {
+                    if(agenda.fechaPertenece(unaFecha))
+                    {
+                        //no entra nunca
+                        fechas.Add(unaFecha);
+                        break;
+                    }
+                }
+            }
+            return fechas;
         }
 
         public Boolean persistirEsquema()

@@ -12,8 +12,6 @@ namespace ClinicaFrba.UtilConexion
         public int id { get; set; }
         public TimeSpan horaDesde { get; set; }
         public TimeSpan horaHasta { get; set; }
-        public DateTime fechaDesde { get; set; }
-        public DateTime fechaHasta { get; set; }
 
         public Dia(int id, string nombre)
         {
@@ -54,12 +52,12 @@ namespace ClinicaFrba.UtilConexion
 
         public void setFranja()
         {
-            if (id >= 1 && id <= 6)
+            if (id >= 0 && id <= 5)
             {
                 this.horaDesde = new TimeSpan(7, 00, 0);
                 this.horaHasta = new TimeSpan(20, 00, 0);
             }
-            if (id == 7)
+            if (id == 6)
             {
                 this.horaDesde = new TimeSpan(10, 00, 0);
                 this.horaHasta = new TimeSpan(15, 00, 0);
@@ -77,19 +75,5 @@ namespace ClinicaFrba.UtilConexion
             lista.Add(new Dia((int)DayOfWeek.Saturday, "Sábado"));
             return lista;
         }
-
-        public List<DateTime> darFechasConcretas()
-        {
-            List<DateTime> fechas = new List<DateTime>();
-            DateTime fecha;
-            fecha = fechaDesde;
-            while (fecha.CompareTo(fechaHasta) <= 0)
-            {
-                fechas.Add(fecha);
-                fecha = fecha.AddDays(1);
-            }
-            return fechas;
-        }
     }
 }
-

@@ -7,6 +7,7 @@ using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace ClinicaFrba.UtilConexion
 {
@@ -28,6 +29,20 @@ namespace ClinicaFrba.UtilConexion
             this.diaString = dia.nombre;
             this.especialidadString = especialidadString;
             this.especialidadCodigo = especialidadCodigo;
+        }
+
+        public Boolean fechaPertenece(Fecha fecha)
+        {
+            if ((int)fecha.dia.DayOfWeek == dia.id)
+            {
+                fecha.horaDesde = horaDesde;
+                fecha.horaHasta = horaHasta;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void persistirDiaAgenda()

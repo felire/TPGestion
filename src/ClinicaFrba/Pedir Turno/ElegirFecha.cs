@@ -33,36 +33,13 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void cargarFechas()
         {
-            List<Dia> dias = new List<Dia>();
-            List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            ListaParametros.Add(new SqlParameter("@idProfesional", turno.profesional.id));
-            ListaParametros.Add(new SqlParameter("@especialidad", turno.especialidad.codigo));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT ad.Dia AS dia, ad.Desde AS fechaDesde, ad.Hasta AS fechaHasta, et.Desde AS horaDesde, et.Hasta AS horaHasta FROM kernel_panic.Esquema_Trabajo et JOIN kernel_panic.Agenda_Diaria ad ON (et.Id = ad.EsquemaTrabajo) WHERE  et.Profesional = @idProfesional AND ad.Especialidad = @especialidad ", "T", ListaParametros);
-            if (speaker.reader.HasRows)
+            List<EsquemaTrabajo> esquemas = EsquemaTrabajo.darEsquemas(turno.profesional.id);
+            foreach (EsquemaTrabajo esquema in esquemas)
             {
-                while (speaker.reader.Read())
+                List<Fecha> fechasEsquema = esquema.darFechas(turno.especialidad.codigo);
+                foreach (Fecha fecha in fechasEsquema)
                 {
-                    int id = (int)speaker.reader["dia"];
-                    Dia dia = new Dia(id);
-                    dia.horaDesde = (TimeSpan)speaker.reader["fechaDesde"];
-                    dia.horaHasta = (TimeSpan)speaker.reader["fechaHasta"];
-                    dia.fechaDesde = (DateTime)speaker.reader["horaDesde"];
-                    dia.fechaHasta = (DateTime)speaker.reader["horaHasta"];
-                    dias.Add(dia);
-                }
-            }
-            speaker.close();
-            this.obtenerFechas(dias);
-        }
-
-        private void obtenerFechas(List<Dia> dias)
-        {
-            foreach (Dia dia in dias)
-            {
-                foreach (DateTime fecha in dia.darFechasConcretas())
-                {
-                    Fecha fechita = new Fecha(fecha, dia.horaDesde, dia.horaHasta);
-                    this.fechas.Add(fechita);
+                    fechas.Add(fecha);
                 }
             }
         }
