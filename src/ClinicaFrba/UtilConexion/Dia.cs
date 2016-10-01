@@ -27,25 +27,25 @@ namespace ClinicaFrba.UtilConexion
             this.id = id;
             switch (id)
             {
-                case 1:
+                case (int)DayOfWeek.Monday:
                     nombre = "Lunes";
                     break;
-                case 2:
+                case (int)DayOfWeek.Tuesday:
                     nombre = "Martes";
                     break;
-                case 3:
+                case (int)DayOfWeek.Wednesday:
                     nombre = "Miercoles";
                     break;
-                case 4:
+                case (int)DayOfWeek.Thursday:
                     nombre = "Jueves";
                     break;
-                case 5:
+                case (int)DayOfWeek.Friday:
                     nombre = "Viernes";
                     break;
-                case 6:
+                case (int)DayOfWeek.Saturday:
                     nombre = "Sábado";
                     break;
-                case 7:
+                case (int)DayOfWeek.Sunday:
                     nombre = "Domingo";
                     break;
             }
@@ -69,12 +69,12 @@ namespace ClinicaFrba.UtilConexion
         public static List<Dia> ObtenerTodosLosDias()
         {
             List<Dia> lista = new List<Dia>();
-            lista.Add(new Dia(1, "Lunes"));
-            lista.Add(new Dia(2, "Martes"));
-            lista.Add(new Dia(3, "Miercoles"));
-            lista.Add(new Dia(4, "Jueves"));
-            lista.Add(new Dia(5, "Viernes"));
-            lista.Add(new Dia(6, "Sábado"));
+            lista.Add(new Dia((int)DayOfWeek.Monday, "Lunes"));
+            lista.Add(new Dia((int)DayOfWeek.Tuesday, "Martes"));
+            lista.Add(new Dia((int)DayOfWeek.Wednesday, "Miercoles"));
+            lista.Add(new Dia((int)DayOfWeek.Thursday, "Jueves"));
+            lista.Add(new Dia((int)DayOfWeek.Friday, "Viernes"));
+            lista.Add(new Dia((int)DayOfWeek.Saturday, "Sábado"));
             return lista;
         }
 

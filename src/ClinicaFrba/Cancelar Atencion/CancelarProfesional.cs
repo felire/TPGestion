@@ -30,7 +30,7 @@ namespace ClinicaFrba.Cancelar_Atencion
         {
             if (desde.Value >= hasta.Value)
             {
-                MessageBox.Show("Ingrese fechas correctas", "Error!", MessageBoxButtons.OK);              
+                MessageBox.Show("Ingrese fechas correctas", "Error!", MessageBoxButtons.OK);    
             }
             else
             {
