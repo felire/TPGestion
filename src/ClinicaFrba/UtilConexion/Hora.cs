@@ -17,6 +17,39 @@ namespace ClinicaFrba.UtilConexion
             LaHora = hora;
         }
 
+
+        public static List<Hora> obtenerHorasFecha(Fecha dia)
+        {
+            int cont = 0;
+            List<Hora> lista = new List<Hora>();
+            for (int i = dia.horaDesde.Hours; i <= dia.horaHasta.Hours; i++)
+            {
+                cont++;
+                if (cont != 2)
+                {
+                    TimeSpan unaHora = new TimeSpan(i, 00, 0);
+                    string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
+                    if (!dia.horasOcupadas.Contains(unaHora))
+                    {
+                        lista.Add(new Hora(unaHora, hora));
+                    }
+                }
+                else
+                {
+                    //REINICIO EL CONTADOR PORQUE ES MEDIA HORA
+                    cont = 0;
+                    i--;
+                    TimeSpan unaHora = new TimeSpan(i, 30, 0);
+                    string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
+                    if (!dia.horasOcupadas.Contains(unaHora))
+                    {
+                        lista.Add(new Hora(unaHora, hora));
+                    }
+                }
+            }
+            return lista;
+        }
+
         public static List<Hora> obtenerHorasDia(Dia dia)
         {
             int cont = 0;

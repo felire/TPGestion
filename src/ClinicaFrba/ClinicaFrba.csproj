@@ -317,6 +317,9 @@
     <EmbeddedResource Include="Registrar Agenta Medico\SeleccionarProfesional.resx">
       <DependentUpon>SeleccionarProfesional.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="bin\Debug\ClinicaFrba.exe.config" />
+    <None Include="bin\Debug\ClinicaFrba.vshost.exe.config" />
+    <None Include="bin\Debug\ClinicaFrba.vshost.exe.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -330,7 +333,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\ClinicaFrba.exe" />
+    <Content Include="bin\Debug\ClinicaFrba.pdb" />
+    <Content Include="bin\Debug\ClinicaFrba.vshost.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

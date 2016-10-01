@@ -32,7 +32,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.elegir = new System.Windows.Forms.Button();
-            this.elegirDia = new System.Windows.Forms.Button();
             this.comboFecha = new System.Windows.Forms.ComboBox();
             this.comboHorario = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -71,19 +70,9 @@
             this.elegir.Name = "elegir";
             this.elegir.Size = new System.Drawing.Size(87, 23);
             this.elegir.TabIndex = 21;
-            this.elegir.Text = "Elegir Horario";
+            this.elegir.Text = "Aceptar";
             this.elegir.UseVisualStyleBackColor = true;
-            this.elegir.Click += new System.EventHandler(this.elegir_Click);
-            // 
-            // elegirDia
-            // 
-            this.elegirDia.Location = new System.Drawing.Point(256, 44);
-            this.elegirDia.Name = "elegirDia";
-            this.elegirDia.Size = new System.Drawing.Size(75, 23);
-            this.elegirDia.TabIndex = 22;
-            this.elegirDia.Text = "Elegir dia";
-            this.elegirDia.UseVisualStyleBackColor = true;
-            this.elegirDia.Click += new System.EventHandler(this.elegirDia_Click);
+            this.elegir.Click += new System.EventHandler(this.acepto);
             // 
             // comboFecha
             // 
@@ -92,6 +81,7 @@
             this.comboFecha.Name = "comboFecha";
             this.comboFecha.Size = new System.Drawing.Size(121, 21);
             this.comboFecha.TabIndex = 23;
+            this.comboFecha.SelectedIndexChanged += new System.EventHandler(this.eligioDia);
             // 
             // comboHorario
             // 
@@ -118,7 +108,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboHorario);
             this.Controls.Add(this.comboFecha);
-            this.Controls.Add(this.elegirDia);
             this.Controls.Add(this.elegir);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.nombreProfesional);
@@ -136,7 +125,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button elegir;
-        private System.Windows.Forms.Button elegirDia;
         private System.Windows.Forms.ComboBox comboFecha;
         private System.Windows.Forms.ComboBox comboHorario;
         private System.Windows.Forms.Label label3;

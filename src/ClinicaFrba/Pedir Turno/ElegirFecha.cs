@@ -27,6 +27,7 @@ namespace ClinicaFrba.Pedir_Turno
             this.turno = turno;
             this.cargarFechas();
             this.cargarCancelaciones();
+            this.cargarFechasOcupadas();
             this.mostrarFechas();
         }
 
@@ -102,27 +103,50 @@ namespace ClinicaFrba.Pedir_Turno
             }
         }
 
+        private void cargarFechasOcupadas()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@afiliado", turno.afiliado.id));
+            ListaParametros.Add(new SqlParameter("@profesional", turno.profesional.id));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Afiliado_id, Profesional_id, Fecha FROM kernel_panic.Turnos WHERE ( Afiliado_id = @afiliado OR Profesional_id = @profesional ) AND Cancelacion IS NULL ", "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                while (speaker.reader.Read())
+                {
+                    horarioOcupado((DateTime)speaker.reader["Fecha"]);
+                }
+            }
+            speaker.close();
+        }
+
+        private void horarioOcupado(DateTime date)
+        {
+            Fecha fecha = Fecha.parsearDateTime(date);
+            foreach (Fecha unaFecha in fechas)
+            {
+                if (fecha.dia.Date == unaFecha.dia.Date)
+                {
+                    unaFecha.horasOcupadas.Add(fecha.horaDesde);
+                }
+            }
+        }
+
         private void mostrarFechas()
         {
             comboFecha.DataSource = fechas;
             comboFecha.DisplayMember = "dia";
         }
 
-        private void elegirDia_Click(object sender, EventArgs e)
+        private void eligioDia(object sender, EventArgs e)
         {
-
             Fecha fecha = (Fecha)comboFecha.SelectedItem;
             turno.fecha = fecha.dia;
-            Dia dia = new Dia(1);
-            dia.horaDesde = fecha.horaDesde;
-            dia.horaHasta = fecha.horaHasta;
-            comboHorario.DataSource = Hora.obtenerHorasDia(dia);
+            comboHorario.DataSource = Hora.obtenerHorasFecha(fecha);
             comboHorario.ValueMember = "LaHora";
             comboHorario.DisplayMember = "HoraAMostrar";
-           
         }
 
-        private void elegir_Click(object sender, EventArgs e)
+        private void acepto(object sender, EventArgs e)
         {
             Hora hora = (Hora)comboHorario.SelectedItem;
             turno.fecha = new DateTime(turno.fecha.Year, turno.fecha.Month, turno.fecha.Day, hora.LaHora.Hours, hora.LaHora.Minutes, 0);
@@ -131,9 +155,10 @@ namespace ClinicaFrba.Pedir_Turno
             ListaParametros.Add(new SqlParameter("@profesionalId", turno.profesional.id));
             ListaParametros.Add(new SqlParameter("@fecha", turno.fecha));
             ListaParametros.Add(new SqlParameter("@especialidad", turno.especialidad.codigo));
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Turnos (Afiliado_id, Profesional_id, Fecha, Especialidad) VALUES (@afiliadoId, @profesionalId, @fecha, @especialidad) ", "T", ListaParametros);
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Turnos (Afiliado_id, Profesional_id, Fecha, Especialidad, Cancelacion) VALUES (@afiliadoId, @profesionalId, @fecha, @especialidad, NULL) ", "T", ListaParametros);
             speaker.close();
             MessageBox.Show("Turno creado con exito", "Info", MessageBoxButtons.OK);
+            this.Hide();
         }
     }
 }

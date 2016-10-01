@@ -54,7 +54,7 @@ namespace ClinicaFrba.UtilConexion
 
         public void setFranja()
         {
-            if(id >= 1 && id <=6)
+            if (id >= 1 && id <= 6)
             {
                 this.horaDesde = new TimeSpan(7, 00, 0);
                 this.horaHasta = new TimeSpan(20, 00, 0);
@@ -79,11 +79,11 @@ namespace ClinicaFrba.UtilConexion
         }
 
         public List<DateTime> darFechasConcretas()
-        { 
+        {
             List<DateTime> fechas = new List<DateTime>();
             DateTime fecha;
             fecha = fechaDesde;
-            while(fecha.CompareTo(fechaHasta) <= 0)
+            while (fecha.CompareTo(fechaHasta) <= 0)
             {
                 fechas.Add(fecha);
                 fecha = fecha.AddDays(1);
