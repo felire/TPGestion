@@ -140,6 +140,8 @@ AS
 		Fecha DATETIME NOT NULL,
 		Sintoma VARCHAR(255) NOT NULL,
 		Enfermedad VARCHAR(255),
+		Turno_id INT,
+		FOREIGN KEY(Turno_id) REFERENCES [kernel_panic].[Turnos] (Id),
 		FOREIGN KEY(Afiliado_id) REFERENCES [kernel_panic].[Afiliados] (Id),
 		FOREIGN KEY(Profesional_id) REFERENCES [kernel_panic].[Profesionales] (Id));
 
@@ -337,8 +339,8 @@ GO
 
 CREATE PROCEDURE kernel_panic.Cargar_diagnosticos
 AS
-	INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Fecha, Sintoma, Enfermedad)
-	SELECT A.Id, P.Id, M.Turno_Fecha, M.Consulta_Sintomas, M.Consulta_Enfermedades
+	INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Fecha, Sintoma, Enfermedad, Turno_id)
+	SELECT A.Id, P.Id, M.Turno_Fecha, M.Consulta_Sintomas, M.Consulta_Enfermedades,M.Turno_Numero
 	FROM gd_esquema.Maestra AS M JOIN kernel_panic.Profesionales AS P ON (P.Numero_doc = M.Medico_Dni)
 								 JOIN kernel_panic.Afiliados AS A ON (M.Paciente_Dni = A.Numero_doc)
 	WHERE M.Consulta_Sintomas IS NOT NULL
