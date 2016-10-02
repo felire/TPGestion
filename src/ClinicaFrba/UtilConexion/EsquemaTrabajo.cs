@@ -107,7 +107,6 @@ namespace ClinicaFrba.UtilConexion
                 {
                     if(agenda.fechaPertenece(unaFecha))
                     {
-                        //no entra nunca
                         fechas.Add(unaFecha);
                         break;
                     }

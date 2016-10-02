@@ -28,6 +28,7 @@ namespace ClinicaFrba.Pedir_Turno
             this.cargarFechas();
             this.cargarCancelaciones();
             this.cargarFechasOcupadas();
+            this.borrarPasadas();
             this.mostrarFechas();
         }
 
@@ -73,7 +74,26 @@ namespace ClinicaFrba.Pedir_Turno
 
             foreach (Fecha fecha in fechasClonadas)
             {
-                if (fecha.CompareTo(desde) >= 0 && fecha.CompareTo(hasta) <= 0)
+                if ((fecha.CompareTo(desde) >= 0 && fecha.CompareTo(hasta) <= 0))
+                {
+                    fechas.Remove(fecha);
+                }
+            }
+        }
+
+        private void borrarPasadas()
+        {
+            List<Fecha> fechasClonadas = new List<Fecha>();
+
+            foreach (Fecha fecha in fechas)
+            {
+
+                fechasClonadas.Add(fecha);
+            }
+
+            foreach (Fecha fecha in fechasClonadas)
+            {
+                if (fecha.dia.CompareTo(DateTime.Now.Date) < 0)
                 {
                     fechas.Remove(fecha);
                 }
