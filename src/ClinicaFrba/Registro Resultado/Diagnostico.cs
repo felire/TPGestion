@@ -36,6 +36,7 @@ namespace ClinicaFrba.Registro_Resultado
             cmbHora.SelectedIndex = 0;
             dtpFechaAtencion.Text = consulta.turno.fecha.ToString();
             dtpFechaAtencion.Enabled = false;
+            resultado.Visible = false;
         }
 
         private void actualizarHoras(object sender, EventArgs e)
@@ -73,6 +74,13 @@ namespace ClinicaFrba.Registro_Resultado
                 return false;
             }
             return true;
+        }
+
+        private void confirmar_Click(object sender, EventArgs e)
+        {
+            resultado.Visible = true;
+            cmbHora.Enabled = false;
+            confirmar.Visible = false;
         }
     }
 }

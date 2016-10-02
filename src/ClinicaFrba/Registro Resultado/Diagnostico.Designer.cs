@@ -35,7 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtpFechaAtencion = new System.Windows.Forms.DateTimePicker();
             this.nombreAfi = new System.Windows.Forms.Label();
-            this.gpHistoriaClinica = new System.Windows.Forms.GroupBox();
+            this.resultado = new System.Windows.Forms.GroupBox();
             this.txtEnfermedad = new System.Windows.Forms.RichTextBox();
             this.txtSintomas = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,12 +45,14 @@
             this.asignarDiag = new System.Windows.Forms.Button();
             this.asd = new System.Windows.Forms.Label();
             this.nombreEspecialidad = new System.Windows.Forms.Label();
+            this.confirmar = new System.Windows.Forms.Button();
             this.gbDatos.SuspendLayout();
-            this.gpHistoriaClinica.SuspendLayout();
+            this.resultado.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.confirmar);
             this.gbDatos.Controls.Add(this.nombreAfi);
             this.gbDatos.Controls.Add(this.lbl2);
             this.gbDatos.Controls.Add(this.cmbHora);
@@ -59,7 +61,7 @@
             this.gbDatos.Controls.Add(this.dtpFechaAtencion);
             this.gbDatos.Location = new System.Drawing.Point(12, 12);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(482, 110);
+            this.gbDatos.Size = new System.Drawing.Size(482, 119);
             this.gbDatos.TabIndex = 5;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Atención";
@@ -77,7 +79,7 @@
             // cmbHora
             // 
             this.cmbHora.FormattingEnabled = true;
-            this.cmbHora.Location = new System.Drawing.Point(249, 66);
+            this.cmbHora.Location = new System.Drawing.Point(238, 67);
             this.cmbHora.Name = "cmbHora";
             this.cmbHora.Size = new System.Drawing.Size(144, 21);
             this.cmbHora.TabIndex = 8;
@@ -85,7 +87,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(246, 50);
+            this.label2.Location = new System.Drawing.Point(235, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 13);
             this.label2.TabIndex = 7;
@@ -111,26 +113,27 @@
             // nombreAfi
             // 
             this.nombreAfi.AutoSize = true;
-            this.nombreAfi.Location = new System.Drawing.Point(57, 16);
+            this.nombreAfi.Location = new System.Drawing.Point(56, 16);
             this.nombreAfi.Name = "nombreAfi";
             this.nombreAfi.Size = new System.Drawing.Size(35, 13);
             this.nombreAfi.TabIndex = 61;
             this.nombreAfi.Text = "label3";
             // 
-            // gpHistoriaClinica
+            // resultado
             // 
-            this.gpHistoriaClinica.Controls.Add(this.nombreEspecialidad);
-            this.gpHistoriaClinica.Controls.Add(this.asd);
-            this.gpHistoriaClinica.Controls.Add(this.txtEnfermedad);
-            this.gpHistoriaClinica.Controls.Add(this.txtSintomas);
-            this.gpHistoriaClinica.Controls.Add(this.label5);
-            this.gpHistoriaClinica.Controls.Add(this.label4);
-            this.gpHistoriaClinica.Location = new System.Drawing.Point(12, 137);
-            this.gpHistoriaClinica.Name = "gpHistoriaClinica";
-            this.gpHistoriaClinica.Size = new System.Drawing.Size(482, 167);
-            this.gpHistoriaClinica.TabIndex = 7;
-            this.gpHistoriaClinica.TabStop = false;
-            this.gpHistoriaClinica.Text = "Resultado";
+            this.resultado.Controls.Add(this.asignarDiag);
+            this.resultado.Controls.Add(this.nombreEspecialidad);
+            this.resultado.Controls.Add(this.asd);
+            this.resultado.Controls.Add(this.txtEnfermedad);
+            this.resultado.Controls.Add(this.txtSintomas);
+            this.resultado.Controls.Add(this.label5);
+            this.resultado.Controls.Add(this.label4);
+            this.resultado.Location = new System.Drawing.Point(12, 137);
+            this.resultado.Name = "resultado";
+            this.resultado.Size = new System.Drawing.Size(482, 197);
+            this.resultado.TabIndex = 7;
+            this.resultado.TabStop = false;
+            this.resultado.Text = "Resultado";
             // 
             // txtEnfermedad
             // 
@@ -186,7 +189,7 @@
             // 
             // asignarDiag
             // 
-            this.asignarDiag.Location = new System.Drawing.Point(187, 340);
+            this.asignarDiag.Location = new System.Drawing.Point(175, 168);
             this.asignarDiag.Name = "asignarDiag";
             this.asignarDiag.Size = new System.Drawing.Size(117, 23);
             this.asignarDiag.TabIndex = 10;
@@ -206,28 +209,37 @@
             // nombreEspecialidad
             // 
             this.nombreEspecialidad.AutoSize = true;
-            this.nombreEspecialidad.Location = new System.Drawing.Point(59, 20);
+            this.nombreEspecialidad.Location = new System.Drawing.Point(77, 20);
             this.nombreEspecialidad.Name = "nombreEspecialidad";
             this.nombreEspecialidad.Size = new System.Drawing.Size(102, 13);
             this.nombreEspecialidad.TabIndex = 14;
             this.nombreEspecialidad.Text = "nombreEspecialidad";
+            // 
+            // confirmar
+            // 
+            this.confirmar.Location = new System.Drawing.Point(399, 64);
+            this.confirmar.Name = "confirmar";
+            this.confirmar.Size = new System.Drawing.Size(75, 23);
+            this.confirmar.TabIndex = 62;
+            this.confirmar.Text = "Confirmar";
+            this.confirmar.UseVisualStyleBackColor = true;
+            this.confirmar.Click += new System.EventHandler(this.confirmar_Click);
             // 
             // Diagnostico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 402);
-            this.Controls.Add(this.asignarDiag);
             this.Controls.Add(this.nombreProf);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.gpHistoriaClinica);
+            this.Controls.Add(this.resultado);
             this.Controls.Add(this.gbDatos);
             this.Name = "Diagnostico";
             this.Text = "Diagnostico";
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
-            this.gpHistoriaClinica.ResumeLayout(false);
-            this.gpHistoriaClinica.PerformLayout();
+            this.resultado.ResumeLayout(false);
+            this.resultado.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,7 +254,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpFechaAtencion;
-        private System.Windows.Forms.GroupBox gpHistoriaClinica;
+        private System.Windows.Forms.GroupBox resultado;
         private System.Windows.Forms.RichTextBox txtEnfermedad;
         private System.Windows.Forms.RichTextBox txtSintomas;
         private System.Windows.Forms.Label label5;
@@ -252,5 +264,6 @@
         private System.Windows.Forms.Button asignarDiag;
         private System.Windows.Forms.Label asd;
         private System.Windows.Forms.Label nombreEspecialidad;
+        private System.Windows.Forms.Button confirmar;
     }
 }
