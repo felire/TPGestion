@@ -30,16 +30,21 @@ namespace ClinicaFrba.Registro_Resultado
             nombreAfi.Text = this.afiliado.apellido + ", " + this.afiliado.nombre;
             nombreProf.Text = this.profesional.apellido + ", "+this.profesional.nombre;
             nombreEspecialidad.Text = consulta.turno.especialidad.descripcion;
-            fechaTurno.Text = consulta.turno.fecha.ToString();
+            cmbHora.DataSource = Hora.ObtenerHorasAceptables(consulta.turno);
+            cmbHora.ValueMember = "LaHora";
+            cmbHora.DisplayMember = "HoraAMostrar";
+            cmbHora.SelectedIndex = 0;
+            dtpFechaAtencion.Text = consulta.turno.fecha.ToString();
+            dtpFechaAtencion.Enabled = false;
         }
 
         private void actualizarHoras(object sender, EventArgs e)
         {
-            Dia dia = new Dia((int)dtpFechaAtencion.Value.Date.DayOfWeek);
+            /*Dia dia = new Dia((int)dtpFechaAtencion.Value.Date.DayOfWeek);
             cmbHora.DataSource = Hora.obtenerHorasDia(dia);
             cmbHora.ValueMember = "LaHora";
             cmbHora.DisplayMember = "HoraAMostrar";
-            cmbHora.SelectedIndex = 0;
+            cmbHora.SelectedIndex = 0;*/
         }
 
         private void asignarDiag_Click(object sender, EventArgs e)
@@ -50,6 +55,8 @@ namespace ClinicaFrba.Registro_Resultado
                 consulta.enfermedad = txtEnfermedad.Text;
                 consulta.fecha = new DateTime(dtpFechaAtencion.Value.Year, dtpFechaAtencion.Value.Month, dtpFechaAtencion.Value.Day, ((Hora)cmbHora.SelectedItem).LaHora.Hours, ((Hora)cmbHora.SelectedItem).LaHora.Minutes, 0);
                 consulta.actualizarConsulta();
+                MessageBox.Show("Diagnostico asignado con exito", "Error!", MessageBoxButtons.OK);
+                this.Hide();
             }
         }
 

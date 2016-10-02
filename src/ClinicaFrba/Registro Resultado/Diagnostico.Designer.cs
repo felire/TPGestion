@@ -45,16 +45,12 @@
             this.asignarDiag = new System.Windows.Forms.Button();
             this.asd = new System.Windows.Forms.Label();
             this.nombreEspecialidad = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.fechaTurno = new System.Windows.Forms.Label();
             this.gbDatos.SuspendLayout();
             this.gpHistoriaClinica.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
             // 
-            this.gbDatos.Controls.Add(this.fechaTurno);
-            this.gbDatos.Controls.Add(this.label7);
             this.gbDatos.Controls.Add(this.nombreAfi);
             this.gbDatos.Controls.Add(this.lbl2);
             this.gbDatos.Controls.Add(this.cmbHora);
@@ -216,24 +212,6 @@
             this.nombreEspecialidad.TabIndex = 14;
             this.nombreEspecialidad.Text = "nombreEspecialidad";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 34);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(87, 13);
-            this.label7.TabIndex = 62;
-            this.label7.Text = "Fecha del turno: ";
-            // 
-            // fechaTurno
-            // 
-            this.fechaTurno.AutoSize = true;
-            this.fechaTurno.Location = new System.Drawing.Point(90, 34);
-            this.fechaTurno.Name = "fechaTurno";
-            this.fechaTurno.Size = new System.Drawing.Size(62, 13);
-            this.fechaTurno.TabIndex = 63;
-            this.fechaTurno.Text = "fechaTurno";
-            // 
             // Diagnostico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,8 +251,6 @@
         private System.Windows.Forms.Label nombreProf;
         private System.Windows.Forms.Button asignarDiag;
         private System.Windows.Forms.Label asd;
-        private System.Windows.Forms.Label fechaTurno;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label nombreEspecialidad;
     }
 }

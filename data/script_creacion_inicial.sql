@@ -137,10 +137,10 @@ AS
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Afiliado_id INT NOT NULL,
 		Profesional_id INT NOT NULL,
-		Fecha DATETIME NOT NULL,
-		Sintoma VARCHAR(255) NOT NULL,
+		Fecha DATETIME,
+		Sintoma VARCHAR(255),
 		Enfermedad VARCHAR(255),
-		Turno_id INT,
+		Turno_id INT NOT NULL,
 		FOREIGN KEY(Turno_id) REFERENCES [kernel_panic].[Turnos] (Id),
 		FOREIGN KEY(Afiliado_id) REFERENCES [kernel_panic].[Afiliados] (Id),
 		FOREIGN KEY(Profesional_id) REFERENCES [kernel_panic].[Profesionales] (Id));
@@ -579,9 +579,8 @@ AS
 	SELECT D.Id idConsulta, T.Id idTurno
 	INTO #consulta
 	FROM kernel_panic.Diagnosticos D JOIN kernel_panic.Turnos T ON (D.Turno_id = T.Id)	
-	WHERE T.Cancelacion IS NOT NULL AND D.Fecha IS NULL AND T.Afiliado_id = @afiliado AND T.Profesional_id = @profesional
+	WHERE T.Cancelacion IS NULL AND D.Fecha IS NULL AND T.Afiliado_id = @afiliado AND T.Profesional_id = @profesional
 	ORDER BY D.Id ASC
-
 
 	IF (SELECT COUNT(idConsulta) FROM #consulta) = 0 
 	BEGIN
@@ -595,8 +594,6 @@ AS
 
 	DROP TABLE #consulta
 GO
-
-
 
 CREATE PROCEDURE kernel_panic.agregarRegistroDeLogsInicial
 AS

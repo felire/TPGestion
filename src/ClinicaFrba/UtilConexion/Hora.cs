@@ -91,6 +91,62 @@ namespace ClinicaFrba.UtilConexion
                 return false; 
             }
         }
+
+
+        public static List<Hora> ObtenerHorasAceptables(Turno turno)
+        {
+            int cont;
+            List<Hora> lista = new List<Hora>();
+            if (turno.fecha.Minute == 0)
+            {
+                cont = 0;
+                for (int i = turno.fecha.TimeOfDay.Hours; i <= turno.fecha.TimeOfDay.Hours + 3; i++)
+                {
+                    cont++;
+                    if (cont != 2)
+                    {
+                        TimeSpan unaHora = new TimeSpan(i, 00, 0);
+                        string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
+                        lista.Add(new Hora(unaHora, hora));
+                    }
+                    else
+                    {
+                        //REINICIO EL CONTADOR PORQUE ES MEDIA HORA
+                        cont = 0;
+                        i--;
+                        TimeSpan unaHora = new TimeSpan(i, 30, 0);
+                        string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
+                        lista.Add(new Hora(unaHora, hora));
+                    }
+                }
+            }
+            else
+            {
+                cont = 1;
+                for (int i = turno.fecha.TimeOfDay.Hours + 1; i <= turno.fecha.TimeOfDay.Hours + 3; i++)
+                {
+                    cont++;
+                    if (cont != 2)
+                    {
+                        TimeSpan unaHora = new TimeSpan(i, 00, 0);
+                        string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
+                        lista.Add(new Hora(unaHora, hora));
+                    }
+                    else
+                    {
+                        //REINICIO EL CONTADOR PORQUE ES MEDIA HORA
+                        cont = 0;
+                        i--;
+                        TimeSpan unaHora = new TimeSpan(i, 30, 0);
+                        string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
+                        lista.Add(new Hora(unaHora, hora));
+                    }
+                }
+            }
+            return lista;
+        }
+
+
     }
 }
 
