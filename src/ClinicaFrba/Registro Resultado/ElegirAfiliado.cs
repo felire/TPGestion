@@ -46,9 +46,17 @@ namespace ClinicaFrba.Registro_Resultado
                 Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
                 if (afiliado.esta_activo)
                 {
-                    Diagnostico diag = new Diagnostico(afiliado, profesional);
-                    diag.Show();
-                    this.Hide();
+                    ConsultaMedica consulta = new ConsultaMedica(afiliado, profesional);
+                    if (consulta.id == -1)
+                    {
+                        MessageBox.Show("No tiene consultas pendientes con este afiliado!", "Error!", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        Diagnostico diag = new Diagnostico(consulta);
+                        diag.Show();
+                        this.Hide();
+                    }                    
                 }
                 else
                 {

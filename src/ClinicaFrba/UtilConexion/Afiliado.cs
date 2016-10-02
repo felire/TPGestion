@@ -39,11 +39,12 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombre", "%" + nombre + "%"));
             ListaParametros.Add(new SqlParameter("@apellido", "%" + apellido + "%"));
+            Int16 grupoNum;
             SpeakerDB speaker;
             // pueden pasar el documento o no, y el numero de grupo podria ser 0 que significa que no busca por ese campo
             if (doc.Equals(""))
             {
-                if (grupo.Equals("0"))
+                if (grupo.Equals(""))
                 {
                     speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo, Esta_activo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido", "T", ListaParametros);
                 }
@@ -57,7 +58,7 @@ namespace ClinicaFrba.UtilConexion
             {
                 ListaParametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
                 ListaParametros.Add(new SqlParameter("@doc", Decimal.Parse(doc)));
-                if (grupo.Equals("0"))
+                if (grupo.Equals(""))
                 {
                     speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo, Esta_activo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Tipo_doc = @tipoDoc AND Numero_doc = @doc", "T", ListaParametros);
 

@@ -15,11 +15,57 @@ namespace ClinicaFrba.Registro_Resultado
     {
         public Afiliado afiliado { get; set; }
         public Profesional profesional { get; set; }
-        public Diagnostico(Afiliado afiliado, Profesional profesional)
+        public ConsultaMedica consulta { get; set; }
+        public Diagnostico(ConsultaMedica consulta)
         {
             InitializeComponent();
-            this.afiliado = afiliado;
-            this.profesional = profesional;
+            this.afiliado = consulta.afiliado;
+            this.profesional = consulta.profesional;
+            this.consulta = consulta;
+            this.cargarDatos();
+        }
+
+        public void cargarDatos()
+        {
+            nombreAfi.Text = this.afiliado.apellido + ", " + this.afiliado.nombre;
+            nombreProf.Text = this.profesional.apellido + ", "+this.profesional.nombre;
+            nombreEspecialidad.Text = consulta.turno.especialidad.descripcion;
+            fechaTurno.Text = consulta.turno.fecha.ToString();
+        }
+
+        private void actualizarHoras(object sender, EventArgs e)
+        {
+            Dia dia = new Dia((int)dtpFechaAtencion.Value.Date.DayOfWeek);
+            cmbHora.DataSource = Hora.obtenerHorasDia(dia);
+            cmbHora.ValueMember = "LaHora";
+            cmbHora.DisplayMember = "HoraAMostrar";
+            cmbHora.SelectedIndex = 0;
+        }
+
+        private void asignarDiag_Click(object sender, EventArgs e)
+        {
+            if (camposValidos())
+            {
+                consulta.sintoma = txtSintomas.Text;
+                consulta.enfermedad = txtEnfermedad.Text;
+                consulta.fecha = new DateTime(dtpFechaAtencion.Value.Year, dtpFechaAtencion.Value.Month, dtpFechaAtencion.Value.Day, ((Hora)cmbHora.SelectedItem).LaHora.Hours, ((Hora)cmbHora.SelectedItem).LaHora.Minutes, 0);
+                consulta.actualizarConsulta();
+            }
+        }
+
+        private Boolean camposValidos()
+        {
+            if (txtEnfermedad.Text.Equals("") || txtSintomas.Text.Equals(""))
+            {
+                MessageBox.Show("Debe rellenar todos los campos", "Error!", MessageBoxButtons.OK);
+                return false;
+            }
+            if (txtEnfermedad.Text.Length > 255 || txtSintomas.Text.Length > 255)
+            {
+                MessageBox.Show("Los campos no pueden superar los 255 caracteres!", "Error!", MessageBoxButtons.OK);
+                return false;
+            }
+            return true;
         }
     }
 }

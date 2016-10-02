@@ -199,7 +199,7 @@ AS
 	DROP TABLE [kernel_panic].[Franjas_Canceladas]
 	DROP TABLE [kernel_panic].[Agenda_Diaria]
 	DROP TABLE [kernel_panic].[Esquema_Trabajo]
-	DROP TABLE [kernel_panic].[Bonos_Farmacia]
+	--DROP TABLE [kernel_panic].[Bonos_Farmacia]
 	DROP TABLE [kernel_panic].[Bonos_Consultas]
 	DROP TABLE [kernel_panic].[Diagnosticos]
 	DROP TABLE [kernel_panic].[Turnos]
@@ -344,8 +344,9 @@ AS
 	FROM gd_esquema.Maestra AS M JOIN kernel_panic.Profesionales AS P ON (P.Numero_doc = M.Medico_Dni)
 								 JOIN kernel_panic.Afiliados AS A ON (M.Paciente_Dni = A.Numero_doc)
 	WHERE M.Consulta_Sintomas IS NOT NULL
-	GROUP BY A.Id, P.Id, M.Turno_Fecha, M.Consulta_Sintomas, M.Consulta_Enfermedades
+	GROUP BY A.Id, P.Id, M.Turno_Fecha, M.Consulta_Sintomas, M.Consulta_Enfermedades, M.Turno_Numero
 GO
+
 
 CREATE PROCEDURE kernel_panic.Cargar_transacciones
 AS
@@ -568,6 +569,35 @@ AS
 GO
 
 
+CREATE PROCEDURE kernel_panic.consultaNueva
+@afiliado INT,
+@profesional INT,
+@idConsulta INT OUTPUT,
+@idTurno INT OUTPUT
+AS
+
+	SELECT D.Id idConsulta, T.Id idTurno
+	INTO #consulta
+	FROM kernel_panic.Diagnosticos D JOIN kernel_panic.Turnos T ON (D.Turno_id = T.Id)	
+	WHERE T.Cancelacion IS NOT NULL AND D.Fecha IS NULL AND T.Afiliado_id = @afiliado AND T.Profesional_id = @profesional
+	ORDER BY D.Id ASC
+
+
+	IF (SELECT COUNT(idConsulta) FROM #consulta) = 0 
+	BEGIN
+		SET @idConsulta = -1
+	END
+	ELSE
+	BEGIN
+		SET @idConsulta = (SELECT TOP 1 idConsulta FROM #consulta)
+		SET @idTurno = (SELECT TOP 1 idTurno FROM #consulta)
+	END
+
+	DROP TABLE #consulta
+GO
+
+
+
 CREATE PROCEDURE kernel_panic.agregarRegistroDeLogsInicial
 AS
 declare @1 int
@@ -703,3 +733,4 @@ DROP PROCEDURE kernel_panic.cancelarTurnoAfi
 DROP PROCEDURE kernel_panic.cancelarDiaProfesional
 DROP PROCEDURE kernel_panic.cancelarFranjaProfesional
 DROP PROCEDURE kernel_panic.agregarRegistroDeLogsInicial
+DROP PROCEDURE kernel_panic.consultaNueva

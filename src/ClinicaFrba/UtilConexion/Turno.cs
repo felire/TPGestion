@@ -20,6 +20,27 @@ namespace ClinicaFrba.UtilConexion
         public string profesionalNombre { get; set; }
         public Afiliado afiliado { get; set; }
 
+
+        public Turno(int id)
+        {
+            this.id = id;
+            cargarTurno();
+        }
+        public Turno() { }
+        public void cargarTurno()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@turnoId", this.id));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Fecha, Especialidad FROM kernel_panic.Turnos WHERE Id = @turnoId", "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                speaker.reader.Read();
+                this.fecha = (DateTime)speaker.reader["Fecha"];
+                this.especialidad = new Especialidad((decimal)speaker.reader["Especialidad"]);               
+            }
+            speaker.close();
+        
+        }
         public static List<Turno> darTodosLosTurnosDe(Afiliado afiliado)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
