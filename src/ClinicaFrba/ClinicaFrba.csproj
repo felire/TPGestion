@@ -232,11 +232,17 @@
     <Compile Include="Registro Llegada\RegLlegada.Designer.cs">
       <DependentUpon>RegLlegada.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Resultado\RegResultado.cs">
+    <Compile Include="Registro Resultado\Diagnostico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Resultado\RegResultado.Designer.cs">
-      <DependentUpon>RegResultado.cs</DependentUpon>
+    <Compile Include="Registro Resultado\Diagnostico.Designer.cs">
+      <DependentUpon>Diagnostico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registro Resultado\ElegirAfiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Resultado\ElegirAfiliado.Designer.cs">
+      <DependentUpon>ElegirAfiliado.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilConexion\Afiliado.cs" />
     <Compile Include="UtilConexion\AgendaDiaria.cs" />
@@ -316,6 +322,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registrar Agenta Medico\SeleccionarProfesional.resx">
       <DependentUpon>SeleccionarProfesional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Resultado\Diagnostico.resx">
+      <DependentUpon>Diagnostico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Resultado\ElegirAfiliado.resx">
+      <DependentUpon>ElegirAfiliado.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="bin\Debug\ClinicaFrba.exe.config" />
     <None Include="bin\Debug\ClinicaFrba.vshost.exe.config" />

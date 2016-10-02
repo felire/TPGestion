@@ -1,6 +1,6 @@
 ﻿namespace ClinicaFrba.Registro_Resultado
 {
-    partial class RegResultado
+    partial class Diagnostico
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Diagnostico
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(712, 345);
+            this.Name = "Diagnostico";
+            this.Text = "Diagnostico";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

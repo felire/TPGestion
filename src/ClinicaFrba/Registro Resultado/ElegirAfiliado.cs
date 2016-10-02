@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClinicaFrba.UtilConexion;
 
-namespace ClinicaFrba.Compra_Bono
+namespace ClinicaFrba.Registro_Resultado
 {
     partial class ElegirAfiliado : Form
     {
         public List<Afiliado> afiliadosActuales { get; set; }
-
-        public ElegirAfiliado()
+        public Profesional profesional {get;set;}
+        public ElegirAfiliado(Profesional profesional)
         {
             InitializeComponent();
-
+            this.profesional = profesional;
             cargarFormulario();
         }
 
@@ -46,8 +46,8 @@ namespace ClinicaFrba.Compra_Bono
                 Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
                 if (afiliado.esta_activo)
                 {
-                    CompraBono compraForm = new CompraBono(afiliado);
-                    compraForm.Show();
+                    Diagnostico diag = new Diagnostico(afiliado, profesional);
+                    diag.Show();
                     this.Hide();
                 }
                 else

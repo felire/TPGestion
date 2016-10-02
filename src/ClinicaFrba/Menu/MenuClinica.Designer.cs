@@ -42,7 +42,6 @@
             this.bonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seleccionarAfiliado = new System.Windows.Forms.ToolStripMenuItem();
             this.comprarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.turnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diagnosticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoEstadisticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +62,6 @@
             this.rolesToolStripMenuItem,
             this.afiliadoToolStripMenuItem,
             this.bonoToolStripMenuItem,
-            this.turnoToolStripMenuItem,
             this.diagnosticoToolStripMenuItem,
             this.cancelarToolStripMenuItem,
             this.listadoEstadisticoToolStripMenuItem,
@@ -178,17 +176,12 @@
             this.comprarToolStripMenuItem.Text = "Comprar";
             this.comprarToolStripMenuItem.Click += new System.EventHandler(this.comprarToolStripMenuItem_Click);
             // 
-            // turnoToolStripMenuItem
-            // 
-            this.turnoToolStripMenuItem.Name = "turnoToolStripMenuItem";
-            this.turnoToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
-            this.turnoToolStripMenuItem.Text = "Turno";
-            // 
             // diagnosticoToolStripMenuItem
             // 
             this.diagnosticoToolStripMenuItem.Name = "diagnosticoToolStripMenuItem";
             this.diagnosticoToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.diagnosticoToolStripMenuItem.Text = "Diagnostico";
+            this.diagnosticoToolStripMenuItem.Click += new System.EventHandler(this.diagnosticoToolStripMenuItem_Click);
             // 
             // cancelarToolStripMenuItem
             // 
@@ -301,7 +294,6 @@
         private System.Windows.Forms.ToolStripMenuItem modificaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem afiliadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bonoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem turnoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diagnosticoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoEstadisticoToolStripMenuItem;

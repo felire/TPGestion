@@ -1,4 +1,4 @@
-﻿namespace ClinicaFrba.Compra_Bono
+﻿namespace ClinicaFrba.Registro_Resultado
 {
     partial class ElegirAfiliado
     {
@@ -52,7 +52,7 @@
             this.elegir.Name = "elegir";
             this.elegir.Size = new System.Drawing.Size(577, 23);
             this.elegir.TabIndex = 5;
-            this.elegir.Text = "Elegir";
+            this.elegir.Text = "Escribir Diagnostico";
             this.elegir.UseVisualStyleBackColor = true;
             this.elegir.Click += new System.EventHandler(this.elegir_Click);
             // 

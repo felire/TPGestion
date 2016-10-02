@@ -7,14 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClinicaFrba.UtilConexion;
 
 namespace ClinicaFrba.Registro_Resultado
 {
-    public partial class RegResultado : Form
+    partial class Diagnostico : Form
     {
-        public RegResultado()
+        public Afiliado afiliado { get; set; }
+        public Profesional profesional { get; set; }
+        public Diagnostico(Afiliado afiliado, Profesional profesional)
         {
             InitializeComponent();
+            this.afiliado = afiliado;
+            this.profesional = profesional;
         }
     }
 }

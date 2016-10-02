@@ -157,7 +157,7 @@ AS
 		FOREIGN KEY(Turno) REFERENCES [kernel_panic].[Turnos] (Id),
 		FOREIGN KEY(Afiliado_Uso) REFERENCES [kernel_panic].[Afiliados] (Id));
 
-	CREATE TABLE [kernel_panic].[Bonos_Farmacia] (
+	/*CREATE TABLE [kernel_panic].[Bonos_Farmacia] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Afiliado_uso INT NULL,
 		Grupo_afiliado INT NOT NULL,
@@ -165,7 +165,7 @@ AS
 		Fecha_compra DATETIME,
 		FOREIGN KEY(Grupo_afiliado) REFERENCES [kernel_panic].[Grupos_Familiares] (Id),
 		FOREIGN KEY(Plan_uso) REFERENCES [kernel_panic].[Planes] (Codigo),
-		FOREIGN KEY(Afiliado_uso) REFERENCES [kernel_panic].[Afiliados] (Id));
+		FOREIGN KEY(Afiliado_uso) REFERENCES [kernel_panic].[Afiliados] (Id));*/
 
 	CREATE TABLE [kernel_panic].[Esquema_Trabajo] (
 		Id INT IDENTITY (1,1) PRIMARY KEY,

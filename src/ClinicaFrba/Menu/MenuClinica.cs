@@ -107,7 +107,7 @@ namespace ClinicaFrba.Menu
             rolesToolStripMenuItem.Visible = idFun.Contains(1);
             afiliadoToolStripMenuItem.Visible = idFun.Contains(2);
             bonoToolStripMenuItem.Visible = idFun.Contains(4);
-            turnoToolStripMenuItem.Visible = idFun.Contains(5);
+            pedirTurnoToolStripMenuItem.Visible = idFun.Contains(5);
             diagnosticoToolStripMenuItem.Visible = idFun.Contains(7);
             if (idFun.Contains(8))
             {
@@ -244,6 +244,12 @@ namespace ClinicaFrba.Menu
             turno.afiliado = usuario.afiliado;
             Pedir_Turno.ElegirProfesional elegirProfesional = new Pedir_Turno.ElegirProfesional(turno);
             elegirProfesional.Show();
+        }
+
+        private void diagnosticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClinicaFrba.Registro_Resultado.ElegirAfiliado elegir = new ClinicaFrba.Registro_Resultado.ElegirAfiliado(this.usuario.profesional);
+            elegir.Show();
         }
     }
 }
