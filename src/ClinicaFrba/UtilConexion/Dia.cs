@@ -53,7 +53,6 @@ namespace ClinicaFrba.UtilConexion
 
         public void setFranja()
         {
-            //if (id >= 1 && id <= 6)
             if (id != (int)DayOfWeek.Saturday && id != (int)DayOfWeek.Sunday )
             {
                 this.horaDesde = new TimeSpan(7, 00, 0);

@@ -34,7 +34,7 @@ namespace ClinicaFrba.UtilConexion
 
         public Fecha AddDays(double n)
         {
-            return new Fecha( dia.AddDays(n));
+            return new Fecha(dia.AddDays(n));
         }
 
         public static Fecha parsearDateTime(DateTime date)

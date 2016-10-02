@@ -12,7 +12,7 @@ namespace ClinicaFrba.UtilConexion
 {
     class Especialidad
     {
-        public decimal codigo { get; set; } //Puede llegar a despordar por el tamaño que soporta el int
+        public decimal codigo { get; set; }
         public string descripcion { get; set; }
         public TipoEspecialidad tipo { get; set; }
 

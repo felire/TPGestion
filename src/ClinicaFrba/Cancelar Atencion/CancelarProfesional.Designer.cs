@@ -165,7 +165,6 @@
             this.motivoCancelacion.Name = "motivoCancelacion";
             this.motivoCancelacion.Size = new System.Drawing.Size(539, 49);
             this.motivoCancelacion.TabIndex = 15;
-            this.motivoCancelacion.TextChanged += new System.EventHandler(this.motivoCancelacion_TextChanged);
             // 
             // label5
             // 

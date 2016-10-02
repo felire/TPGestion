@@ -33,15 +33,13 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void FormCambios_Load(object sender, EventArgs e) {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            string query = "SELECT Numero_en_el_grupo, Nombre, Apellido, GD2C2016.kernel_panic.LogsCambioAfiliados.Fecha, GD2C2016.kernel_panic.LogsCambioAfiliados.Tipo, GD2C2016.kernel_panic.LogsCambioAfiliados.Descripcion, Esta_activo FROM GD2C2016.kernel_panic.Afiliados INNER JOIN GD2C2016.kernel_panic.LogsCambioAfiliados ON  GD2C2016.kernel_panic.Afiliados.Id = GD2C2016.kernel_panic.LogsCambioAfiliados.Afiliado";
-            string queryPrueba = "SELECT TOP 1 Id from GD2C2016.kernel_panic.Afiliados";
+            string query = "SELECT Numero_en_el_grupo, Nombre, Apellido, kernel_panic.LogsCambioAfiliados.Fecha, kernel_panic.LogsCambioAfiliados.Tipo, kernel_panic.LogsCambioAfiliados.Descripcion, Esta_activo FROM kernel_panic.Afiliados INNER JOIN kernel_panic.LogsCambioAfiliados ON  kernel_panic.Afiliados.Id = kernel_panic.LogsCambioAfiliados.Afiliado";
+            string queryPrueba = "SELECT TOP 1 Id from kernel_panic.Afiliados";
             string tipo = "TD";
             string tipoPrueba = "T";
             SpeakerDB speaker = ConexionDB.ObtenerDataReader (query, tipo, ListaParametros);
             this.dataGridView1.DataSource = speaker;
             speaker.close();
-            
-            
         }
 
 

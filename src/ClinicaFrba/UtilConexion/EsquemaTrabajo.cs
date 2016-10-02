@@ -24,7 +24,7 @@ namespace ClinicaFrba.UtilConexion
             this.desde = desde;
             this.hasta = hasta;
             this.profesional = profesional;
-            agendas = new List<AgendaDiaria>();
+            this.agendas = new List<AgendaDiaria>();
             this.cargarAgendas();
         }
 
@@ -34,7 +34,7 @@ namespace ClinicaFrba.UtilConexion
             this.desde = desde;
             this.hasta = hasta;
             this.profesional = null;
-            agendas = new List<AgendaDiaria>();
+            this.agendas = new List<AgendaDiaria>();
             this.cargarAgendas();
         }
 
@@ -92,7 +92,7 @@ namespace ClinicaFrba.UtilConexion
                 }
             }
 
-            List<Fecha> todasLasFechas = new List<Fecha>();//todas las fechas comprendidas entre el desde y hasta del esquema
+            List<Fecha> todasLasFechas = new List<Fecha>();//son todas las fechas comprendidas entre el desde y hasta del esquema
             Fecha fecha = new Fecha(desde);
             while (fecha.CompareTo(hasta) <= 0)
             {
@@ -100,12 +100,12 @@ namespace ClinicaFrba.UtilConexion
                 fecha = fecha.AddDays(1);
             }
 
-            List<Fecha> fechas = new List<Fecha>();//solo las fechas que se corresponden en las agendas
+            List<Fecha> fechas = new List<Fecha>();//ponemos solo las fechas que se corresponden en las agendas
             foreach (Fecha unaFecha in todasLasFechas)
             {
                 foreach (AgendaDiaria agenda in agendasEspecialidad)
                 {
-                    if(agenda.fechaPertenece(unaFecha) && unaFecha.dia.CompareTo(DateTime.Now.Date) > 0)
+                    if(unaFecha.dia.CompareTo(DateTime.Now.Date) >= 0 && agenda.fechaPertenece(unaFecha))
                     {
                         fechas.Add(unaFecha);
                         break;

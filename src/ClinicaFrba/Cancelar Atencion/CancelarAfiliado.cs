@@ -62,49 +62,37 @@ namespace ClinicaFrba.Cancelar_Atencion
         {
             if (seleccionValida())
             {
-                if (motivoCancelacion.Text == "")
-                {
-                    MessageBox.Show("Debe especificar el motivo de la cancelacion", "Error!", MessageBoxButtons.OK);
-                }
-                else
-                {
-                    if (motivoCancelacion.Text.Length <= 400)
-                    {
-                        Turno turno = (Turno)turnos.CurrentRow.DataBoundItem;
-
-                        if ((turno.fecha.Date - DateTime.Now.Date).Days >= 1)
-                        {
-                            turno.cancelar(motivoCancelacion.Text, "Afiliado");
-                            MessageBox.Show("Turno cancelado con exito!", "Exito!", MessageBoxButtons.OK);
-                            this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("No puede cancelar un turno el dia que lo tiene.", "Error!", MessageBoxButtons.OK);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("El mensaje no debe superar los 400 caracteres", "Error!", MessageBoxButtons.OK);
-                    }
-                }
-                
+                Turno turno = (Turno)turnos.CurrentRow.DataBoundItem;
+                turno.cancelar(motivoCancelacion.Text, "Afiliado");
+                MessageBox.Show("Turno cancelado con exito!", "Exito!", MessageBoxButtons.OK);
+                this.Hide();
             }
         }
 
-
         private Boolean seleccionValida()
         {
-            if (turnos.SelectedRows.Count == 1)
-            {
-                return true;
-            }
-            else
+            if (turnos.SelectedRows.Count != 1)
             {
                 MessageBox.Show("Debe seleccionar un turno", "Error!", MessageBoxButtons.OK);
                 return false;
             }
+            if (motivoCancelacion.Text == "")
+            {
+                MessageBox.Show("Debe especificar el motivo de la cancelacion", "Error!", MessageBoxButtons.OK);
+                return false;
+            }
+            if (motivoCancelacion.Text.Length > 400)
+            {
+                MessageBox.Show("El mensaje no debe superar los 400 caracteres", "Error!", MessageBoxButtons.OK);
+                return false;
+            }
+            Turno turno = (Turno)turnos.CurrentRow.DataBoundItem;
+            if ((turno.fecha.Date - DateTime.Now.Date).Days < 1)
+            {
+                MessageBox.Show("No puede cancelar un turno el dia que lo tiene.", "Error!", MessageBoxButtons.OK);
+                return false;
+            }
+            return true;
         }
-
     }
 }
