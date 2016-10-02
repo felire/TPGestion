@@ -35,6 +35,7 @@ namespace ClinicaFrba.UtilConexion
         {
             if ((int)fecha.dia.DayOfWeek == dia.id)
             {
+                MessageBox.Show("fecha.dia.DayOfWeek: " + fecha.dia.DayOfWeek.ToString() + " dia: " + dia.nombre, "Error!", MessageBoxButtons.OK);
                 fecha.horaDesde = horaDesde;
                 fecha.horaHasta = horaHasta;
                 return true;

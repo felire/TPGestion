@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ClinicaFrba.UtilConexion
 {
@@ -15,14 +16,14 @@ namespace ClinicaFrba.UtilConexion
 
         public Dia(int id, string nombre)
         {
-            this.id = id - 1;
+            this.id = id;
             this.nombre = nombre;
             setFranja();
         }
 
         public Dia(int id)
         {
-            this.id = id - 1 ;
+            this.id =id;
             switch (this.id)
             {
                 case (int)DayOfWeek.Monday:
@@ -52,12 +53,13 @@ namespace ClinicaFrba.UtilConexion
 
         public void setFranja()
         {
-            if (id >= 1 && id <= 6)
+            //if (id >= 1 && id <= 6)
+            if (id != (int)DayOfWeek.Saturday && id != (int)DayOfWeek.Sunday )
             {
                 this.horaDesde = new TimeSpan(7, 00, 0);
                 this.horaHasta = new TimeSpan(20, 00, 0);
             }
-            if (id == 7)
+            if (id == (int)DayOfWeek.Saturday)
             {
                 this.horaDesde = new TimeSpan(10, 00, 0);
                 this.horaHasta = new TimeSpan(15, 00, 0);
