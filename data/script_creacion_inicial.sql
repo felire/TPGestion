@@ -68,6 +68,7 @@ AS
 
 	CREATE TABLE [kernel_panic].[LogsCambioAfiliados] (
 		Id INT IDENTITY (1,1) PRIMARY KEY,
+		Tipo VARCHAR(1) NOT NULL CHECK(Tipo IN('A','B','M')),	
 		Afiliado INT NOT NULL,
 		Fecha DATETIME NOT NULL DEFAULT GETDATE(),
 		Descripcion VARCHAR(255)
@@ -451,7 +452,7 @@ AS
 						SET Habilitado = 0
 						WHERE Nombre_usuario = @nombreUsuario
 					END
-				SET @fallo = 2 /*Contraseña Incorrecta*/
+				SET @fallo = 2 /*ContraseÃ±a Incorrecta*/
 				return
 				END
 		END
@@ -565,14 +566,98 @@ AS
 GO
 
 
-/*
-CREATE PROCEDURE kernel_panic.agregarRegistroDeLogs
+CREATE PROCEDURE kernel_panic.agregarRegistroDeLogsInicial
 AS
-insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values ('994','M','se modifico')
-insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values ('994','B','se elimino')
-insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values ('994','M','se habilito')
+declare @1 int
+set @1 = (select top 1 Id from kernel_panic.Afiliados)
+insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values (@1,'M','se modifico')
+insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values (@1,'B','se elimino')
+insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values (@1,'M','se habilito')
 GO
-*/
+
+create procedure kernel_panic.baja_logica_afiliado (@Id int, @Motivo varchar(500)) AS
+declare @fec datetime
+set @fec = GETDATE()
+insert into GD2C2016.kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('B',@Id, @Motivo)
+update GD2C2016.kernel_panic.Afiliados SET GD2C2016.kernel_panic.Afiliados.Esta_Activo= 0 where GD2C2016.kernel_panic.Afiliados.Id = @Id
+	IF (select COUNT(GD2C2016.kernel_panic.Turnos.Id)  from GD2C2016.kernel_panic.Turnos where GD2C2016.kernel_panic.Turnos.Afiliado_Id = @Id 
+	AND GD2C2016.kernel_panic.Turnos.Fecha > @fec and GD2C2016.kernel_panic.Turnos.Cancelacion IS NULL ) > 0
+	Begin
+	INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES ('Afiliado', @Motivo, @fec)
+	UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Id = @id
+	End
+GO
+
+create procedure kernel_panic.alta_afiliado
+--recibo parametros
+		@Nom VARCHAR(255),
+		@Ape VARCHAR(255),
+		@Tipo_doc VARCHAR(15),
+		@Doc numeric(18,0),
+		@Dire VARCHAR(255),
+		@Tel numeric(18,0),
+		@Mail VARCHAR(255),
+		@Fecha_nac VARCHAR(30),
+		@Sexo CHAR,
+		@Estado_civil VARCHAR(20), 
+		@Hijos INT,
+		@Plan_Medico numeric(18,0) 
+AS BEGIN
+	declare @Id int
+	declare @IdAfiReal int
+	IF (select COUNT(GD2C2016.kernel_panic.Afiliados.Numero_doc)  from GD2C2016.kernel_panic.Afiliados where GD2C2016.kernel_panic.Afiliados.Numero_doc = @Doc) > 0
+	begin
+	print 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existente'
+	return 1
+	end
+	Else begin
+		insert into GD2C2016.kernel_panic.Grupos_Familiares (Plan_grupo) values (@Plan_Medico)
+			if @@rowcount = 0
+				begin
+				print 'El Afiliado no ha podido ser asociado al Plan Medico'
+				return 2			
+			end
+		set @Id = @@IDENTITY
+		set @IdAfiReal = CONVERT(INT,CONVERT(VARCHAR(20),@Id)+'01')
+		insert into kernel_panic.Usuarios (Nombre_usuario, Password_usuario, Habilitado) values (CONVERT(VARCHAR(50), @IdAfiReal), 'default', 0)
+			if @@rowcount = 0
+			begin
+			print 'No se ha podido crear el usuario'+@IdAfiReal
+				IF @@ERROR <> 0
+				BEGIN
+					 PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+				END
+			return 3		
+			end
+		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
+		VALUES
+		(@IdAfiReal, @Id, 1, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(datetime, @Fecha_nac, 120), @Sexo, @Estado_civil, @Hijos, 0, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		if @@rowcount = 0
+		begin
+			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
+			IF @@ERROR <> 0
+			BEGIN
+                PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+			END
+            RETURN 4
+		 END
+	end
+end
+
+Create trigger kernel_panic.Alta_AF_inserta_log
+on GD2C2016.kernel_panic.Afiliados
+after insert as
+	begin
+	declare @id numeric
+	set @id = (select top 1 Id from inserted order by id DESC)
+	insert into GD2C2016.kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('A',@id,'Alta de usuario')
+	end
+go
+
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
 EXEC kernel_panic.Cargar_planes
@@ -589,7 +674,7 @@ EXEC kernel_panic.Cargar_turnos
 EXEC kernel_panic.Cargar_diagnosticos
 EXEC kernel_panic.Cargar_transacciones
 EXEC kernel_panic.CargarBonos
-EXEC kernel_panic.agregarRegistroDeLogs
+EXEC kernel_panic.agregarRegistroDeLogsInicial
 
 
 DROP PROCEDURE kernel_panic.BorrarTablas
@@ -615,4 +700,4 @@ DROP PROCEDURE kernel_panic.agregarDiaAgenda
 DROP PROCEDURE kernel_panic.cancelarTurnoAfi
 DROP PROCEDURE kernel_panic.cancelarDiaProfesional
 DROP PROCEDURE kernel_panic.cancelarFranjaProfesional
-DROP PROCEDURE kernel_panic.agregarRegistroDeLogs
+DROP PROCEDURE kernel_panic.agregarRegistroDeLogsInicial
