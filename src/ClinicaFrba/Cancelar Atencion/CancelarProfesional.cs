@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClinicaFrba.UtilConexion;
+
 namespace ClinicaFrba.Cancelar_Atencion
 {
     partial class CancelarProfesional : Form
     {
         public Profesional profesional { get; set; }
+
         public CancelarProfesional(Profesional profesional)
         {
             InitializeComponent();
