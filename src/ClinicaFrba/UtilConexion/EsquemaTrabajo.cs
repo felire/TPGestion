@@ -105,7 +105,7 @@ namespace ClinicaFrba.UtilConexion
             {
                 foreach (AgendaDiaria agenda in agendasEspecialidad)
                 {
-                    if(agenda.fechaPertenece(unaFecha))
+                    if(agenda.fechaPertenece(unaFecha) && unaFecha.dia.CompareTo(DateTime.Now.Date) > 0)
                     {
                         fechas.Add(unaFecha);
                         break;
