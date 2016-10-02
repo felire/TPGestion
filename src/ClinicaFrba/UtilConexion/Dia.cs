@@ -15,14 +15,14 @@ namespace ClinicaFrba.UtilConexion
 
         public Dia(int id, string nombre)
         {
-            this.id = id + 1;
+            this.id = id - 1;
             this.nombre = nombre;
             setFranja();
         }
 
         public Dia(int id)
         {
-            this.id = id +1 ;
+            this.id = id - 1 ;
             switch (this.id)
             {
                 case (int)DayOfWeek.Monday:
