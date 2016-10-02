@@ -46,8 +46,16 @@
             this.asd = new System.Windows.Forms.Label();
             this.nombreEspecialidad = new System.Windows.Forms.Label();
             this.confirmar = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.fecha2 = new System.Windows.Forms.DateTimePicker();
+            this.asignarDiagnostico = new System.Windows.Forms.Button();
+            this.ausenciaConsulta = new System.Windows.Forms.Button();
+            this.datos1 = new System.Windows.Forms.GroupBox();
+            this.nombreAfi2 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.gbDatos.SuspendLayout();
             this.resultado.SuspendLayout();
+            this.datos1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatos
@@ -59,7 +67,7 @@
             this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Controls.Add(this.dtpFechaAtencion);
-            this.gbDatos.Location = new System.Drawing.Point(12, 12);
+            this.gbDatos.Location = new System.Drawing.Point(12, 21);
             this.gbDatos.Name = "gbDatos";
             this.gbDatos.Size = new System.Drawing.Size(482, 119);
             this.gbDatos.TabIndex = 5;
@@ -128,7 +136,7 @@
             this.resultado.Controls.Add(this.txtSintomas);
             this.resultado.Controls.Add(this.label5);
             this.resultado.Controls.Add(this.label4);
-            this.resultado.Location = new System.Drawing.Point(12, 137);
+            this.resultado.Location = new System.Drawing.Point(12, 146);
             this.resultado.Name = "resultado";
             this.resultado.Size = new System.Drawing.Size(482, 197);
             this.resultado.TabIndex = 7;
@@ -172,7 +180,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 377);
+            this.label3.Location = new System.Drawing.Point(12, 355);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 8;
@@ -181,7 +189,7 @@
             // nombreProf
             // 
             this.nombreProf.AutoSize = true;
-            this.nombreProf.Location = new System.Drawing.Point(72, 377);
+            this.nombreProf.Location = new System.Drawing.Point(72, 355);
             this.nombreProf.Name = "nombreProf";
             this.nombreProf.Size = new System.Drawing.Size(35, 13);
             this.nombreProf.TabIndex = 9;
@@ -225,11 +233,82 @@
             this.confirmar.UseVisualStyleBackColor = true;
             this.confirmar.Click += new System.EventHandler(this.confirmar_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(41, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(164, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Fecha programada para el turno: ";
+            // 
+            // fecha2
+            // 
+            this.fecha2.Location = new System.Drawing.Point(202, 43);
+            this.fecha2.Name = "fecha2";
+            this.fecha2.Size = new System.Drawing.Size(195, 20);
+            this.fecha2.TabIndex = 63;
+            // 
+            // asignarDiagnostico
+            // 
+            this.asignarDiagnostico.Location = new System.Drawing.Point(44, 75);
+            this.asignarDiagnostico.Name = "asignarDiagnostico";
+            this.asignarDiagnostico.Size = new System.Drawing.Size(131, 23);
+            this.asignarDiagnostico.TabIndex = 64;
+            this.asignarDiagnostico.Text = "Asignar diagnostico ";
+            this.asignarDiagnostico.UseVisualStyleBackColor = true;
+            this.asignarDiagnostico.Click += new System.EventHandler(this.asignarDiagnostico_Click);
+            // 
+            // ausenciaConsulta
+            // 
+            this.ausenciaConsulta.Location = new System.Drawing.Point(222, 75);
+            this.ausenciaConsulta.Name = "ausenciaConsulta";
+            this.ausenciaConsulta.Size = new System.Drawing.Size(174, 23);
+            this.ausenciaConsulta.TabIndex = 65;
+            this.ausenciaConsulta.Text = "Declarar ausencia a la consulta";
+            this.ausenciaConsulta.UseVisualStyleBackColor = true;
+            this.ausenciaConsulta.Click += new System.EventHandler(this.ausenciaConsulta_Click);
+            // 
+            // datos1
+            // 
+            this.datos1.Controls.Add(this.nombreAfi2);
+            this.datos1.Controls.Add(this.label6);
+            this.datos1.Controls.Add(this.label8);
+            this.datos1.Controls.Add(this.ausenciaConsulta);
+            this.datos1.Controls.Add(this.fecha2);
+            this.datos1.Controls.Add(this.asignarDiagnostico);
+            this.datos1.Location = new System.Drawing.Point(15, 21);
+            this.datos1.Name = "datos1";
+            this.datos1.Size = new System.Drawing.Size(479, 114);
+            this.datos1.TabIndex = 66;
+            this.datos1.TabStop = false;
+            this.datos1.Text = "Datos Atención";
+            // 
+            // nombreAfi2
+            // 
+            this.nombreAfi2.AutoSize = true;
+            this.nombreAfi2.Location = new System.Drawing.Point(91, 16);
+            this.nombreAfi2.Name = "nombreAfi2";
+            this.nombreAfi2.Size = new System.Drawing.Size(35, 13);
+            this.nombreAfi2.TabIndex = 68;
+            this.nombreAfi2.Text = "label3";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(41, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(44, 13);
+            this.label8.TabIndex = 67;
+            this.label8.Text = "Afiliado:";
+            // 
             // Diagnostico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 402);
+            this.ClientSize = new System.Drawing.Size(526, 379);
+            this.Controls.Add(this.datos1);
             this.Controls.Add(this.nombreProf);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.resultado);
@@ -240,6 +319,8 @@
             this.gbDatos.PerformLayout();
             this.resultado.ResumeLayout(false);
             this.resultado.PerformLayout();
+            this.datos1.ResumeLayout(false);
+            this.datos1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,5 +346,12 @@
         private System.Windows.Forms.Label asd;
         private System.Windows.Forms.Label nombreEspecialidad;
         private System.Windows.Forms.Button confirmar;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker fecha2;
+        private System.Windows.Forms.Button asignarDiagnostico;
+        private System.Windows.Forms.Button ausenciaConsulta;
+        private System.Windows.Forms.GroupBox datos1;
+        private System.Windows.Forms.Label nombreAfi2;
+        private System.Windows.Forms.Label label8;
     }
 }

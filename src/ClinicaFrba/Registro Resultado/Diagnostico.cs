@@ -30,12 +30,16 @@ namespace ClinicaFrba.Registro_Resultado
             nombreAfi.Text = this.afiliado.apellido + ", " + this.afiliado.nombre;
             nombreProf.Text = this.profesional.apellido + ", "+this.profesional.nombre;
             nombreEspecialidad.Text = consulta.turno.especialidad.descripcion;
+            nombreAfi2.Text = this.afiliado.apellido + ", " + this.afiliado.nombre;
             cmbHora.DataSource = Hora.ObtenerHorasAceptables(consulta.turno);
             cmbHora.ValueMember = "LaHora";
             cmbHora.DisplayMember = "HoraAMostrar";
             cmbHora.SelectedIndex = 0;
             dtpFechaAtencion.Text = consulta.turno.fecha.ToString();
             dtpFechaAtencion.Enabled = false;
+            fecha2.Text = dtpFechaAtencion.Text = consulta.turno.fecha.ToString();
+            fecha2.Enabled = false;
+            gbDatos.Visible = false;
             resultado.Visible = false;
         }
 
@@ -81,6 +85,20 @@ namespace ClinicaFrba.Registro_Resultado
             resultado.Visible = true;
             cmbHora.Enabled = false;
             confirmar.Visible = false;
+        }
+
+        private void ausenciaConsulta_Click(object sender, EventArgs e)
+        {
+            consulta.fecha = fecha2.Value;
+            consulta.ausenciaConsulta();
+            MessageBox.Show("Ausencia registrada corectamente", "Error!", MessageBoxButtons.OK);
+            this.Hide();
+        }
+
+        private void asignarDiagnostico_Click(object sender, EventArgs e)
+        {
+            datos1.Visible = false;
+            gbDatos.Visible = true;
         }
     }
 }

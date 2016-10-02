@@ -60,5 +60,14 @@ namespace ClinicaFrba.UtilConexion
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Diagnosticos SET Fecha = @fecha, Sintoma = @sintomas, Enfermedad = @enfermedad WHERE Id = @id ", "T", ListaParametros);
             speaker.close();
         }
+
+        public void ausenciaConsulta()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@id", this.id));
+            ListaParametros.Add(new SqlParameter("@fecha", this.fecha));
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Diagnosticos SET Fecha = @fecha WHERE Id = @id ", "T", ListaParametros);
+            speaker.close();
+        }
     }
 }
