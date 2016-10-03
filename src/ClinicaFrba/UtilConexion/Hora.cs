@@ -52,7 +52,7 @@ namespace ClinicaFrba.UtilConexion
 
         private static Boolean horaValida(Fecha dia, TimeSpan unaHora)
         {
-            DateTime horaACheckear = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, unaHora.Hours, unaHora.Minutes, 0);
+            DateTime horaACheckear = new DateTime(dia.dia.Year, dia.dia.Month, dia.dia.Day, unaHora.Hours, unaHora.Minutes, 0);
             Boolean noEsPasada = DateTime.Now.CompareTo(horaACheckear) < 0;
             Boolean noEstaOcupada = !dia.horasOcupadas.Contains(unaHora);
             return noEsPasada && noEsPasada;
