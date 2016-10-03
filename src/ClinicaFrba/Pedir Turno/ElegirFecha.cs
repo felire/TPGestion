@@ -18,10 +18,12 @@ namespace ClinicaFrba.Pedir_Turno
     {
         public Turno turno;
         public List<Fecha> fechas;
+        public ElegirEspecialidad elegirEsp;
 
-        public ElegirFecha(Turno turno)
+        public ElegirFecha(Turno turno, ElegirEspecialidad elegirEsp)
         {
             InitializeComponent();
+            this.elegirEsp = elegirEsp;
             nombreProfesional.Text = "DR. " + turno.profesional.nombre + " " + turno.profesional.apellido;
             fechas = new List<Fecha>();
             this.turno = turno;
@@ -113,16 +115,27 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void mostrarFechas()
         {
+            int fechasMostradas = 0;
             List<Fecha> fechasConHorariosDisponibles = new List<Fecha>();
             foreach (Fecha fecha in fechas)
             {
                 if (Hora.obtenerHorasFecha(fecha).Count() > 0)
                 {
                     fechasConHorariosDisponibles.Add(fecha);
+                    fechasMostradas++;
                 }
             }
-            comboFecha.DataSource = fechasConHorariosDisponibles;
-            comboFecha.DisplayMember = "dia";
+            if (fechasMostradas != 0)
+            {
+                comboFecha.DataSource = fechasConHorariosDisponibles;
+                comboFecha.DisplayMember = "dia";
+                elegirEsp.Hide();
+                this.Show();
+            }
+            else 
+            {
+                MessageBox.Show("No hay turnos disponibles para la especialidad elegida", "Error!", MessageBoxButtons.OK);
+            }
         }
 
         private void eligioDia(object sender, EventArgs e)

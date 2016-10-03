@@ -42,11 +42,10 @@ namespace ClinicaFrba.Pedir_Turno
                     if(especialidad.descripcion.Equals(item.Text))
                     {
                         turno.especialidad = especialidad;
-                        this.Hide();
+                        //this.Hide();
                     }
                 }
-                ElegirFecha elegirFecha = new ElegirFecha(turno);
-                elegirFecha.Show();
+                ElegirFecha elegirFecha = new ElegirFecha(turno, this);
             }
         }
 

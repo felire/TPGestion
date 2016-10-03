@@ -1,47 +1,4 @@
-C:\Users\Matias\Documents\Visual Studio 2012\Projects\ClinicaFrba\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
-C:\Users\Matias\Documents\Visual Studio 2012\Projects\ClinicaFrba\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe
-C:\Users\Matias\Documents\Visual Studio 2012\Projects\ClinicaFrba\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.pdb
-C:\Users\Matias\Documents\Visual Studio 2012\Projects\ClinicaFrba\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
-C:\Users\Matias\Documents\Visual Studio 2012\Projects\ClinicaFrba\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
-C:\Users\Matias\Documents\Visual Studio 2012\Projects\ClinicaFrba\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
-C:\Users\Matias\Documents\Visual Studio 2012\Projects\ClinicaFrba\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
-C:\Users\Matias\Documents\Visual Studio 2012\Projects\ClinicaFrba\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.pdb
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TP Enunciado\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Logeo.resources
-C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
-C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
-C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
-C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
-C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.Rol.resources
-C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Logeo.resources
-C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
-C:\Users\Administrador\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.pdb
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Logeo.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.MenuClinica.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.Afiliado.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.AltaRol.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ModificarRol.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ModificarFuncionalidadesRol.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.RegAgendaMedico.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.pdb
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
@@ -50,55 +7,21 @@ C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.Alta
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.BajaRol.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ModificarFuncionalidadesRol.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ModificarRol.resources
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Logeo.resources
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.MenuClinica.resources
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.RegAgendaMedico.resources
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional.resources
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.ElegirAfiliado.resources
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.CompraBono.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.BajaRol.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.CompraBono.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.ElegirAfiliado.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.LogeoPrimer.PrimerLogeo.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.pdb
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.Afiliado.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.AltaRol.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.BajaRol.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ModificarFuncionalidadesRol.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ModificarRol.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.CompraBono.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.ElegirAfiliado.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Logeo.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.LogeoPrimer.PrimerLogeo.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.MenuClinica.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.RegAgendaMedico.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional.resources
-C:\Users\admin\Documents\GitHub\TPGestion-master\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.CancelarAfiliado.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.CancelarProfesional.resources
-C:\Users\Felipe\Desktop\BACKUP\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
-C:\Users\Felipe\Desktop\BACKUP\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
-C:\Users\Felipe\Desktop\BACKUP\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirEspecialidad.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirFecha.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirProfesional.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.CancelarAfiliado.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.CancelarProfesional.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.CompraBono.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.ElegirAfiliado.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Logeo.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.LogeoPrimer.PrimerLogeo.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.MenuClinica.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirEspecialidad.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirFecha.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirProfesional.resources
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.PedirTurno.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.PedirTurno.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Resultado.Diagnostico.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Resultado.ElegirAfiliado.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.RegAgendaMedico.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Resultado.Diagnostico.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Resultado.ElegirAfiliado.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
