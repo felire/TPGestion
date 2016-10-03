@@ -25,6 +25,11 @@ namespace ClinicaFrba.Pedir_Turno
             nombreProfesional.Text = "DR. " + turno.profesional.nombre + " " + turno.profesional.apellido;
             fechas = new List<Fecha>();
             this.turno = turno;
+            this.preparar();
+        }
+
+        private void preparar()
+        {
             this.cargarFechas();
             this.cargarCancelaciones();
             this.cargarFechasOcupadas();
@@ -64,13 +69,11 @@ namespace ClinicaFrba.Pedir_Turno
         private void borrarFechas(DateTime desde, DateTime hasta)
         {
             List<Fecha> fechasClonadas = new List<Fecha>();
-
             foreach (Fecha fecha in fechas)
             {
 
                 fechasClonadas.Add(fecha);
             }
-
             foreach (Fecha fecha in fechasClonadas)
             {
                 if ((fecha.CompareTo(desde) >= 0 && fecha.CompareTo(hasta) <= 0))
@@ -110,7 +113,15 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void mostrarFechas()
         {
-            comboFecha.DataSource = fechas;
+            List<Fecha> fechasConHorariosDisponibles = new List<Fecha>();
+            foreach (Fecha fecha in fechas)
+            {
+                if (Hora.obtenerHorasFecha(fecha).Count() > 0)
+                {
+                    fechasConHorariosDisponibles.Add(fecha);
+                }
+            }
+            comboFecha.DataSource = fechasConHorariosDisponibles;
             comboFecha.DisplayMember = "dia";
         }
 

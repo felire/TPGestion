@@ -4,7 +4,6 @@ GO
 CREATE SCHEMA [kernel_panic] AUTHORIZATION [gd]
 GO
 
-
 CREATE PROCEDURE kernel_panic.CrearTablas
 AS
 	CREATE TABLE [kernel_panic].[Roles] (
@@ -159,16 +158,6 @@ AS
 		FOREIGN KEY(Turno) REFERENCES [kernel_panic].[Turnos] (Id),
 		FOREIGN KEY(Afiliado_Uso) REFERENCES [kernel_panic].[Afiliados] (Id));
 
-	/*CREATE TABLE [kernel_panic].[Bonos_Farmacia] (
-		Id INT IDENTITY(1,1) PRIMARY KEY,
-		Afiliado_uso INT NULL,
-		Grupo_afiliado INT NOT NULL,
-		Plan_uso numeric(18,0) NOT NULL,
-		Fecha_compra DATETIME,
-		FOREIGN KEY(Grupo_afiliado) REFERENCES [kernel_panic].[Grupos_Familiares] (Id),
-		FOREIGN KEY(Plan_uso) REFERENCES [kernel_panic].[Planes] (Codigo),
-		FOREIGN KEY(Afiliado_uso) REFERENCES [kernel_panic].[Afiliados] (Id));*/
-
 	CREATE TABLE [kernel_panic].[Esquema_Trabajo] (
 		Id INT IDENTITY (1,1) PRIMARY KEY,
 		Profesional INT,
@@ -199,7 +188,6 @@ AS
 	DROP TABLE [kernel_panic].[Franjas_Canceladas]
 	DROP TABLE [kernel_panic].[Agenda_Diaria]
 	DROP TABLE [kernel_panic].[Esquema_Trabajo]
-	--DROP TABLE [kernel_panic].[Bonos_Farmacia]
 	DROP TABLE [kernel_panic].[Bonos_Consultas]
 	DROP TABLE [kernel_panic].[Diagnosticos]
 	DROP TABLE [kernel_panic].[Turnos]
@@ -686,6 +674,7 @@ after insert as
 	insert into GD2C2016.kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('A',@id,'Alta de usuario')
 	end
 go
+
 
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
