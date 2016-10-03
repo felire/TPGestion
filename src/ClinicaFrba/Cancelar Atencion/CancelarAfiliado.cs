@@ -14,8 +14,8 @@ namespace ClinicaFrba.Cancelar_Atencion
 {
     partial class CancelarAfiliado : Form
     {
-        public Afiliado afiliado { get; set; }
-        public List<Turno> listaTurnos { get; set; }
+        private Afiliado afiliado;
+        public List<Turno> listaTurnos;
 
         public CancelarAfiliado(Afiliado afiliado)
         {
@@ -27,7 +27,6 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         public void cargarDatos()
         {
-            
             this.nombreAfiliado.Text = afiliado.apellido + ", " + afiliado.nombre;
             turnos.AutoGenerateColumns = false;
             turnos.MultiSelect = false;

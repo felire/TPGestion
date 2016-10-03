@@ -13,8 +13,8 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
 {
     partial class RegAgendaMedico : Form
     {
-        public Profesional profesional { get; set; }
-        public List<AgendaDiaria> agendaDeTrabajo { get; set; }
+        private Profesional profesional;
+        private List<AgendaDiaria> agendaDeTrabajo;
 
         public RegAgendaMedico(Profesional profesional)
         {

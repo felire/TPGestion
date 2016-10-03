@@ -29,7 +29,7 @@ namespace ClinicaFrba.UtilConexion
                 {
                     TimeSpan unaHora = new TimeSpan(i, 00, 0);
                     string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
-                    if (!dia.horasOcupadas.Contains(unaHora))
+                    if (horaValida(dia, unaHora))
                     {
                         lista.Add(new Hora(unaHora, hora));
                     }
@@ -41,13 +41,21 @@ namespace ClinicaFrba.UtilConexion
                     i--;
                     TimeSpan unaHora = new TimeSpan(i, 30, 0);
                     string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
-                    if (!dia.horasOcupadas.Contains(unaHora))
+                    if (horaValida(dia, unaHora))
                     {
                         lista.Add(new Hora(unaHora, hora));
                     }
                 }
             }
             return lista;
+        }
+
+        private static Boolean horaValida(Fecha dia, TimeSpan unaHora)
+        {
+            DateTime horaACheckear = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, unaHora.Hours, unaHora.Minutes, 0);
+            Boolean noEsPasada = DateTime.Now.CompareTo(horaACheckear) < 0;
+            Boolean noEstaOcupada = !dia.horasOcupadas.Contains(unaHora);
+            return noEsPasada && noEsPasada;
         }
 
         public static List<Hora> obtenerHorasDia(Dia dia)

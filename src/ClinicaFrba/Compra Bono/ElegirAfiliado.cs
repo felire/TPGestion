@@ -13,12 +13,11 @@ namespace ClinicaFrba.Compra_Bono
 {
     partial class ElegirAfiliado : Form
     {
-        public List<Afiliado> afiliadosActuales { get; set; }
+        private List<Afiliado> afiliadosActuales;
 
         public ElegirAfiliado()
         {
             InitializeComponent();
-
             cargarFormulario();
         }
 
@@ -44,16 +43,9 @@ namespace ClinicaFrba.Compra_Bono
             if (seleccionValida())
             {
                 Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
-                if (afiliado.esta_activo)
-                {
-                    CompraBono compraForm = new CompraBono(afiliado);
-                    compraForm.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("El afiliado debe estar activo", "Error!", MessageBoxButtons.OK);
-                }
+                CompraBono compraForm = new CompraBono(afiliado);
+                compraForm.Show();
+                this.Hide();
             }
         }
 
@@ -68,7 +60,6 @@ namespace ClinicaFrba.Compra_Bono
                 MessageBox.Show("Debe seleccionar un afiliado", "Error!", MessageBoxButtons.OK);
                 return false;
             }
-
         }
 
         private void soloNumeros(object sender, KeyPressEventArgs e)

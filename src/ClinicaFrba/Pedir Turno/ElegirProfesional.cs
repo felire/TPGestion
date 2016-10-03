@@ -13,10 +13,10 @@ namespace ClinicaFrba.Pedir_Turno
 {
     partial class ElegirProfesional : Form
     {
-        public List<Especialidad> especialidades { get; set; }
-        public List<Profesional> profesionalesActuales { get; set; }
-        public Profesional profesionalElegido { get; set; }
-        public Turno turno { get; set; }
+        private List<Especialidad> especialidades;
+        private List<Profesional> profesionalesActuales;
+        private Profesional profesionalElegido;
+        private Turno turno;
 
         public ElegirProfesional(Turno turno)
         {

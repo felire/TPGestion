@@ -13,7 +13,7 @@ namespace ClinicaFrba.AbmRol
 {
     partial class ModificarRol : Form
     {
-        public List<Rol> roles { get; set; }
+        private List<Rol> roles;
 
         public ModificarRol()
         {

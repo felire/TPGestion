@@ -7,6 +7,7 @@ using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace ClinicaFrba.UtilConexion
 {
@@ -19,7 +20,6 @@ namespace ClinicaFrba.UtilConexion
         public Profesional profesional { get; set; }
         public string profesionalNombre { get; set; }
         public Afiliado afiliado { get; set; }
-
 
         public Turno(int id)
         {
@@ -103,18 +103,39 @@ namespace ClinicaFrba.UtilConexion
             return turnos;
         }
 
-        public void registrarLlegada()
+        public void registrarLlegada(int bonoAusar)
         {
+            this.actualizarBono(bonoAusar);
+
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@idTurno", this.id));
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Turnos SET Fecha_llegada = GETDATE() WHERE Id = @idTurno", "T", ListaParametros);
             speaker.close();
-            ListaParametros.Clear();
 
+            ListaParametros.Clear();
             ListaParametros.Add(new SqlParameter("@idTurno", this.id));
             ListaParametros.Add(new SqlParameter("@idAfiliado", afiliado.id));
             ListaParametros.Add(new SqlParameter("@idProfesional", profesional.id));
             speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Turno_id) VALUES (@idAfiliado, @idProfesional, @idTurno)", "T", ListaParametros);
+            speaker.close();
+        }
+
+        private void actualizarBono(int bonoAUsar)
+        {
+            int numeroConsulta = afiliado.proximoNumeroDeConsulta();
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@numConsulta", numeroConsulta));
+            ListaParametros.Add(new SqlParameter("@idAfiliado", afiliado.id));
+            ListaParametros.Add(new SqlParameter("@hoy", DateTime.Today));
+            ListaParametros.Add(new SqlParameter("@idTurno", this.id));
+            ListaParametros.Add(new SqlParameter("@idBono", bonoAUsar));
+            string query = "UPDATE kernel_panic.Bonos_Consultas " +
+                           "SET Nro_consulta = @numConsulta, " +
+                           "Afiliado_Uso = @idAfiliado, " +
+                           "Fecha_Impresion = @hoy, " +
+                           "Turno = @idBono " +
+                           "WHERE Id = @idBono";
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
         }
     }

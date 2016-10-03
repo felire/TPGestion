@@ -13,9 +13,9 @@ namespace ClinicaFrba.AbmRol
 {
     partial class ModificarFuncionalidadesRol : Form
     {
-        public Rol rol { get; set; }
-        public List<Funcionalidad> funcionalidadesDelRol { get; set;}
-        public List<Funcionalidad> funcionalidades { get; set; }
+        private Rol rol;
+        private List<Funcionalidad> funcionalidadesDelRol;
+        private List<Funcionalidad> funcionalidades;
 
         public ModificarFuncionalidadesRol(Rol rol)
         {

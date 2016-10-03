@@ -16,8 +16,8 @@ namespace ClinicaFrba.Compra_Bono
 {
     partial class CompraBono : Form
     {
-        public BonoConsulta bono { get; set; }
-        public Afiliado afiliado { get; set; }
+        private BonoConsulta bono;
+        private Afiliado afiliado;
 
         public CompraBono(Afiliado afiliado)
         {

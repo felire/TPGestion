@@ -13,9 +13,10 @@ namespace ClinicaFrba.Registro_Resultado
 {
     partial class Diagnostico : Form
     {
-        public Afiliado afiliado { get; set; }
-        public Profesional profesional { get; set; }
-        public ConsultaMedica consulta { get; set; }
+        private Afiliado afiliado;
+        private Profesional profesional;
+        private ConsultaMedica consulta;
+
         public Diagnostico(ConsultaMedica consulta)
         {
             InitializeComponent();

@@ -13,13 +13,10 @@ namespace ClinicaFrba.Registro_Llegada
 {
     partial class RegLlegada : Form
     {
-        public List<Afiliado> afiliadosActuales { get; set; }
-        public Profesional profesional {get;set;}
 
         public RegLlegada()
         {
             InitializeComponent();
-            this.profesional = profesional;
             cargarFormulario();
         }
 
@@ -35,11 +32,9 @@ namespace ClinicaFrba.Registro_Llegada
 
         private void buscar_Click(object sender, EventArgs e)
         {
-           afiliadosActuales = Afiliado.buscar(nombre.Text, apellido.Text, grupo.Text, (string)tipoDoc.SelectedItem, numeroDoc.Text);
-           listaAfiliados.DataSource = afiliadosActuales;
+           listaAfiliados.DataSource = Afiliado.buscar(nombre.Text, apellido.Text, grupo.Text, (string)tipoDoc.SelectedItem, numeroDoc.Text);
            listaAfiliados.ClearSelection();
         }
-
 
         private Boolean seleccionValida()
         {
@@ -70,9 +65,17 @@ namespace ClinicaFrba.Registro_Llegada
             if (seleccionValida())
             {
                 Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
-                ElegirProfesional elegirProfesinal = new ElegirProfesional(afiliado);
-                this.Hide();
-                elegirProfesinal.Show();
+                int bonoAUsar = afiliado.bonoAUsar();
+                if (bonoAUsar > 0)
+                {
+                    ElegirProfesional elegirProfesinal = new ElegirProfesional(afiliado, bonoAUsar);
+                    this.Hide();
+                    elegirProfesinal.Show();
+                }
+                else
+                {
+                    MessageBox.Show("No tiene bonos disponibles", "Error!", MessageBoxButtons.OK);
+                }
             }
         }
     }

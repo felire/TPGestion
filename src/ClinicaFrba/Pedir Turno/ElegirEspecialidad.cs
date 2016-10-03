@@ -13,8 +13,8 @@ namespace ClinicaFrba.Pedir_Turno
 {
     partial class ElegirEspecialidad : Form
     {
-        public Especialidad especialidadElegida { get; set; }
-        public Turno turno;
+        private Especialidad especialidadElegida;
+        private Turno turno;
 
         public ElegirEspecialidad(Turno turno)
         {
@@ -29,7 +29,6 @@ namespace ClinicaFrba.Pedir_Turno
             {
                 listaEspecialidades.Items.Add(especialidad.descripcion);
             }
-
         }
 
         private void Elegir_Click(object sender, EventArgs e)
@@ -42,7 +41,6 @@ namespace ClinicaFrba.Pedir_Turno
                     if(especialidad.descripcion.Equals(item.Text))
                     {
                         turno.especialidad = especialidad;
-                        //this.Hide();
                     }
                 }
                 ElegirFecha elegirFecha = new ElegirFecha(turno, this);

@@ -13,7 +13,7 @@ namespace ClinicaFrba.Cancelar_Atencion
 {
     partial class CancelarProfesional : Form
     {
-        public Profesional profesional { get; set; }
+        private Profesional profesional;
 
         public CancelarProfesional(Profesional profesional)
         {
@@ -59,7 +59,6 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void cancelarDia_Click(object sender, EventArgs e)
         {
-
             if (motivoCancelacion.Text.Length >= 400)
             {
                 MessageBox.Show("El motivo de cancelacion tiene que tener menos de 400 caracteres", "Error!", MessageBoxButtons.OK);
