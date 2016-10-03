@@ -734,6 +734,22 @@ GROUP BY E.Descripcion, T.Descripcion
 ORDER BY cantidad_cancelaciones DESC
 
 
---Listado 2
+SELECT TOP 5 A.Nombre Nombre, A.Apellido Apellido, SUM(T.Cantidad) AS Cantidad_Comprados, A.Numero_de_grupo,(SELECT CAST(
+   CASE WHEN (SELECT COUNT(A2.Numero_de_grupo) FROM kernel_panic.Afiliados A2 WHERE A2.Numero_de_grupo = A.Numero_de_grupo) > 1 THEN 1 
+   ELSE 0 
+   END 
+AS BIT)) AS pertenece_a_grupo
+FROM kernel_panic.Afiliados A JOIN kernel_panic.Transacciones T ON (T.Afiliado = A.Id)
+GROUP BY A.Nombre, A.Apellido, A.Numero_de_grupo
+ORDER BY Cantidad_Comprados DESC, A.Numero_de_grupo ASC
 
---SELECT 
+--Listado 5
+
+SELECT TOP 5 E.Descripcion Especialidad,Ti.Descripcion Tipo,COUNT(B.Id) Bonos_Utilizados
+FROM kernel_panic.Turnos T 
+		JOIN kernel_panic.Bonos_Consultas B ON (T.Id=B.Turno)
+		JOIN kernel_panic.Especialidades E ON (T.Especialidad= E.Codigo)
+		JOIN kernel_panic.Tipo_Especialidad Ti ON (Ti.Codigo = E.Tipo)
+GROUP BY  Ti.Descripcion,E.Descripcion
+ORDER BY Bonos_Utilizados DESC
+
