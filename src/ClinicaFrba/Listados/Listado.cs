@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinicaFrba.UtilConexion;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,17 +11,254 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Listados
 {
-    public partial class Listado : Form
+    partial class Listado : Form
     {
+        public int semestre;
+        private List<int> anios;
+        public const int numeritoMagico = 44;
         public Listado()
         {
             InitializeComponent();
-            this.CargarDatos();
+            this.cargarDatos();
+            grilla4.Enabled = false;
+            filtro2.Visible = false;
+            filtro3.Visible = false;
+            grilla1.AutoGenerateColumns = false;
+            grilla2.AutoGenerateColumns = false;
+            grilla3.AutoGenerateColumns = false;
+            grilla4.AutoGenerateColumns = false;
+            grilla5.AutoGenerateColumns = false;
+            this.generarGrillaListado1();
+            this.generarGrillaListado4();
+            this.generarGrillaListado5();
         }
 
-        private void CargarDatos()
+        private void comboAnio_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void listar_Click(object sender, EventArgs e)
+        {
+            
+            if (tabControl.SelectedTab.Name.Equals("tabPage1"))
+            {
+                this.cargarEspecialidadesCanceladas();
+            }
+            if (tabControl.SelectedTab.Name.Equals("tabPage2"))
+            {
+                this.cargarProfesionalesMasConsultados();
+            }
+            if (tabControl.SelectedTab.Name.Equals("tabPage3"))
+            {
+                this.cargarProfesionalesMenosHoras();
+            }
+            if (tabControl.SelectedTab.Name.Equals("tabPage4"))
+            {
+                this.cargarAfiliadosBonos();
+            }
+            if (tabControl.SelectedTab.Name.Equals("tabPage5"))
+            {
+                this.cargarEspecialidadesRequeridas();
+            }
+        }
+
+        private void cargarDatos()
+        {
+            anios= new List<int>();
+            for (int i = 2000; i < 2100; i++) anios.Add(i);
+            anioElegido.DataSource = anios;
+            semestreUno.Checked=true;    
+        }
+        private void cargarEspecialidadesCanceladas()
+        {
+            List<Listado1> lista = Listado1.obtenerResultados((int)anioElegido.SelectedItem, semestre);
+            grilla1.DataSource = lista;
+        }
+        private void cargarProfesionalesMasConsultados()
+        {
+
+        }
+        private void cargarProfesionalesMenosHoras()
+        {
+
+        }
+        private void cargarAfiliadosBonos()
+        {
+            List<Listado4> lista = Listado4.obtenerResultados((int)anioElegido.SelectedItem, semestre);
+            grilla4.DataSource = lista;
+        }
+        private void cargarEspecialidadesRequeridas()
+        {
+            List<Listado5> lista = Listado5.obtenerResultados((int)anioElegido.SelectedItem, semestre);
+            grilla5.DataSource = lista;
+        
+        }
+
+        private void semestreUno_CheckedChanged(object sender, EventArgs e)
+        {
+            semestre = 1;
+        }
+
+        private void Listado_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void semestre2_CheckedChanged(object sender, EventArgs e)
+        {
+            semestre = 2;
+        }
+
+        private void cambiaTab(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab.Name.Equals("tabPage1"))
+            {
+                filtro2.Visible = false;
+                filtro3.Visible = false;
+            }
+            if (tabControl.SelectedTab.Name.Equals("tabPage2"))
+            {
+                filtro2.Visible = true;
+                filtro3.Visible = false;
+            }
+            if (tabControl.SelectedTab.Name.Equals("tabPage3"))
+            {
+                filtro2.Visible = false;
+                filtro3.Visible = true;
+            }
+            if (tabControl.SelectedTab.Name.Equals("tabPage4"))
+            {
+                filtro2.Visible = false;
+                filtro3.Visible = false;
+            }
+            if (tabControl.SelectedTab.Name.Equals("tabPage5"))
+            {
+                filtro2.Visible = false;
+                filtro3.Visible = false;
+            }
+        }
+
+
+
+
+        private void generarGrillaListado1()
+        {
+
+            DataGridViewTextBoxColumn ColNombre = new DataGridViewTextBoxColumn();
+            ColNombre.DataPropertyName = "especialidad";
+            ColNombre.HeaderText = "Especialidad Médica";
+
+            ColNombre.Width = grilla1.Width/3;
+            grilla1.Columns.Add(ColNombre);
+
+            DataGridViewTextBoxColumn ColTipo = new DataGridViewTextBoxColumn();
+            ColTipo.DataPropertyName = "tipoEspecialidad";
+            ColTipo.HeaderText = "Tipo Especialidad Médica";
+            ColTipo.Width = grilla1.Width / 3;
+            grilla1.Columns.Add(ColTipo);
+
+            DataGridViewTextBoxColumn ColCant = new DataGridViewTextBoxColumn();
+            ColCant.DataPropertyName = "cantidadCancelaciones";
+            ColCant.HeaderText = "Total Cancelaciones del semestre";
+            ColCant.Width = grilla1.Width /3 -numeritoMagico;
+            grilla1.Columns.Add(ColCant);
+        }
+
+        private void generarGrillaListado2()
+        {
+
+            /*DataGridViewTextBoxColumn ColNombre = new DataGridViewTextBoxColumn();
+            ColNombre.DataPropertyName = "especialidad";
+            ColNombre.HeaderText = "Especialidad Médica";
+
+            ColNombre.Width = grilla1.Width / 3;
+            grilla1.Columns.Add(ColNombre);
+
+            DataGridViewTextBoxColumn ColTipo = new DataGridViewTextBoxColumn();
+            ColTipo.DataPropertyName = "tipoEspecialidad";
+            ColTipo.HeaderText = "Tipo Especialidad Médica";
+            ColTipo.Width = grilla1.Width / 3;
+            grilla1.Columns.Add(ColTipo);
+
+            DataGridViewTextBoxColumn ColCant = new DataGridViewTextBoxColumn();
+            ColCant.DataPropertyName = "cantidadCancelaciones";
+            ColCant.HeaderText = "Total Cancelaciones del semestre";
+            ColCant.Width = grilla1.Width / 3 - numeritoMagico;
+            grilla1.Columns.Add(ColCant);*/
+        }
+
+        private void generarGrillaListado3()
+        {
+
+           /* DataGridViewTextBoxColumn ColNombre = new DataGridViewTextBoxColumn();
+            ColNombre.DataPropertyName = "especialidad";
+            ColNombre.HeaderText = "Especialidad Médica";
+
+            ColNombre.Width = grilla1.Width / 3;
+            grilla1.Columns.Add(ColNombre);
+
+            DataGridViewTextBoxColumn ColTipo = new DataGridViewTextBoxColumn();
+            ColTipo.DataPropertyName = "tipoEspecialidad";
+            ColTipo.HeaderText = "Tipo Especialidad Médica";
+            ColTipo.Width = grilla1.Width / 3;
+            grilla1.Columns.Add(ColTipo);
+
+            DataGridViewTextBoxColumn ColCant = new DataGridViewTextBoxColumn();
+            ColCant.DataPropertyName = "cantidadCancelaciones";
+            ColCant.HeaderText = "Total Cancelaciones del semestre";
+            ColCant.Width = grilla1.Width / 3 - numeritoMagico;
+            grilla1.Columns.Add(ColCant);*/
+        }
+        private void generarGrillaListado4()
+        {
+
+            DataGridViewTextBoxColumn ColNombre = new DataGridViewTextBoxColumn();
+            ColNombre.DataPropertyName = "nombre";
+            ColNombre.HeaderText = "Nombre";
+            ColNombre.Width = grilla4.Width / 4;
+            grilla4.Columns.Add(ColNombre);
+
+            DataGridViewTextBoxColumn ColTipo = new DataGridViewTextBoxColumn();
+            ColTipo.DataPropertyName = "apellido";
+            ColTipo.HeaderText = "Apellido";
+            ColTipo.Width = grilla4.Width / 4;
+            grilla4.Columns.Add(ColTipo);
+
+            DataGridViewTextBoxColumn ColCant = new DataGridViewTextBoxColumn();
+            ColCant.DataPropertyName = "bonosComprados";
+            ColCant.HeaderText = "Total de bonos comprados";
+            ColCant.Width = grilla4.Width / 4;
+            grilla4.Columns.Add(ColCant);
+
+            DataGridViewTextBoxColumn ColParientes = new DataGridViewTextBoxColumn();
+            ColParientes.DataPropertyName = "tieneParientes";
+            ColParientes.HeaderText = "Tiene Parientes";
+            ColParientes.Width = grilla4.Width / 4 - numeritoMagico;
+            grilla4.Columns.Add(ColParientes);
+        }
+        private void generarGrillaListado5()
+        {
+
+            DataGridViewTextBoxColumn ColNombre = new DataGridViewTextBoxColumn();
+            ColNombre.DataPropertyName = "Especialidad";
+            ColNombre.HeaderText = "Especialidad Médica";
+            ColNombre.Width = grilla5.Width / 3;
+            grilla5.Columns.Add(ColNombre);
+
+            DataGridViewTextBoxColumn ColTipo = new DataGridViewTextBoxColumn();
+            ColTipo.DataPropertyName = "tipoEspecialidad";
+            ColTipo.HeaderText = "Tipo Especialidad Médica";
+            ColTipo.Width = grilla5.Width / 3;
+            grilla5.Columns.Add(ColTipo);
+
+            DataGridViewTextBoxColumn ColCant = new DataGridViewTextBoxColumn();
+            ColCant.DataPropertyName = "bonosUtilizados";
+            ColCant.HeaderText = "Bonos utilizados";
+            ColCant.Width = grilla5.Width / 3 - numeritoMagico;
+            grilla5.Columns.Add(ColCant);
+        }
+
+
     }
 }

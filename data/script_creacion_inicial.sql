@@ -726,11 +726,11 @@ DROP PROCEDURE kernel_panic.consultaNueva
 --SELECT LISTADOS
 
 --Listado 1
-SELECT TOP 5 E.Descripcion AS Especialidad, T.Descripcion AS Tipo, COUNT(Tu.Id) AS Cantidad_cancelaciones
+SELECT TOP 5 E.Descripcion AS Especialidad, T.Descripcion AS Tipo, COUNT(Tu.Id) AS Cantidad_cancelaciones,MONTH(Tu.Fecha)
 FROM kernel_panic.Especialidades E JOIN kernel_panic.Tipo_Especialidad T ON (T.Codigo = E.Tipo)
 								   JOIN kernel_panic.Turnos Tu ON (Tu.Especialidad = E.Codigo)
-WHERE Tu.Cancelacion IS NOT NULL
-GROUP BY E.Descripcion, T.Descripcion
+WHERE Tu.Cancelacion IS NOT NULL AND YEAR(Tu.Fecha)=2016	  
+GROUP BY E.Descripcion, T.Descripcion,MONTH(Tu.Fecha)
 ORDER BY cantidad_cancelaciones DESC
 
 
@@ -742,12 +742,13 @@ SELECT TOP 5 A.Nombre Nombre, A.Apellido Apellido, SUM(T.Cantidad) AS Cantidad_C
    END 
 AS BIT)) AS pertenece_a_grupo
 FROM kernel_panic.Afiliados A JOIN kernel_panic.Transacciones T ON (T.Afiliado = A.Id)
+WHERE YEAR(T.Fecha)=2015 AND MONTH(T.Fecha)>6
 GROUP BY A.Nombre, A.Apellido, A.Numero_de_grupo
 ORDER BY Cantidad_Comprados DESC, A.Numero_de_grupo ASC
 
 --Listado 5
 
-SELECT TOP 5 E.Descripcion Especialidad,Ti.Descripcion Tipo,COUNT(B.Id) Bonos_Utilizados
+SELECT TOP 5 E.Descripcion AS Especialidad,Ti.Descripcion AS Tipo,COUNT(B.Id) AS Bonos_Utilizados
 FROM kernel_panic.Turnos T 
 		JOIN kernel_panic.Bonos_Consultas B ON (T.Id=B.Turno)
 		JOIN kernel_panic.Especialidades E ON (T.Especialidad= E.Codigo)

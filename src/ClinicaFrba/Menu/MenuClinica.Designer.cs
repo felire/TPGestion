@@ -48,12 +48,12 @@
             this.agendaProfesional = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelarDiaOFranjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pedirTurnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarLlegadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboElegirRol = new System.Windows.Forms.ComboBox();
             this.textElegirRol = new System.Windows.Forms.Label();
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
-            this.registrarLlegadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -197,6 +197,7 @@
             this.listadoEstadisticoToolStripMenuItem.Name = "listadoEstadisticoToolStripMenuItem";
             this.listadoEstadisticoToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.listadoEstadisticoToolStripMenuItem.Text = "Listado Estadistico";
+            this.listadoEstadisticoToolStripMenuItem.Click += new System.EventHandler(this.listadoEstadisticoToolStripMenuItem_Click);
             // 
             // agendaProfesional
             // 
@@ -218,6 +219,13 @@
             this.pedirTurnoToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.pedirTurnoToolStripMenuItem.Text = "Pedir Turno";
             this.pedirTurnoToolStripMenuItem.Click += new System.EventHandler(this.pedirTurnoToolStripMenuItem_Click);
+            // 
+            // registrarLlegadaToolStripMenuItem
+            // 
+            this.registrarLlegadaToolStripMenuItem.Name = "registrarLlegadaToolStripMenuItem";
+            this.registrarLlegadaToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.registrarLlegadaToolStripMenuItem.Text = "Registrar Llegada";
+            this.registrarLlegadaToolStripMenuItem.Click += new System.EventHandler(this.registrarLlegadaToolStripMenuItem_Click);
             // 
             // comboElegirRol
             // 
@@ -264,13 +272,6 @@
             this.labelFuncionalidades.Size = new System.Drawing.Size(87, 13);
             this.labelFuncionalidades.TabIndex = 5;
             this.labelFuncionalidades.Text = "Funcionalidades:";
-            // 
-            // registrarLlegadaToolStripMenuItem
-            // 
-            this.registrarLlegadaToolStripMenuItem.Name = "registrarLlegadaToolStripMenuItem";
-            this.registrarLlegadaToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
-            this.registrarLlegadaToolStripMenuItem.Text = "Registrar Llegada";
-            this.registrarLlegadaToolStripMenuItem.Click += new System.EventHandler(this.registrarLlegadaToolStripMenuItem_Click);
             // 
             // MenuClinica
             // 

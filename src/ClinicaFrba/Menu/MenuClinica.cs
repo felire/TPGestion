@@ -258,5 +258,11 @@ namespace ClinicaFrba.Menu
             ClinicaFrba.Registro_Llegada.RegLlegada regLlegada = new ClinicaFrba.Registro_Llegada.RegLlegada();
             regLlegada.Show();
         }
+
+        private void listadoEstadisticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClinicaFrba.Listados.Listado listado = new ClinicaFrba.Listados.Listado();
+            listado.Show();
+        }
     }
 }
