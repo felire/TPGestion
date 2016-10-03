@@ -59,3 +59,4 @@ C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Listados.Li
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.ListarTurnos.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.RegLlegada.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.ElegirProfesional.resources
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache

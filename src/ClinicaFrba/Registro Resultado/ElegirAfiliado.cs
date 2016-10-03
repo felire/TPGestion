@@ -21,6 +21,43 @@ namespace ClinicaFrba.Registro_Resultado
             InitializeComponent();
             this.profesional = profesional;
             cargarFormulario();
+            listaAfiliados.AutoGenerateColumns = false;
+            cargarGrilla();
+        }
+
+
+
+        private void cargarGrilla()
+        {
+            DataGridViewTextBoxColumn ColId = new DataGridViewTextBoxColumn();
+            ColId.DataPropertyName = "id";
+            ColId.HeaderText = "Numero de Afiliado";
+            ColId.Width = listaAfiliados.Width / 5;
+            listaAfiliados.Columns.Add(ColId);
+
+            DataGridViewTextBoxColumn ColNombre = new DataGridViewTextBoxColumn();
+            ColNombre.DataPropertyName = "nombre";
+            ColNombre.HeaderText = "Nombre";
+            ColNombre.Width = listaAfiliados.Width / 5;
+            listaAfiliados.Columns.Add(ColNombre);
+
+            DataGridViewTextBoxColumn ColApellido = new DataGridViewTextBoxColumn();
+            ColApellido.DataPropertyName = "apellido";
+            ColApellido.HeaderText = "Apellido";
+            ColApellido.Width = listaAfiliados.Width / 5;
+            listaAfiliados.Columns.Add(ColApellido);
+
+            DataGridViewTextBoxColumn ColTipo = new DataGridViewTextBoxColumn();
+            ColTipo.DataPropertyName = "tipoDoc";
+            ColTipo.HeaderText = "Tipo";
+            ColTipo.Width = listaAfiliados.Width / 5;
+            listaAfiliados.Columns.Add(ColTipo);
+
+            DataGridViewTextBoxColumn ColNumero = new DataGridViewTextBoxColumn();
+            ColNumero.DataPropertyName = "documento";
+            ColNumero.HeaderText = "Numero Documento";
+            ColNumero.Width = listaAfiliados.Width / 5 - 44;
+            listaAfiliados.Columns.Add(ColNumero);
         }
 
         private void cargarFormulario()

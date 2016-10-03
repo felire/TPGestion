@@ -25,6 +25,41 @@ namespace ClinicaFrba.Pedir_Turno
             especialidades = Especialidad.darTodasEspecialidades();
             profesionalesActuales = new List<Profesional>();
             cargarFormulario();
+            listaProfesionales.AutoGenerateColumns = false;
+            this.cargarGrilla();
+        }
+
+        private void cargarGrilla()
+        {
+            DataGridViewTextBoxColumn ColId = new DataGridViewTextBoxColumn();
+            ColId.DataPropertyName = "id";
+            ColId.HeaderText = "Numero de Profesional";
+            ColId.Width = listaProfesionales.Width / 5;
+            listaProfesionales.Columns.Add(ColId);
+
+            DataGridViewTextBoxColumn ColNombre = new DataGridViewTextBoxColumn();
+            ColNombre.DataPropertyName = "nombre";
+            ColNombre.HeaderText = "Nombre";
+            ColNombre.Width = listaProfesionales.Width / 5;
+            listaProfesionales.Columns.Add(ColNombre);
+
+            DataGridViewTextBoxColumn ColApellido = new DataGridViewTextBoxColumn();
+            ColApellido.DataPropertyName = "apellido";
+            ColApellido.HeaderText = "Apellido";
+            ColApellido.Width = listaProfesionales.Width / 5;
+            listaProfesionales.Columns.Add(ColApellido);
+
+            DataGridViewTextBoxColumn ColTipo = new DataGridViewTextBoxColumn();
+            ColTipo.DataPropertyName = "tipoDoc";
+            ColTipo.HeaderText = "Tipo";
+            ColTipo.Width = listaProfesionales.Width / 5;
+            listaProfesionales.Columns.Add(ColTipo);
+
+            DataGridViewTextBoxColumn ColNumero = new DataGridViewTextBoxColumn();
+            ColNumero.DataPropertyName = "documento";
+            ColNumero.HeaderText = "Numero Documento";
+            ColNumero.Width = listaProfesionales.Width / 5 - 44;
+            listaProfesionales.Columns.Add(ColNumero);
         }
 
         private void cargarFormulario()
