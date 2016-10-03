@@ -13,17 +13,19 @@ namespace ClinicaFrba.Registro_Llegada
 {
     partial class ElegirProfesional : Form
     {
-        public List<Especialidad> especialidades { get; set; }
-        public List<Profesional> profesionalesActuales { get; set; }
-        public Profesional profesionalElegido { get; set; }
-        public Afiliado afiliado { get; set; }
+        private List<Especialidad> especialidades;
+        private List<Profesional> profesionalesActuales;
+        private Profesional profesionalElegido;
+        private Afiliado afiliado;
+        private int bonoAUsar;
 
-        public ElegirProfesional(Afiliado afiliado)
+        public ElegirProfesional(Afiliado afiliado, int bonoAUsar)
         {
             InitializeComponent();
             especialidades = Especialidad.darTodasEspecialidades();
             profesionalesActuales = new List<Profesional>();
             this.afiliado = afiliado;
+            this.bonoAUsar = bonoAUsar;
             cargarFormulario();
         }
 
@@ -70,7 +72,6 @@ namespace ClinicaFrba.Registro_Llegada
                 MessageBox.Show("Debe seleccionar un profesional", "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            
         }
 
         private void Elegir(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace ClinicaFrba.Registro_Llegada
             if (seleccionValida())
             {
                 profesionalElegido = (Profesional)listaProfesionales.CurrentRow.DataBoundItem;
-                ListarTurnos listTurnos = new ListarTurnos(profesionalElegido, this.afiliado, this);
+                ListarTurnos listarTurnos = new ListarTurnos(profesionalElegido, this.afiliado, bonoAUsar, this);
             }
         }
     }

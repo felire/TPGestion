@@ -16,9 +16,9 @@ namespace ClinicaFrba.Pedir_Turno
 {
     partial class ElegirFecha : Form
     {
-        public Turno turno;
-        public List<Fecha> fechas;
-        public ElegirEspecialidad elegirEsp;
+        private Turno turno;
+        private List<Fecha> fechas;
+        private ElegirEspecialidad elegirEsp;
 
         public ElegirFecha(Turno turno, ElegirEspecialidad elegirEsp)
         {

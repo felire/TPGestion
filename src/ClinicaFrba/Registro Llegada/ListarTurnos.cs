@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlTypes;
+using System.Data.Sql;
+using System.Data.SqlClient;
 using ClinicaFrba.UtilConexion;
 
 namespace ClinicaFrba.Registro_Llegada
@@ -17,23 +20,24 @@ namespace ClinicaFrba.Registro_Llegada
         private Afiliado afiliado;
         private List<Turno> turnos;
         private ElegirProfesional elegirProfesinal;
+        private int bonoAUsar;
         
-        public ListarTurnos(Profesional profesional, Afiliado afiliado, ElegirProfesional elegirProfesinal)
+        public ListarTurnos(Profesional profesional, Afiliado afiliado, int bonoAUsar, ElegirProfesional elegirProfesinal)
         {
             InitializeComponent();
             this.afiliado = afiliado;
             this.profesional = profesional;
+            this.bonoAUsar = bonoAUsar;
             this.elegirProfesinal = elegirProfesinal;
             this.cargarDatos();
         }
 
-        public void cargarDatos()
+        private void cargarDatos()
         {
             nombreAfiliado.Text = "Nombre Afiliado: " + afiliado.apellido + ", " + afiliado.nombre;
             this.turnos = Turno.darTurnos(afiliado, profesional);
             if (turnos.Count != 0)
             {
-                
                 turnosGrid.AutoGenerateColumns = false;
                 turnosGrid.MultiSelect = false;
                 turnosGrid.DataSource = turnos;
@@ -45,7 +49,6 @@ namespace ClinicaFrba.Registro_Llegada
             {
                 MessageBox.Show("No tiene turnos con el profesional elegido", "Error!", MessageBoxButtons.OK);
             }
-          
         }
 
         private void generarGrid()
@@ -73,7 +76,8 @@ namespace ClinicaFrba.Registro_Llegada
         {
             if (seleccionValida())
             {
-                ((Turno)turnosGrid.CurrentRow.DataBoundItem).registrarLlegada();
+                Turno turno = ((Turno)turnosGrid.CurrentRow.DataBoundItem);
+                turno.registrarLlegada(bonoAUsar);
                 MessageBox.Show("Llegada registrada con exito", "Éxito!", MessageBoxButtons.OK);
                 this.Hide();
             }

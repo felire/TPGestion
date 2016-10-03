@@ -13,7 +13,7 @@ namespace ClinicaFrba.AbmRol
 {
     partial class AltaRol : Form
     {
-        public List<Funcionalidad> funcionalidades {get;set;}
+        private List<Funcionalidad> funcionalidades;
  
         public AltaRol()
         {

@@ -13,8 +13,9 @@ namespace ClinicaFrba.Registro_Resultado
 {
     partial class ElegirAfiliado : Form
     {
-        public List<Afiliado> afiliadosActuales { get; set; }
-        public Profesional profesional {get;set;}
+        private List<Afiliado> afiliadosActuales;
+        private Profesional profesional;
+
         public ElegirAfiliado(Profesional profesional)
         {
             InitializeComponent();
@@ -44,24 +45,17 @@ namespace ClinicaFrba.Registro_Resultado
             if (seleccionValida())
             {
                 Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
-                if (afiliado.esta_activo)
+                ConsultaMedica consulta = new ConsultaMedica(afiliado, profesional);
+                if (consulta.id == -1)
                 {
-                    ConsultaMedica consulta = new ConsultaMedica(afiliado, profesional);
-                    if (consulta.id == -1)
-                    {
-                        MessageBox.Show("No tiene consultas pendientes con este afiliado!", "Error!", MessageBoxButtons.OK);
-                    }
-                    else
-                    {
-                        Diagnostico diag = new Diagnostico(consulta);
-                        diag.Show();
-                        this.Hide();
-                    }                    
+                    MessageBox.Show("No tiene consultas pendientes con este afiliado!", "Error!", MessageBoxButtons.OK);
                 }
                 else
                 {
-                    MessageBox.Show("El afiliado debe estar activo", "Error!", MessageBoxButtons.OK);
-                }
+                    Diagnostico diag = new Diagnostico(consulta);
+                    diag.Show();
+                    this.Hide();
+                }                    
             }
         }
 

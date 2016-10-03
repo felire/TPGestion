@@ -40,7 +40,6 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombre", "%" + nombre + "%"));
             ListaParametros.Add(new SqlParameter("@apellido", "%" + apellido + "%"));
-            Int16 grupoNum;
             SpeakerDB speaker;
             // pueden pasar el documento o no, y el numero de grupo podria ser 0 que significa que no busca por ese campo
             if (doc.Equals(""))
@@ -112,5 +111,40 @@ namespace ClinicaFrba.UtilConexion
             speaker.close();    
         }
 
+        public int proximoNumeroDeConsulta()
+        {
+            int proximo = 0;
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@id", this.id));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT COUNT(id) AS prox FROM kernel_panic.Bonos_Consultas WHERE Afiliado_Uso = @id", "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                    speaker.reader.Read();
+                    proximo = (int)speaker.reader["prox"];
+            }
+            speaker.close();
+            proximo++;
+            return proximo;
+        }
+
+        public int bonoAUsar()
+        {
+            int idBono = 0;
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@idGrupo", this.numeroDeGrupo));
+            string query = "SELECT TOP 1 con.Id AS num " +
+                            "FROM kernel_panic.Bonos_Consultas con " +
+                            "JOIN kernel_panic.Grupos_Familiares gf  ON (gf.Id = @idGrupo) " +
+                            "WHERE con.Afiliado_Uso IS NULL AND con.Plan_Uso = gf.Plan_grupo AND con.Grupo_afiliado = gf.Id " +
+                            "ORDER BY con.Id ASC";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                speaker.reader.Read();
+                idBono = (int)speaker.reader["num"];
+            }
+            speaker.close();
+            return idBono;
+        }
     }
 }

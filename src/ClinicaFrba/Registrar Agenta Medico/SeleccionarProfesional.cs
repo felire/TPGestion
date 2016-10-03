@@ -13,8 +13,8 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
 {
     partial class SeleccionarProfesional : Form
     {
-        public List<Especialidad> especialidades { get; set; }
-        public List<Profesional> profesionalesActuales { get; set; }
+        private List<Especialidad> especialidades;
+        private List<Profesional> profesionalesActuales;
 
         public SeleccionarProfesional()
         {

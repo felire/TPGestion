@@ -16,8 +16,8 @@ namespace ClinicaFrba.AbmRol
         private ListView rolesExistentes;
         private Button Eliminar;
         private Label label1;
-    
-        public List<Rol> roles { get; set; }
+        private List<Rol> roles;
+
         public BajaRol()
         {
             InitializeComponent();

@@ -734,8 +734,6 @@ GROUP BY E.Descripcion, T.Descripcion,MONTH(Tu.Fecha)
 ORDER BY cantidad_cancelaciones DESC
 
 
---Listado 4
-
 SELECT TOP 5 A.Nombre Nombre, A.Apellido Apellido, SUM(T.Cantidad) AS Cantidad_Comprados, A.Numero_de_grupo,(SELECT CAST(
    CASE WHEN (SELECT COUNT(A2.Numero_de_grupo) FROM kernel_panic.Afiliados A2 WHERE A2.Numero_de_grupo = A.Numero_de_grupo) > 1 THEN 1 
    ELSE 0 
@@ -755,3 +753,4 @@ FROM kernel_panic.Turnos T
 		JOIN kernel_panic.Tipo_Especialidad Ti ON (Ti.Codigo = E.Tipo)
 GROUP BY  Ti.Descripcion,E.Descripcion
 ORDER BY Bonos_Utilizados DESC
+
