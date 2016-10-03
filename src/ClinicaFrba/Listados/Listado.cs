@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Listados
 {
-    public partial class Listados : Form
+    public partial class Listado : Form
     {
-        public Listados()
+        public Listado()
         {
             InitializeComponent();
+            this.CargarDatos();
+        }
+
+        private void CargarDatos()
+        {
+
         }
     }
 }

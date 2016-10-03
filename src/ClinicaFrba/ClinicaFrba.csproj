@@ -161,11 +161,11 @@
     <Compile Include="Compra Bono\ElegirAfiliado.Designer.cs">
       <DependentUpon>ElegirAfiliado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados\Listados.cs">
+    <Compile Include="Listados\Listado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados\Listados.Designer.cs">
-      <DependentUpon>Listados.cs</DependentUpon>
+    <Compile Include="Listados\Listado.Designer.cs">
+      <DependentUpon>Listado.cs</DependentUpon>
     </Compile>
     <Compile Include="Logeo.cs">
       <SubType>Form</SubType>
@@ -185,9 +185,6 @@
     <Compile Include="Menu\MenuClinica.Designer.cs">
       <DependentUpon>MenuClinica.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menu\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="Menu\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="Menu\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Pedir Turno\ElegirEspecialidad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +217,12 @@
     <Compile Include="Registrar Agenta Medico\SeleccionarProfesional.Designer.cs">
       <DependentUpon>SeleccionarProfesional.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registro Llegada\ListarTurnos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Llegada\ListarTurnos.Designer.cs">
+      <DependentUpon>ListarTurnos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro Llegada\RegLlegada.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +240,12 @@
     </Compile>
     <Compile Include="Registro Resultado\ElegirAfiliado.Designer.cs">
       <DependentUpon>ElegirAfiliado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registro Llegada\ElegirProfesional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Llegada\ElegirProfesional.Designer.cs">
+      <DependentUpon>ElegirProfesional.cs</DependentUpon>
     </Compile>
     <Compile Include="UtilConexion\Afiliado.cs" />
     <Compile Include="UtilConexion\AgendaDiaria.cs" />
@@ -282,6 +291,9 @@
     <EmbeddedResource Include="Compra Bono\ElegirAfiliado.resx">
       <DependentUpon>ElegirAfiliado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado.resx">
+      <DependentUpon>Listado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Logeo.resx">
       <DependentUpon>Logeo.cs</DependentUpon>
     </EmbeddedResource>
@@ -315,11 +327,20 @@
     <EmbeddedResource Include="Registrar Agenta Medico\SeleccionarProfesional.resx">
       <DependentUpon>SeleccionarProfesional.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada\ListarTurnos.resx">
+      <DependentUpon>ListarTurnos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada\RegLlegada.resx">
+      <DependentUpon>RegLlegada.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registro Resultado\Diagnostico.resx">
       <DependentUpon>Diagnostico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro Resultado\ElegirAfiliado.resx">
       <DependentUpon>ElegirAfiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada\ElegirProfesional.resx">
+      <DependentUpon>ElegirProfesional.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="bin\Debug\ClinicaFrba.exe.config" />
     <None Include="bin\Debug\ClinicaFrba.vshost.exe.config" />
@@ -344,6 +365,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
+    <Folder Include="Menu\obj\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -53,6 +53,7 @@
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
+            this.registrarLlegadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,12 +68,13 @@
             this.listadoEstadisticoToolStripMenuItem,
             this.agendaProfesional,
             this.cancelarDiaOFranjaToolStripMenuItem,
-            this.pedirTurnoToolStripMenuItem});
+            this.pedirTurnoToolStripMenuItem,
+            this.registrarLlegadaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(933, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(970, 24);
             this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.Text = "Registrar llegada ";
             // 
             // rolesToolStripMenuItem
             // 
@@ -263,11 +265,18 @@
             this.labelFuncionalidades.TabIndex = 5;
             this.labelFuncionalidades.Text = "Funcionalidades:";
             // 
+            // registrarLlegadaToolStripMenuItem
+            // 
+            this.registrarLlegadaToolStripMenuItem.Name = "registrarLlegadaToolStripMenuItem";
+            this.registrarLlegadaToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.registrarLlegadaToolStripMenuItem.Text = "Registrar Llegada";
+            this.registrarLlegadaToolStripMenuItem.Click += new System.EventHandler(this.registrarLlegadaToolStripMenuItem_Click);
+            // 
             // MenuClinica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 350);
+            this.ClientSize = new System.Drawing.Size(970, 350);
             this.Controls.Add(this.labelFuncionalidades);
             this.Controls.Add(this.listaFunciones);
             this.Controls.Add(this.botonElegirRol);
@@ -312,5 +321,6 @@
         private System.Windows.Forms.ToolStripMenuItem comprarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelarDiaOFranjaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedirTurnoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registrarLlegadaToolStripMenuItem;
     }
 }

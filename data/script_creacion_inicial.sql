@@ -720,3 +720,20 @@ DROP PROCEDURE kernel_panic.cancelarDiaProfesional
 DROP PROCEDURE kernel_panic.cancelarFranjaProfesional
 DROP PROCEDURE kernel_panic.agregarRegistroDeLogsInicial
 DROP PROCEDURE kernel_panic.consultaNueva
+
+
+
+--SELECT LISTADOS
+
+--Listado 1
+SELECT TOP 5 E.Descripcion AS Especialidad, T.Descripcion AS Tipo, COUNT(Tu.Id) AS Cantidad_cancelaciones
+FROM kernel_panic.Especialidades E JOIN kernel_panic.Tipo_Especialidad T ON (T.Codigo = E.Tipo)
+								   JOIN kernel_panic.Turnos Tu ON (Tu.Especialidad = E.Codigo)
+WHERE Tu.Cancelacion IS NOT NULL
+GROUP BY E.Descripcion, T.Descripcion
+ORDER BY cantidad_cancelaciones DESC
+
+
+--Listado 2
+
+--SELECT 

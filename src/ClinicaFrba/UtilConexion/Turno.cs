@@ -26,7 +26,9 @@ namespace ClinicaFrba.UtilConexion
             this.id = id;
             cargarTurno();
         }
-        public Turno() { }
+
+        public Turno() {}
+
         public void cargarTurno()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
@@ -75,5 +77,45 @@ namespace ClinicaFrba.UtilConexion
             speaker.close();
         }
 
+        public static List<Turno> darTurnos(Afiliado afiliado, Profesional profesional)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@idAfiliado", afiliado.id));
+            ListaParametros.Add(new SqlParameter("@idProfesional", profesional.id));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id, Fecha, Especialidad FROM kernel_panic.Turnos WHERE Afiliado_id = @idAfiliado AND Profesional_id = @idProfesional AND CONVERT(DATE,Fecha) = CONVERT(DATE,GETDATE()) AND Fecha_llegada IS NULL AND Cancelacion IS NULL ORDER BY Fecha ASC", "T", ListaParametros);
+            List<Turno> turnos = new List<Turno>();
+            if (speaker.reader.HasRows)
+            {
+                while (speaker.reader.Read())
+                {
+                    Turno turno = new Turno();
+                    turno.id = (int)speaker.reader["Id"];
+                    turno.fecha = (DateTime)speaker.reader["Fecha"];
+                    turno.especialidad = new Especialidad((decimal)speaker.reader["Especialidad"]);
+                    turno.afiliado = afiliado;
+                    turno.profesional = profesional;
+                    turno.especialidadNombre = turno.especialidad.descripcion;
+                    turno.profesionalNombre = turno.profesional.apellido + ", " + turno.profesional.nombre;
+                    turnos.Add(turno);
+                }
+            }
+            speaker.close();
+            return turnos;
+        }
+
+        public void registrarLlegada()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@idTurno", this.id));
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Turnos SET Fecha_llegada = GETDATE() WHERE Id = @idTurno", "T", ListaParametros);
+            speaker.close();
+            ListaParametros.Clear();
+
+            ListaParametros.Add(new SqlParameter("@idTurno", this.id));
+            ListaParametros.Add(new SqlParameter("@idAfiliado", afiliado.id));
+            ListaParametros.Add(new SqlParameter("@idProfesional", profesional.id));
+            speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Turno_id) VALUES (@idAfiliado, @idProfesional, @idTurno)", "T", ListaParametros);
+            speaker.close();
+        }
     }
 }
