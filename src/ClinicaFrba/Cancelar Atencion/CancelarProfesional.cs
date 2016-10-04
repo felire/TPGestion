@@ -59,20 +59,24 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void cancelarDia_Click(object sender, EventArgs e)
         {
+            string mensajeDeError = "";
             if (motivoCancelacion.Text.Length >= 400)
             {
-                MessageBox.Show("El motivo de cancelacion tiene que tener menos de 400 caracteres", "Error!", MessageBoxButtons.OK);
-                return;
+                mensajeDeError = "El motivo de cancelacion tiene que tener menos de 400 caracteres";
             }
             if (motivoCancelacion.Text.Equals(""))
             {
-                MessageBox.Show("Debe ingresar un motivo de cancelacion", "Error!", MessageBoxButtons.OK);
+                mensajeDeError = mensajeDeError + "\r\n" + "Debe ingresar un motivo de cancelacion";
+            }
+            if (!mensajeDeError.Equals(""))
+            {
+                MessageBox.Show(mensajeDeError, "Error!", MessageBoxButtons.OK);
                 return;
             }
             int resultado = profesional.cancelarDia(dia.Value, motivoCancelacion.Text, "Profesional");
             if (resultado == 1)
             {
-                MessageBox.Show("Dia cancelado con exito", "Exito!", MessageBoxButtons.OK);
+                MessageBox.Show("Dia cancelado con exito", "Éxito!", MessageBoxButtons.OK);
                 this.Hide();
             }
             else

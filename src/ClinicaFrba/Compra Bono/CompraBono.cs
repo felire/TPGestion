@@ -35,7 +35,11 @@ namespace ClinicaFrba.Compra_Bono
             string grupo = afiliado.numeroDeGrupo.ToString();
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@grupo", Decimal.Parse(grupo)));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Precio_bono_consulta, Plan_grupo FROM kernel_panic.Planes p JOIN kernel_panic.Grupos_Familiares gf ON (p.Codigo = gf.Plan_grupo) WHERE gf.Id = @grupo", "T", ListaParametros);
+            string query = "SELECT Precio_bono_consulta, Plan_grupo "+
+                           "FROM kernel_panic.Planes p "+
+                           "JOIN kernel_panic.Grupos_Familiares gf ON (p.Codigo = gf.Plan_grupo) "+
+                           "WHERE gf.Id = @grupo";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 speaker.reader.Read();

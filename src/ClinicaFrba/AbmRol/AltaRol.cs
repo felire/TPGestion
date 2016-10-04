@@ -73,19 +73,23 @@ namespace ClinicaFrba.AbmRol
 
         private Boolean formularioValido()
         {
+            string mensajeDeError = "";
             if (nombreElegido.Text == "")
             {
-                MessageBox.Show("No a asignado un nombre al rol", "Error!", MessageBoxButtons.OK);
-                return false;
+                mensajeDeError = "No a asignado un nombre al rol";
             }
-            else if (funcionalidadesAgregadas.Items.Count == 0)
+            if (funcionalidadesAgregadas.Items.Count == 0)
             {
-                MessageBox.Show("No a asignado funcionalidades al rol", "Error!", MessageBoxButtons.OK);
-                return false;
+                mensajeDeError = mensajeDeError + "\r\n" + "No a asignado funcionalidades al rol";
+            }
+            if (mensajeDeError.Equals(""))
+            {
+                return true;
             }
             else
             {
-                return true;
+                MessageBox.Show(mensajeDeError, "Error!", MessageBoxButtons.OK);
+                return false;
             }
         }
 

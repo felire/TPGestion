@@ -25,8 +25,6 @@ namespace ClinicaFrba.Registro_Resultado
             cargarGrilla();
         }
 
-
-
         private void cargarGrilla()
         {
             DataGridViewTextBoxColumn ColId = new DataGridViewTextBoxColumn();

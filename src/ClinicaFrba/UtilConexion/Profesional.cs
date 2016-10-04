@@ -8,7 +8,7 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
-using ClinicaFrba.Pedir_Turno;
+using ClinicaFrba.UtilConexion;
 
 namespace ClinicaFrba.UtilConexion
 {
@@ -43,7 +43,10 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombreUser", nombreUser));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id,Nombre, Apellido, Tipo_doc, Numero_doc  FROM kernel_panic.Profesionales WHERE Usuario_id = @nombreUser ", "T", ListaParametros);
+            string query = "SELECT Id,Nombre, Apellido, Tipo_doc, Numero_doc "+
+                           "FROM kernel_panic.Profesionales "+
+                           "WHERE Usuario_id = @nombreUser ";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 speaker.reader.Read();
@@ -61,7 +64,10 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@id", this.id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc  FROM kernel_panic.Profesionales WHERE Id = @id ", "T", ListaParametros);
+            string query = "SELECT Nombre, Apellido, Tipo_doc, Numero_doc "+
+                           "FROM kernel_panic.Profesionales "+
+                           "WHERE Id = @id ";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                     speaker.reader.Read();
@@ -83,13 +89,23 @@ namespace ClinicaFrba.UtilConexion
 
             if (doc.Equals("")) /*no quiere buscar por documento*/
             {
-                speaker = ConexionDB.ObtenerDataReader("SELECT Id, Nombre, Apellido, Tipo_doc, Numero_doc  FROM kernel_panic.Profesionales WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido ", "T", ListaParametros);
+                string query = "SELECT Id, Nombre, Apellido, Tipo_doc, Numero_doc  "+
+                               "FROM kernel_panic.Profesionales "+
+                               "WHERE Nombre LIKE @nombre "+
+                               "AND  Apellido LIKE @apellido ";
+                speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             }
             else /*busca por documento*/
             {
                 ListaParametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
                 ListaParametros.Add(new SqlParameter("@doc", Decimal.Parse(doc)));
-                speaker = ConexionDB.ObtenerDataReader("SELECT Id, Nombre, Apellido, Tipo_doc, Numero_doc  FROM kernel_panic.Profesionales WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Tipo_doc = @tipoDoc AND Numero_doc = @doc ", "T", ListaParametros);
+                string query = "SELECT Id, Nombre, Apellido, Tipo_doc, Numero_doc  "+
+                               "FROM kernel_panic.Profesionales "+
+                               "WHERE Nombre LIKE @nombre "+
+                               "AND  Apellido LIKE @apellido "+
+                               "AND Tipo_doc = @tipoDoc "+
+                               "AND Numero_doc = @doc ";
+                speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             }
             List<Profesional> profesionales = new List<Profesional>();
             if (speaker.reader.HasRows)
@@ -139,7 +155,10 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@profesional_id", this.id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Especialidad_codigo FROM kernel_panic.Especialidad_Profesional WHERE Profesional_id = @profesional_id ", "T", ListaParametros);
+            string query = "SELECT Especialidad_codigo "+
+                           "FROM kernel_panic.Especialidad_Profesional "+
+                           "WHERE Profesional_id = @profesional_id ";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 while (speaker.reader.Read())

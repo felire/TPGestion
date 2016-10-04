@@ -70,28 +70,33 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private Boolean seleccionValida()
         {
+            string mensajeDeError = "";
             if (turnos.SelectedRows.Count != 1)
             {
-                MessageBox.Show("Debe seleccionar un turno", "Error!", MessageBoxButtons.OK);
-                return false;
+                mensajeDeError = "Debe seleccionar un turno";
             }
             if (motivoCancelacion.Text == "")
             {
-                MessageBox.Show("Debe especificar el motivo de la cancelacion", "Error!", MessageBoxButtons.OK);
-                return false;
+                mensajeDeError = mensajeDeError + "\r\n" + "Debe especificar el motivo de la cancelacion";
             }
             if (motivoCancelacion.Text.Length > 400)
             {
-                MessageBox.Show("El mensaje no debe superar los 400 caracteres", "Error!", MessageBoxButtons.OK);
-                return false;
+                mensajeDeError = mensajeDeError + "\r\n" + "El mensaje no debe superar los 400 caracteres";
             }
             Turno turno = (Turno)turnos.CurrentRow.DataBoundItem;
             if ((turno.fecha.Date - DateTime.Now.Date).Days < 1)
             {
-                MessageBox.Show("No puede cancelar un turno el dia que lo tiene.", "Error!", MessageBoxButtons.OK);
+                mensajeDeError = mensajeDeError + "\r\n" + "No puede cancelar un turno el dia que lo tiene";
+            }
+            if (mensajeDeError.Equals(""))
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(mensajeDeError, "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            return true;
         }
     }
 }

@@ -44,14 +44,7 @@ namespace ClinicaFrba.Registro_Resultado
             resultado.Visible = false;
         }
 
-        private void actualizarHoras(object sender, EventArgs e)
-        {
-            /*Dia dia = new Dia((int)dtpFechaAtencion.Value.Date.DayOfWeek);
-            cmbHora.DataSource = Hora.obtenerHorasDia(dia);
-            cmbHora.ValueMember = "LaHora";
-            cmbHora.DisplayMember = "HoraAMostrar";
-            cmbHora.SelectedIndex = 0;*/
-        }
+        private void actualizarHoras(object sender, EventArgs e) {} //santi: es horripilante esto
 
         private void asignarDiag_Click(object sender, EventArgs e)
         {
@@ -68,17 +61,24 @@ namespace ClinicaFrba.Registro_Resultado
 
         private Boolean camposValidos()
         {
+            string mensajeDeError = "";
             if (txtEnfermedad.Text.Equals("") || txtSintomas.Text.Equals(""))
             {
-                MessageBox.Show("Debe rellenar todos los campos", "Error!", MessageBoxButtons.OK);
-                return false;
+                mensajeDeError = "Debe rellenar todos los campos";
             }
             if (txtEnfermedad.Text.Length > 255 || txtSintomas.Text.Length > 255)
             {
-                MessageBox.Show("Los campos no pueden superar los 255 caracteres!", "Error!", MessageBoxButtons.OK);
+                mensajeDeError = mensajeDeError + "\r\n" + "Los campos tienen un máximo de 255 caracteres";
+            }
+            if (mensajeDeError.Equals(""))
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(mensajeDeError, "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            return true;
         }
 
         private void confirmar_Click(object sender, EventArgs e)

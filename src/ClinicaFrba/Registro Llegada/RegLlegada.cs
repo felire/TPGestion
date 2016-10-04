@@ -20,7 +20,6 @@ namespace ClinicaFrba.Registro_Llegada
             cargarFormulario();
             listaAfiliados.AutoGenerateColumns = false;
             cargarGrilla();
-
         }
 
 

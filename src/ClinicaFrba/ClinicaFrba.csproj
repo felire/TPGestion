@@ -203,7 +203,7 @@
     <Compile Include="Pedir Turno\ElegirProfesional.Designer.cs">
       <DependentUpon>ElegirProfesional.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pedir Turno\FranjaCancelada.cs" />
+    <Compile Include="UtilConexion\FranjaCancelada.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registrar Agenta Medico\RegAgendaMedico.cs">
