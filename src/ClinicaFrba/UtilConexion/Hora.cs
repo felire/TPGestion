@@ -17,7 +17,6 @@ namespace ClinicaFrba.UtilConexion
             LaHora = hora;
         }
 
-
         public static List<Hora> obtenerHorasFecha(Fecha dia)
         {
             int cont = 0;
@@ -54,8 +53,8 @@ namespace ClinicaFrba.UtilConexion
         {
             DateTime horaACheckear = new DateTime(dia.dia.Year, dia.dia.Month, dia.dia.Day, unaHora.Hours, unaHora.Minutes, 0);
             Boolean noEsPasada = DateTime.Now.CompareTo(horaACheckear) < 0;
-            Boolean noEstaOcupada = !dia.horasOcupadas.Contains(unaHora);
-            return noEsPasada && noEsPasada;
+            Boolean estaOcupada = dia.horasOcupadas.Contains(unaHora);
+            return noEsPasada && !estaOcupada;
         }
 
         public static List<Hora> obtenerHorasDia(Dia dia)

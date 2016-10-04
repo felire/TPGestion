@@ -8,6 +8,7 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using ClinicaFrba.Pedir_Turno;
 
 namespace ClinicaFrba.UtilConexion
 {
@@ -180,7 +181,30 @@ namespace ClinicaFrba.UtilConexion
             int resultado = Int32.Parse(speaker.comando.Parameters["@fallo"].Value.ToString());
             speaker.close();
             return resultado;
+        }
 
+        public List<FranjaCancelada> darFranjasCanceladas()
+        {
+            List<FranjaCancelada> franjas = new List<FranjaCancelada>();
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@id", this.id));
+            string query = "SELECT c.Desde AS fechaDesde, c.Hasta AS fechaHasta " +
+                           "FROM kernel_panic.Franjas_Canceladas c " +
+                           "JOIN kernel_panic.Esquema_Trabajo et ON(c.EsquemaTrabajo = et.Id) " +
+                           "WHERE et.Profesional = @id ";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                while (speaker.reader.Read())
+                {
+                    DateTime fechaDesde = (DateTime)speaker.reader["fechaDesde"];
+                    DateTime fechaHasta = (DateTime)speaker.reader["fechaHasta"];
+                    FranjaCancelada franja = new FranjaCancelada(fechaDesde, fechaHasta);
+                    franjas.Add(franja);
+                }
+            }
+            speaker.close();
+            return franjas;
         }
     }
 }

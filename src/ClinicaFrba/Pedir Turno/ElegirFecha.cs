@@ -27,14 +27,9 @@ namespace ClinicaFrba.Pedir_Turno
             nombreProfesional.Text = "DR. " + turno.profesional.nombre + " " + turno.profesional.apellido;
             fechas = new List<Fecha>();
             this.turno = turno;
-            this.preparar();
-        }
-
-        private void preparar()
-        {
             this.cargarFechas();
-            this.cargarCancelaciones();
-            this.cargarFechasOcupadas();
+            this.borrarFechasCanceladas();
+            this.borrarHorariosOcupados();
             this.mostrarFechas();
         }
 
@@ -51,57 +46,49 @@ namespace ClinicaFrba.Pedir_Turno
             }
         }
 
-        private void cargarCancelaciones()
+        private void borrarFechasCanceladas()
         {
-            List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            ListaParametros.Add(new SqlParameter("@profesional", turno.profesional.id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT c.Desde AS fechaDesde, c.Hasta AS fechaHasta FROM kernel_panic.Franjas_Canceladas c JOIN kernel_panic.Esquema_Trabajo et ON(c.EsquemaTrabajo = et.Id) WHERE et.Profesional = @profesional ", "T", ListaParametros);
-            if (speaker.reader.HasRows)
-            {
-                while (speaker.reader.Read())
-                {
-                    DateTime fechaDesde = (DateTime)speaker.reader["fechaDesde"];
-                    DateTime fechaHasta = (DateTime)speaker.reader["fechaHasta"];
-                    this.borrarFechas(fechaDesde, fechaHasta);
-                }
-            }
-            speaker.close();
-        }
+            List<FranjaCancelada> franjasCanceladas = turno.profesional.darFranjasCanceladas();
 
-        private void borrarFechas(DateTime desde, DateTime hasta)
-        {
             List<Fecha> fechasClonadas = new List<Fecha>();
             foreach (Fecha fecha in fechas)
             {
-
                 fechasClonadas.Add(fecha);
             }
-            foreach (Fecha fecha in fechasClonadas)
+            
+            foreach(Fecha fecha in fechasClonadas)
             {
-                if ((fecha.CompareTo(desde) >= 0 && fecha.CompareTo(hasta) <= 0))
+                foreach (FranjaCancelada franja in franjasCanceladas)
                 {
-                    fechas.Remove(fecha);
+                    if (franja.fechaFueCancelada(fecha))
+                    {
+                        fechas.Remove(fecha);
+                        break;
+                    }
                 }
             }
         }
 
-        private void cargarFechasOcupadas()
+        private void borrarHorariosOcupados()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@afiliado", turno.afiliado.id));
             ListaParametros.Add(new SqlParameter("@profesional", turno.profesional.id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Afiliado_id, Profesional_id, Fecha FROM kernel_panic.Turnos WHERE ( Afiliado_id = @afiliado OR Profesional_id = @profesional ) AND Cancelacion IS NULL ", "T", ListaParametros);
+            string query = "SELECT Fecha "+
+                           "FROM kernel_panic.Turnos "+
+                           "WHERE ( Afiliado_id = @afiliado OR Profesional_id = @profesional ) AND Cancelacion IS NULL ";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 while (speaker.reader.Read())
                 {
-                    horarioOcupado((DateTime)speaker.reader["Fecha"]);
+                    agregarHorarioOcupado((DateTime)speaker.reader["Fecha"]);
                 }
             }
             speaker.close();
         }
 
-        private void horarioOcupado(DateTime date)
+        private void agregarHorarioOcupado(DateTime date)
         {
             Fecha fecha = Fecha.parsearDateTime(date);
             foreach (Fecha unaFecha in fechas)
@@ -156,7 +143,9 @@ namespace ClinicaFrba.Pedir_Turno
             ListaParametros.Add(new SqlParameter("@profesionalId", turno.profesional.id));
             ListaParametros.Add(new SqlParameter("@fecha", turno.fecha));
             ListaParametros.Add(new SqlParameter("@especialidad", turno.especialidad.codigo));
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Turnos (Afiliado_id, Profesional_id, Fecha, Especialidad, Cancelacion) VALUES (@afiliadoId, @profesionalId, @fecha, @especialidad, NULL) ", "T", ListaParametros);
+            string query = "INSERT INTO kernel_panic.Turnos (Afiliado_id, Profesional_id, Fecha, Especialidad, Cancelacion) "+
+                           "VALUES (@afiliadoId, @profesionalId, @fecha, @especialidad, NULL) ";
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
             MessageBox.Show("Turno creado con exito", "Info", MessageBoxButtons.OK);
             this.Hide();

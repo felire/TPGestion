@@ -42,7 +42,11 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@id", id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Dia, Desde, Hasta, Codigo, Descripcion FROM kernel_panic.Agenda_Diaria ad JOIN kernel_panic.Especialidades esp ON (esp.Codigo = ad.Especialidad) WHERE EsquemaTrabajo = @id", "T", ListaParametros);
+            string query = "SELECT Dia, Desde, Hasta, Codigo, Descripcion "+
+                           "FROM kernel_panic.Agenda_Diaria ad "+
+                           "JOIN kernel_panic.Especialidades esp ON (esp.Codigo = ad.Especialidad) "+
+                           "WHERE EsquemaTrabajo = @id";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 while (speaker.reader.Read())
@@ -65,7 +69,10 @@ namespace ClinicaFrba.UtilConexion
             List<EsquemaTrabajo> esquemas = new List<EsquemaTrabajo>();
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@id", idProfesional));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id, Desde, Hasta FROM kernel_panic.Esquema_Trabajo WHERE Profesional = @id", "T", ListaParametros);
+            string query = "SELECT Id, Desde, Hasta " +
+                           "FROM kernel_panic.Esquema_Trabajo " +
+                           "WHERE Profesional = @id";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 while (speaker.reader.Read())
