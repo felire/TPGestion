@@ -31,6 +31,7 @@
             this.elegir = new System.Windows.Forms.Button();
             this.listaAfiliados = new System.Windows.Forms.DataGridView();
             this.filtros = new System.Windows.Forms.GroupBox();
+            this.grupo = new System.Windows.Forms.TextBox();
             this.buscar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.numeroDoc = new System.Windows.Forms.TextBox();
@@ -41,7 +42,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.grupo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).BeginInit();
             this.filtros.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +86,15 @@
             this.filtros.TabStop = false;
             this.filtros.Text = "Filtros";
             // 
+            // grupo
+            // 
+            this.grupo.Location = new System.Drawing.Point(86, 99);
+            this.grupo.MaxLength = 100;
+            this.grupo.Name = "grupo";
+            this.grupo.Size = new System.Drawing.Size(121, 20);
+            this.grupo.TabIndex = 11;
+            this.grupo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros);
+            // 
             // buscar
             // 
             this.buscar.Location = new System.Drawing.Point(309, 97);
@@ -108,6 +117,7 @@
             // numeroDoc
             // 
             this.numeroDoc.Location = new System.Drawing.Point(309, 58);
+            this.numeroDoc.MaxLength = 15;
             this.numeroDoc.Name = "numeroDoc";
             this.numeroDoc.Size = new System.Drawing.Size(115, 20);
             this.numeroDoc.TabIndex = 7;
@@ -142,6 +152,7 @@
             // apellido
             // 
             this.apellido.Location = new System.Drawing.Point(309, 22);
+            this.apellido.MaxLength = 255;
             this.apellido.Name = "apellido";
             this.apellido.Size = new System.Drawing.Size(115, 20);
             this.apellido.TabIndex = 3;
@@ -158,6 +169,7 @@
             // nombre
             // 
             this.nombre.Location = new System.Drawing.Point(86, 17);
+            this.nombre.MaxLength = 255;
             this.nombre.Name = "nombre";
             this.nombre.Size = new System.Drawing.Size(121, 20);
             this.nombre.TabIndex = 1;
@@ -170,14 +182,6 @@
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre: ";
-            // 
-            // grupo
-            // 
-            this.grupo.Location = new System.Drawing.Point(86, 99);
-            this.grupo.Name = "grupo";
-            this.grupo.Size = new System.Drawing.Size(121, 20);
-            this.grupo.TabIndex = 11;
-            this.grupo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros);
             // 
             // ElegirAfiliado
             // 

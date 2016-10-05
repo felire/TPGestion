@@ -32,11 +32,23 @@ namespace ClinicaFrba.AbmRol
 
         private void habilitarRol_Click(object sender, EventArgs e)
         {
-            if (seleccionoUno())
+            List<Rol> roles = darRolesSeleccionados();
+            if (roles.Count == 0)
             {
-                Rol rol = darRolSeleccionado();
+                MessageBox.Show("No selecciono ningun rol", "Error!", MessageBoxButtons.OK);
+                return;
+            }
+            foreach (Rol rol in roles)
+            {
                 rol.habilitarRol();
+            }
+            if (roles.Count == 1)
+            {
                 MessageBox.Show("Rol habilitado con exito", "Exito", MessageBoxButtons.OK);
+            }
+            else
+            {
+                MessageBox.Show("Roles habilitados con exito", "Exito", MessageBoxButtons.OK);
             }
         }
 
@@ -70,6 +82,25 @@ namespace ClinicaFrba.AbmRol
                 }
             }
             return rol;
+        }
+
+        private List<Rol> darRolesSeleccionados()
+        {
+            int cantidadSeleccionados = rolesExistentes.SelectedItems.Count;
+            List<Rol> rolesElegidos = new List<Rol>();
+            for (int i = 0; i < cantidadSeleccionados; i++)
+            {
+                ListViewItem nombreRol = rolesExistentes.SelectedItems[i];
+                foreach (Rol rolEach in roles)
+                {
+                    if (rolEach.nombreRol.Equals(nombreRol.Text))
+                    {
+                        rolesElegidos.Add(rolEach);
+                        break;
+                    }
+                }
+            }
+            return rolesElegidos;
         }
 
         private void modifRol_Click(object sender, EventArgs e)

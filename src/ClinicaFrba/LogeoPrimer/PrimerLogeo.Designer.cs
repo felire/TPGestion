@@ -77,16 +77,20 @@
             // passNuevaT
             // 
             this.passNuevaT.Location = new System.Drawing.Point(133, 70);
+            this.passNuevaT.MaxLength = 100;
             this.passNuevaT.Name = "passNuevaT";
             this.passNuevaT.PasswordChar = '•';
+            this.passNuevaT.ShortcutsEnabled = false;
             this.passNuevaT.Size = new System.Drawing.Size(131, 20);
             this.passNuevaT.TabIndex = 4;
             // 
             // passRepeT
             // 
             this.passRepeT.Location = new System.Drawing.Point(133, 113);
+            this.passRepeT.MaxLength = 100;
             this.passRepeT.Name = "passRepeT";
             this.passRepeT.PasswordChar = '•';
+            this.passRepeT.ShortcutsEnabled = false;
             this.passRepeT.Size = new System.Drawing.Size(131, 20);
             this.passRepeT.TabIndex = 5;
             // 

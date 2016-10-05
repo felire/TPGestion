@@ -51,6 +51,7 @@
             // nombreElegido
             // 
             this.nombreElegido.Location = new System.Drawing.Point(99, 21);
+            this.nombreElegido.MaxLength = 20;
             this.nombreElegido.Name = "nombreElegido";
             this.nombreElegido.Size = new System.Drawing.Size(217, 20);
             this.nombreElegido.TabIndex = 1;

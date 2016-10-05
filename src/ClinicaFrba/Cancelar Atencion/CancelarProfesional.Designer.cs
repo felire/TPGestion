@@ -161,6 +161,7 @@
             // motivoCancelacion
             // 
             this.motivoCancelacion.Location = new System.Drawing.Point(12, 76);
+            this.motivoCancelacion.MaxLength = 400;
             this.motivoCancelacion.Multiline = true;
             this.motivoCancelacion.Name = "motivoCancelacion";
             this.motivoCancelacion.Size = new System.Drawing.Size(539, 49);

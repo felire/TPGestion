@@ -36,7 +36,7 @@
             // 
             // rolesExistentes
             // 
-            this.rolesExistentes.Location = new System.Drawing.Point(12, 82);
+            this.rolesExistentes.Location = new System.Drawing.Point(12, 28);
             this.rolesExistentes.Name = "rolesExistentes";
             this.rolesExistentes.Size = new System.Drawing.Size(211, 218);
             this.rolesExistentes.TabIndex = 0;
@@ -46,7 +46,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 63);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 1;
@@ -54,7 +54,7 @@
             // 
             // modifRol
             // 
-            this.modifRol.Location = new System.Drawing.Point(282, 123);
+            this.modifRol.Location = new System.Drawing.Point(282, 91);
             this.modifRol.Name = "modifRol";
             this.modifRol.Size = new System.Drawing.Size(175, 38);
             this.modifRol.TabIndex = 2;
@@ -64,7 +64,7 @@
             // 
             // habilitarRol
             // 
-            this.habilitarRol.Location = new System.Drawing.Point(282, 208);
+            this.habilitarRol.Location = new System.Drawing.Point(282, 170);
             this.habilitarRol.Name = "habilitarRol";
             this.habilitarRol.Size = new System.Drawing.Size(175, 38);
             this.habilitarRol.TabIndex = 3;
@@ -76,7 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 371);
+            this.ClientSize = new System.Drawing.Size(475, 278);
             this.Controls.Add(this.habilitarRol);
             this.Controls.Add(this.modifRol);
             this.Controls.Add(this.label1);
