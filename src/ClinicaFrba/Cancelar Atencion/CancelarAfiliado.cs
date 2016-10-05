@@ -79,10 +79,6 @@ namespace ClinicaFrba.Cancelar_Atencion
             {
                 mensajeDeError = mensajeDeError + "\r\n" + "Debe especificar el motivo de la cancelacion";
             }
-            if (motivoCancelacion.Text.Length > 400)
-            {
-                mensajeDeError = mensajeDeError + "\r\n" + "El mensaje no debe superar los 400 caracteres";
-            }
             Turno turno = (Turno)turnos.CurrentRow.DataBoundItem;
             if ((turno.fecha.Date - DateTime.Now.Date).Days < 1)
             {

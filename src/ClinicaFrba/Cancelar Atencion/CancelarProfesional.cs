@@ -30,20 +30,14 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void cancelarFranja_Click(object sender, EventArgs e)
         {
+            string mensajeDeError = "";
             if (desde.Value >= hasta.Value)
             {
-                MessageBox.Show("Ingrese fechas correctas", "Error!", MessageBoxButtons.OK);
-                return;
-            }
-            if (motivoCancelacion.Text.Length >= 400)
-            {
-                MessageBox.Show("El motivo de cancelacion tiene que tener menos de 400 caracteres", "Exito!", MessageBoxButtons.OK);
-                return;
+                mensajeDeError = "Ingrese fechas correctas"; 
             }
             if (motivoCancelacion.Text.Equals(""))
             {
-                MessageBox.Show("Debe ingresar un motivo de cancelacion", "Exito!", MessageBoxButtons.OK);
-                return;
+                mensajeDeError = mensajeDeError + "\r\n" + "Debe ingresar un motivo de cancelacion";
             }
             int resultado = profesional.cancelarFranja(desde.Value, hasta.Value, motivoCancelacion.Text, "Profesional");
             if (resultado == 1)
@@ -53,7 +47,11 @@ namespace ClinicaFrba.Cancelar_Atencion
             }
             else
             {
-                MessageBox.Show("Los dias que selecciono no pertenecen a ninguna franja!", "Error!", MessageBoxButtons.OK);
+                mensajeDeError = mensajeDeError + "\r\n" + "Los dias que selecciono no pertenecen a ninguna franja";
+            }
+            if (!mensajeDeError.Equals(""))
+            {
+                MessageBox.Show(mensajeDeError, "Error!", MessageBoxButtons.OK);
             }
         }
 
