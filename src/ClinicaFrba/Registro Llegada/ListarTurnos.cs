@@ -36,7 +36,7 @@ namespace ClinicaFrba.Registro_Llegada
         {
             nombreAfiliado.Text = "Nombre Afiliado: " + afiliado.apellido + ", " + afiliado.nombre;
             this.turnos = Turno.darTurnos(afiliado, profesional);
-            if (turnos.Count != 0)
+            if (turnos.Count > 0)
             {
                 turnosGrid.AutoGenerateColumns = false;
                 turnosGrid.MultiSelect = false;
@@ -85,14 +85,14 @@ namespace ClinicaFrba.Registro_Llegada
 
         private Boolean seleccionValida()
         {
-            if (turnosGrid.SelectedRows.Count == 1)
-            {
-                return true;
-            }
-            else
+            if (turnosGrid.SelectedRows.Count != 1)
             {
                 MessageBox.Show("Debe seleccionar a un turno", "Error!", MessageBoxButtons.OK);
                 return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

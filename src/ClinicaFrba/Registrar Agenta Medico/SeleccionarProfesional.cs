@@ -91,7 +91,20 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             listaProfesionales.ClearSelection();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private Boolean seleccionValida()
+        {
+            if (listaProfesionales.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Debe seleccionar un profesional", "Error!", MessageBoxButtons.OK);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void registrarAgendaProfesional_Click(object sender, EventArgs e)
         {
             if (seleccionValida())
             {
@@ -99,19 +112,6 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
                 RegAgendaMedico agenda = new RegAgendaMedico(profesional);
                 agenda.Show();
                 this.Hide();
-            }
-        }
-
-        private Boolean seleccionValida()
-        {
-            if (listaProfesionales.SelectedRows.Count == 1)
-            {
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un profesional", "Error!", MessageBoxButtons.OK);
-                return false;
             }
         }
     }

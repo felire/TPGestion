@@ -59,15 +59,12 @@ namespace ClinicaFrba.AbmRol
                 MessageBox.Show("No selecciono ningun rol", "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            else if (rolesExistentes.SelectedItems.Count > 1)
+            if (rolesExistentes.SelectedItems.Count > 1)
             {
                 MessageBox.Show("No puede seleccionar mas de un rol a modificar", "Error!", MessageBoxButtons.OK);
                 return false;
-            }
-            else
-            {
-                return true;
-            }
+            }       
+            return true;
         }
 
         private Rol darRolSeleccionado()
@@ -79,6 +76,7 @@ namespace ClinicaFrba.AbmRol
                 if (rolEach.nombreRol.Equals(nombreRol.Text))
                 {
                     rol = rolEach;
+                    break;
                 }
             }
             return rol;
@@ -88,7 +86,7 @@ namespace ClinicaFrba.AbmRol
         {
             int cantidadSeleccionados = rolesExistentes.SelectedItems.Count;
             List<Rol> rolesElegidos = new List<Rol>();
-            for (int i = 0; i < cantidadSeleccionados; i++)
+            for(int i = 0; i < cantidadSeleccionados; i++)
             {
                 ListViewItem nombreRol = rolesExistentes.SelectedItems[i];
                 foreach (Rol rolEach in roles)

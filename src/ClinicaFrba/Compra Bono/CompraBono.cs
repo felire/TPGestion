@@ -24,30 +24,9 @@ namespace ClinicaFrba.Compra_Bono
             InitializeComponent();
             this.afiliado = afiliado;
             this.bono = new BonoConsulta(afiliado);
-            this.cargarDatos();
-        }
-
-        private void cargarDatos()
-        {
             nombre.Text = afiliado.nombre;
             apellido.Text = afiliado.apellido;
-            
-            string grupo = afiliado.numeroDeGrupo.ToString();
-            List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            ListaParametros.Add(new SqlParameter("@grupo", Decimal.Parse(grupo)));
-            string query = "SELECT Precio_bono_consulta, Plan_grupo "+
-                           "FROM kernel_panic.Planes p "+
-                           "JOIN kernel_panic.Grupos_Familiares gf ON (p.Codigo = gf.Plan_grupo) "+
-                           "WHERE gf.Id = @grupo";
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
-            if (speaker.reader.HasRows)
-            {
-                speaker.reader.Read();
-                bono.precioUnitario = (decimal)speaker.reader["Precio_bono_consulta"];
-                bono.plan = (decimal)speaker.reader["Plan_grupo"];
-                precio.Text = bono.precioUnitario.ToString();
-            }
-            speaker.close();
+            precio.Text = bono.precioUnitario.ToString();
         }
 
         private void comprar_Click(object sender, EventArgs e)

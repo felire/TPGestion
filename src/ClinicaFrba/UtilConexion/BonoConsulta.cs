@@ -21,8 +21,28 @@ namespace ClinicaFrba.UtilConexion
         public BonoConsulta(Afiliado afiliado)
         {
             this.afiliado = afiliado;
+            this.cargarPrecioYPlan();
         }
 
+        private void cargarPrecioYPlan()
+        {
+            string grupo = afiliado.numeroDeGrupo.ToString();
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@grupo", Decimal.Parse(grupo)));
+            string query = "SELECT Precio_bono_consulta, Plan_grupo "+
+                           "FROM kernel_panic.Planes p "+
+                           "JOIN kernel_panic.Grupos_Familiares gf ON (p.Codigo = gf.Plan_grupo) "+
+                           "WHERE gf.Id = @grupo";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                speaker.reader.Read();
+                this.precioUnitario = (decimal)speaker.reader["Precio_bono_consulta"];
+                this.plan = (decimal)speaker.reader["Plan_grupo"];
+            }
+            speaker.close();
+        }
+        
         public void comprar()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();

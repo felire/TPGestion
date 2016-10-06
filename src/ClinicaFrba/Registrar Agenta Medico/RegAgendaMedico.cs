@@ -188,19 +188,14 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
                 {
                     MessageBox.Show("Las fechas de la agenda no son validas. Se superponen con otra agenda ya existente.", "Error!", MessageBoxButtons.OK);
                 }
-
             }
-            else
-            {
-                MessageBox.Show("Fechas no validas!", "Error!", MessageBoxButtons.OK); 
-            }
-
         }
 
         private Boolean fechasValidas(DateTime desde, DateTime hasta)
         {
             if (desde >= hasta)
             {
+                MessageBox.Show("Fechas no validas", "Error!", MessageBoxButtons.OK); 
                 return false;
             } 
             return true;

@@ -14,8 +14,9 @@ namespace ClinicaFrba.LogeoPrimer
 {
     partial class PrimerLogeo : Form
     {
-        public Usuario usuario { get; set; }
-        public Logeo log { get; set; }
+        private Usuario usuario;
+        private Logeo log;
+
         public PrimerLogeo(Usuario usuario, Logeo log)
         {
             InitializeComponent();
@@ -26,8 +27,6 @@ namespace ClinicaFrba.LogeoPrimer
 
         private void Entrar_Click(object sender, EventArgs e)
         {
-            
-
             if (passNuevaT.Text == passRepeT.Text)
             {
                 UTF8Encoding encoderHash = new UTF8Encoding();

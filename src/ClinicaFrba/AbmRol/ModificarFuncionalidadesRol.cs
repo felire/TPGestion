@@ -47,15 +47,15 @@ namespace ClinicaFrba.AbmRol
             {
                 idFunDelRol.Add(funcionalidadDelRol.funcionalidad_id);
             }
-            List<Funcionalidad> funci = new List<Funcionalidad>();
+            List<Funcionalidad> funcionalidadesRestantes = new List<Funcionalidad>();
             foreach (Funcionalidad funcionalidad in funcionalidades)
             {
                 if (!idFunDelRol.Contains(funcionalidad.funcionalidad_id))
                 {
-                    funci.Add(funcionalidad);
+                    funcionalidadesRestantes.Add(funcionalidad);
                 }
             }
-            return funci;
+            return funcionalidadesRestantes;
         }
 
         private void agregarFun_Click(object sender, EventArgs e)
@@ -93,13 +93,14 @@ namespace ClinicaFrba.AbmRol
         private List<Funcionalidad> funcionalidadesElegidas()
         {
             List<Funcionalidad> funcionalidadesAAgregar = new List<Funcionalidad>();
-            foreach (Funcionalidad funci in funcionalidades)
+            foreach (ListViewItem item in funcionalidadesAgregadas.Items)
             {
-                foreach (ListViewItem item in funcionalidadesAgregadas.Items)
+                foreach (Funcionalidad funcionalidad in funcionalidades)
                 {
-                    if (funci.descripcion.Equals(item.Text))
+                    if (funcionalidad.descripcion.Equals(item.Text))
                     {
-                        funcionalidadesAAgregar.Add(funci);
+                        funcionalidadesAAgregar.Add(funcionalidad);
+                        break;
                     }
                 }
             }

@@ -96,16 +96,15 @@ namespace ClinicaFrba.Pedir_Turno
 
         private Boolean seleccionValida()
         {
-            if (listaProfesionales.SelectedRows.Count == 1)
-            {
-                return true;
-            }
-            else
+            if (listaProfesionales.SelectedRows.Count != 1)
             {
                 MessageBox.Show("Debe seleccionar un profesional", "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            
+            else
+            {
+                return true;
+            }
         }
 
         private void Elegir(object sender, EventArgs e)

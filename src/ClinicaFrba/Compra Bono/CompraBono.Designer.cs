@@ -31,15 +31,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.precio = new System.Windows.Forms.TextBox();
             this.comprar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.nombre = new System.Windows.Forms.TextBox();
-            this.apellido = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cantidadAComprar = new System.Windows.Forms.NumericUpDown();
+            this.nombre = new System.Windows.Forms.Label();
+            this.apellido = new System.Windows.Forms.Label();
+            this.precio = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadAComprar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,14 +69,6 @@
             this.label3.Size = new System.Drawing.Size(77, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Precio unitario:";
-            // 
-            // precio
-            // 
-            this.precio.Location = new System.Drawing.Point(318, 77);
-            this.precio.Name = "precio";
-            this.precio.ReadOnly = true;
-            this.precio.Size = new System.Drawing.Size(56, 20);
-            this.precio.TabIndex = 4;
             // 
             // comprar
             // 
@@ -115,22 +107,6 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Apellido:";
             // 
-            // nombre
-            // 
-            this.nombre.Location = new System.Drawing.Point(70, 44);
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            this.nombre.Size = new System.Drawing.Size(100, 20);
-            this.nombre.TabIndex = 9;
-            // 
-            // apellido
-            // 
-            this.apellido.Location = new System.Drawing.Point(292, 45);
-            this.apellido.Name = "apellido";
-            this.apellido.ReadOnly = true;
-            this.apellido.Size = new System.Drawing.Size(100, 20);
-            this.apellido.TabIndex = 10;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -157,20 +133,47 @@
             0,
             0});
             // 
+            // nombre
+            // 
+            this.nombre.AutoSize = true;
+            this.nombre.Location = new System.Drawing.Point(57, 45);
+            this.nombre.Name = "nombre";
+            this.nombre.Size = new System.Drawing.Size(35, 13);
+            this.nombre.TabIndex = 13;
+            this.nombre.Text = "label8";
+            // 
+            // apellido
+            // 
+            this.apellido.AutoSize = true;
+            this.apellido.Location = new System.Drawing.Point(277, 44);
+            this.apellido.Name = "apellido";
+            this.apellido.Size = new System.Drawing.Size(35, 13);
+            this.apellido.TabIndex = 14;
+            this.apellido.Text = "label8";
+            // 
+            // precio
+            // 
+            this.precio.AutoSize = true;
+            this.precio.Location = new System.Drawing.Point(308, 80);
+            this.precio.Name = "precio";
+            this.precio.Size = new System.Drawing.Size(35, 13);
+            this.precio.TabIndex = 15;
+            this.precio.Text = "label8";
+            // 
             // CompraBono
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(536, 262);
-            this.Controls.Add(this.cantidadAComprar);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.precio);
             this.Controls.Add(this.apellido);
             this.Controls.Add(this.nombre);
+            this.Controls.Add(this.cantidadAComprar);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comprar);
-            this.Controls.Add(this.precio);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -187,14 +190,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox precio;
         private System.Windows.Forms.Button comprar;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox nombre;
-        private System.Windows.Forms.TextBox apellido;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown cantidadAComprar;
+        private System.Windows.Forms.Label nombre;
+        private System.Windows.Forms.Label apellido;
+        private System.Windows.Forms.Label precio;
     }
 }

@@ -39,6 +39,11 @@ namespace ClinicaFrba.Cancelar_Atencion
             {
                 mensajeDeError = mensajeDeError + "\r\n" + "Debe ingresar un motivo de cancelacion";
             }
+            if (!mensajeDeError.Equals(""))
+            {
+                MessageBox.Show(mensajeDeError, "Error!", MessageBoxButtons.OK);
+                return;
+            }
             int resultado = profesional.cancelarFranja(desde.Value, hasta.Value, motivoCancelacion.Text, "Profesional");
             if (resultado == 1)
             {
@@ -47,11 +52,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             }
             else
             {
-                mensajeDeError = mensajeDeError + "\r\n" + "Los dias que selecciono no pertenecen a ninguna franja";
-            }
-            if (!mensajeDeError.Equals(""))
-            {
-                MessageBox.Show(mensajeDeError, "Error!", MessageBoxButtons.OK);
+                MessageBox.Show("Los dias que selecciono no pertenecen a ninguna franja", "Error!", MessageBoxButtons.OK);
             }
         }
 

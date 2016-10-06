@@ -42,7 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.listaProfesionales = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
+            this.registrarAgendaProfesional = new System.Windows.Forms.Button();
             this.filtros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listaProfesionales)).BeginInit();
             this.SuspendLayout();
@@ -174,22 +174,22 @@
             this.listaProfesionales.Size = new System.Drawing.Size(577, 155);
             this.listaProfesionales.TabIndex = 1;
             // 
-            // button2
+            // registrarAgendaProfesional
             // 
-            this.button2.Location = new System.Drawing.Point(22, 356);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(577, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Registrar Agenda Profesional";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.registrarAgendaProfesional.Location = new System.Drawing.Point(22, 356);
+            this.registrarAgendaProfesional.Name = "registrarAgendaProfesional";
+            this.registrarAgendaProfesional.Size = new System.Drawing.Size(577, 23);
+            this.registrarAgendaProfesional.TabIndex = 2;
+            this.registrarAgendaProfesional.Text = "Registrar Agenda Profesional";
+            this.registrarAgendaProfesional.UseVisualStyleBackColor = true;
+            this.registrarAgendaProfesional.Click += new System.EventHandler(this.registrarAgendaProfesional_Click);
             // 
             // SeleccionarProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(645, 393);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.registrarAgendaProfesional);
             this.Controls.Add(this.listaProfesionales);
             this.Controls.Add(this.filtros);
             this.Name = "SeleccionarProfesional";
@@ -217,6 +217,6 @@
         private System.Windows.Forms.ComboBox tipoDoc;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.DataGridView listaProfesionales;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button registrarAgendaProfesional;
     }
 }

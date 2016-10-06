@@ -13,7 +13,6 @@ namespace ClinicaFrba.Pedir_Turno
 {
     partial class ElegirEspecialidad : Form
     {
-        private Especialidad especialidadElegida;
         private Turno turno;
 
         public ElegirEspecialidad(Turno turno)
@@ -41,6 +40,7 @@ namespace ClinicaFrba.Pedir_Turno
                     if(especialidad.descripcion.Equals(item.Text))
                     {
                         turno.especialidad = especialidad;
+                        break;
                     }
                 }
                 ElegirFecha elegirFecha = new ElegirFecha(turno, this);
@@ -49,7 +49,12 @@ namespace ClinicaFrba.Pedir_Turno
 
         private bool seleccionValida()
         {
-            return listaEspecialidades.SelectedItems.Count == 1;
+            if (listaEspecialidades.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("Debe seleccionar una especialidad", "Error!", MessageBoxButtons.OK);
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -90,12 +90,12 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void agregarHorarioOcupado(DateTime date)
         {
-            Fecha fecha = Fecha.parsearDateTime(date);
+            Fecha fechaOcupada = Fecha.parsearDateTime(date);
             foreach (Fecha unaFecha in fechas)
             {
-                if (fecha.dia.Date == unaFecha.dia.Date)
+                if (fechaOcupada.dia.Date == unaFecha.dia.Date)
                 {
-                    unaFecha.horasOcupadas.Add(fecha.horaDesde);
+                    unaFecha.horasOcupadas.Add(fechaOcupada.horaDesde);
                 }
             }
         }

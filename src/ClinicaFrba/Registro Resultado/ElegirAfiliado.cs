@@ -96,16 +96,15 @@ namespace ClinicaFrba.Registro_Resultado
 
         private Boolean seleccionValida()
         {
-            if (listaAfiliados.SelectedRows.Count == 1)
-            {
-                return true;
-            }
-            else
+            if (listaAfiliados.SelectedRows.Count != 1)
             {
                 MessageBox.Show("Debe seleccionar un afiliado", "Error!", MessageBoxButtons.OK);
                 return false;
             }
-
+            else
+            {
+                return true;
+            }
         }
 
         private void soloNumeros(object sender, KeyPressEventArgs e)
