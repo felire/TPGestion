@@ -103,7 +103,10 @@ namespace ClinicaFrba.UtilConexion
             Fecha fecha = new Fecha(desde);
             while (fecha.CompareTo(hasta) <= 0)
             {
-                todasLasFechas.Add(fecha);
+                if (fecha.CompareTo(DateTime.Now.Date) >= 0)//no agregamos fechas pasadas
+                {
+                    todasLasFechas.Add(fecha);
+                }
                 fecha = fecha.AddDays(1);
             }
 
@@ -112,7 +115,7 @@ namespace ClinicaFrba.UtilConexion
             {
                 foreach (AgendaDiaria agenda in agendasEspecialidad)
                 {
-                    if(unaFecha.dia.CompareTo(DateTime.Now.Date) >= 0 && agenda.fechaPertenece(unaFecha))
+                    if(agenda.fechaPertenece(unaFecha))
                     {
                         fechas.Add(unaFecha);
                         break;
