@@ -260,6 +260,8 @@
     <Compile Include="UtilConexion\Funcionalidad.cs" />
     <Compile Include="UtilConexion\Hora.cs" />
     <Compile Include="UtilConexion\Listado1.cs" />
+    <Compile Include="UtilConexion\Listado2.cs" />
+    <Compile Include="UtilConexion\Listado3.cs" />
     <Compile Include="UtilConexion\Listado4.cs" />
     <Compile Include="UtilConexion\Listado5.cs" />
     <Compile Include="UtilConexion\Profesional.cs" />

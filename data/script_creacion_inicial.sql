@@ -734,6 +734,24 @@ GROUP BY E.Descripcion, T.Descripcion,MONTH(Tu.Fecha)
 ORDER BY cantidad_cancelaciones DESC
 
 
+--Listado 2
+SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, COUNT(DISTINCT T.Id) Consultas
+FROM kernel_panic.Profesionales P JOIN kernel_panic.Diagnosticos T ON(T.Profesional_id = P.Id)
+								  JOIN kernel_panic.Afiliados A ON (T.Afiliado_id = A.Id)
+								  JOIN kernel_panic.Grupos_Familiares GF ON (A.Numero_de_grupo = GF.Id)
+								  JOIN kernel_panic.Turnos Tu ON (T.Turno_id = Tu.Id)
+--WHERE Tu.Especialidad = @especialidad AND GF.Plan_grupo = @planGrupo AND YEAR(T.Fecha) = 2016 esto es para filtrar por año etc
+GROUP BY P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc
+ORDER BY COUNT(DISTINCT T.Id) DESC
+
+--Listado 3
+SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, E.Desde desde,E.Hasta hasta,SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) HorasTrabajadasEnFranja
+FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Profesional = P.Id)
+								  JOIN kernel_panic.Agenda_Diaria AD ON (AD.EsquemaTrabajo = E.Id)
+--WHERE AD.Especialidad = @especialidad
+GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta
+ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) DESC
+
 SELECT TOP 5 A.Nombre Nombre, A.Apellido Apellido, SUM(T.Cantidad) AS Cantidad_Comprados, A.Numero_de_grupo,(SELECT CAST(
    CASE WHEN (SELECT COUNT(A2.Numero_de_grupo) FROM kernel_panic.Afiliados A2 WHERE A2.Numero_de_grupo = A.Numero_de_grupo) > 1 THEN 1 
    ELSE 0 
