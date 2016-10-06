@@ -752,6 +752,7 @@ FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Prof
 GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta
 ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) DESC
 
+--Listado 4
 SELECT TOP 5 A.Nombre Nombre, A.Apellido Apellido, SUM(T.Cantidad) AS Cantidad_Comprados, A.Numero_de_grupo,(SELECT CAST(
    CASE WHEN (SELECT COUNT(A2.Numero_de_grupo) FROM kernel_panic.Afiliados A2 WHERE A2.Numero_de_grupo = A.Numero_de_grupo) > 1 THEN 1 
    ELSE 0 
@@ -771,4 +772,5 @@ FROM kernel_panic.Turnos T
 		JOIN kernel_panic.Tipo_Especialidad Ti ON (Ti.Codigo = E.Tipo)
 GROUP BY  Ti.Descripcion,E.Descripcion
 ORDER BY Bonos_Utilizados DESC
+
 
