@@ -60,6 +60,7 @@
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.filtro2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -131,7 +132,7 @@
             this.grilla3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grilla3.Location = new System.Drawing.Point(-4, 0);
             this.grilla3.Name = "grilla3";
-            this.grilla3.Size = new System.Drawing.Size(814, 325);
+            this.grilla3.Size = new System.Drawing.Size(814, 310);
             this.grilla3.TabIndex = 0;
             // 
             // tabPage4
@@ -229,6 +230,7 @@
             // 
             // filtro2
             // 
+            this.filtro2.Controls.Add(this.filtro3);
             this.filtro2.Location = new System.Drawing.Point(463, 12);
             this.filtro2.Name = "filtro2";
             this.filtro2.Size = new System.Drawing.Size(353, 100);
@@ -238,7 +240,7 @@
             // 
             // filtro3
             // 
-            this.filtro3.Location = new System.Drawing.Point(463, 12);
+            this.filtro3.Location = new System.Drawing.Point(0, 0);
             this.filtro3.Name = "filtro3";
             this.filtro3.Size = new System.Drawing.Size(353, 100);
             this.filtro3.TabIndex = 0;
@@ -249,8 +251,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 458);
-            this.Controls.Add(this.filtro3);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(840, 439);
             this.Controls.Add(this.filtro2);
             this.Controls.Add(this.anioElegido);
             this.Controls.Add(this.listar);
@@ -258,6 +260,8 @@
             this.Controls.Add(this.semestreUno);
             this.Controls.Add(this.anio);
             this.Controls.Add(this.tabControl);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Listado";
             this.Text = "Listado";
             this.Load += new System.EventHandler(this.Listado_Load);
@@ -273,6 +277,7 @@
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grilla5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.filtro2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
