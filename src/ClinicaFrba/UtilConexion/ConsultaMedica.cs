@@ -8,18 +8,17 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data;
 
-
 namespace ClinicaFrba.UtilConexion
 {
     class ConsultaMedica
     {
-        public int id { get; set; }
-        public Afiliado afiliado { get; set; }
-        public Profesional profesional { get; set; }
-        public DateTime fecha { get; set; }
-        public string sintoma { get; set; }
-        public string enfermedad { get; set; }
-        public Turno turno { get; set; }
+        public int id;
+        public Afiliado afiliado;
+        public Profesional profesional;
+        public DateTime fecha;
+        public string sintoma;
+        public string enfermedad;
+        public Turno turno;
 
         public ConsultaMedica(Afiliado afiliado, Profesional profesional)
         {
@@ -57,7 +56,9 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(new SqlParameter("@fecha", this.fecha));
             ListaParametros.Add(new SqlParameter("@enfermedad", this.enfermedad));
             ListaParametros.Add(new SqlParameter("@sintomas", this.sintoma));
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Diagnosticos SET Fecha = @fecha, Sintoma = @sintomas, Enfermedad = @enfermedad WHERE Id = @id ", "T", ListaParametros);
+            string query = "UPDATE kernel_panic.Diagnosticos "+
+                           "SET Fecha = @fecha, Sintoma = @sintomas, Enfermedad = @enfermedad WHERE Id = @id ";
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
         }
 

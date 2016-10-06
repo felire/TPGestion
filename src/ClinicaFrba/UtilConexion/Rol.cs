@@ -13,15 +13,10 @@ namespace ClinicaFrba.UtilConexion
 {
     class Rol
     {
-        public int rol_id { get; set;}
-        public string nombreRol { get; set; }
-        public Boolean activo { get; set; }
+        public int rol_id;
+        public string nombreRol;
+        public Boolean activo;
         public List<Funcionalidad> funcionalidades;
-
-        public List<Funcionalidad> getFuncionalidades()
-        {
-            return funcionalidades;
-        }
 
         public Rol() {}
 
@@ -32,12 +27,20 @@ namespace ClinicaFrba.UtilConexion
             this.obtenerFuncionalidades();
         }
 
+        public List<Funcionalidad> getFuncionalidades()
+        {
+            return funcionalidades;
+        }
+
         public void obtenerFuncionalidades()
         {
             List<int> idsFunc = new List<int>();
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Funcion_id FROM kernel_panic.Funciones_Roles WHERE Rol_id = @rol_id", "T", ListaParametros);
+            string query = "SELECT Funcion_id "+
+                           "FROM kernel_panic.Funciones_Roles "+
+                           "WHERE Rol_id = @rol_id";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
 
             if (speaker.reader.HasRows)
             {
@@ -49,7 +52,10 @@ namespace ClinicaFrba.UtilConexion
             speaker.close();
             ListaParametros.Clear();
             ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
-            speaker = ConexionDB.ObtenerDataReader("SELECT Nombre FROM kernel_panic.Roles WHERE Id = @rol_id", "T", ListaParametros);
+            query = "SELECT Nombre "+
+                    "FROM kernel_panic.Roles "+
+                    "WHERE Id = @rol_id";
+            speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 speaker.reader.Read();
@@ -84,7 +90,10 @@ namespace ClinicaFrba.UtilConexion
                 ListaParametros.Clear();
                 ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
                 ListaParametros.Add(new SqlParameter("@funcionalidad_id", funcionalidad.funcionalidad_id));
-                speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Funciones_Roles (Rol_id, Funcion_id) VALUES (@rol_id, @funcionalidad_id)", "T", ListaParametros);
+                string query = "INSERT INTO kernel_panic.Funciones_Roles "+
+                               "(Rol_id, Funcion_id) "+
+                               "VALUES (@rol_id, @funcionalidad_id)";
+                speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
                 speaker.close();
             }
             return true;
@@ -93,7 +102,9 @@ namespace ClinicaFrba.UtilConexion
         public static List<Rol> obtenerTodosLosRoles()
         {
             List<Rol> roles = new List<Rol>();
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id,Esta_activo FROM kernel_panic.Roles", "T", new List<SqlParameter>());
+            string query = "SELECT Id,Esta_activo "+
+                           "FROM kernel_panic.Roles";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", new List<SqlParameter>());
             if (speaker.reader.HasRows)
             {
                 while (speaker.reader.Read())
@@ -111,7 +122,10 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Roles SET Esta_activo = 1 WHERE Id = @rol_id", "T", ListaParametros);
+            string query = "UPDATE kernel_panic.Roles "+
+                           "SET Esta_activo = 1 "+
+                           "WHERE Id = @rol_id";
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
         }
 
@@ -120,14 +134,19 @@ namespace ClinicaFrba.UtilConexion
             this.funcionalidades.Clear();
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@idRol", this.rol_id));
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("DELETE FROM kernel_panic.Funciones_Roles WHERE Rol_id = @idRol", "T", ListaParametros);
+            string query = "DELETE FROM kernel_panic.Funciones_Roles "+
+                           "WHERE Rol_id = @idRol";
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
             foreach (Funcionalidad funcionalidad in funcionalidades)
             {
                 ListaParametros.Clear();
                 ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
                 ListaParametros.Add(new SqlParameter("@funcionalidad_id", funcionalidad.funcionalidad_id));
-                speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Funciones_Roles (Rol_id, Funcion_id) VALUES (@rol_id, @funcionalidad_id)", "T", ListaParametros);
+                query = "INSERT INTO kernel_panic.Funciones_Roles "+
+                        "(Rol_id, Funcion_id) "+
+                        "VALUES (@rol_id, @funcionalidad_id)";
+                speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
                 speaker.close();
                 this.funcionalidades.Add(funcionalidad);
             }
@@ -137,13 +156,17 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("DELETE FROM kernel_panic.Roles_Usuario WHERE Rol_id = @rol_id", "T", ListaParametros);
+            string query = "DELETE FROM kernel_panic.Roles_Usuario "+
+                           "WHERE Rol_id = @rol_id";
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
             ListaParametros.Clear();
             ListaParametros.Add(new SqlParameter("@rol_id", this.rol_id));
-            speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Roles SET Esta_activo = 0 WHERE Id = @rol_id", "T", ListaParametros);
+            query = "UPDATE kernel_panic.Roles "+
+                    "SET Esta_activo = 0 "+
+                    "WHERE Id = @rol_id";
+            speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
         }
     }
 }
-

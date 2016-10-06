@@ -49,23 +49,9 @@ namespace ClinicaFrba.Pedir_Turno
         private void borrarFechasCanceladas()
         {
             List<FranjaCancelada> franjasCanceladas = turno.profesional.darFranjasCanceladas();
-
-            List<Fecha> fechasClonadas = new List<Fecha>();
-            foreach (Fecha fecha in fechas)
+            foreach (FranjaCancelada franja in franjasCanceladas)
             {
-                fechasClonadas.Add(fecha);
-            }
-            
-            foreach(Fecha fecha in fechasClonadas)
-            {
-                foreach (FranjaCancelada franja in franjasCanceladas)
-                {
-                    if (franja.fechaFueCancelada(fecha))
-                    {
-                        fechas.Remove(fecha);
-                        break;
-                    }
-                }
+                fechas.RemoveAll(fecha => franja.fechaFueCancelada(fecha));
             }
         }
 

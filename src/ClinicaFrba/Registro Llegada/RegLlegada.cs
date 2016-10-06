@@ -13,7 +13,6 @@ namespace ClinicaFrba.Registro_Llegada
 {
     partial class RegLlegada : Form
     {
-
         public RegLlegada()
         {
             InitializeComponent();
@@ -21,7 +20,6 @@ namespace ClinicaFrba.Registro_Llegada
             listaAfiliados.AutoGenerateColumns = false;
             cargarGrilla();
         }
-
 
         private void cargarGrilla()
         {

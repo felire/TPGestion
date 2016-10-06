@@ -13,10 +13,11 @@ namespace ClinicaFrba.UtilConexion
 {
     class Usuario
     {
-        public string usuario { get; set; }
+        public string usuario;
         public List<Rol> roles;
-        public Afiliado afiliado {get;set;}
-        public Profesional profesional { get; set; }
+        public Afiliado afiliado;
+        public Profesional profesional;
+
         public List<Rol> getRoles()
         {
             return roles;
@@ -76,7 +77,10 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombreUsuario", this.usuario));
             ListaParametros.Add(new SqlParameter("@pass", pass));
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Usuarios SET Password_usuario = @pass WHERE Nombre_usuario = @nombreUsuario", "T", ListaParametros);
+            string query = "UPDATE kernel_panic.Usuarios "+
+                           "SET Password_usuario = @pass "+
+                           "WHERE Nombre_usuario = @nombreUsuario";
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
         }
         public void ObtenerRoles()
@@ -85,7 +89,10 @@ namespace ClinicaFrba.UtilConexion
             this.roles = new List<Rol>();
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombre", this.usuario));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Rol_id FROM kernel_panic.Roles_Usuario WHERE Usuario_id = @nombre", "T", ListaParametros);
+            string query = "SELECT Rol_id "+
+                           "FROM kernel_panic.Roles_Usuario "+
+                           "WHERE Usuario_id = @nombre";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
 
             if (speaker.reader.HasRows)
             {

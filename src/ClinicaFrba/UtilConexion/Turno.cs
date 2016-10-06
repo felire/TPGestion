@@ -13,13 +13,13 @@ namespace ClinicaFrba.UtilConexion
 {
     class Turno
     {
-        public int id { get; set; }
-        public DateTime fecha { get; set; }
-        public Especialidad especialidad { get; set; }
-        public string especialidadNombre { get; set; }
-        public Profesional profesional { get; set; }
-        public string profesionalNombre { get; set; }
-        public Afiliado afiliado { get; set; }
+        public int id;
+        public DateTime fecha;
+        public Especialidad especialidad;
+        public string especialidadNombre;
+        public Profesional profesional;
+        public string profesionalNombre;
+        public Afiliado afiliado;
 
         public Turno(int id)
         {
@@ -33,7 +33,10 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@turnoId", this.id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Fecha, Especialidad FROM kernel_panic.Turnos WHERE Id = @turnoId", "T", ListaParametros);
+            string query = "SELECT Fecha, Especialidad "+
+                           "FROM kernel_panic.Turnos "+
+                           "WHERE Id = @turnoId";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 speaker.reader.Read();
@@ -48,7 +51,13 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@afiliadoId", afiliado.id));
             List<Turno> turnos = new List<Turno>();
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id, Fecha, Especialidad, Profesional_id FROM kernel_panic.Turnos WHERE Afiliado_id = @afiliadoId AND Fecha >= CONVERT(DATE,GETDATE()) AND Fecha_llegada IS NULL AND Cancelacion IS NULL ORDER BY Fecha ASC", "T", ListaParametros);
+            string query = "SELECT Id, Fecha, Especialidad, Profesional_id "+
+                           "FROM kernel_panic.Turnos "+
+                           "WHERE Afiliado_id = @afiliadoId AND Fecha >= CONVERT(DATE,GETDATE()) "+
+                           "AND Fecha_llegada IS NULL "+
+                           "AND Cancelacion IS NULL "+
+                           "ORDER BY Fecha ASC";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 while (speaker.reader.Read())
@@ -82,7 +91,15 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@idAfiliado", afiliado.id));
             ListaParametros.Add(new SqlParameter("@idProfesional", profesional.id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id, Fecha, Especialidad FROM kernel_panic.Turnos WHERE Afiliado_id = @idAfiliado AND Profesional_id = @idProfesional AND CONVERT(DATE,Fecha) = CONVERT(DATE,GETDATE()) AND Fecha_llegada IS NULL AND Cancelacion IS NULL ORDER BY Fecha ASC", "T", ListaParametros);
+            string query = "SELECT Id, Fecha, Especialidad "+
+                           "FROM kernel_panic.Turnos "+
+                           "WHERE Afiliado_id = @idAfiliado "+
+                           "AND Profesional_id = @idProfesional "+
+                           "AND CONVERT(DATE,Fecha) = CONVERT(DATE,GETDATE()) "+
+                           "AND Fecha_llegada IS NULL "+
+                           "AND Cancelacion IS NULL "+
+                           "ORDER BY Fecha ASC";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             List<Turno> turnos = new List<Turno>();
             if (speaker.reader.HasRows)
             {
@@ -109,14 +126,19 @@ namespace ClinicaFrba.UtilConexion
 
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@idTurno", this.id));
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Turnos SET Fecha_llegada = GETDATE() WHERE Id = @idTurno", "T", ListaParametros);
+            string query = "UPDATE kernel_panic.Turnos "+
+                           "SET Fecha_llegada = GETDATE() "+
+                           "WHERE Id = @idTurno";
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
 
             ListaParametros.Clear();
             ListaParametros.Add(new SqlParameter("@idTurno", this.id));
             ListaParametros.Add(new SqlParameter("@idAfiliado", afiliado.id));
             ListaParametros.Add(new SqlParameter("@idProfesional", profesional.id));
-            speaker = ConexionDB.ExecuteNoQuery("INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Turno_id) VALUES (@idAfiliado, @idProfesional, @idTurno)", "T", ListaParametros);
+            query = "INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Turno_id) "+
+                    "VALUES (@idAfiliado, @idProfesional, @idTurno)";
+            speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
         }
 

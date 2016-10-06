@@ -8,8 +8,8 @@ namespace ClinicaFrba.UtilConexion
 {
     class Hora
     {
-        public string HoraAMostrar { get; set; }
-        public TimeSpan LaHora { get; set; }
+        public string HoraAMostrar;
+        public TimeSpan LaHora;
 
         public Hora(TimeSpan hora, string detalle)
         {
@@ -49,11 +49,11 @@ namespace ClinicaFrba.UtilConexion
             return lista;
         }
 
-        private static Boolean horaValida(Fecha dia, TimeSpan unaHora)
+        private static Boolean horaValida(Fecha fecha, TimeSpan unaHora)
         {
-            DateTime horaACheckear = new DateTime(dia.dia.Year, dia.dia.Month, dia.dia.Day, unaHora.Hours, unaHora.Minutes, 0);
+            DateTime horaACheckear = new DateTime(fecha.dia.Year, fecha.dia.Month, fecha.dia.Day, unaHora.Hours, unaHora.Minutes, 0);
             Boolean noEsPasada = DateTime.Now.CompareTo(horaACheckear) < 0;
-            Boolean estaOcupada = dia.horasOcupadas.Contains(unaHora);
+            Boolean estaOcupada = fecha.horasOcupadas.Contains(unaHora);
             return noEsPasada && !estaOcupada;
         }
 
@@ -152,8 +152,6 @@ namespace ClinicaFrba.UtilConexion
             }
             return lista;
         }
-
-
     }
 }
 

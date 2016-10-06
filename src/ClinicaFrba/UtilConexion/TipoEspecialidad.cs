@@ -12,8 +12,8 @@ namespace ClinicaFrba.UtilConexion
 {
     class TipoEspecialidad
     {
-        public decimal codigo { get; set; }
-        public string descripcion { get; set; }
+        public decimal codigo;
+        public string descripcion;
 
         public TipoEspecialidad(decimal codigo)
         {
@@ -25,7 +25,10 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@codigo", this.codigo));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Descripcion FROM kernel_panic.Tipo_Especialidad WHERE Codigo = @codigo", "T", ListaParametros);
+            string query = "SELECT Descripcion "+
+                           "FROM kernel_panic.Tipo_Especialidad "+
+                           "WHERE Codigo = @codigo";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                 speaker.reader.Read();

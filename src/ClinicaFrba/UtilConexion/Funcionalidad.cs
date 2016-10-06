@@ -12,8 +12,8 @@ namespace ClinicaFrba.UtilConexion
 {
     class Funcionalidad
     {
-        public int funcionalidad_id {get;set;}
-        public string descripcion { get; set; }
+        public int funcionalidad_id;
+        public string descripcion;
 
         public Funcionalidad(int fun_id)
         {
@@ -27,7 +27,10 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@fun_id", this.funcionalidad_id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Nombre FROM kernel_panic.Funciones WHERE Id = @fun_id", "T", ListaParametros);
+            string query = "SELECT Nombre "+
+                           "FROM kernel_panic.Funciones "+
+                           "WHERE Id = @fun_id";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
 
             if (speaker.reader.HasRows)
             {
@@ -40,7 +43,9 @@ namespace ClinicaFrba.UtilConexion
         public static List<Funcionalidad> darTodasLasFuncionalidades()
         {
             List<Funcionalidad> funcionalidades = new List<Funcionalidad>();
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id,Nombre FROM kernel_panic.Funciones", "T", new List<SqlParameter>());
+            string query = "SELECT Id,Nombre "+
+                           "FROM kernel_panic.Funciones";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", new List<SqlParameter>());
             if (speaker.reader.HasRows)
             {
                 while (speaker.reader.Read())

@@ -13,20 +13,20 @@ namespace ClinicaFrba.UtilConexion
 {
     class Afiliado
     {
-        public int id { get; set; }
-        public int numeroDeGrupo { get; set; }
-        public int numeroEnElGrupo { get; set; }
-        public bool esta_activo { get; set; }
-        public string nombre { get; set; }
-        public string apellido { get; set; }
-        public string tipoDoc { get; set; }
-        public decimal documento { get; set; }
-        public string direccion { get; set; }
-        public decimal telefono { get; set; }
-        public string mail { get; set; }
-        public DateTime fechaNac { get; set; }
-        public string sexo { get; set; }
-        public string estadoCivil { get; set; }
+        public int id;
+        public int numeroDeGrupo;
+        public int numeroEnElGrupo;
+        public bool esta_activo;
+        public string nombre;
+        public string apellido;
+        public string tipoDoc;
+        public decimal documento;
+        public string direccion;
+        public decimal telefono;
+        public string mail;
+        public DateTime fechaNac;
+        public string sexo;
+        public string estadoCivil;
 
         public Afiliado(string nombreUser)
         {

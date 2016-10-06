@@ -13,10 +13,10 @@ namespace ClinicaFrba.UtilConexion
 {
     class BonoConsulta
     {
-        public decimal precioUnitario { get; set; }
-        public int cantidad { get; set; }
-        public decimal plan { get; set; }
-        public Afiliado afiliado { get; set; }
+        public decimal precioUnitario;
+        public int cantidad;
+        public decimal plan;
+        public Afiliado afiliado;
 
         public BonoConsulta(Afiliado afiliado)
         {

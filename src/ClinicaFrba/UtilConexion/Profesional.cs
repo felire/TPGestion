@@ -14,12 +14,12 @@ namespace ClinicaFrba.UtilConexion
 {
     class Profesional
     {
-        public int id { get; set; }
-        public string nombre { get; set; }
-        public string apellido { get; set; }
-        public List<Especialidad> especialidades { get; set; }
-        public string tipoDoc { get; set; }
-        public decimal documento { get; set; }
+        public int id;
+        public string nombre;
+        public string apellido;
+        public List<Especialidad> especialidades;
+        public string tipoDoc;
+        public decimal documento;
 
         public Profesional()
         {

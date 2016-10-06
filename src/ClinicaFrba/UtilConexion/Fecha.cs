@@ -8,10 +8,10 @@ namespace ClinicaFrba.UtilConexion
 {
     class Fecha
     {
-        public DateTime dia { get; set; }
-        public TimeSpan horaDesde { get; set; }
-        public TimeSpan horaHasta { get; set; }
-        public List<TimeSpan> horasOcupadas { get; set; }
+        public DateTime dia;
+        public TimeSpan horaDesde;
+        public TimeSpan horaHasta;
+        public List<TimeSpan> horasOcupadas;
 
         public Fecha(DateTime dia, TimeSpan horaDesde, TimeSpan horaHasta)
         {
@@ -25,6 +25,11 @@ namespace ClinicaFrba.UtilConexion
         {
             this.dia = dia;
             this.horasOcupadas = new List<TimeSpan>();
+        }
+
+        public DayOfWeek dayOfWeek()
+        {
+            return dia.DayOfWeek;
         }
 
         public int CompareTo(DateTime desde)
