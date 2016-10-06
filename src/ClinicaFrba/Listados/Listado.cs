@@ -29,7 +29,6 @@ namespace ClinicaFrba.Listados
             grilla4.AutoGenerateColumns = false;
             grilla5.AutoGenerateColumns = false;
             this.generarGrillaListado1();
-            this.generarGrillaListado2();
             this.generarGrillaListado4();
             this.generarGrillaListado5();
         }
@@ -73,13 +72,12 @@ namespace ClinicaFrba.Listados
         }
         private void cargarEspecialidadesCanceladas()
         {
-            List<Listado1> lista1 = Listado1.obtenerResultados((int)anioElegido.SelectedItem, semestre);
-            grilla1.DataSource = lista1;
+            List<Listado1> lista = Listado1.obtenerResultados((int)anioElegido.SelectedItem, semestre);
+            grilla1.DataSource = lista;
         }
         private void cargarProfesionalesMasConsultados()
         {
-            List<Listado2> lista2 = Listado2.obtenerResultados((int)anioElegido.SelectedItem, semestre);
-            grilla2.DataSource = lista2;
+
         }
         private void cargarProfesionalesMenosHoras()
         {
@@ -170,41 +168,24 @@ namespace ClinicaFrba.Listados
         private void generarGrillaListado2()
         {
 
-            DataGridViewTextBoxColumn ColId = new DataGridViewTextBoxColumn();
-            ColId.DataPropertyName = "Id";
-            ColId.HeaderText = "Id";
-            ColId.Width = grilla1.Width / 6;
-            grilla2.Columns.Add(ColId);
+            /*DataGridViewTextBoxColumn ColNombre = new DataGridViewTextBoxColumn();
+            ColNombre.DataPropertyName = "especialidad";
+            ColNombre.HeaderText = "Especialidad Médica";
 
-            DataGridViewTextBoxColumn ColNombre = new DataGridViewTextBoxColumn();
-            ColNombre.DataPropertyName = "nombre";
-            ColNombre.HeaderText = "Nombre Profesional";
-            ColNombre.Width = grilla1.Width / 6;
-            grilla2.Columns.Add(ColNombre);
+            ColNombre.Width = grilla1.Width / 3;
+            grilla1.Columns.Add(ColNombre);
 
-            DataGridViewTextBoxColumn ColApellido = new DataGridViewTextBoxColumn();
-            ColApellido.DataPropertyName = "apellido";
-            ColApellido.HeaderText = "Apellido Profesional";
-            ColApellido.Width = grilla1.Width / 6;
-            grilla2.Columns.Add(ColApellido);
+            DataGridViewTextBoxColumn ColTipo = new DataGridViewTextBoxColumn();
+            ColTipo.DataPropertyName = "tipoEspecialidad";
+            ColTipo.HeaderText = "Tipo Especialidad Médica";
+            ColTipo.Width = grilla1.Width / 3;
+            grilla1.Columns.Add(ColTipo);
 
-            DataGridViewTextBoxColumn ColTipoDoc = new DataGridViewTextBoxColumn();
-            ColTipoDoc.DataPropertyName = "tipDoc";
-            ColTipoDoc.HeaderText = "Tipo Documento";
-            ColTipoDoc.Width = grilla1.Width / 6;
-            grilla2.Columns.Add(ColTipoDoc);
-
-            DataGridViewTextBoxColumn ColDocumento = new DataGridViewTextBoxColumn();
-            ColDocumento.DataPropertyName = "documento";
-            ColDocumento.HeaderText = "Documento";
-            ColDocumento.Width = grilla1.Width / 6;
-            grilla2.Columns.Add(ColDocumento);
-
-            DataGridViewTextBoxColumn ColConsultas = new DataGridViewTextBoxColumn();
-            ColConsultas.DataPropertyName = "consultas";
-            ColConsultas.HeaderText = "Cantidad Consultas";
-            ColConsultas.Width = grilla1.Width / 6 - numeritoMagico;
-            grilla2.Columns.Add(ColConsultas);
+            DataGridViewTextBoxColumn ColCant = new DataGridViewTextBoxColumn();
+            ColCant.DataPropertyName = "cantidadCancelaciones";
+            ColCant.HeaderText = "Total Cancelaciones del semestre";
+            ColCant.Width = grilla1.Width / 3 - numeritoMagico;
+            grilla1.Columns.Add(ColCant);*/
         }
 
         private void generarGrillaListado3()
