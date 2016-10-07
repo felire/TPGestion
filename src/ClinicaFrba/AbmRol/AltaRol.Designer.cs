@@ -32,7 +32,7 @@
             this.nombreElegido = new System.Windows.Forms.TextBox();
             this.funcionalidadesAgregables = new System.Windows.Forms.ListView();
             this.agregarFun = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.quitarFun = new System.Windows.Forms.Button();
             this.funcionalidadesAgregadas = new System.Windows.Forms.ListView();
             this.agregarRol = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -75,15 +75,15 @@
             this.agregarFun.UseVisualStyleBackColor = true;
             this.agregarFun.Click += new System.EventHandler(this.agregarFun_Click);
             // 
-            // button1
+            // quitarFun
             // 
-            this.button1.Location = new System.Drawing.Point(283, 200);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(33, 35);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "<";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.quitarFun.Location = new System.Drawing.Point(283, 200);
+            this.quitarFun.Name = "quitarFun";
+            this.quitarFun.Size = new System.Drawing.Size(33, 35);
+            this.quitarFun.TabIndex = 4;
+            this.quitarFun.Text = "<";
+            this.quitarFun.UseVisualStyleBackColor = true;
+            this.quitarFun.Click += new System.EventHandler(this.quitarFun_Click);
             // 
             // funcionalidadesAgregadas
             // 
@@ -131,7 +131,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.agregarRol);
             this.Controls.Add(this.funcionalidadesAgregadas);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.quitarFun);
             this.Controls.Add(this.agregarFun);
             this.Controls.Add(this.funcionalidadesAgregables);
             this.Controls.Add(this.nombreElegido);
@@ -149,7 +149,7 @@
         private System.Windows.Forms.TextBox nombreElegido;
         private System.Windows.Forms.ListView funcionalidadesAgregables;
         private System.Windows.Forms.Button agregarFun;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button quitarFun;
         private System.Windows.Forms.ListView funcionalidadesAgregadas;
         private System.Windows.Forms.Button agregarRol;
         private System.Windows.Forms.Label label1;

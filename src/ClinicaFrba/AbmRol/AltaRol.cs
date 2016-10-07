@@ -41,7 +41,7 @@ namespace ClinicaFrba.AbmRol
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void quitarFun_Click(object sender, EventArgs e)
         {
             int cantidadSeleccionadas = funcionalidadesAgregadas.SelectedItems.Count;
             for (int i = 0; i < cantidadSeleccionadas; i++)
@@ -96,13 +96,14 @@ namespace ClinicaFrba.AbmRol
         private List<Funcionalidad> funcionalidadesElegidas()
         {
             List<Funcionalidad> funcionalidadesAAgregar = new List<Funcionalidad>();
-            foreach (Funcionalidad funci in funcionalidades)
+            foreach (ListViewItem item in funcionalidadesAgregadas.Items)
             {
-                foreach (ListViewItem item in funcionalidadesAgregadas.Items)
+                foreach (Funcionalidad funcionalidad in funcionalidades)
                 {
-                    if (funci.descripcion.Equals(item.Text))
+                    if (funcionalidad.descripcion.Equals(item.Text))
                     {
-                        funcionalidadesAAgregar.Add(funci);
+                        funcionalidadesAAgregar.Add(funcionalidad);
+                        break;
                     }
                 }
             }

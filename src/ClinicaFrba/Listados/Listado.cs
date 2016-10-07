@@ -16,6 +16,7 @@ namespace ClinicaFrba.Listados
         public int semestre;
         private List<int> anios;
         public const int numeritoMagico = 44;
+
         public Listado()
         {
             InitializeComponent();

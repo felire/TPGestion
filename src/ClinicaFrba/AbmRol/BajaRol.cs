@@ -47,6 +47,7 @@ namespace ClinicaFrba.AbmRol
                     if (rol.nombreRol.Equals(nombreRol.Text))
                     {
                         rol.deshabilitar();
+                        break;
                     }
                 }
             }
