@@ -619,13 +619,15 @@ create procedure kernel_panic.alta_afiliado
 		@Estado_civil VARCHAR(20), 
 		@Hijos INT,
 		@Plan_Medico numeric(18,0) 
-AS BEGIN
+AS
 	declare @Id int
 	declare @IdAfiReal int
 	IF (select COUNT(GD2C2016.kernel_panic.Afiliados.Numero_doc)  from GD2C2016.kernel_panic.Afiliados where GD2C2016.kernel_panic.Afiliados.Numero_doc = @Doc) > 0
 	begin
-	print 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existente'
-	return 1
+	print 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existe'
+	set @IdAfiReal = (select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
+	print 'El Afiliado Id es: '+CONVERT(VARCHAR(20), @IdAfiReal)
+	return -@IdAfiReal
 	end
 	Else begin
 		insert into GD2C2016.kernel_panic.Grupos_Familiares (Plan_grupo) values (@Plan_Medico)
@@ -662,8 +664,158 @@ AS BEGIN
 			END
             RETURN 4
 		 END
+		 RETURN @IdAfiReal
 	end
-end
+GO
+
+--Alta/Habilitacion usuario existente
+create procedure kernel_panic.rehabilitar_alta @IdAfiliado int
+AS
+	IF (@IdAfiliado < 0)
+		BEGIN
+		SET @IdAfiliado = -@IdAfiliado
+	END
+	update kernel_panic.Afiliados SET Esta_activo = 0 where Id = @IdAfiliado
+	IF @@rowcount = 0
+		BEGIN
+			PRINT 'Hubo un problema al habilitar el usuario'+@IdAfiliado
+			IF @@ERROR <> 0
+			BEGIN
+                PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+			END
+		RETURN 1
+	END
+	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('A',@IdAfiliado,'Se rehabilita el usuario')
+	RETURN @IdAfiliado
+GO
+
+--Alta Conyugue 
+create procedure kernel_panic.alta_conyuge
+--recibo parametros
+		@Nom VARCHAR(255),
+		@Ape VARCHAR(255),
+		@Tipo_doc VARCHAR(15),
+		@Doc numeric(18,0),
+		@Dire VARCHAR(255),
+		@Tel numeric(18,0),
+		@Mail VARCHAR(255),
+		@Fecha_nac VARCHAR(30),
+		@Sexo CHAR,
+		@Plan_Medico numeric(18,0),
+		@IdAfiInput int
+AS
+	DECLARE @Id int
+	DECLARE @IdAfiReal int
+	DECLARE @Hijos int
+	DECLARE @Estado_civil VARCHAR(20)
+	IF (select COUNT(kernel_panic.Afiliados.Numero_doc)  from kernel_panic.Afiliados where kernel_panic.Afiliados.Numero_doc = @Doc) > 0
+	BEGIN
+		PRINT 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existe'
+		SET @IdAfiReal = (select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
+		PRINT 'El Afiliado Id es: '+CONVERT(VARCHAR(20), @IdAfiReal)
+		RETURN -@IdAfiReal
+	END
+	ElSE BEGIN
+		SET @Id = (SELECT Numero_de_grupo from kernel_panic.Afiliados where kernel_panic.Afiliados.Id = @IdAfiInput)
+		SET @Estado_civil = (SELECT Estado_civil from kernel_panic.Afiliados where kernel_panic.Afiliados.Id = @IdAfiInput)
+		SET @Hijos = (SELECT Familiares_a_cargo from kernel_panic.Afiliados where kernel_panic.Afiliados.Id = @IdAfiInput)
+		SET @IdAfiReal = @IdAfiInput+1
+		INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario, Habilitado) values (CONVERT(VARCHAR(50), @IdAfiReal), 'default', 0)
+		IF @@rowcount = 0
+		BEGIN
+			PRINT 'No se ha podido crear el usuario'+@IdAfiReal
+				IF @@ERROR <> 0
+				BEGIN
+					 PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+				END
+			RETURN 2		
+		END
+		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
+		VALUES
+		(@IdAfiReal, @Id, 2, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(DATETIME, @Fecha_nac, 120), @Sexo, @Estado_civil, @Hijos, 0, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		IF @@rowcount = 0
+		BEGIN
+			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
+			IF @@ERROR <> 0
+			BEGIN
+                PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+			END
+            RETURN 3
+		 END
+		 RETURN @IdAfiReal
+		 END
+GO
+
+DROP PROCEDURE kernel_panic.alta_hermano
+--Alta hermano
+create procedure kernel_panic.alta_hermano
+--recibo parametros
+		@Nom VARCHAR(255),
+		@Ape VARCHAR(255),
+		@Tipo_doc VARCHAR(15),
+		@Doc numeric(18,0),
+		@Dire VARCHAR(255),
+		@Tel numeric(18,0),
+		@Mail VARCHAR(255),
+		@Fecha_nac VARCHAR(30),
+		@Sexo CHAR,
+		@Plan_Medico numeric(18,0),
+		@NroHijo int,
+		@IdAfiInput int
+AS
+	DECLARE @Id int
+	DECLARE @CantHijos int
+	DECLARE @IdAfiReal int
+	DECLARE @Estado_civil VARCHAR(20)
+	IF (select COUNT(kernel_panic.Afiliados.Numero_doc)  from kernel_panic.Afiliados where kernel_panic.Afiliados.Numero_doc = @Doc) > 0
+	BEGIN
+		PRINT 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existe'
+		SET @IdAfiReal = (select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
+		PRINT 'El Afiliado Id es: '+CONVERT(VARCHAR(20), @IdAfiReal)
+		RETURN -@IdAfiReal
+	END
+	ElSE BEGIN
+		SET @Id = (SELECT Numero_de_grupo from kernel_panic.Afiliados where kernel_panic.Afiliados.Id = @IdAfiInput)
+		SET @Estado_civil = 'Soltero/a'
+		SET @CantHijos = (SELECT Familiares_a_cargo from kernel_panic.Afiliados where kernel_panic.Afiliados.Id = @IdAfiInput)
+		--Reservo el 1 para el conyuge + el nro de hijo que estoy registrando
+		SET @IdAfiReal = @IdAfiInput+1+@NroHijo
+		INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario, Habilitado) values (CONVERT(VARCHAR(50), @IdAfiReal), 'default', 0)
+		IF @@rowcount = 0
+		BEGIN
+			PRINT 'No se ha podido crear el usuario'+@IdAfiReal
+				IF @@ERROR <> 0
+				BEGIN
+					 PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+				END
+			RETURN 2		
+		END
+		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
+		VALUES
+		(@IdAfiReal, @Id, @NroHijo, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(DATETIME, @Fecha_nac, 120), @Sexo, @Estado_civil, NULL, 0, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		IF @@rowcount = 0
+		BEGIN
+			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
+			IF @@ERROR <> 0
+			BEGIN
+                PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+			END
+            RETURN 3
+		 END
+		 RETURN (@IdAfiReal-1-@NroHijo)
+		 --Devuelvo el padre original
+		 END
+GO
 
 Create trigger kernel_panic.Alta_AF_inserta_log
 on GD2C2016.kernel_panic.Afiliados
