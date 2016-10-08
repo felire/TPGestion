@@ -24,19 +24,36 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@anio", anio));
             ListaParametros.Add(new SqlParameter("@especialidad", especialidad));
-            
+            //SELECT convert(date, '23/10/2016', 103)
             SpeakerDB speaker;
                      
 
-            speaker = ConexionDB.ObtenerDataReader("SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, E.Desde desde,E.Hasta hasta,SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) HorasTrabajadasEnFranja "+
-                                                    "FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Profesional = P.Id) "+
-								                                                        "JOIN kernel_panic.Agenda_Diaria AD ON (AD.EsquemaTrabajo = E.Id) "+
-                                                    "WHERE YEAR(E.Desde)=@anio OR YEAR(E.Hasta)=@anio "+
-                                                    "AND AD.Especialidad = @especialidad "+
-                                                    "GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta "+
-                                                    "ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) ASC", "T", ListaParametros);
-                
-                        
+           
+
+
+
+            if (semestre == 1)
+            {
+
+                speaker = ConexionDB.ObtenerDataReader("SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, E.Desde desde,E.Hasta hasta,SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) HorasTrabajadasEnFranja " +
+                                                   "FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Profesional = P.Id) " +
+                                                                                       "JOIN kernel_panic.Agenda_Diaria AD ON (AD.EsquemaTrabajo = E.Id) " +
+                                                   "WHERE (YEAR(E.Desde)=@anio OR YEAR(E.Hasta)=@anio) AND MONTH(E.Desde)<7 " +
+                                                   "AND AD.Especialidad = @especialidad " +
+                                                   "GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta " +
+                                                   "ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) ASC", "T", ListaParametros);
+
+            }
+            else
+            {
+                speaker = ConexionDB.ObtenerDataReader("SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, E.Desde desde,E.Hasta hasta,SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, CASE WHEN MONTH(E.Desde) > 6 THEN E.Desde ELSE convert(date, '01/07/@anio', 103) END, CASE WHEN MONTH(E.Hasta)>6 THEN E.Hasta ELSE convert(date, '31/12/@anio',103) END) HorasTrabajadasEnFranja " +
+                                                   "FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Profesional = P.Id) " +
+                                                                                       "JOIN kernel_panic.Agenda_Diaria AD ON (AD.EsquemaTrabajo = E.Id) " +
+                                                   "WHERE (YEAR(E.Desde)=@anio OR YEAR(E.Hasta)=@anio) " +
+                                                   "AND AD.Especialidad = @especialidad " +
+                                                   "GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta " +
+                                                   "ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, CASE WHEN MONTH(E.Desde) > 6 THEN E.Desde ELSE convert(date, '01/07/@anio', 103) END, CASE WHEN MONTH(E.Hasta)>6 THEN E.Hasta ELSE convert(date, '31/12/@anio',103) END) ASC", "T", ListaParametros);
+            }
             List<Listado3> lista = new List<Listado3>();
             if (speaker.reader.HasRows)
             {

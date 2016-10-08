@@ -264,6 +264,7 @@
     <Compile Include="UtilConexion\Listado3.cs" />
     <Compile Include="UtilConexion\Listado4.cs" />
     <Compile Include="UtilConexion\Listado5.cs" />
+    <Compile Include="UtilConexion\Plan.cs" />
     <Compile Include="UtilConexion\Profesional.cs" />
     <Compile Include="UtilConexion\Rol.cs" />
     <Compile Include="UtilConexion\SpeakerDB.cs" />

@@ -48,6 +48,9 @@
             this.anioElegido = new System.Windows.Forms.ComboBox();
             this.comboBoxEspecialidades = new System.Windows.Forms.ComboBox();
             this.filtroEspecialidad = new System.Windows.Forms.GroupBox();
+            this.filtrarEspYPlan = new System.Windows.Forms.GroupBox();
+            this.comboBoxEspecialidad2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxPlan = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla1)).BeginInit();
@@ -61,6 +64,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grilla5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.filtroEspecialidad.SuspendLayout();
+            this.filtrarEspYPlan.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -240,12 +244,41 @@
             // filtroEspecialidad
             // 
             this.filtroEspecialidad.Controls.Add(this.comboBoxEspecialidades);
-            this.filtroEspecialidad.Location = new System.Drawing.Point(526, 8);
+            this.filtroEspecialidad.Location = new System.Drawing.Point(532, 8);
             this.filtroEspecialidad.Name = "filtroEspecialidad";
             this.filtroEspecialidad.Size = new System.Drawing.Size(237, 100);
             this.filtroEspecialidad.TabIndex = 0;
             this.filtroEspecialidad.TabStop = false;
             this.filtroEspecialidad.Text = "Filtrar Especialidad";
+            // 
+            // filtrarEspYPlan
+            // 
+            this.filtrarEspYPlan.Controls.Add(this.comboBoxPlan);
+            this.filtrarEspYPlan.Controls.Add(this.comboBoxEspecialidad2);
+            this.filtrarEspYPlan.Location = new System.Drawing.Point(532, 8);
+            this.filtrarEspYPlan.Name = "filtrarEspYPlan";
+            this.filtrarEspYPlan.Size = new System.Drawing.Size(237, 100);
+            this.filtrarEspYPlan.TabIndex = 12;
+            this.filtrarEspYPlan.TabStop = false;
+            this.filtrarEspYPlan.Text = "Filtrar Especialidad y Plan";
+            // 
+            // comboBoxEspecialidad2
+            // 
+            this.comboBoxEspecialidad2.FormattingEnabled = true;
+            this.comboBoxEspecialidad2.Location = new System.Drawing.Point(16, 28);
+            this.comboBoxEspecialidad2.Name = "comboBoxEspecialidad2";
+            this.comboBoxEspecialidad2.Size = new System.Drawing.Size(203, 21);
+            this.comboBoxEspecialidad2.TabIndex = 0;
+            this.comboBoxEspecialidad2.Text = "Especialidad";
+            // 
+            // comboBoxPlan
+            // 
+            this.comboBoxPlan.FormattingEnabled = true;
+            this.comboBoxPlan.Location = new System.Drawing.Point(16, 63);
+            this.comboBoxPlan.Name = "comboBoxPlan";
+            this.comboBoxPlan.Size = new System.Drawing.Size(203, 21);
+            this.comboBoxPlan.TabIndex = 1;
+            this.comboBoxPlan.Text = "Plan";
             // 
             // Listado
             // 
@@ -253,6 +286,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(840, 439);
+            this.Controls.Add(this.filtrarEspYPlan);
             this.Controls.Add(this.anioElegido);
             this.Controls.Add(this.filtroEspecialidad);
             this.Controls.Add(this.listar);
@@ -278,6 +312,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grilla5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.filtroEspecialidad.ResumeLayout(false);
+            this.filtrarEspYPlan.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,5 +339,8 @@
         private System.Windows.Forms.ComboBox anioElegido;
         private System.Windows.Forms.ComboBox comboBoxEspecialidades;
         private System.Windows.Forms.GroupBox filtroEspecialidad;
+        private System.Windows.Forms.GroupBox filtrarEspYPlan;
+        private System.Windows.Forms.ComboBox comboBoxPlan;
+        private System.Windows.Forms.ComboBox comboBoxEspecialidad2;
     }
 }

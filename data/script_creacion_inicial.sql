@@ -1082,7 +1082,7 @@ FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Prof
 								  JOIN kernel_panic.Agenda_Diaria AD ON (AD.EsquemaTrabajo = E.Id)
 --WHERE AD.Especialidad = @especialidad
 GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta
-ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) DESC
+ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, CASE WHEN MONTH(E.Desde) > 6 THEN E.Desde ELSE convert(date, '23/10/2016', 103) END) DESC
 
 --Listado 4
 SELECT TOP 5 A.Nombre Nombre, A.Apellido Apellido, SUM(T.Cantidad) AS Cantidad_Comprados, A.Numero_de_grupo,(SELECT CAST(
@@ -1104,5 +1104,4 @@ FROM kernel_panic.Turnos T
 		JOIN kernel_panic.Tipo_Especialidad Ti ON (Ti.Codigo = E.Tipo)
 GROUP BY  Ti.Descripcion,E.Descripcion
 ORDER BY Bonos_Utilizados DESC
-
 

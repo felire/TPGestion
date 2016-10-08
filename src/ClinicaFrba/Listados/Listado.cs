@@ -17,15 +17,14 @@ namespace ClinicaFrba.Listados
         private List<int> anios;
         public const int numeritoMagico = 44;
         private List<Especialidad> especialidades;
-        private int planAfiliado;
-
-        public Listado(int numeroPlan)
+        public List<Plan> planes;
+        public Listado()
         {
             InitializeComponent();
             this.cargarDatos();
-            planAfiliado = numeroPlan;
             grilla4.Enabled = false;
             filtroEspecialidad.Visible=false;
+            filtrarEspYPlan.Visible = false;
             grilla1.AutoGenerateColumns = false;
             grilla2.AutoGenerateColumns = false;
             grilla3.AutoGenerateColumns = false;
@@ -75,12 +74,21 @@ namespace ClinicaFrba.Listados
             anioElegido.DataSource = anios;
             semestreUno.Checked=true;
             especialidades = Especialidad.darTodasEspecialidades();
-            List<string> nombresEspecialidades = new List<string>();
+            this.planes = Plan.darTodosLosPlanes();
+            /*List<string> nombresEspecialidades = new List<string>();
             foreach(Especialidad esp in especialidades){
                 nombresEspecialidades.Add(esp.descripcion);
-            }
+            }*/
 
-            comboBoxEspecialidades.DataSource = nombresEspecialidades;            
+            comboBoxEspecialidades.DataSource = especialidades;
+            comboBoxEspecialidades.DisplayMember = "descripcion";
+            comboBoxEspecialidades.ValueMember = "codigo";
+            comboBoxPlan.DataSource = this.planes;
+            comboBoxPlan.DisplayMember = "descripcion";
+            comboBoxPlan.ValueMember = "codigo";
+            comboBoxEspecialidad2.DataSource = especialidades;
+            comboBoxEspecialidad2.DisplayMember = "descripcion";
+            comboBoxEspecialidad2.ValueMember = "codigo";
         }
         private void cargarEspecialidadesCanceladas()
         {
@@ -89,12 +97,12 @@ namespace ClinicaFrba.Listados
         }
         private void cargarProfesionalesMasConsultados()
         {
-            List<Listado2> lista2 = Listado2.obtenerResultados((int)anioElegido.SelectedItem, semestre, this.darCodigoEspecialidad(), planAfiliado);
+            List<Listado2> lista2 = Listado2.obtenerResultados((int)anioElegido.SelectedItem, semestre, ((Especialidad)comboBoxEspecialidad2.SelectedItem).codigo, ((Plan)comboBoxPlan.SelectedItem).codigo);
             grilla2.DataSource = lista2;
         }
         private void cargarProfesionalesMenosHoras()
         {
-            List<Listado3> lista = Listado3.obtenerResultados((int)anioElegido.SelectedItem, semestre, this.darCodigoEspecialidad());
+            List<Listado3> lista = Listado3.obtenerResultados((int)anioElegido.SelectedItem, semestre, ((Especialidad)comboBoxEspecialidades.SelectedItem).codigo);
             grilla3.DataSource = lista;
         }
         private void cargarAfiliadosBonos()
@@ -129,22 +137,27 @@ namespace ClinicaFrba.Listados
             if (tabControl.SelectedTab.Name.Equals("tabPage1"))
             {
                 filtroEspecialidad.Visible = false;
+                filtrarEspYPlan.Visible = false;
             }
             if (tabControl.SelectedTab.Name.Equals("tabPage2"))
             {
-                filtroEspecialidad.Visible = true;
+                filtroEspecialidad.Visible = false;
+                filtrarEspYPlan.Visible = true;
             }
             if (tabControl.SelectedTab.Name.Equals("tabPage3"))
             {
                 filtroEspecialidad.Visible = true;
+                filtrarEspYPlan.Visible = false;
             }
             if (tabControl.SelectedTab.Name.Equals("tabPage4"))
             {
                 filtroEspecialidad.Visible = false;
+                filtrarEspYPlan.Visible = false;
             }
             if (tabControl.SelectedTab.Name.Equals("tabPage5"))
             {
                 filtroEspecialidad.Visible = false;
+                filtrarEspYPlan.Visible = false;
             }
         }
 
