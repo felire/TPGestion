@@ -19,10 +19,11 @@ namespace ClinicaFrba.UtilConexion
         public DateTime hasta { get; set; }
         public int horasTrabajadas { get; set; }
 
-        public static List<Listado3> obtenerResultados(int anio, int semestre)
+        public static List<Listado3> obtenerResultados(int anio, int semestre, decimal especialidad)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@anio", anio));
+            ListaParametros.Add(new SqlParameter("@especialidad", especialidad));
             
             SpeakerDB speaker;
                      
@@ -30,8 +31,8 @@ namespace ClinicaFrba.UtilConexion
             speaker = ConexionDB.ObtenerDataReader("SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, E.Desde desde,E.Hasta hasta,SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) HorasTrabajadasEnFranja "+
                                                     "FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Profesional = P.Id) "+
 								                                                        "JOIN kernel_panic.Agenda_Diaria AD ON (AD.EsquemaTrabajo = E.Id) "+
-                                                    "WHERE YEAR(E.Desde)=@anio OR YEAR(E.Hasta)=anio "+
-                                                    /*"AND AD.Especialidad = @especialidad "+*/
+                                                    "WHERE YEAR(E.Desde)=@anio OR YEAR(E.Hasta)=@anio "+
+                                                    "AND AD.Especialidad = @especialidad "+
                                                     "GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta "+
                                                     "ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) DESC", "T", ListaParametros);
                 

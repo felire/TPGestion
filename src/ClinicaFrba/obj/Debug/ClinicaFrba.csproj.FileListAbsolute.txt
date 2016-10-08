@@ -60,3 +60,34 @@ C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Ll
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.RegLlegada.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.ElegirProfesional.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.pdb
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.Afiliado.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.AltaRol.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.BajaRol.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ModificarFuncionalidadesRol.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ModificarRol.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.CancelarAfiliado.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.CancelarProfesional.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.CompraBono.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.ElegirAfiliado.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Listados.Listado.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Logeo.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.LogeoPrimer.PrimerLogeo.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.MenuClinica.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirEspecialidad.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirFecha.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.ElegirProfesional.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.RegAgendaMedico.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.SeleccionarProfesional.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.ListarTurnos.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.RegLlegada.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Resultado.Diagnostico.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Resultado.ElegirAfiliado.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.ElegirProfesional.resources
+C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache

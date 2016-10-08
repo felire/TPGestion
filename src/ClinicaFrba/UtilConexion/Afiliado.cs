@@ -146,5 +146,20 @@ namespace ClinicaFrba.UtilConexion
             speaker.close();
             return idBono;
         }
+
+        public int numeroPlan()
+        {
+            int numeroPlan = 0;
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@idGrupo", this.numeroDeGrupo));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Plan_grupo AS planG FROM kernel_panic.Grupos_Familiares WHERE Id=@idGrupo ", "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                speaker.reader.Read();
+                numeroPlan = (int)speaker.reader["planG"];
+            }
+            speaker.close();
+            return numeroPlan;
+        }
     }
 }

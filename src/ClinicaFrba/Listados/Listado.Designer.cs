@@ -46,8 +46,8 @@
             this.semestre2 = new System.Windows.Forms.RadioButton();
             this.listar = new System.Windows.Forms.Button();
             this.anioElegido = new System.Windows.Forms.ComboBox();
-            this.filtro2 = new System.Windows.Forms.GroupBox();
-            this.filtro3 = new System.Windows.Forms.GroupBox();
+            this.comboBoxEspecialidades = new System.Windows.Forms.ComboBox();
+            this.filtroEspecialidad = new System.Windows.Forms.GroupBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla1)).BeginInit();
@@ -60,7 +60,7 @@
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.filtro2.SuspendLayout();
+            this.filtroEspecialidad.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -228,24 +228,24 @@
             this.anioElegido.Size = new System.Drawing.Size(85, 21);
             this.anioElegido.TabIndex = 11;
             // 
-            // filtro2
+            // comboBoxEspecialidades
             // 
-            this.filtro2.Controls.Add(this.filtro3);
-            this.filtro2.Location = new System.Drawing.Point(463, 12);
-            this.filtro2.Name = "filtro2";
-            this.filtro2.Size = new System.Drawing.Size(353, 100);
-            this.filtro2.TabIndex = 12;
-            this.filtro2.TabStop = false;
-            this.filtro2.Text = " Profesionales mas consultados";
+            this.comboBoxEspecialidades.FormattingEnabled = true;
+            this.comboBoxEspecialidades.Location = new System.Drawing.Point(16, 35);
+            this.comboBoxEspecialidades.Name = "comboBoxEspecialidades";
+            this.comboBoxEspecialidades.Size = new System.Drawing.Size(203, 21);
+            this.comboBoxEspecialidades.TabIndex = 0;
+            this.comboBoxEspecialidades.Text = "Especialidad";
             // 
-            // filtro3
+            // filtroEspecialidad
             // 
-            this.filtro3.Location = new System.Drawing.Point(0, 0);
-            this.filtro3.Name = "filtro3";
-            this.filtro3.Size = new System.Drawing.Size(353, 100);
-            this.filtro3.TabIndex = 0;
-            this.filtro3.TabStop = false;
-            this.filtro3.Text = "Profesionales con menos horas trabajadas";
+            this.filtroEspecialidad.Controls.Add(this.comboBoxEspecialidades);
+            this.filtroEspecialidad.Location = new System.Drawing.Point(526, 8);
+            this.filtroEspecialidad.Name = "filtroEspecialidad";
+            this.filtroEspecialidad.Size = new System.Drawing.Size(237, 100);
+            this.filtroEspecialidad.TabIndex = 0;
+            this.filtroEspecialidad.TabStop = false;
+            this.filtroEspecialidad.Text = "Filtrar Especialidad";
             // 
             // Listado
             // 
@@ -253,8 +253,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(840, 439);
-            this.Controls.Add(this.filtro2);
             this.Controls.Add(this.anioElegido);
+            this.Controls.Add(this.filtroEspecialidad);
             this.Controls.Add(this.listar);
             this.Controls.Add(this.semestre2);
             this.Controls.Add(this.semestreUno);
@@ -277,7 +277,7 @@
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grilla5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.filtro2.ResumeLayout(false);
+            this.filtroEspecialidad.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,7 +302,7 @@
         private System.Windows.Forms.RadioButton semestreUno;
         private System.Windows.Forms.Label anio;
         private System.Windows.Forms.ComboBox anioElegido;
-        private System.Windows.Forms.GroupBox filtro3;
-        private System.Windows.Forms.GroupBox filtro2;
+        private System.Windows.Forms.ComboBox comboBoxEspecialidades;
+        private System.Windows.Forms.GroupBox filtroEspecialidad;
     }
 }

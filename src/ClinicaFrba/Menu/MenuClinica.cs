@@ -261,7 +261,7 @@ namespace ClinicaFrba.Menu
 
         private void listadoEstadisticoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ClinicaFrba.Listados.Listado listado = new ClinicaFrba.Listados.Listado();
+            ClinicaFrba.Listados.Listado listado = new ClinicaFrba.Listados.Listado(usuario.afiliado.numeroPlan());
             listado.Show();
         }
     }

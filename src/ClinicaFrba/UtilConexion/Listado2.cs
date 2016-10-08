@@ -18,12 +18,15 @@ namespace ClinicaFrba.UtilConexion
         public decimal documento { get; set; }
         public int consultas { get; set; }
 
-        public static List<Listado2> obtenerResultados(int anio, int semestre)
+        public static List<Listado2> obtenerResultados(int anio, int semestre, decimal especialidad, int planAfiliado)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@anio", anio));
-            
+            ListaParametros.Add(new SqlParameter("@especialidad", especialidad));
+            ListaParametros.Add(new SqlParameter("@planGrupo", planAfiliado));
+
             SpeakerDB speaker;
+            
             if (semestre == 1)
             {
 
@@ -33,7 +36,8 @@ namespace ClinicaFrba.UtilConexion
 								                                                          "JOIN kernel_panic.Grupos_Familiares GF ON (A.Numero_de_grupo = GF.Id) "+
 								                                                          "JOIN kernel_panic.Turnos Tu ON (T.Id = Tu.Id) "+
                                                         "WHERE YEAR(T.Fecha)= @anio AND MONTH(T.Fecha)<7 "+
-                                                        /*"AND Tu.Especialidad = @especialidad AND GF.Plan_grupo = @planGrupo "+*/
+                                                        "AND Tu.Especialidad = @especialidad " +
+                                                        "AND GF.Plan_grupo = @planGrupo "+
                                                         "GROUP BY P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc "+
                                                         "ORDER BY COUNT(DISTINCT T.Id) DESC", "T", ListaParametros);
                 
