@@ -13,10 +13,10 @@ namespace ClinicaFrba.UtilConexion
 {
     class Rol
     {
-        public int rol_id;
-        public string nombreRol;
-        public Boolean activo;
-        public List<Funcionalidad> funcionalidades;
+        public int rol_id { get; set; }
+        public string nombreRol { get; set; }
+        public Boolean activo { get; set; }
+        public List<Funcionalidad> funcionalidades { get; set; }
 
         public Rol() {}
 

@@ -13,13 +13,13 @@ namespace ClinicaFrba.UtilConexion
 {
     class Turno
     {
-        public int id;
-        public DateTime fecha;
-        public Especialidad especialidad;
-        public string especialidadNombre;
-        public Profesional profesional;
-        public string profesionalNombre;
-        public Afiliado afiliado;
+        public int id { get; set; }
+        public DateTime fecha { get; set; }
+        public Especialidad especialidad { get; set; }
+        public string especialidadNombre { get; set; }
+        public Profesional profesional { get; set; }
+        public string profesionalNombre { get; set; }
+        public Afiliado afiliado { get; set; }
 
         public Turno(int id)
         {

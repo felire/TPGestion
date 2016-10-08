@@ -13,10 +13,10 @@ namespace ClinicaFrba.UtilConexion
 {
     class Usuario
     {
-        public string usuario;
-        public List<Rol> roles;
-        public Afiliado afiliado;
-        public Profesional profesional;
+        public string usuario { get; set; }
+        public List<Rol> roles { get; set; }
+        public Afiliado afiliado { get; set; }
+        public Profesional profesional { get; set; }
 
         public List<Rol> getRoles()
         {

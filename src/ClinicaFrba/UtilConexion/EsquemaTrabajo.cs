@@ -13,11 +13,11 @@ namespace ClinicaFrba.UtilConexion
 {
     class EsquemaTrabajo
     {
-        public int id;
-        public DateTime desde;
-        public DateTime hasta;
-        public Profesional profesional;
-        public List<AgendaDiaria> agendas;
+        public int id { get; set; }
+        public DateTime desde { get; set; }
+        public DateTime hasta { get; set; }
+        public Profesional profesional { get; set; }
+        public List<AgendaDiaria> agendas { get; set; }
 
         public EsquemaTrabajo(DateTime desde, DateTime hasta, Profesional profesional)
         {

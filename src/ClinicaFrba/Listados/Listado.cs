@@ -203,7 +203,7 @@ namespace ClinicaFrba.Listados
             grilla2.Columns.Add(ColApellido);
 
             DataGridViewTextBoxColumn ColTipoDoc = new DataGridViewTextBoxColumn();
-            ColTipoDoc.DataPropertyName = "tipDoc";
+            ColTipoDoc.DataPropertyName = "tipoDocumento";
             ColTipoDoc.HeaderText = "Tipo Documento";
             ColTipoDoc.Width = grilla1.Width / 6;
             grilla2.Columns.Add(ColTipoDoc);
@@ -243,7 +243,7 @@ namespace ClinicaFrba.Listados
             grilla3.Columns.Add(ColApellido);
 
             DataGridViewTextBoxColumn ColTipoDoc = new DataGridViewTextBoxColumn();
-            ColTipoDoc.DataPropertyName = "tipDoc";
+            ColTipoDoc.DataPropertyName = "tipoDocumento";
             ColTipoDoc.HeaderText = "Tipo Documento";
             ColTipoDoc.Width = grilla3.Width / 8;
             grilla3.Columns.Add(ColTipoDoc);

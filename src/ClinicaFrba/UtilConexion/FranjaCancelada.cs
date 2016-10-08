@@ -9,8 +9,8 @@ namespace ClinicaFrba.UtilConexion
 {
     class FranjaCancelada
     {
-        private DateTime desde;
-        private DateTime hasta;
+        private DateTime desde { get; set; }
+        private DateTime hasta { get; set; }
 
         public FranjaCancelada(DateTime desde, DateTime hasta)
         {

@@ -12,8 +12,8 @@ namespace ClinicaFrba.UtilConexion
 {
     class Funcionalidad
     {
-        public int funcionalidad_id;
-        public string descripcion;
+        public int funcionalidad_id { get; set; }
+        public string descripcion { get; set; }
 
         public Funcionalidad(int fun_id)
         {

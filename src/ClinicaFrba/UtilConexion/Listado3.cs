@@ -34,7 +34,7 @@ namespace ClinicaFrba.UtilConexion
                                                     "WHERE YEAR(E.Desde)=@anio OR YEAR(E.Hasta)=@anio "+
                                                     "AND AD.Especialidad = @especialidad "+
                                                     "GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta "+
-                                                    "ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) DESC", "T", ListaParametros);
+                                                    "ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) ASC", "T", ListaParametros);
                 
                         
             List<Listado3> lista = new List<Listado3>();
@@ -49,7 +49,7 @@ namespace ClinicaFrba.UtilConexion
                     listado.tipoDocumento = (string)speaker.reader["tipoDoc"];
                     listado.documento = (decimal)speaker.reader["numeroDoc"];
                     listado.desde = (DateTime)speaker.reader["desde"];
-                    listado.desde = (DateTime)speaker.reader["hasta"];
+                    listado.hasta = (DateTime)speaker.reader["hasta"];
                     listado.horasTrabajadas = (int)speaker.reader["HorasTrabajadasEnFranja"];
                     lista.Add(listado);                    
                 }

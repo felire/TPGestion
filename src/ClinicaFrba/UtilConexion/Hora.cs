@@ -8,8 +8,8 @@ namespace ClinicaFrba.UtilConexion
 {
     class Hora
     {
-        public string HoraAMostrar;
-        public TimeSpan LaHora;
+        public string HoraAMostrar { get; set; }
+        public TimeSpan LaHora { get; set; }
 
         public Hora(TimeSpan hora, string detalle)
         {

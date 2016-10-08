@@ -12,13 +12,13 @@ namespace ClinicaFrba.UtilConexion
 {
     class ConsultaMedica
     {
-        public int id;
-        public Afiliado afiliado;
-        public Profesional profesional;
-        public DateTime fecha;
-        public string sintoma;
-        public string enfermedad;
-        public Turno turno;
+        public int id { get; set; }
+        public Afiliado afiliado { get; set; }
+        public Profesional profesional { get; set; }
+        public DateTime fecha { get; set; }
+        public string sintoma { get; set; }
+        public string enfermedad { get; set; }
+        public Turno turno { get; set; }
 
         public ConsultaMedica(Afiliado afiliado, Profesional profesional)
         {

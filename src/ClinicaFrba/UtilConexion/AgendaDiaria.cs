@@ -13,13 +13,13 @@ namespace ClinicaFrba.UtilConexion
 {
     class AgendaDiaria
     {
-        public Dia dia;
-        public string diaString;
-        public TimeSpan horaDesde;
-        public TimeSpan horaHasta;
-        public EsquemaTrabajo esquema;
-        public string especialidadString;
-        public decimal especialidadCodigo;
+        public Dia dia { get; set; }
+        public string diaString { get; set; }
+        public TimeSpan horaDesde { get; set; }
+        public TimeSpan horaHasta { get; set; }
+        public EsquemaTrabajo esquema { get; set; }
+        public string especialidadString { get; set; }
+        public decimal especialidadCodigo { get; set; }
 
         public AgendaDiaria(Dia dia, string especialidadString, decimal especialidadCodigo)
         {

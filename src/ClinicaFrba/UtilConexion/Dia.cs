@@ -9,10 +9,10 @@ namespace ClinicaFrba.UtilConexion
 {
     class Dia
     {
-        public string nombre;
-        public int id;
-        public TimeSpan horaDesde;
-        public TimeSpan horaHasta;
+        public string nombre { get; set; }
+        public int id { get; set; }
+        public TimeSpan horaDesde { get; set; }
+        public TimeSpan horaHasta { get; set; }
 
         public Dia(int id, string nombre)
         {
