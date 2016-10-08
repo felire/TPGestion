@@ -70,7 +70,8 @@ AS
 		Tipo VARCHAR(1) NOT NULL CHECK(Tipo IN('A','B','M')),	
 		Afiliado INT NOT NULL,
 		Fecha DATETIME NOT NULL DEFAULT GETDATE(),
-		Descripcion VARCHAR(255)
+		Descripcion VARCHAR(255),
+		Valor_anterior VARCHAR(20),
 		FOREIGN KEY(Afiliado) REFERENCES [kernel_panic].[Afiliados] (Id));
 
 	CREATE TABLE [kernel_panic].[Transacciones] (
@@ -592,19 +593,9 @@ insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) value
 insert into kernel_panic.LogsCambioAfiliados (Afiliado, Tipo, Descripcion) values (@1,'M','se habilito')
 GO
 
-create procedure kernel_panic.baja_logica_afiliado (@Id int, @Motivo varchar(500)) AS
-declare @fec datetime
-set @fec = GETDATE()
-insert into GD2C2016.kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('B',@Id, @Motivo)
-update GD2C2016.kernel_panic.Afiliados SET GD2C2016.kernel_panic.Afiliados.Esta_Activo= 0 where GD2C2016.kernel_panic.Afiliados.Id = @Id
-	IF (select COUNT(GD2C2016.kernel_panic.Turnos.Id)  from GD2C2016.kernel_panic.Turnos where GD2C2016.kernel_panic.Turnos.Afiliado_Id = @Id 
-	AND GD2C2016.kernel_panic.Turnos.Fecha > @fec and GD2C2016.kernel_panic.Turnos.Cancelacion IS NULL ) > 0
-	Begin
-	INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES ('Afiliado', @Motivo, @fec)
-	UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Id = @id
-	End
-GO
-
+--ALta Afiliado
+--Todas las ALTAS las hice con manejo de errores para luego probar todo bien en la app, dps se los vuelo o los metemos en un tabla magica de logs del sistema.
+DROP PROCEDURE kernel_panic.alta_afiliado
 create procedure kernel_panic.alta_afiliado
 --recibo parametros
 		@Nom VARCHAR(255),
@@ -630,16 +621,16 @@ AS
 	return -@IdAfiReal
 	end
 	Else begin
-		insert into GD2C2016.kernel_panic.Grupos_Familiares (Plan_grupo) values (@Plan_Medico)
+		INSERT INTO GD2C2016.kernel_panic.Grupos_Familiares (Plan_grupo) VALUES (@Plan_Medico)
 			if @@rowcount = 0
 				begin
 				print 'El Afiliado no ha podido ser asociado al Plan Medico'
 				return 2			
 			end
-		set @Id = @@IDENTITY
-		set @IdAfiReal = CONVERT(INT,CONVERT(VARCHAR(20),@Id)+'01')
-		insert into kernel_panic.Usuarios (Nombre_usuario, Password_usuario, Habilitado) values (CONVERT(VARCHAR(50), @IdAfiReal), 'default', 0)
-			if @@rowcount = 0
+		SET @Id = @@IDENTITY
+		SET @IdAfiReal = CONVERT(INT,CONVERT(VARCHAR(20),@Id)+'01')
+		INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario, Habilitado) VALUES (CONVERT(VARCHAR(50), @IdAfiReal), NULL, 1)
+		if @@rowcount = 0
 			begin
 			print 'No se ha podido crear el usuario'+@IdAfiReal
 				IF @@ERROR <> 0
@@ -649,10 +640,22 @@ AS
                     + N' occurred.'
 				END
 			return 3		
-			end
+		end
+		INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (2, CONVERT(VARCHAR(50), @IdAfiReal))
+		if @@rowcount = 0
+			begin
+			print 'No se ha podido crear el usuario'+@IdAfiReal
+				IF @@ERROR <> 0
+				BEGIN
+					 PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+				END
+			return 4		
+		end
 		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
 		VALUES
-		(@IdAfiReal, @Id, 1, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(datetime, @Fecha_nac, 120), @Sexo, @Estado_civil, @Hijos, 0, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		(@IdAfiReal, @Id, 1, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(datetime, @Fecha_nac, 120), @Sexo, @Estado_civil, @Hijos, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
 		if @@rowcount = 0
 		begin
 			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
@@ -662,38 +665,14 @@ AS
                     + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
                     + N' occurred.'
 			END
-            RETURN 4
+            RETURN 5
 		 END
 		 RETURN @IdAfiReal
 	end
 GO
 
---Alta/Habilitacion usuario existente
-create procedure kernel_panic.rehabilitar_alta @IdAfiliado int
-AS
-	IF (@IdAfiliado < 0)
-		BEGIN
-		SET @IdAfiliado = -@IdAfiliado
-	END
-	update kernel_panic.Afiliados SET Esta_activo = 0 where Id = @IdAfiliado
-	IF @@rowcount = 0
-		BEGIN
-			PRINT 'Hubo un problema al habilitar el usuario'+@IdAfiliado
-			IF @@ERROR <> 0
-			BEGIN
-                PRINT N'ERROR: error '
-                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
-                    + N' occurred.'
-			END
-		RETURN 1
-	END
-	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('A',@IdAfiliado,'Se rehabilita el usuario')
-	RETURN @IdAfiliado
-GO
-
 --Alta Conyugue 
 create procedure kernel_panic.alta_conyuge
---recibo parametros
 		@Nom VARCHAR(255),
 		@Ape VARCHAR(255),
 		@Tipo_doc VARCHAR(15),
@@ -722,7 +701,7 @@ AS
 		SET @Estado_civil = (SELECT Estado_civil from kernel_panic.Afiliados where kernel_panic.Afiliados.Id = @IdAfiInput)
 		SET @Hijos = (SELECT Familiares_a_cargo from kernel_panic.Afiliados where kernel_panic.Afiliados.Id = @IdAfiInput)
 		SET @IdAfiReal = @IdAfiInput+1
-		INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario, Habilitado) values (CONVERT(VARCHAR(50), @IdAfiReal), 'default', 0)
+		INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario, Habilitado) values (CONVERT(VARCHAR(50), @IdAfiReal), NULL, 1)
 		IF @@rowcount = 0
 		BEGIN
 			PRINT 'No se ha podido crear el usuario'+@IdAfiReal
@@ -734,9 +713,21 @@ AS
 				END
 			RETURN 2		
 		END
+		INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (2, CONVERT(VARCHAR(50), @IdAfiReal))
+		if @@rowcount = 0
+			begin
+			print 'No se ha podido crear el usuario'+@IdAfiReal
+				IF @@ERROR <> 0
+				BEGIN
+					 PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+				END
+			return 3		
+		end
 		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
 		VALUES
-		(@IdAfiReal, @Id, 2, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(DATETIME, @Fecha_nac, 120), @Sexo, @Estado_civil, @Hijos, 0, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		(@IdAfiReal, @Id, 2, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(DATETIME, @Fecha_nac, 120), @Sexo, @Estado_civil, @Hijos, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
 		IF @@rowcount = 0
 		BEGIN
 			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
@@ -746,16 +737,14 @@ AS
                     + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
                     + N' occurred.'
 			END
-            RETURN 3
+            RETURN 4
 		 END
 		 RETURN @IdAfiReal
 		 END
 GO
 
-DROP PROCEDURE kernel_panic.alta_hermano
 --Alta hermano
 create procedure kernel_panic.alta_hermano
---recibo parametros
 		@Nom VARCHAR(255),
 		@Ape VARCHAR(255),
 		@Tipo_doc VARCHAR(15),
@@ -786,7 +775,7 @@ AS
 		SET @CantHijos = (SELECT Familiares_a_cargo from kernel_panic.Afiliados where kernel_panic.Afiliados.Id = @IdAfiInput)
 		--Reservo el 1 para el conyuge + el nro de hijo que estoy registrando
 		SET @IdAfiReal = @IdAfiInput+1+@NroHijo
-		INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario, Habilitado) values (CONVERT(VARCHAR(50), @IdAfiReal), 'default', 0)
+		INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario, Habilitado) values (CONVERT(VARCHAR(50), @IdAfiReal), NULL, 1)
 		IF @@rowcount = 0
 		BEGIN
 			PRINT 'No se ha podido crear el usuario'+@IdAfiReal
@@ -798,9 +787,21 @@ AS
 				END
 			RETURN 2		
 		END
+		INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (2, CONVERT(VARCHAR(50), @IdAfiReal))
+		if @@rowcount = 0
+			begin
+			print 'No se ha podido crear el usuario'+@IdAfiReal
+				IF @@ERROR <> 0
+				BEGIN
+					 PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+				END
+			return 3
+		end
 		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
 		VALUES
-		(@IdAfiReal, @Id, @NroHijo, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(DATETIME, @Fecha_nac, 120), @Sexo, @Estado_civil, NULL, 0, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		(@IdAfiReal, @Id, @NroHijo, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(DATETIME, @Fecha_nac, 120), @Sexo, @Estado_civil, NULL, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
 		IF @@rowcount = 0
 		BEGIN
 			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
@@ -810,23 +811,202 @@ AS
                     + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
                     + N' occurred.'
 			END
-            RETURN 3
+            RETURN 4
 		 END
 		 RETURN (@IdAfiReal-1-@NroHijo)
 		 --Devuelvo el padre original
 		 END
 GO
 
+--Alta/Rehabilitación desde cero
+--Aca por si lo quisieron dar de baja y lo quieren rehabilitar de 0 y no simplemente (activarlo)
+create procedure kernel_panic.rehabilitacion_afiliado
+		@Nom VARCHAR(255),
+		@Ape VARCHAR(255),
+		@Tipo_doc VARCHAR(15),
+		@Doc numeric(18,0),
+		@Dire VARCHAR(255),
+		@Tel numeric(18,0),
+		@Mail VARCHAR(255),
+		@Fecha_nac VARCHAR(30),
+		@Sexo CHAR,
+		@Estado_civil VARCHAR(20), 
+		@Hijos INT,
+		@Plan_Medico numeric(18,0) 
+AS
+	declare @Id int
+	declare @IdAfiReal int
+	INSERT INTO GD2C2016.kernel_panic.Grupos_Familiares (Plan_grupo) VALUES (@Plan_Medico)
+		IF @@rowcount = 0
+		BEGIN
+			PRINT 'El Afiliado no ha podido ser asociado al Plan Medico'			
+			IF @@ERROR <> 0
+			BEGIN
+				 PRINT N'ERROR: error '
+                   + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                   + N' occurred.'
+			END
+		RETURN 1			
+		END
+	SET @Id = @@IDENTITY
+	SET @IdAfiReal = CONVERT(INT,CONVERT(VARCHAR(20),@Id)+'01')
+	INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario, Habilitado) VALUES (CONVERT(VARCHAR(50), @IdAfiReal), NULL, 1)
+		IF @@rowcount = 0
+		BEGIN
+			PRINT 'No se ha podido crear el usuario'+@IdAfiReal
+			IF @@ERROR <> 0
+			BEGIN
+				PRINT N'ERROR: error '
+                   + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                   + N' occurred.'
+			END
+		RETURN 2		
+		END
+		INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (2, CONVERT(VARCHAR(50), @IdAfiReal))
+		if @@rowcount = 0
+			begin
+			print 'No se ha podido crear el usuario'+@IdAfiReal
+				IF @@ERROR <> 0
+				BEGIN
+					 PRINT N'ERROR: error '
+                    + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                    + N' occurred.'
+				END
+			return 3		
+		end
+	INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
+	VALUES
+	(@IdAfiReal, @Id, 1, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(datetime, @Fecha_nac, 120), @Sexo, @Estado_civil, @Hijos, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+	IF @@rowcount = 0
+	BEGIN
+		PRINT 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
+		IF @@ERROR <> 0
+		BEGIN
+               PRINT N'ERROR: error '
+                 + RTRIM(CAST(@@ERROR AS NVARCHAR(10)))
+                 + N' occurred.'
+		END
+		RETURN 4
+	END
+	RETURN @IdAfiReal
+GO
+
+--Alta/Habilitacion usuario existente
+create procedure kernel_panic.rehabilitar @IdAfiliado int
+AS
+	
+	IF (@IdAfiliado < 0)
+		BEGIN
+		SET @IdAfiliado = -@IdAfiliado
+	END
+	UPDATE kernel_panic.Afiliados SET Esta_activo = 1 where Id = @IdAfiliado
+	DECLARE @IdAfiEnPlan INT
+	SET @IdAfiEnPlan = (select Numero_de_grupo FROM kernel_panic.Afiliados WHERE Id =  @IdAfiliado) 
+	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('A',@IdAfiliado,'Se rehabilita el usuario', CONVERT(VARCHAR(20),(SELECT Plan_grupo from kernel_panic.Grupos_Familiares where Id = @IdAfiEnPlan)))
+	UPDATE kernel_panic.Usuarios SET Habilitado = 1 WHERE Nombre_usuario = (CONVERT(VARCHAR(50), @IdAfiliado))
+	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('A',@IdAfiliado,'Se desbloquea el usuario', CONVERT(VARCHAR(20),(SELECT Plan_grupo from kernel_panic.Grupos_Familiares where Id = @IdAfiEnPlan)))
+	RETURN @IdAfiliado
+GO
+
+-- Trigger para Loggear las Altas
 Create trigger kernel_panic.Alta_AF_inserta_log
-on GD2C2016.kernel_panic.Afiliados
+on kernel_panic.Afiliados
 after insert as
-	begin
+begin
 	declare @id numeric
 	set @id = (select top 1 Id from inserted order by id DESC)
-	insert into GD2C2016.kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('A',@id,'Alta de usuario')
-	end
+	insert into kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('A',@id,'Se ha registrado el alta de usuario')
+end
 go
+--Modificacion padre puede implicar agregar hijos, lo que implica nueva alta
+create procedure kernel_panic.modificacion_Padre
+		@Dire VARCHAR(255),
+		@Tel numeric(18,0),
+		@Mail VARCHAR(255),
+		@Sexo CHAR(1),
+		@Estado_civil VARCHAR(20),
+		@NroHijo int, --Este valor que se recibe debe ser igual o mayor al original (Ver If de mas abajo)
+		@Plan_Medico numeric(18,0),
+		@Estado bit,
+		@Motivo VARCHAR(255),
+		@IdAfiInput int
+AS
+	DECLARE @IdAfiReturn INT
+	SET @IdAfiReturn = @IdAfiInput
+	DECLARE @IdAfiEnPlan INT
+	SET @IdAfiEnPlan = (select Numero_de_grupo from kernel_panic.Afiliados where Id =  @IdAfiInput)
+	IF (@NroHijo < (SELECT Familiares_a_cargo from kernel_panic.Afiliados where Id = @IdAfiInput)) -- Por las dudas hago check
+	BEGIN
+		PRINT 'Para quitar un hijo de un Pladre Familia, deberá darlo de baja a través de baja lógica'
+		RETURN -1
+	END
+	UPDATE kernel_panic.Afiliados SET Direccion = @Dire WHERE Id = @IdAfiInput
+	UPDATE kernel_panic.Afiliados SET Telefono = @Tel WHERE Id = @IdAfiInput
+	UPDATE kernel_panic.Afiliados SET Mail = @Mail WHERE Id = @IdAfiInput
+	UPDATE kernel_panic.Afiliados SET Sexo = @Sexo WHERE Id = @IdAfiInput
+	IF (@NroHijo <> (SELECT Familiares_a_cargo from kernel_panic.Afiliados where Id = @IdAfiInput))
+	BEGIN
+		SET @IdAfiReturn = @NroHijo - (SELECT Familiares_a_cargo from kernel_panic.Afiliados where Id = @IdAfiInput)
+	END
+	UPDATE kernel_panic.Afiliados SET Familiares_a_cargo = @NroHijo WHERE Id = @IdAfiInput
+	UPDATE kernel_panic.Afiliados SET Estado_civil = @Estado_civil WHERE Id = @IdAfiInput
+	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('M',@IdAfiInput, @Motivo+': Se actualizaron datos basicos')
+	IF (@Plan_Medico <> (SELECT Plan_grupo FROM kernel_panic.Grupos_Familiares WHERE Id = @IdAfiEnPlan))
+	BEGIN
+		UPDATE kernel_panic.Grupos_Familiares SET Plan_grupo = @Plan_Medico WHERE Id = @IdAfiEnPlan
+		INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion, Valor_anterior) VALUES ('M',@IdAfiInput, @Motivo+': Se actualizó el Plan', CONVERT(VARCHAR(20),(SELECT Plan_grupo from kernel_panic.Grupos_Familiares where Id = @IdAfiEnPlan)))
+	END
+	IF (@Estado = 1)
+	BEGIN
+		UPDATE kernel_panic.Afiliados SET Esta_activo = 1 WHERE Id = @IdAfiInput
+		INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion, Valor_anterior) VALUES ('M',@IdAfiInput, @Motivo+': Se rehabilitó el usuario', CONVERT(VARCHAR(20),0))
+	END
+	RETURN @IdAfiReturn 
+--Devuelve Afiliado o diferencia de hijos nuevos. 
+--Es decir, si valor de retorno >99 devolvió afiliado sino devolvió dif de hijo preguntar si lo quiere asociar con algun loop para todos esos hijos nuevos
+--// Por las dudas, no debería pero agregé control si sale negativo porque falló la condición que voy a poner en la aplicación
+GO
 
+create procedure kernel_panic.modificacion_familiares
+		@Dire VARCHAR(255),
+		@Tel numeric(18,0),
+		@Mail VARCHAR(255),
+		@Sexo CHAR(1),
+		@Estado_civil VARCHAR(20),
+		@NroHijo int, --Puede ser cualquier valor, no afecta.
+		@Estado bit,
+		@Motivo VARCHAR(255),
+		@IdAfiInput int
+AS
+	UPDATE kernel_panic.Afiliados SET Direccion = @Dire WHERE Id = @IdAfiInput
+	UPDATE kernel_panic.Afiliados SET Telefono = @Tel WHERE Id = @IdAfiInput
+	UPDATE kernel_panic.Afiliados SET Mail = @Mail WHERE Id = @IdAfiInput
+	UPDATE kernel_panic.Afiliados SET Sexo = @Sexo WHERE Id = @IdAfiInput
+	UPDATE kernel_panic.Afiliados SET Familiares_a_cargo = @NroHijo WHERE Id = @IdAfiInput
+	UPDATE kernel_panic.Afiliados SET Estado_civil = @Estado_civil WHERE Id = @IdAfiInput
+	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('M',@IdAfiInput, @Motivo+': Se actualizaron datos basicos')
+	IF (@Estado = 1)
+	BEGIN
+		UPDATE kernel_panic.Afiliados SET Esta_activo = 1 WHERE Id = @IdAfiInput
+		INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion, Valor_anterior) VALUES ('M',@IdAfiInput, @Motivo+': Se rehabilitó el usuario', CONVERT(VARCHAR(20),0))
+	END
+GO
+
+--baja logica Afiliado
+create procedure kernel_panic.baja_logica_afiliado @Id int, @Motivo varchar(500) 
+AS
+	declare @fec datetime
+	set @fec = GETDATE()
+	UPDATE kernel_panic.Usuarios SET Habilitado = 0 where kernel_panic.Usuarios.Nombre_usuario = (CONVERT(VARCHAR(50), @Id))
+	update kernel_panic.Afiliados SET Esta_Activo = 0 where kernel_panic.Afiliados.Id = @Id
+	insert into kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('B',@Id, @Motivo+': Baja de Afiliado')
+	IF (select COUNT(kernel_panic.Turnos.Id)  from kernel_panic.Turnos where GD2C2016.kernel_panic.Turnos.Afiliado_Id = @Id 
+	AND kernel_panic.Turnos.Fecha > @fec and kernel_panic.Turnos.Cancelacion IS NULL ) > 0
+	Begin
+		INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES ('Afiliado', @Motivo+': Baja de Afiliado', @fec)
+		UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Id = @id
+	End
+GO
 
 EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
