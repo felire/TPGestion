@@ -124,15 +124,7 @@ namespace ClinicaFrba.Pedir_Turno
         {
             Hora hora = (Hora)comboHorario.SelectedItem;
             turno.fecha = new DateTime(turno.fecha.Year, turno.fecha.Month, turno.fecha.Day, hora.LaHora.Hours, hora.LaHora.Minutes, 0);
-            List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            ListaParametros.Add(new SqlParameter("@afiliadoId", turno.afiliado.id));
-            ListaParametros.Add(new SqlParameter("@profesionalId", turno.profesional.id));
-            ListaParametros.Add(new SqlParameter("@fecha", turno.fecha));
-            ListaParametros.Add(new SqlParameter("@especialidad", turno.especialidad.codigo));
-            string query = "INSERT INTO kernel_panic.Turnos (Afiliado_id, Profesional_id, Fecha, Especialidad, Cancelacion) "+
-                           "VALUES (@afiliadoId, @profesionalId, @fecha, @especialidad, NULL) ";
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
-            speaker.close();
+            turno.persistir();
             MessageBox.Show("Turno creado con exito", "Info", MessageBoxButtons.OK);
             this.Hide();
         }

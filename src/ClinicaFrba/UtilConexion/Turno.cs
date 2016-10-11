@@ -160,5 +160,18 @@ namespace ClinicaFrba.UtilConexion
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
         }
+
+        public void persistir()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@afiliadoId", afiliado.id));
+            ListaParametros.Add(new SqlParameter("@profesionalId", profesional.id));
+            ListaParametros.Add(new SqlParameter("@fecha", fecha));
+            ListaParametros.Add(new SqlParameter("@especialidad", especialidad.codigo));
+            string query = "INSERT INTO kernel_panic.Turnos (Afiliado_id, Profesional_id, Fecha, Especialidad, Cancelacion) " +
+                           "VALUES (@afiliadoId, @profesionalId, @fecha, @especialidad, NULL)";
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
+            speaker.close();
+        }
     }
 }

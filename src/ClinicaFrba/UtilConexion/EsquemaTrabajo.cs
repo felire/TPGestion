@@ -100,13 +100,18 @@ namespace ClinicaFrba.UtilConexion
             }
 
             List<Fecha> todasLasFechas = new List<Fecha>();//son todas las fechas comprendidas entre el desde y hasta del esquema
-            Fecha fecha = new Fecha(desde);
+            Fecha fecha;
+            if (desde.CompareTo(DateTime.Now) >= 0)
+            {
+                fecha = new Fecha(desde);
+            }
+            else
+            {
+                fecha = new Fecha(DateTime.Now);
+            }
             while (fecha.CompareTo(hasta) <= 0)
             {
-                if (fecha.CompareTo(DateTime.Now.Date) >= 0)//no agregamos fechas pasadas
-                {
-                    todasLasFechas.Add(fecha);
-                }
+                todasLasFechas.Add(fecha);
                 fecha = fecha.AddDays(1);
             }
 
