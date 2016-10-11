@@ -53,6 +53,8 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
            
             horarios.AutoGenerateColumns = false;
             horarios.MultiSelect = false;
+            fechaDesde.MinDate = DateTime.Now.Date;
+            fechaHasta.MinDate = DateTime.Now.Date;
             generarGrid();
         }
 

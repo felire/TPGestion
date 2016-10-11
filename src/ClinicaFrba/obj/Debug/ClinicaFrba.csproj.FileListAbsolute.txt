@@ -91,3 +91,4 @@ C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debu
 C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Resultado.ElegirAfiliado.resources
 C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.ElegirProfesional.resources
 C:\Users\Familia\Documents\Facundo\Tp Gestion\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.LogeoPrimer.SeleccionUsuario.resources

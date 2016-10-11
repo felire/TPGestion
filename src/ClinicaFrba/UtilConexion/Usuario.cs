@@ -8,7 +8,7 @@ using System.Data.SqlTypes;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data;
-
+using ClinicaFrba.LogeoPrimer;
 namespace ClinicaFrba.UtilConexion
 {
     class Usuario
@@ -71,6 +71,40 @@ namespace ClinicaFrba.UtilConexion
             }
             speaker.conection.Close();
         }
+
+
+        public Usuario(string user, string pass, SeleccionUsuario formu)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@nombreUsuario", user));
+            ListaParametros.Add(new SqlParameter("@pass", pass));
+            SqlParameter parametroSalida = new SqlParameter("@fallo", 0);
+            parametroSalida.Direction = ParameterDirection.Output;
+            ListaParametros.Add(parametroSalida);
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.chequearUsuario", "SP", ListaParametros);
+            int resultado = Int32.Parse(speaker.comando.Parameters["@fallo"].Value.ToString());
+            usuario = user;
+            if (resultado == 3)
+            {
+                this.cargarReferencias();
+                this.ObtenerRoles();
+                if (roles.Count == 0)
+                {
+                    formu.sinRoles();
+                }
+                else
+                {
+                    formu.primerLogeo(this);
+                }
+
+            }
+            else
+            {
+                formu.noEntra();
+            }
+            speaker.conection.Close();
+        }
+
 
         public void actualizarPass(string pass)
         {

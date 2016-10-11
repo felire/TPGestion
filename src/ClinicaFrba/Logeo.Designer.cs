@@ -36,12 +36,13 @@
             this.userName = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.butPrimerLogeo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // logearse
             // 
-            this.logearse.Location = new System.Drawing.Point(120, 170);
+            this.logearse.Location = new System.Drawing.Point(143, 168);
             this.logearse.Name = "logearse";
             this.logearse.Size = new System.Drawing.Size(117, 46);
             this.logearse.TabIndex = 0;
@@ -98,11 +99,22 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // butPrimerLogeo
+            // 
+            this.butPrimerLogeo.Location = new System.Drawing.Point(12, 168);
+            this.butPrimerLogeo.Name = "butPrimerLogeo";
+            this.butPrimerLogeo.Size = new System.Drawing.Size(117, 46);
+            this.butPrimerLogeo.TabIndex = 6;
+            this.butPrimerLogeo.Text = "Primer Logeo";
+            this.butPrimerLogeo.UseVisualStyleBackColor = true;
+            this.butPrimerLogeo.Click += new System.EventHandler(this.butPrimerLogeo_Click);
+            // 
             // Logeo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.butPrimerLogeo);
             this.Controls.Add(this.password);
             this.Controls.Add(this.userName);
             this.Controls.Add(this.label3);
@@ -126,6 +138,7 @@
         private System.Windows.Forms.TextBox userName;
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button butPrimerLogeo;
     }
 }
 
