@@ -15,7 +15,7 @@ namespace ClinicaFrba.UtilConexion
 
         public Fecha(DateTime dia, TimeSpan horaDesde, TimeSpan horaHasta)
         {
-            this.dia = dia;
+            this.dia = dia.Date;
             this.horaDesde = horaDesde;
             this.horaHasta = horaHasta;
             this.horasOcupadas = new List<TimeSpan>();
@@ -23,7 +23,7 @@ namespace ClinicaFrba.UtilConexion
 
         public Fecha(DateTime dia)
         {
-            this.dia = dia;
+            this.dia = dia.Date;
             this.horasOcupadas = new List<TimeSpan>();
         }
 
