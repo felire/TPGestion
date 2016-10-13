@@ -148,7 +148,7 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@numConsulta", numeroConsulta));
             ListaParametros.Add(new SqlParameter("@idAfiliado", afiliado.id));
-            ListaParametros.Add(new SqlParameter("@hoy", DateTime.Today));
+            ListaParametros.Add(new SqlParameter("@hoy", DateTime.Now));
             ListaParametros.Add(new SqlParameter("@idTurno", this.id));
             ListaParametros.Add(new SqlParameter("@idBono", bonoAUsar));
             string query = "UPDATE kernel_panic.Bonos_Consultas " +
