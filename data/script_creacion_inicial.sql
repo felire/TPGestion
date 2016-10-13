@@ -60,6 +60,7 @@ AS
 		Sexo CHAR CHECK (Sexo IN ('M', 'F')),
 		Estado_civil VARCHAR(20) CHECK (Estado_civil IN ('Soltero/a', 'Casado/a', 'Viudo/a', 'Concubinato', 'Divorciado/a')),
 		Familiares_a_cargo INT,
+		Esta_activo BIT NOT NULL DEFAULT 1 -- 1 activo, 0 baja logica
 		Nombre_usuario VARCHAR(50),
 		FOREIGN KEY (Nombre_usuario) REFERENCES [kernel_panic].[Usuarios] (Nombre_usuario),
 		FOREIGN KEY (Numero_de_grupo) REFERENCES [kernel_panic].[Grupos_Familiares] (Id));

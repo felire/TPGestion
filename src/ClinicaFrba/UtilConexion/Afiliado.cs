@@ -16,6 +16,7 @@ namespace ClinicaFrba.UtilConexion
         public int id { get; set; }
         public int numeroDeGrupo { get; set; }
         public int numeroEnElGrupo { get; set; }
+        public bool esta_activo { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string tipoDoc { get; set; }
@@ -45,12 +46,12 @@ namespace ClinicaFrba.UtilConexion
             {
                 if (grupo.Equals(""))
                 {
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido", "T", ListaParametros);
+                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Esta_activo = 1", "T", ListaParametros);
                 }
                 else
                 {
                     ListaParametros.Add(new SqlParameter("@grupo", Int16.Parse(grupo)));
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo LIKE @grupo", "T", ListaParametros);
+                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo LIKE @grupo AND Esta_activo = 1", "T", ListaParametros);
                 }
             }
             else
@@ -59,13 +60,13 @@ namespace ClinicaFrba.UtilConexion
                 ListaParametros.Add(new SqlParameter("@doc", Decimal.Parse(doc)));
                 if (grupo.Equals(""))
                 {
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Tipo_doc = @tipoDoc AND Numero_doc = @doc", "T", ListaParametros);
+                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Tipo_doc = @tipoDoc AND Numero_doc = @doc AND Esta_activo = 1", "T", ListaParametros);
 
                 }
                 else
                 {
                     ListaParametros.Add(new SqlParameter("@grupo", Int16.Parse(grupo)));
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo = @grupo AND Tipo_doc = @tipoDoc AND Numero_doc = @doc", "T", ListaParametros);
+                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo = @grupo AND Tipo_doc = @tipoDoc AND Numero_doc = @doc AND Esta_activo = 1", "T", ListaParametros);
                 }
             }
 
@@ -78,6 +79,7 @@ namespace ClinicaFrba.UtilConexion
                     afiliado.id = (int)speaker.reader["Id"];
                     afiliado.numeroDeGrupo = (int)speaker.reader["Numero_de_grupo"];
                     afiliado.numeroEnElGrupo = (int)speaker.reader["Numero_en_el_grupo"];
+                    afiliado.esta_activo = true;
                     afiliado.apellido = (string)speaker.reader["Apellido"];
                     afiliado.nombre = (string)speaker.reader["Nombre"];
                     afiliado.tipoDoc = (string)speaker.reader["Tipo_doc"];
