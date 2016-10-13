@@ -42,7 +42,7 @@
             // 
             // logearse
             // 
-            this.logearse.Location = new System.Drawing.Point(143, 168);
+            this.logearse.Location = new System.Drawing.Point(16, 183);
             this.logearse.Name = "logearse";
             this.logearse.Size = new System.Drawing.Size(117, 46);
             this.logearse.TabIndex = 0;
@@ -101,7 +101,7 @@
             // 
             // butPrimerLogeo
             // 
-            this.butPrimerLogeo.Location = new System.Drawing.Point(12, 168);
+            this.butPrimerLogeo.Location = new System.Drawing.Point(143, 183);
             this.butPrimerLogeo.Name = "butPrimerLogeo";
             this.butPrimerLogeo.Size = new System.Drawing.Size(117, 46);
             this.butPrimerLogeo.TabIndex = 6;
