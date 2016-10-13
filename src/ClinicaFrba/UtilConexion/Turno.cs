@@ -153,8 +153,8 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(new SqlParameter("@idBono", bonoAUsar));
             string query = "UPDATE kernel_panic.Bonos_Consultas " +
                            "SET Nro_consulta = @numConsulta, " +
-                           "Afiliado_Uso = @idAfiliado, " +
-                           "Fecha_Impresion = @hoy, " +
+                           "Afiliado = @idAfiliado, " +
+                           "Fecha_de_uso = @hoy, " +
                            "Turno = @idBono " +
                            "WHERE Id = @idBono";
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);

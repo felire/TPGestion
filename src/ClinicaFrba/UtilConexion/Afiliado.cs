@@ -16,7 +16,6 @@ namespace ClinicaFrba.UtilConexion
         public int id { get; set; }
         public int numeroDeGrupo { get; set; }
         public int numeroEnElGrupo { get; set; }
-        public bool esta_activo { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string tipoDoc { get; set; }
@@ -46,12 +45,12 @@ namespace ClinicaFrba.UtilConexion
             {
                 if (grupo.Equals(""))
                 {
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Esta_activo = 1", "T", ListaParametros);
+                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido", "T", ListaParametros);
                 }
                 else
                 {
                     ListaParametros.Add(new SqlParameter("@grupo", Int16.Parse(grupo)));
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo LIKE @grupo AND Esta_activo = 1", "T", ListaParametros);
+                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo LIKE @grupo", "T", ListaParametros);
                 }
             }
             else
@@ -60,13 +59,13 @@ namespace ClinicaFrba.UtilConexion
                 ListaParametros.Add(new SqlParameter("@doc", Decimal.Parse(doc)));
                 if (grupo.Equals(""))
                 {
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Tipo_doc = @tipoDoc AND Numero_doc = @doc AND Esta_activo = 1", "T", ListaParametros);
+                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Tipo_doc = @tipoDoc AND Numero_doc = @doc", "T", ListaParametros);
 
                 }
                 else
                 {
                     ListaParametros.Add(new SqlParameter("@grupo", Int16.Parse(grupo)));
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo = @grupo AND Tipo_doc = @tipoDoc AND Numero_doc = @doc AND Esta_activo = 1", "T", ListaParametros);
+                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo = @grupo AND Tipo_doc = @tipoDoc AND Numero_doc = @doc", "T", ListaParametros);
                 }
             }
 
@@ -79,7 +78,6 @@ namespace ClinicaFrba.UtilConexion
                     afiliado.id = (int)speaker.reader["Id"];
                     afiliado.numeroDeGrupo = (int)speaker.reader["Numero_de_grupo"];
                     afiliado.numeroEnElGrupo = (int)speaker.reader["Numero_en_el_grupo"];
-                    afiliado.esta_activo = true;
                     afiliado.apellido = (string)speaker.reader["Apellido"];
                     afiliado.nombre = (string)speaker.reader["Nombre"];
                     afiliado.tipoDoc = (string)speaker.reader["Tipo_doc"];
@@ -95,14 +93,13 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombreUsuario", nombreUsuario));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo, Esta_activo FROM kernel_panic.Afiliados WHERE Nombre_usuario = @nombreUsuario", "T", ListaParametros);
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre_usuario = @nombreUsuario", "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                     speaker.reader.Read();
                     this.id = (int)speaker.reader["Id"];
                     this.numeroDeGrupo = (int)speaker.reader["Numero_de_grupo"];
                     this.numeroEnElGrupo = (int)speaker.reader["Numero_en_el_grupo"];
-                    this.esta_activo = (bool)speaker.reader["Esta_activo"];
                     this.apellido = (string)speaker.reader["Apellido"];
                     this.nombre = (string)speaker.reader["Nombre"];
                     this.tipoDoc = (string)speaker.reader["Tipo_doc"];
@@ -116,7 +113,7 @@ namespace ClinicaFrba.UtilConexion
             int proximo = 0;
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@id", this.id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT COUNT(id) AS prox FROM kernel_panic.Bonos_Consultas WHERE Afiliado_Uso = @id", "T", ListaParametros);
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT COUNT(id) AS prox FROM kernel_panic.Bonos_Consultas WHERE Afiliado = @id", "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                     speaker.reader.Read();
@@ -135,7 +132,7 @@ namespace ClinicaFrba.UtilConexion
             string query = "SELECT TOP 1 con.Id AS num " +
                             "FROM kernel_panic.Bonos_Consultas con " +
                             "JOIN kernel_panic.Grupos_Familiares gf  ON (gf.Id = @idGrupo) " +
-                            "WHERE con.Afiliado_Uso IS NULL AND con.Plan_Uso = gf.Plan_grupo AND con.Grupo_afiliado = gf.Id " +
+                            "WHERE con.Afiliado IS NULL AND con.Plan_asociado = gf.Plan_grupo AND con.Grupo = gf.Id " +
                             "ORDER BY con.Id ASC";
             SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)

@@ -27,6 +27,7 @@ AS
 		Password_usuario CHAR(64),
 		Intentos_fallidos INT DEFAULT 0,
 		Habilitado BIT NOT NULL DEFAULT 1); --1 es habilitado, 0 no.
+
 	CREATE TABLE [kernel_panic].[Roles_Usuario] (
 		Rol_id INT,
 		Usuario_id VARCHAR(50),
@@ -37,13 +38,12 @@ AS
 	CREATE TABLE [kernel_panic].[Planes] (	--Todos valores de tabla maestra
 		Codigo numeric(18,0) PRIMARY KEY,
 		Descripcion VARCHAR(255),
-		Precio_bono_consulta numeric(18,0),
-		Precio_bono_farmacia numeric(18,0));
+		Precio_bono_consulta numeric(18,0));
 
 	CREATE TABLE [kernel_panic].[Grupos_Familiares] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Plan_grupo numeric(18,0),
-		FOREIGN KEY (Plan_Grupo) REFERENCES [kernel_panic].[Planes] (Codigo));
+		FOREIGN KEY (Plan_grupo) REFERENCES [kernel_panic].[Planes] (Codigo));
 
 	CREATE TABLE [kernel_panic].[Afiliados] (
 		Id INT PRIMARY KEY,
@@ -60,7 +60,6 @@ AS
 		Sexo CHAR CHECK (Sexo IN ('M', 'F')),
 		Estado_civil VARCHAR(20) CHECK (Estado_civil IN ('Soltero/a', 'Casado/a', 'Viudo/a', 'Concubinato', 'Divorciado/a')),
 		Familiares_a_cargo INT,
-		Esta_activo BIT, -- 1 activo, 0 desactivado
 		Nombre_usuario VARCHAR(50),
 		FOREIGN KEY (Nombre_usuario) REFERENCES [kernel_panic].[Usuarios] (Nombre_usuario),
 		FOREIGN KEY (Numero_de_grupo) REFERENCES [kernel_panic].[Grupos_Familiares] (Id));
@@ -93,9 +92,9 @@ AS
 		Mail VARCHAR(255) NOT NULL,
 		Fecha_nacimiento DATETIME NOT NULL,
 		Sexo CHAR CHECK (Sexo IN ('M', 'F')),
+		Profesional_matricula VARCHAR (50),
 		Usuario_id VARCHAR(50),
-		FOREIGN KEY (Usuario_id) REFERENCES [kernel_panic].[Usuarios] (Nombre_usuario),
-		Profesional_matricula VARCHAR (50));
+		FOREIGN KEY (Usuario_id) REFERENCES [kernel_panic].[Usuarios] (Nombre_usuario));
 
 	CREATE TABLE [kernel_panic].[Tipo_Especialidad] (
 		Codigo numeric(18,0) PRIMARY KEY,
@@ -148,16 +147,16 @@ AS
 	CREATE TABLE [kernel_panic].[Bonos_Consultas] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Nro_consulta INT NULL,
-		Grupo_afiliado INT NOT NULL,
-		Plan_Uso numeric(18,0) NOT NULL,
-		Afiliado_Uso INT NULL, --Afiliado que lo utilizo
-		Fecha_Bono_compra DATETIME,
-		Fecha_Impresion DATETIME, --Es fecha de uso
+		Grupo INT NOT NULL,
+		Plan_asociado numeric(18,0) NOT NULL,
+		Afiliado INT NULL, --Afiliado que lo utilizo
+		Fecha_de_compra DATETIME,
+		Fecha_de_uso DATETIME,
 		Turno INT NULL,
-		FOREIGN KEY(Grupo_afiliado) REFERENCES [kernel_panic].[Grupos_Familiares] (Id),
-		FOREIGN KEY(Plan_Uso) REFERENCES [kernel_panic].[Planes] (Codigo),
+		FOREIGN KEY(Grupo) REFERENCES [kernel_panic].[Grupos_Familiares] (Id),
+		FOREIGN KEY(Plan_asociado) REFERENCES [kernel_panic].[Planes] (Codigo),
 		FOREIGN KEY(Turno) REFERENCES [kernel_panic].[Turnos] (Id),
-		FOREIGN KEY(Afiliado_Uso) REFERENCES [kernel_panic].[Afiliados] (Id));
+		FOREIGN KEY(Afiliado) REFERENCES [kernel_panic].[Afiliados] (Id));
 
 	CREATE TABLE [kernel_panic].[Esquema_Trabajo] (
 		Id INT IDENTITY (1,1) PRIMARY KEY,
@@ -239,9 +238,9 @@ AS
 		VALUES
 		(CONVERT(VARCHAR(50), @IdAfiliadoReal), NULL)	
 
-		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
+		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Nombre_usuario)
 		VALUES
-		(@IdAfiliadoReal,@UltimoGrupo,1, @PacienteNombre, @PacienteApellido,'DNI', @PacienteDNI, @PacienteDireccion, @PacienteTelefono,@PacienteMail,@PacienteFechaNac,NULL,NULL,NULL,1,(CONVERT(VARCHAR(50), @IdAfiliadoReal)))
+		(@IdAfiliadoReal,@UltimoGrupo,1, @PacienteNombre, @PacienteApellido,'DNI', @PacienteDNI, @PacienteDireccion, @PacienteTelefono,@PacienteMail,@PacienteFechaNac,NULL,NULL,NULL,(CONVERT(VARCHAR(50), @IdAfiliadoReal)))
 		
 		INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (2,CONVERT(VARCHAR(50), @IdAfiliadoReal))
 
@@ -272,8 +271,8 @@ GO
 
 CREATE PROCEDURE kernel_panic.Cargar_planes
 AS
-	INSERT INTO kernel_panic.Planes (Codigo, Descripcion, Precio_bono_consulta, Precio_bono_farmacia)
-	SELECT DISTINCT Plan_Med_Codigo, Plan_Med_Descripcion, Plan_Med_Precio_Bono_Consulta, Plan_Med_Precio_Bono_Farmacia
+	INSERT INTO kernel_panic.Planes (Codigo, Descripcion, Precio_bono_consulta)
+	SELECT DISTINCT Plan_Med_Codigo, Plan_Med_Descripcion, Plan_Med_Precio_Bono_Consulta
 	FROM gd_esquema.Maestra
 GO
 
@@ -373,7 +372,7 @@ AS
 	WHILE @@FETCH_STATUS = 0
 		BEGIN
 
-			INSERT INTO kernel_panic.Bonos_Consultas (Id,Nro_consulta,Grupo_afiliado,Plan_Uso,Afiliado_Uso,Fecha_Bono_compra,Fecha_Impresion,Turno)
+			INSERT INTO kernel_panic.Bonos_Consultas (Id, Nro_consulta, Grupo, Plan_asociado, Afiliado, Fecha_de_compra, Fecha_de_uso, Turno)
 			SELECT numeroBono, ROW_NUMBER() OVER (ORDER BY numeroBono), @numGrupo, codigoPlan, @afiliadoId, fecha,fecha, turno
 			FROM #auxBonos
 			WHERE dni = @afiliadoDoc
