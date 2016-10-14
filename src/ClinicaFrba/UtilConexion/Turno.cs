@@ -46,6 +46,7 @@ namespace ClinicaFrba.UtilConexion
             speaker.close();
         
         }
+
         public static List<Turno> darTodosLosTurnosDe(Afiliado afiliado)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
@@ -120,30 +121,9 @@ namespace ClinicaFrba.UtilConexion
             return turnos;
         }
 
-        public void registrarLlegada(int bonoAusar)
+        public void registrarLlegada(int bonoAUsar)
         {
-            this.actualizarBono(bonoAusar);
-
-            List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            ListaParametros.Add(new SqlParameter("@idTurno", this.id));
-            string query = "UPDATE kernel_panic.Turnos "+
-                           "SET Fecha_llegada = GETDATE() "+
-                           "WHERE Id = @idTurno";
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
-            speaker.close();
-
-            ListaParametros.Clear();
-            ListaParametros.Add(new SqlParameter("@idTurno", this.id));
-            ListaParametros.Add(new SqlParameter("@idAfiliado", afiliado.id));
-            ListaParametros.Add(new SqlParameter("@idProfesional", profesional.id));
-            query = "INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Turno_id) "+
-                    "VALUES (@idAfiliado, @idProfesional, @idTurno)";
-            speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
-            speaker.close();
-        }
-
-        private void actualizarBono(int bonoAUsar)
-        {
+            //le agregamos al turno cuando se uso, quien lo uso, el bono usado y que numero de consulta es
             int numeroConsulta = afiliado.proximoNumeroDeConsulta();
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@numConsulta", numeroConsulta));
@@ -158,6 +138,26 @@ namespace ClinicaFrba.UtilConexion
                            "Turno = @idBono " +
                            "WHERE Id = @idBono";
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
+            speaker.close();
+            
+            //agrego la fecha y hora de llegada al turno
+            ListaParametros.Clear();
+            ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@idTurno", this.id));
+            query = "UPDATE kernel_panic.Turnos "+
+                    "SET Fecha_llegada = GETDATE() "+
+                    "WHERE Id = @idTurno";
+            speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
+            speaker.close();
+
+            //creo el diagnostico, impleto por ahora
+            ListaParametros.Clear();
+            ListaParametros.Add(new SqlParameter("@idTurno", this.id));
+            ListaParametros.Add(new SqlParameter("@idAfiliado", afiliado.id));
+            ListaParametros.Add(new SqlParameter("@idProfesional", profesional.id));
+            query = "INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Turno_id) "+
+                    "VALUES (@idAfiliado, @idProfesional, @idTurno)";
+            speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
         }
 
