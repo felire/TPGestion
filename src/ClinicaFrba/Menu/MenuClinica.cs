@@ -46,7 +46,7 @@ namespace ClinicaFrba.Menu
 
         private void modificacionAficlick(object sender, EventArgs e)
         {
-            Abm_Afiliado.Modificacion formAf = new Abm_Afiliado.Modificacion();
+            Abm_Afiliado.ElegirAfiliado formAf = new Abm_Afiliado.ElegirAfiliado();
             formAf.ShowDialog();
         }
 
@@ -263,6 +263,12 @@ namespace ClinicaFrba.Menu
         {
             ClinicaFrba.Listados.Listado listado = new ClinicaFrba.Listados.Listado();
             listado.Show();
+        }
+
+        private void habilitarAfiliadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClinicaFrba.Abm_Afiliado.ElegirAfiliadoDeshabilitado desa = new ClinicaFrba.Abm_Afiliado.ElegirAfiliadoDeshabilitado();
+            desa.Show();
         }
     }
 }

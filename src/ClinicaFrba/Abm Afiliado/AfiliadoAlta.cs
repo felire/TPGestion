@@ -21,6 +21,7 @@ namespace ClinicaFrba.Abm_Afiliado
             this.afiliado = new Afiliado();
             cargarComboBoxs();
         }
+
         private void cargarComboBoxs()
         {
             comboBoxCasado.Items.Add("Soltero/a");
@@ -141,6 +142,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 if (afiliado.id < 0)
                 {
                     MessageBox.Show("Afiliado existente", "Exito", MessageBoxButtons.OK);
+                    this.Hide();
                     return;
                 }
                 MessageBox.Show("Afiliado registrado/a con exito", "Exito", MessageBoxButtons.OK);

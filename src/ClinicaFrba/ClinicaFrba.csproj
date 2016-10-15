@@ -80,11 +80,17 @@
     <Compile Include="Abm Afiliado\Cambios.Designer.cs">
       <DependentUpon>Cambios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Afiliado\Modificacion.cs">
+    <Compile Include="Abm Afiliado\ElegirAfiliadoDeshabilitado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Afiliado\Modificacion.Designer.cs">
-      <DependentUpon>Modificacion.cs</DependentUpon>
+    <Compile Include="Abm Afiliado\ElegirAfiliadoDeshabilitado.Designer.cs">
+      <DependentUpon>ElegirAfiliadoDeshabilitado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Afiliado\ElegirAfiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\ElegirAfiliado.Designer.cs">
+      <DependentUpon>ElegirAfiliado.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Afiliado\ModificaDatos.cs">
       <SubType>Form</SubType>
@@ -279,6 +285,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\AfiliadoAltaHijos.resx">
       <DependentUpon>AfiliadoAltaHijos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\ElegirAfiliadoDeshabilitado.resx">
+      <DependentUpon>ElegirAfiliadoDeshabilitado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\ElegirAfiliado.resx">
+      <DependentUpon>ElegirAfiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\ModificaDatos.resx">
+      <DependentUpon>ModificaDatos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>

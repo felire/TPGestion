@@ -21,6 +21,9 @@ namespace ClinicaFrba.Abm_Afiliado
             this.afiliado = afi;
         }
 
+
+     
+
         private void groupBox4_Enter(object sender, EventArgs e)
         {
 

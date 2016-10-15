@@ -613,10 +613,10 @@ create procedure kernel_panic.alta_afiliado
 		@IdAfiReal INT OUTPUT 
 AS
 	declare @Id int
-	IF (select COUNT(GD2C2016.kernel_panic.Afiliados.Numero_doc)  from GD2C2016.kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND GD2C2016.kernel_panic.Afiliados.Numero_doc = @Doc) > 0
+	IF (select COUNT(GD2C2016.kernel_panic.Afiliados.Numero_doc)  from GD2C2016.kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND GD2C2016.kernel_panic.Afiliados.Numero_doc = @Doc AND  Esta_activo = 1) > 0
 	begin
 	print 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existe'
-	set @IdAfiReal = -(select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
+	set @IdAfiReal = -(select TOP 1 Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc AND  Esta_activo = 1)
 	print 'El Afiliado Id es: '+CONVERT(VARCHAR(20), @IdAfiReal)
 	return -@IdAfiReal
 	end
@@ -690,10 +690,10 @@ AS
 	DECLARE @Id int
 	DECLARE @Hijos int
 	DECLARE @Estado_civil VARCHAR(20)
-	IF (select COUNT(kernel_panic.Afiliados.Numero_doc)  from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc) > 0
+	IF (select COUNT(kernel_panic.Afiliados.Numero_doc)  from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc AND  Esta_activo = 1) > 0
 	BEGIN
 		PRINT 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existe'
-		SET @IdAfiReal = -(select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
+		SET @IdAfiReal = -(select TOP 1 Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc AND  Esta_activo = 1)
 		PRINT 'El Afiliado Id es: '+CONVERT(VARCHAR(20), @IdAfiReal)
 		RETURN -@IdAfiReal
 	END
@@ -756,18 +756,17 @@ create procedure kernel_panic.alta_hermano
 		@Mail VARCHAR(255),
 		@Fecha_nac DATETIME,
 		@Sexo CHAR,
-		@Plan_Medico numeric(18,0),
 		@NroHijo int,
-		@IdAfiInput int
+		@IdAfiInput int,
+		@IdAfiReal INT OUTPUT 
 AS
 	DECLARE @Id int
 	DECLARE @CantHijos int
-	DECLARE @IdAfiReal int
 	DECLARE @Estado_civil VARCHAR(20)
-	IF (select COUNT(kernel_panic.Afiliados.Numero_doc)  from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc) > 0
+	IF (select COUNT(kernel_panic.Afiliados.Numero_doc)  from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc AND  Esta_activo = 1) > 0
 	BEGIN
 		PRINT 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existe'
-		SET @IdAfiReal = -(select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
+		SET @IdAfiReal = -(select TOP 1 Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc AND  Esta_activo = 1)
 		PRINT 'El Afiliado Id es: '+CONVERT(VARCHAR(20), @IdAfiReal)
 		RETURN -@IdAfiReal
 	END
@@ -822,6 +821,7 @@ GO
 
 --Alta/Rehabilitación desde cero
 --Aca por si lo quisieron dar de baja y lo quieren rehabilitar de 0 y no simplemente (activarlo)
+DROP PROCEDURE kernel_panic.rehabilitacion_afiliado
 create procedure kernel_panic.rehabilitacion_afiliado
 		@Nom VARCHAR(255),
 		@Ape VARCHAR(255),
@@ -830,14 +830,14 @@ create procedure kernel_panic.rehabilitacion_afiliado
 		@Dire VARCHAR(255),
 		@Tel numeric(18,0),
 		@Mail VARCHAR(255),
-		@Fecha_nac VARCHAR(30),
+		@Fecha_nac VARCHAR(30),		
 		@Sexo CHAR,
 		@Estado_civil VARCHAR(20), 
 		@Hijos INT,
-		@Plan_Medico numeric(18,0) 
+		@Plan_Medico numeric(18,0),
+		@IdAfiReal INT OUTPUT 
 AS
 	declare @Id int
-	declare @IdAfiReal int
 	INSERT INTO GD2C2016.kernel_panic.Grupos_Familiares (Plan_grupo) VALUES (@Plan_Medico)
 		IF @@rowcount = 0
 		BEGIN
@@ -894,6 +894,7 @@ AS
 GO
 
 --Alta/Habilitacion usuario existente
+DROP PROCEDURE kernel_panic.rehabilitar
 create procedure kernel_panic.rehabilitar @IdAfiliado int
 AS
 	
@@ -904,9 +905,9 @@ AS
 	UPDATE kernel_panic.Afiliados SET Esta_activo = 1 where Id = @IdAfiliado
 	DECLARE @IdAfiEnPlan INT
 	SET @IdAfiEnPlan = (select Numero_de_grupo FROM kernel_panic.Afiliados WHERE Id =  @IdAfiliado) 
-	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('A',@IdAfiliado,'Se rehabilita el usuario', CONVERT(VARCHAR(20),(SELECT Plan_grupo from kernel_panic.Grupos_Familiares where Id = @IdAfiEnPlan)))
+	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion, Valor_anterior) VALUES ('A',@IdAfiliado,'Se rehabilita el usuario','0')
 	UPDATE kernel_panic.Usuarios SET Habilitado = 1 WHERE Nombre_usuario = (CONVERT(VARCHAR(50), @IdAfiliado))
-	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('A',@IdAfiliado,'Se desbloquea el usuario', CONVERT(VARCHAR(20),(SELECT Plan_grupo from kernel_panic.Grupos_Familiares where Id = @IdAfiEnPlan)))
+	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion, Valor_anterior) VALUES ('A',@IdAfiliado,'Se desbloquea el usuario', '0')
 	RETURN @IdAfiliado
 GO
 

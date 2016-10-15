@@ -135,9 +135,16 @@ namespace ClinicaFrba.Abm_Afiliado
                 else
                 {
                     MessageBox.Show("Hijo/a registrado/a con exito", "Exito", MessageBoxButtons.OK);
-                    AfiliadoAltaHijos afiliadoAltaC = new AfiliadoAltaHijos(numeroHijo+1, afiliado);
-                    this.Hide();
-                    afiliadoAltaC.Show();
+                    if (numeroHijo < afiliadoPadre.familiaresACargo)
+                    {
+                        AfiliadoAltaHijos afiliadoAltaC = new AfiliadoAltaHijos(numeroHijo + 1, afiliado);
+                        this.Hide();
+                        afiliadoAltaC.Show();
+                    }
+                    else
+                    {
+                        this.Hide();
+                    }
                 }
             }
         }

@@ -39,6 +39,7 @@
             this.modifToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visuToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.registroDeCambiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.habilitarAfiliadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seleccionarAfiliado = new System.Windows.Forms.ToolStripMenuItem();
             this.comprarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,7 +116,8 @@
             this.bajaToolStripMenuItem1,
             this.modifToolStripMenuItem,
             this.visuToolStripMenuItem1,
-            this.registroDeCambiosToolStripMenuItem});
+            this.registroDeCambiosToolStripMenuItem,
+            this.habilitarAfiliadoToolStripMenuItem});
             this.afiliadoToolStripMenuItem.Name = "afiliadoToolStripMenuItem";
             this.afiliadoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.afiliadoToolStripMenuItem.Text = "Afiliado";
@@ -138,7 +140,7 @@
             // 
             this.modifToolStripMenuItem.Name = "modifToolStripMenuItem";
             this.modifToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.modifToolStripMenuItem.Text = "Modificacion";
+            this.modifToolStripMenuItem.Text = "Modificar Afiliado";
             this.modifToolStripMenuItem.Click += new System.EventHandler(this.modificacionAficlick);
             // 
             // visuToolStripMenuItem1
@@ -154,6 +156,13 @@
             this.registroDeCambiosToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.registroDeCambiosToolStripMenuItem.Text = "Registro de Cambios";
             this.registroDeCambiosToolStripMenuItem.Click += new System.EventHandler(this.logsAficlick);
+            // 
+            // habilitarAfiliadoToolStripMenuItem
+            // 
+            this.habilitarAfiliadoToolStripMenuItem.Name = "habilitarAfiliadoToolStripMenuItem";
+            this.habilitarAfiliadoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.habilitarAfiliadoToolStripMenuItem.Text = "Habilitar Afiliado";
+            this.habilitarAfiliadoToolStripMenuItem.Click += new System.EventHandler(this.habilitarAfiliadoToolStripMenuItem_Click);
             // 
             // bonoToolStripMenuItem
             // 
@@ -323,5 +332,6 @@
         private System.Windows.Forms.ToolStripMenuItem cancelarDiaOFranjaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedirTurnoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registrarLlegadaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem habilitarAfiliadoToolStripMenuItem;
     }
 }
