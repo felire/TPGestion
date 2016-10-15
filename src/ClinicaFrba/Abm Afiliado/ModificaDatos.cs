@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClinicaFrba.UtilConexion;
 
 namespace ClinicaFrba.Abm_Afiliado
 {
-    public partial class ModificaDatos : Form
+    partial class ModificaDatos : Form
     {
         public Afiliado afiliado { get; set; }
         //recibe objeto afiliado con esos datos busco y modifico con el store procedure

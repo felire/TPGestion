@@ -21,26 +21,25 @@ namespace ClinicaFrba.UtilConexion
             SpeakerDB speaker;
             if (semestre == 1)
             {
-
-                speaker = ConexionDB.ObtenerDataReader("SELECT TOP 5 E.Descripcion AS Especialidad, T.Descripcion AS Tipo, COUNT(Tu.Id) AS Cantidad_cancelaciones " +
-                            "FROM kernel_panic.Especialidades E JOIN kernel_panic.Tipo_Especialidad T ON (T.Codigo = E.Tipo) " +
-                                            "JOIN kernel_panic.Turnos Tu ON (Tu.Especialidad = E.Codigo) " +
-                            "WHERE Tu.Cancelacion IS NOT NULL AND MONTH(Tu.Fecha)<7 AND YEAR(Tu.Fecha)=@anio " +
-                            "GROUP BY E.Descripcion, T.Descripcion " +
-                            "ORDER BY cantidad_cancelaciones DESC", "T", ListaParametros);
-                
+                string query = "SELECT TOP 5 E.Descripcion AS Especialidad, T.Descripcion AS Tipo, COUNT(Tu.Id) AS Cantidad_cancelaciones " +
+                               "FROM kernel_panic.Especialidades E JOIN kernel_panic.Tipo_Especialidad T ON (T.Codigo = E.Tipo) " +
+                               "JOIN kernel_panic.Turnos Tu ON (Tu.Especialidad = E.Codigo) " +
+                               "WHERE Tu.Cancelacion IS NOT NULL AND MONTH(Tu.Fecha)<7 AND YEAR(Tu.Fecha)=@anio " +
+                               "GROUP BY E.Descripcion, T.Descripcion " +
+                               "ORDER BY cantidad_cancelaciones DESC";
+                speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             }
             else
             {
-                speaker = ConexionDB.ObtenerDataReader("SELECT TOP 5 E.Descripcion AS Especialidad, T.Descripcion AS Tipo, COUNT(Tu.Id) AS Cantidad_cancelaciones " +
-                            "FROM kernel_panic.Especialidades E JOIN kernel_panic.Tipo_Especialidad T ON (T.Codigo = E.Tipo) " +
-                                            "JOIN kernel_panic.Turnos Tu ON (Tu.Especialidad = E.Codigo) " +
-                            "WHERE Tu.Cancelacion IS NOT NULL AND MONTH(Tu.Fecha)>6 AND YEAR(Tu.Fecha)=@anio " +
-                            "GROUP BY E.Descripcion, T.Descripcion " +
-                            "ORDER BY cantidad_cancelaciones DESC", "T", ListaParametros);                
+                string query = "SELECT TOP 5 E.Descripcion AS Especialidad, T.Descripcion AS Tipo, COUNT(Tu.Id) AS Cantidad_cancelaciones " +
+                               "FROM kernel_panic.Especialidades E JOIN kernel_panic.Tipo_Especialidad T ON (T.Codigo = E.Tipo) " +
+                               "JOIN kernel_panic.Turnos Tu ON (Tu.Especialidad = E.Codigo) " +
+                               "WHERE Tu.Cancelacion IS NOT NULL AND MONTH(Tu.Fecha)>6 AND YEAR(Tu.Fecha)=@anio " +
+                               "GROUP BY E.Descripcion, T.Descripcion " +
+                               "ORDER BY cantidad_cancelaciones DESC";
+                speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);                
             }
-
-                           
+  
             List<Listado1> lista= new List<Listado1>();
             if (speaker.reader.HasRows)
             {

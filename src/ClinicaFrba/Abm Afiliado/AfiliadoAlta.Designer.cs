@@ -55,7 +55,7 @@
             this.buttonLimpiar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBoxFechNac = new System.Windows.Forms.TextBox();
+            this.fechaNac = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -284,6 +284,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.fechaNac);
             this.groupBox2.Controls.Add(this.labelAp);
             this.groupBox2.Controls.Add(this.textBoxNom);
             this.groupBox2.Controls.Add(this.labelNom);
@@ -305,7 +306,6 @@
             this.groupBox2.Controls.Add(this.textBoxTel);
             this.groupBox2.Controls.Add(this.labelFechNac);
             this.groupBox2.Controls.Add(this.labelTel);
-            this.groupBox2.Controls.Add(this.textBoxFechNac);
             this.groupBox2.Controls.Add(this.textBoxMail);
             this.groupBox2.Controls.Add(this.labelMail);
             this.groupBox2.Location = new System.Drawing.Point(26, 32);
@@ -315,12 +315,12 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ingrese Datos";
             // 
-            // textBoxFechNac
+            // fechaNac
             // 
-            this.textBoxFechNac.Location = new System.Drawing.Point(373, 103);
-            this.textBoxFechNac.Name = "textBoxFechNac";
-            this.textBoxFechNac.Size = new System.Drawing.Size(100, 20);
-            this.textBoxFechNac.TabIndex = 14;
+            this.fechaNac.Location = new System.Drawing.Point(373, 105);
+            this.fechaNac.Name = "fechaNac";
+            this.fechaNac.Size = new System.Drawing.Size(98, 20);
+            this.fechaNac.TabIndex = 24;
             // 
             // AfiliadoAlta
             // 
@@ -366,6 +366,6 @@
         private System.Windows.Forms.Button buttonLimpiar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBoxFechNac;
+        private System.Windows.Forms.DateTimePicker fechaNac;
     }
 }

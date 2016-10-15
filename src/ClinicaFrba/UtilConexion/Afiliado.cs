@@ -21,12 +21,14 @@ namespace ClinicaFrba.UtilConexion
         public string apellido { get; set; }
         public string tipoDoc { get; set; }
         public decimal documento { get; set; }
-        public string direccion { get; set; }
         public decimal telefono { get; set; }
         public string mail { get; set; }
         public DateTime fechaNac { get; set; }
         public string sexo { get; set; }
         public string estadoCivil { get; set; }
+        public decimal plan { get; set; }
+        public int familiaresACargo { get; set; }
+        public string domicilio { get; set; }
 
         public Afiliado(string nombreUser)
         {
@@ -34,6 +36,52 @@ namespace ClinicaFrba.UtilConexion
         }
 
         public Afiliado() { }
+
+        public void registrarAltaPrincipal()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@Nom", nombre));
+            ListaParametros.Add(new SqlParameter("@Ape", apellido));
+            ListaParametros.Add(new SqlParameter("@Tipo_doc", tipoDoc));
+            ListaParametros.Add(new SqlParameter("@Doc", documento));
+            ListaParametros.Add(new SqlParameter("@Dire", domicilio));
+            ListaParametros.Add(new SqlParameter("@Tel", telefono));
+            ListaParametros.Add(new SqlParameter("@Mail", mail));
+            ListaParametros.Add(new SqlParameter("@Fecha_nac", fechaNac));
+            ListaParametros.Add(new SqlParameter("@Sexo", sexo));
+            ListaParametros.Add(new SqlParameter("@Estado_civil", estadoCivil));
+            ListaParametros.Add(new SqlParameter("@Hijos", familiaresACargo));
+            ListaParametros.Add(new SqlParameter("@Plan_Medico", plan));
+            SqlParameter parametroSalida = new SqlParameter("@IdAfiReal", 0);
+            parametroSalida.Direction = ParameterDirection.Output;
+            ListaParametros.Add(parametroSalida);
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.alta_afiliado", "SP", ListaParametros);
+            int idAfiliado = Int32.Parse(speaker.comando.Parameters["@IdAfiReal"].Value.ToString());
+            this.id = idAfiliado;
+        }
+
+        public void registrarAltaConyuge(Afiliado conyuge)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@Nom", nombre));
+            ListaParametros.Add(new SqlParameter("@Ape", apellido));
+            ListaParametros.Add(new SqlParameter("@Tipo_doc", tipoDoc));
+            ListaParametros.Add(new SqlParameter("@Doc", documento));
+            ListaParametros.Add(new SqlParameter("@Dire", domicilio));
+            ListaParametros.Add(new SqlParameter("@Tel", telefono));
+            ListaParametros.Add(new SqlParameter("@Mail", mail));
+            ListaParametros.Add(new SqlParameter("@Fecha_nac", fechaNac));
+            ListaParametros.Add(new SqlParameter("@Sexo", sexo));
+            ListaParametros.Add(new SqlParameter("@IdAfiInput", conyuge.id));
+            SqlParameter parametroSalida = new SqlParameter("@IdAfiReal", 0);
+            parametroSalida.Direction = ParameterDirection.Output;
+            ListaParametros.Add(parametroSalida);
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.alta_conyuge", "SP", ListaParametros);
+            int idAfiliado = Int32.Parse(speaker.comando.Parameters["@IdAfiReal"].Value.ToString());
+            this.id = idAfiliado;
+        }
+
+
 
         public static List<Afiliado> buscar(string nombre, string apellido, string grupo, string tipoDoc, string doc)
         {

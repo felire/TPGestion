@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClinicaFrba.UtilConexion;
 
 namespace ClinicaFrba.Abm_Afiliado
 {
-    public partial class AfiliadoAlta : Form
+    partial class AfiliadoAlta : Form
     {
+
+        public Afiliado afiliado { get; set; }
         public AfiliadoAlta()
         {
             InitializeComponent();
+            this.afiliado = new Afiliado();
             cargarComboBoxs();
         }
         private void cargarComboBoxs()
@@ -39,6 +43,10 @@ namespace ClinicaFrba.Abm_Afiliado
 
             //hacer select Codigo from GD2C2016.kernel_panic.Planes group by Codigo
             comboBoxPlan.Items.Add("");
+
+            comboBoxPlan.DataSource = Plan.darTodosLosPlanes();
+            comboBoxPlan.DisplayMember = "descripcion";
+            comboBoxPlan.ValueMember = "codigo";
         }
 
 
@@ -52,25 +60,125 @@ namespace ClinicaFrba.Abm_Afiliado
 
         }
 
+        private Boolean formularioValido()
+        {
+            uint i;
+            string mensajeError = "";
+
+            if (textBoxNom.Text == "")
+            {
+                mensajeError = "Complete el campo Nombre";
+            }
+            if (textBoxAp.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Complete el campo Apellido";
+            }
+            if (!uint.TryParse(textBoxIDdni.Text, out i))
+            {
+                mensajeError = mensajeError + "\r\n" + "Ingrese un dni válido";
+            }
+            if (comboBoxTdoc.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Seleccione el tipo de Dni";
+            }
+            if (textBoxIDdni.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Complete la fecha de nacimiento";
+            }
+            if (comboBoxCasado.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Complete el estado civil";
+            }
+            if (comboBoxPlan.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Seleccione el plan médico";
+            }
+            if (textBoxHijos.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Complete la cantidad de Hijos";
+            }
+            if (textBoxMail.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Complete el campo Mail";
+            }
+            if (!uint.TryParse(textBoxTel.Text, out i))
+            {
+                mensajeError = mensajeError + "\r\n" + "Ingrese un Telefono válido";
+            }
+            if (textBoxDire.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Complete el domicilio";
+            }
+
+            if (mensajeError.Equals(""))
+            {
+                afiliado.apellido = textBoxAp.Text;
+                afiliado.nombre = textBoxNom.Text;
+                afiliado.documento = Decimal.Parse(textBoxIDdni.Text);
+                afiliado.tipoDoc = comboBoxTdoc.Text;
+                afiliado.estadoCivil = comboBoxCasado.Text;
+                afiliado.fechaNac = fechaNac.Value;
+                afiliado.plan = ((Plan)comboBoxPlan.SelectedItem).codigo;
+                afiliado.familiaresACargo = int.Parse(textBoxHijos.Text);
+                afiliado.mail = textBoxMail.Text;
+                afiliado.telefono = Decimal.Parse(textBoxTel.Text);
+                afiliado.domicilio = textBoxDire.Text;
+                afiliado.sexo = comboBoxSexo.Text;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(mensajeError, "Información");
+                return false;
+            }
+        }
+
         private void buttonRegistrar_Click(object sender, EventArgs e)
         {
-            int flag;
-            uint i;
-           if (textBoxNom.Text == "") { MessageBox.Show("Complete el campo Nombre", "Información"); flag = 1; }
-            if (textBoxAp.Text == "") { MessageBox.Show("Complete el campo Apellido", "Información"); flag = 1; }
-            if (textBoxIDdni.Text == "") { MessageBox.Show("Complete el campo Dni", "Información"); flag = 1; }
-			else { if (!uint.TryParse(textBoxIDdni.Text, out i)) { MessageBox.Show("Ingrese un dni válido", "Información"); return; }}
-			if (comboBoxTdoc.Text == "") { MessageBox.Show("Seleccione el tipo de Dni", "Información"); flag = 1; }
-			if (comboBoxSexo.Text == "") { MessageBox.Show("Complete el sexo", "Información"); flag = 1; }
-			if (textBoxIDdni.Text == "") { MessageBox.Show("Complete la fecha de nacimiento", "Información"); flag = 1; }
-			if (comboBoxCasado.Text == "") { MessageBox.Show("Complete el estado civil", "Información"); flag = 1; }
-			if (comboBoxPlan.Text == "") { MessageBox.Show("Seleccione el plan médico", "Información"); flag = 1; }
-            if (textBoxHijos.Text == "") { MessageBox.Show("Complete la cantidad de Hijos", "Información"); flag = 1; }
-            else { if (!uint.TryParse(textBoxIDdni.Text, out i)) { MessageBox.Show("Ingrese un dni válido", "Información"); return; } }
-            if (textBoxMail.Text == "") { MessageBox.Show("Complete el campo Mail", "Información"); flag = 1; }
-            if (textBoxTel.Text == "") { MessageBox.Show("Complete el campo Telefono", "Información"); flag = 1; }
-            else { if (!uint.TryParse(textBoxTel.Text, out i)) { MessageBox.Show("Ingrese un Telefono válido", "Información"); return; } }
-            if (textBoxDire.Text == "") { MessageBox.Show("Complete el domicilio", "Información"); flag = 1; }
+            if (formularioValido())
+            {   
+                afiliado.registrarAltaPrincipal();
+                if (afiliado.id < 0)
+                {
+                    MessageBox.Show("Afiliado existente", "Exito", MessageBoxButtons.OK);
+                    return;
+                }
+                MessageBox.Show("Afiliado registrado/a con exito", "Exito", MessageBoxButtons.OK);
+                if (afiliado.estadoCivil.Equals("Casado/a") || afiliado.estadoCivil.Equals("Concubinato"))
+                {
+                    DialogResult resultado = MessageBox.Show("Desea registrar a su pareja?", "Confirme", MessageBoxButtons.YesNo);
+                    if (resultado == DialogResult.Yes)
+                    {
+                        AfiliadoAltaConyuge afiliadoAltaC = new AfiliadoAltaConyuge(this);
+                        this.Hide();
+                        afiliadoAltaC.Show();
+                    }
+                    else
+                    {
+                        preguntarHijos();
+                    }
+                }
+                else
+                {
+                    preguntarHijos();
+                }
+                
             }
+        }
+
+        public void preguntarHijos()
+        {
+            DialogResult resultado = MessageBox.Show("Desea registrar a su/s "+afiliado.familiaresACargo+" hijo/s?", "Confirme", MessageBoxButtons.YesNo);
+            if (resultado == DialogResult.Yes)
+            {
+                AfiliadoAltaHijos afiliadoAltaC = new AfiliadoAltaHijos(1, afiliado);
+                this.Hide();
+                afiliadoAltaC.Show();
+            }
+            else
+            {
+                this.Hide();
+            }
+        }
     }
 }

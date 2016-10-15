@@ -605,18 +605,18 @@ create procedure kernel_panic.alta_afiliado
 		@Dire VARCHAR(255),
 		@Tel numeric(18,0),
 		@Mail VARCHAR(255),
-		@Fecha_nac VARCHAR(30),
+		@Fecha_nac DATETIME,
 		@Sexo CHAR,
 		@Estado_civil VARCHAR(20), 
 		@Hijos INT,
-		@Plan_Medico numeric(18,0) 
+		@Plan_Medico numeric(18,0),
+		@IdAfiReal INT OUTPUT 
 AS
 	declare @Id int
-	declare @IdAfiReal int
-	IF (select COUNT(GD2C2016.kernel_panic.Afiliados.Numero_doc)  from GD2C2016.kernel_panic.Afiliados where GD2C2016.kernel_panic.Afiliados.Numero_doc = @Doc) > 0
+	IF (select COUNT(GD2C2016.kernel_panic.Afiliados.Numero_doc)  from GD2C2016.kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND GD2C2016.kernel_panic.Afiliados.Numero_doc = @Doc) > 0
 	begin
 	print 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existe'
-	set @IdAfiReal = (select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
+	set @IdAfiReal = -(select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
 	print 'El Afiliado Id es: '+CONVERT(VARCHAR(20), @IdAfiReal)
 	return -@IdAfiReal
 	end
@@ -655,7 +655,7 @@ AS
 		end
 		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
 		VALUES
-		(@IdAfiReal, @Id, 1, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(datetime, @Fecha_nac, 120), @Sexo, @Estado_civil, @Hijos, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		(@IdAfiReal, @Id, 1, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, @Fecha_nac, @Sexo, @Estado_civil, @Hijos, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
 		if @@rowcount = 0
 		begin
 			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
@@ -672,6 +672,8 @@ AS
 GO
 
 --Alta Conyugue 
+
+DROP PROCEDURE kernel_panic.alta_conyuge
 create procedure kernel_panic.alta_conyuge
 		@Nom VARCHAR(255),
 		@Ape VARCHAR(255),
@@ -680,19 +682,18 @@ create procedure kernel_panic.alta_conyuge
 		@Dire VARCHAR(255),
 		@Tel numeric(18,0),
 		@Mail VARCHAR(255),
-		@Fecha_nac VARCHAR(30),
+		@Fecha_nac DATETIME,
 		@Sexo CHAR,
-		@Plan_Medico numeric(18,0),
-		@IdAfiInput int
+		@IdAfiInput int,
+		@IdAfiReal INT OUTPUT 
 AS
 	DECLARE @Id int
-	DECLARE @IdAfiReal int
 	DECLARE @Hijos int
 	DECLARE @Estado_civil VARCHAR(20)
-	IF (select COUNT(kernel_panic.Afiliados.Numero_doc)  from kernel_panic.Afiliados where kernel_panic.Afiliados.Numero_doc = @Doc) > 0
+	IF (select COUNT(kernel_panic.Afiliados.Numero_doc)  from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc) > 0
 	BEGIN
 		PRINT 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existe'
-		SET @IdAfiReal = (select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
+		SET @IdAfiReal = -(select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
 		PRINT 'El Afiliado Id es: '+CONVERT(VARCHAR(20), @IdAfiReal)
 		RETURN -@IdAfiReal
 	END
@@ -727,7 +728,7 @@ AS
 		end
 		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
 		VALUES
-		(@IdAfiReal, @Id, 2, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(DATETIME, @Fecha_nac, 120), @Sexo, @Estado_civil, @Hijos, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		(@IdAfiReal, @Id, 2, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, @Fecha_nac, @Sexo, @Estado_civil, @Hijos, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
 		IF @@rowcount = 0
 		BEGIN
 			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
@@ -744,6 +745,7 @@ AS
 GO
 
 --Alta hermano
+DROP PROCEDURE kernel_panic.alta_hermano
 create procedure kernel_panic.alta_hermano
 		@Nom VARCHAR(255),
 		@Ape VARCHAR(255),
@@ -752,7 +754,7 @@ create procedure kernel_panic.alta_hermano
 		@Dire VARCHAR(255),
 		@Tel numeric(18,0),
 		@Mail VARCHAR(255),
-		@Fecha_nac VARCHAR(30),
+		@Fecha_nac DATETIME,
 		@Sexo CHAR,
 		@Plan_Medico numeric(18,0),
 		@NroHijo int,
@@ -762,10 +764,10 @@ AS
 	DECLARE @CantHijos int
 	DECLARE @IdAfiReal int
 	DECLARE @Estado_civil VARCHAR(20)
-	IF (select COUNT(kernel_panic.Afiliados.Numero_doc)  from kernel_panic.Afiliados where kernel_panic.Afiliados.Numero_doc = @Doc) > 0
+	IF (select COUNT(kernel_panic.Afiliados.Numero_doc)  from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc) > 0
 	BEGIN
 		PRINT 'Afiliado con Tipo de documento '+@Tipo_doc+' y documento '+CONVERT(VARCHAR(20), @Doc)+' ya existe'
-		SET @IdAfiReal = (select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
+		SET @IdAfiReal = -(select Id from kernel_panic.Afiliados where kernel_panic.Afiliados.Tipo_doc = @Tipo_doc AND kernel_panic.Afiliados.Numero_doc = @Doc)
 		PRINT 'El Afiliado Id es: '+CONVERT(VARCHAR(20), @IdAfiReal)
 		RETURN -@IdAfiReal
 	END
@@ -801,7 +803,7 @@ AS
 		end
 		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
 		VALUES
-		(@IdAfiReal, @Id, @NroHijo, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, CONVERT(DATETIME, @Fecha_nac, 120), @Sexo, @Estado_civil, NULL, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		(@IdAfiReal, @Id, @NroHijo, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, @Fecha_nac, @Sexo, @Estado_civil, NULL, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
 		IF @@rowcount = 0
 		BEGIN
 			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
