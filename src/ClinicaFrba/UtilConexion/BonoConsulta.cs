@@ -29,7 +29,7 @@ namespace ClinicaFrba.UtilConexion
             string grupo = afiliado.numeroDeGrupo.ToString();
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@grupo", Decimal.Parse(grupo)));
-            string query = "SELECT Precio_bono_consulta, Plan_grupo "+
+            string query = "SELECT Precio_bono_consulta, Plan_grupo " +
                            "FROM kernel_panic.Planes p "+
                            "JOIN kernel_panic.Grupos_Familiares gf ON (p.Codigo = gf.Plan_grupo) "+
                            "WHERE gf.Id = @grupo";
@@ -54,8 +54,8 @@ namespace ClinicaFrba.UtilConexion
                 ListaParametros.Add(new SqlParameter("@grupo", afiliado.numeroDeGrupo));
                 ListaParametros.Add(new SqlParameter("@plan", plan));
                 ListaParametros.Add(new SqlParameter("@hoy", DateTime.Now));
-                query = "INSERT INTO kernel_panic.Bonos_Consultas (Nro_consulta, Grupo_afiliado, Plan_Uso, Afiliado_Uso, Fecha_Bono_compra, Fecha_Impresion, Turno) "+
-                        "VALUES (NULL, @grupo, @plan, NULL, @hoy, @hoy, NULL)";
+                query = "INSERT INTO kernel_panic.Bonos_Consultas (Nro_consulta, Grupo, Plan_asociado, Afiliado, Fecha_de_compra, Fecha_de_uso, Turno) " +
+                        "VALUES (NULL, @grupo, @plan, NULL, @hoy, NULL, NULL)";
                 speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
                 speaker.close();
             }
