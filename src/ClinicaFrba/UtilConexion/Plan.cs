@@ -15,6 +15,20 @@ namespace ClinicaFrba.UtilConexion
         public decimal codigo { get; set; }
         public string descripcion { get; set; }
 
+        public Plan() { }
+        public Plan(decimal codigo)
+        {
+            this.codigo = codigo;
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@Id", this.codigo));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Descripcion FROM kernel_panic.Planes WHERE Codigo = @Id", "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                    speaker.reader.Read();
+                    this.descripcion = (string)speaker.reader["Descripcion"];
+            }
+            speaker.close();
+        }
         public static List<Plan> darTodosLosPlanes()
         {
             List<Plan> planes = new List<Plan>();

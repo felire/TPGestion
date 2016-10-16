@@ -19,9 +19,64 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             InitializeComponent();
             this.afiliado = afi;
+            cargarDatos();
         }
 
+        public void cargarDatos()
+        {
 
+            estadoCivil.Items.Add("Soltero/a");
+            estadoCivil.Items.Add("Casado/a");
+            estadoCivil.Items.Add("Viudo/a");
+            estadoCivil.Items.Add("Concubinato");
+            estadoCivil.Items.Add("Divorciado/a");
+            estadoCivil.SelectedIndex = 0;
+            plan.DataSource = Plan.darTodosLosPlanes();
+            plan.DisplayMember = "descripcion";
+            plan.ValueMember = "codigo";
+
+            if (afiliado.numeroEnElGrupo == 1)
+            {
+                altaFamiliar.Visible = true;
+            }
+            else
+            {
+                altaFamiliar.Visible = false;
+            }
+
+            id.Text = afiliado.id.ToString();
+            nroDoc.Text = afiliado.documento.ToString();
+            nombre.Text = afiliado.nombre;
+            apellido.Text = afiliado.apellido;
+            direccion.Text = afiliado.domicilio;
+            telefono.Text = afiliado.telefono.ToString();
+            mail.Text = afiliado.mail;
+            plan.Text = afiliado.plan.ToString();
+            tipo.Text = afiliado.tipoDoc;
+            if (afiliado.numeroEnElGrupo == 1)
+            {
+                label7.Visible = true;
+                label2.Visible = true;
+                plan.Visible = true;
+                planAnt.Visible = true;
+                planAnt.Text = afiliado.planObjeto.descripcion;
+            }
+            else
+            {
+                label7.Visible = false;
+                label2.Visible = false;
+                plan.Visible = false;
+                planAnt.Visible = false;
+            }
+            if (afiliado.estadoCivil == null)
+            {
+                civilAnt.Text = "INEXISTENTE";
+            }
+            else
+            {
+                civilAnt.Text = afiliado.estadoCivil;
+            }
+        }
      
 
         private void groupBox4_Enter(object sender, EventArgs e)

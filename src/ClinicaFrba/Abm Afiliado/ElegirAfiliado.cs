@@ -97,19 +97,16 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
-        private void habilitar_Click(object sender, EventArgs e)
+        private void modificar_Click(object sender, EventArgs e)
         {
             if (seleccionValida())
             {
                 Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
-                afiliado.habilitar();
-                MessageBox.Show("Afiliado habilitado con exito", "Exito", MessageBoxButtons.OK);
+                afiliado.obtenerTodosLosDatos();
+                ModificaDatos mod = new ModificaDatos(afiliado);
+                mod.Show();
+                this.Hide();
             }
-        }
-
-        private void modificar_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

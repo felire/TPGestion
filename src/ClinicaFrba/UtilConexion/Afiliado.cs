@@ -29,6 +29,7 @@ namespace ClinicaFrba.UtilConexion
         public decimal plan { get; set; }
         public int familiaresACargo { get; set; }
         public string domicilio { get; set; }
+        public Plan planObjeto { get; set; }
 
         public Afiliado(string nombreUser)
         {
@@ -168,6 +169,50 @@ namespace ClinicaFrba.UtilConexion
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.alta_hermano", "SP", ListaParametros);
             int idAfiliado = Int32.Parse(speaker.comando.Parameters["@IdAfiReal"].Value.ToString());
             this.id = idAfiliado;
+        }
+
+        public void obtenerTodosLosDatos()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@Id", this.id));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Numero_de_grupo, Numero_en_el_grupo, Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, "+
+                                                               "Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, GF.Plan_grupo FROM kernel_panic.Afiliados A JOIN kernel_panic.Grupos_Familiares GF ON (A.Numero_de_grupo=GF.Id) WHERE A.Id = @Id", "T", ListaParametros);
+
+            if (speaker.reader.HasRows)
+            {
+                    speaker.reader.Read();
+
+                    this.numeroDeGrupo = (int)speaker.reader["Numero_de_grupo"];
+                    this.numeroEnElGrupo = (int)speaker.reader["Numero_en_el_grupo"];
+                    this.nombre = (string)speaker.reader["Nombre"];
+                    this.apellido = (string)speaker.reader["Apellido"];
+                    this.tipoDoc = (string)speaker.reader["Tipo_doc"];
+                    this.documento = (decimal)speaker.reader["Numero_doc"];
+                    this.domicilio = (string)speaker.reader["Direccion"];
+                    this.telefono = (decimal)speaker.reader["Telefono"];
+                    this.mail = (string)speaker.reader["Mail"];
+                    this.fechaNac = (DateTime)speaker.reader["Fecha_nacimiento"];                   
+                    if (speaker.reader["Estado_civil"] == DBNull.Value)
+                    {
+                        this.estadoCivil = null;
+                    }
+                    else
+                    {
+                        this.estadoCivil = (string)speaker.reader["Estado_civil"];
+                    }
+                    if (speaker.reader["Sexo"] == DBNull.Value)
+                    {
+                        this.sexo = null;
+                    }
+                    else
+                    {
+                        this.sexo = (string)speaker.reader["Sexo"];
+                    }
+                    this.planObjeto = new Plan((decimal)speaker.reader["Plan_grupo"]);
+                    this.familiaresACargo = (int)speaker.reader["Familiares_a_cargo"];
+            }
+            speaker.close();
+
         }
 
         public static List<Afiliado> buscar(string nombre, string apellido, string grupo, string tipoDoc, string doc)

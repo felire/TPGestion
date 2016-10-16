@@ -202,7 +202,7 @@
             this.eliminar.Name = "eliminar";
             this.eliminar.Size = new System.Drawing.Size(110, 35);
             this.eliminar.TabIndex = 12;
-            this.eliminar.Text = "Eliminar";
+            this.eliminar.Text = "Deshabilitar";
             this.eliminar.UseVisualStyleBackColor = true;
             this.eliminar.Click += new System.EventHandler(this.eliminar_Click);
             // 

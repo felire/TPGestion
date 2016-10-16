@@ -121,6 +121,10 @@ namespace ClinicaFrba.Abm_Afiliado
                 afiliado.fechaNac = fechaNac.Value;
                 afiliado.plan = ((Plan)comboBoxPlan.SelectedItem).codigo;
                 afiliado.familiaresACargo = int.Parse(textBoxHijos.Text);
+                if (textBoxHijos.Text.Equals(""))
+                {
+                    afiliado.familiaresACargo = 0;
+                }
                 afiliado.mail = textBoxMail.Text;
                 afiliado.telefono = Decimal.Parse(textBoxTel.Text);
                 afiliado.domicilio = textBoxDire.Text;

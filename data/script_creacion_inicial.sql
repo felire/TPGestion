@@ -241,7 +241,7 @@ AS
 
 		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Nombre_usuario)
 		VALUES
-		(@IdAfiliadoReal,@UltimoGrupo,1, @PacienteNombre, @PacienteApellido,'DNI', @PacienteDNI, @PacienteDireccion, @PacienteTelefono,@PacienteMail,@PacienteFechaNac,NULL,NULL,NULL,(CONVERT(VARCHAR(50), @IdAfiliadoReal)))
+		(@IdAfiliadoReal,@UltimoGrupo,1, @PacienteNombre, @PacienteApellido,'DNI', @PacienteDNI, @PacienteDireccion, @PacienteTelefono,@PacienteMail,@PacienteFechaNac,NULL,NULL,0,(CONVERT(VARCHAR(50), @IdAfiliadoReal)))
 		
 		INSERT INTO kernel_panic.Roles_Usuario (Rol_id, Usuario_id) VALUES (2,CONVERT(VARCHAR(50), @IdAfiliadoReal))
 
