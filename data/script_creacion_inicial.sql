@@ -802,7 +802,7 @@ AS
 		end
 		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
 		VALUES
-		(@IdAfiReal, @Id, @NroHijo+2, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, @Fecha_nac, @Sexo, @Estado_civil, NULL, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		(@IdAfiReal, @Id, @NroHijo+2, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, @Fecha_nac, @Sexo, @Estado_civil, 0, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
 		IF @@rowcount = 0
 		BEGIN
 			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal
@@ -922,15 +922,14 @@ begin
 end
 go
 --Modificacion padre puede implicar agregar hijos, lo que implica nueva alta
+
 create procedure kernel_panic.modificacion_Padre
 		@Dire VARCHAR(255),
 		@Tel numeric(18,0),
 		@Mail VARCHAR(255),
 		@Sexo CHAR(1),
 		@Estado_civil VARCHAR(20),
-		@NroHijo int, --Este valor que se recibe debe ser igual o mayor al original (Ver If de mas abajo)
 		@Plan_Medico numeric(18,0),
-		@Estado bit,
 		@Motivo VARCHAR(255),
 		@IdAfiInput int
 AS
@@ -938,20 +937,10 @@ AS
 	SET @IdAfiReturn = @IdAfiInput
 	DECLARE @IdAfiEnPlan INT
 	SET @IdAfiEnPlan = (select Numero_de_grupo from kernel_panic.Afiliados where Id =  @IdAfiInput)
-	IF (@NroHijo < (SELECT Familiares_a_cargo from kernel_panic.Afiliados where Id = @IdAfiInput)) -- Por las dudas hago check
-	BEGIN
-		PRINT 'Para quitar un hijo de un Pladre Familia, deberá darlo de baja a través de baja lógica'
-		RETURN -1
-	END
 	UPDATE kernel_panic.Afiliados SET Direccion = @Dire WHERE Id = @IdAfiInput
 	UPDATE kernel_panic.Afiliados SET Telefono = @Tel WHERE Id = @IdAfiInput
 	UPDATE kernel_panic.Afiliados SET Mail = @Mail WHERE Id = @IdAfiInput
 	UPDATE kernel_panic.Afiliados SET Sexo = @Sexo WHERE Id = @IdAfiInput
-	IF (@NroHijo <> (SELECT Familiares_a_cargo from kernel_panic.Afiliados where Id = @IdAfiInput))
-	BEGIN
-		SET @IdAfiReturn = @NroHijo - (SELECT Familiares_a_cargo from kernel_panic.Afiliados where Id = @IdAfiInput)
-	END
-	UPDATE kernel_panic.Afiliados SET Familiares_a_cargo = @NroHijo WHERE Id = @IdAfiInput
 	UPDATE kernel_panic.Afiliados SET Estado_civil = @Estado_civil WHERE Id = @IdAfiInput
 	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('M',@IdAfiInput, @Motivo+': Se actualizaron datos basicos')
 	IF (@Plan_Medico <> (SELECT Plan_grupo FROM kernel_panic.Grupos_Familiares WHERE Id = @IdAfiEnPlan))
@@ -959,17 +948,10 @@ AS
 		UPDATE kernel_panic.Grupos_Familiares SET Plan_grupo = @Plan_Medico WHERE Id = @IdAfiEnPlan
 		INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion, Valor_anterior) VALUES ('M',@IdAfiInput, @Motivo+': Se actualizó el Plan', CONVERT(VARCHAR(20),(SELECT Plan_grupo from kernel_panic.Grupos_Familiares where Id = @IdAfiEnPlan)))
 	END
-	IF (@Estado = 1)
-	BEGIN
-		UPDATE kernel_panic.Afiliados SET Esta_activo = 1 WHERE Id = @IdAfiInput
-		INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion, Valor_anterior) VALUES ('M',@IdAfiInput, @Motivo+': Se rehabilitó el usuario', CONVERT(VARCHAR(20),0))
-	END
 	RETURN @IdAfiReturn 
---Devuelve Afiliado o diferencia de hijos nuevos. 
---Es decir, si valor de retorno >99 devolvió afiliado sino devolvió dif de hijo preguntar si lo quiere asociar con algun loop para todos esos hijos nuevos
---// Por las dudas, no debería pero agregé control si sale negativo porque falló la condición que voy a poner en la aplicación
 GO
 
+--CREO QUE ESTE PROCEDURE NO ES NECESARIO, REUTILIZO EL ALTA HERMANO PARA QUE PUEDA AGREGAR NUEVOS HIJOS
 create procedure kernel_panic.modificacion_familiares
 		@Dire VARCHAR(255),
 		@Tel numeric(18,0),

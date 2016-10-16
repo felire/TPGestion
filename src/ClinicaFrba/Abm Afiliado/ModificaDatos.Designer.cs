@@ -40,7 +40,7 @@
             this.id = new System.Windows.Forms.TextBox();
             this.ButtonModificar = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.motivo = new System.Windows.Forms.TextBox();
             this.ButtonLimpiar = new System.Windows.Forms.Button();
             this.groupDatos = new System.Windows.Forms.GroupBox();
             this.plan = new System.Windows.Forms.ComboBox();
@@ -63,6 +63,8 @@
             this.planAnt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.civilAnt = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.comboBoxSexo = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -180,10 +182,11 @@
             this.ButtonModificar.TabIndex = 29;
             this.ButtonModificar.Text = "Modificar";
             this.ButtonModificar.UseVisualStyleBackColor = true;
+            this.ButtonModificar.Click += new System.EventHandler(this.ButtonModificar_Click);
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.motivo);
             this.groupBox3.Location = new System.Drawing.Point(22, 413);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(521, 97);
@@ -191,13 +194,14 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Motivo de la modificación";
             // 
-            // textBox1
+            // motivo
             // 
-            this.textBox1.Location = new System.Drawing.Point(11, 19);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(490, 72);
-            this.textBox1.TabIndex = 13;
+            this.motivo.Location = new System.Drawing.Point(11, 19);
+            this.motivo.MaxLength = 400;
+            this.motivo.Multiline = true;
+            this.motivo.Name = "motivo";
+            this.motivo.Size = new System.Drawing.Size(490, 72);
+            this.motivo.TabIndex = 13;
             // 
             // ButtonLimpiar
             // 
@@ -210,6 +214,8 @@
             // 
             // groupDatos
             // 
+            this.groupDatos.Controls.Add(this.comboBoxSexo);
+            this.groupDatos.Controls.Add(this.label9);
             this.groupDatos.Controls.Add(this.civilAnt);
             this.groupDatos.Controls.Add(this.label8);
             this.groupDatos.Controls.Add(this.planAnt);
@@ -407,6 +413,24 @@
             this.civilAnt.Size = new System.Drawing.Size(111, 20);
             this.civilAnt.TabIndex = 27;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(295, 120);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 13);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "Sexo: ";
+            // 
+            // comboBoxSexo
+            // 
+            this.comboBoxSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSexo.FormattingEnabled = true;
+            this.comboBoxSexo.Location = new System.Drawing.Point(359, 117);
+            this.comboBoxSexo.Name = "comboBoxSexo";
+            this.comboBoxSexo.Size = new System.Drawing.Size(148, 21);
+            this.comboBoxSexo.TabIndex = 29;
+            // 
             // ModificaDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,7 +468,7 @@
         private System.Windows.Forms.Label labelMail;
         private System.Windows.Forms.Button ButtonModificar;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox motivo;
         private System.Windows.Forms.Button ButtonLimpiar;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label4;
@@ -465,5 +489,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox planAnt;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboBoxSexo;
     }
 }

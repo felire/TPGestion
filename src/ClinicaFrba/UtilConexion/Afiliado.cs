@@ -100,6 +100,7 @@ namespace ClinicaFrba.UtilConexion
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.alta_afiliado", "SP", ListaParametros);
             int idAfiliado = Int32.Parse(speaker.comando.Parameters["@IdAfiReal"].Value.ToString());
             this.id = idAfiliado;
+            speaker.close();
         }
 
         public void registrarAltaConyuge(Afiliado conyuge)
@@ -121,6 +122,7 @@ namespace ClinicaFrba.UtilConexion
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.alta_conyuge", "SP", ListaParametros);
             int idAfiliado = Int32.Parse(speaker.comando.Parameters["@IdAfiReal"].Value.ToString());
             this.id = idAfiliado;
+            speaker.close();
         }
 
 
@@ -169,6 +171,7 @@ namespace ClinicaFrba.UtilConexion
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.rehabilitacion_afiliado", "SP", ListaParametros);
             int idAfiliado = Int32.Parse(speaker.comando.Parameters["@IdAfiReal"].Value.ToString());
             this.id = idAfiliado;
+            speaker.close();
         }
 
 
@@ -192,6 +195,7 @@ namespace ClinicaFrba.UtilConexion
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.alta_hermano", "SP", ListaParametros);
             int idAfiliado = Int32.Parse(speaker.comando.Parameters["@IdAfiReal"].Value.ToString());
             this.id = idAfiliado;
+            speaker.close();
         }
 
         public void obtenerTodosLosDatos()
@@ -236,6 +240,21 @@ namespace ClinicaFrba.UtilConexion
             }
             speaker.close();
 
+        }
+
+        public void modificar(string motivo)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@Dire", domicilio));
+            ListaParametros.Add(new SqlParameter("@Tel", telefono));
+            ListaParametros.Add(new SqlParameter("@Mail", mail));
+            ListaParametros.Add(new SqlParameter("@Sexo", sexo));
+            ListaParametros.Add(new SqlParameter("@Estado_civil", estadoCivil));
+            ListaParametros.Add(new SqlParameter("@Plan_Medico", plan));
+            ListaParametros.Add(new SqlParameter("@Motivo", motivo));
+            ListaParametros.Add(new SqlParameter("@IdAfiInput", id));
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.modificacion_Padre", "SP", ListaParametros);
+            speaker.close();
         }
 
         public static List<Afiliado> buscar(string nombre, string apellido, string grupo, string tipoDoc, string doc)

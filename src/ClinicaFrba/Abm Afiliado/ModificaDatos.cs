@@ -53,6 +53,9 @@ namespace ClinicaFrba.Abm_Afiliado
             mail.Text = afiliado.mail;
             plan.Text = afiliado.plan.ToString();
             tipo.Text = afiliado.tipoDoc;
+            comboBoxSexo.Items.Add("M");
+            comboBoxSexo.Items.Add("F");
+            comboBoxSexo.SelectedIndex = 0;
             if (afiliado.numeroEnElGrupo == 1)
             {
                 label7.Visible = true;
@@ -75,6 +78,16 @@ namespace ClinicaFrba.Abm_Afiliado
             else
             {
                 civilAnt.Text = afiliado.estadoCivil;
+            }
+            if (afiliado.sexo == null)
+            {
+                label9.Visible = true;
+                comboBoxSexo.Visible = true;
+            }
+            else
+            {
+                label9.Visible = false;
+                comboBoxSexo.Visible = false;
             }
         }
      
@@ -107,6 +120,72 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             AfiliadoAltaHijos afiHijos = new AfiliadoAltaHijos(afiliado.familiaresACargo + 1, afiliado);
             afiHijos.Show();
+        }
+
+
+
+        private Boolean formularioValido()
+        {
+            uint i;
+            string mensajeError = "";
+
+            if (mail.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Complete el campo Mail";
+            }
+            if (!uint.TryParse(telefono.Text, out i))
+            {
+                mensajeError = mensajeError + "\r\n" + "Ingrese un Telefono válido";
+            }
+            if (direccion.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Complete el domicilio";
+            }
+            if (motivo.Text == "")
+            {
+                mensajeError = mensajeError + "\r\n" + "Ingrese un motivo";
+            }
+            if (mensajeError.Equals(""))
+            {
+                afiliado.mail = mail.Text;
+                afiliado.telefono = Decimal.Parse(telefono.Text);
+                afiliado.domicilio = direccion.Text;
+
+                if (afiliado.numeroEnElGrupo == 1)
+                {
+                    afiliado.plan = ((Plan)plan.SelectedItem).codigo;
+                }
+                else
+                {
+                    //Si no lo veo quiero cargar el plan que ya tenia, no me importa
+                }
+                afiliado.estadoCivil = estadoCivil.Text;
+                if (afiliado.sexo == null)
+                {
+                    afiliado.sexo = comboBoxSexo.Text;
+                }
+                else
+                {
+                    //Ya tiene cargado un sexo, no me importa => no hago nada
+                }
+            }
+            else
+            {
+                MessageBox.Show(mensajeError, "Información");
+                return false;
+            }
+            return true;
+        }
+
+
+        private void ButtonModificar_Click(object sender, EventArgs e)
+        {
+            if (formularioValido())
+            {
+                afiliado.modificar(motivo.Text);
+                MessageBox.Show("Datos modificados con exito!", "Exito");
+            }
+           
         }
     }
 }
