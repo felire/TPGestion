@@ -802,7 +802,7 @@ AS
 		end
 		INSERT INTO kernel_panic.Afiliados (Id,Numero_de_grupo, Numero_en_el_grupo ,Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, Esta_activo, Nombre_usuario)
 		VALUES
-		(@IdAfiReal, @Id, @NroHijo, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, @Fecha_nac, @Sexo, @Estado_civil, NULL, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
+		(@IdAfiReal, @Id, @NroHijo+2, @Nom,@Ape, @Tipo_doc, @Doc, @Dire, @Tel, @Mail, @Fecha_nac, @Sexo, @Estado_civil, NULL, 1, (CONVERT(VARCHAR(50), @IdAfiReal)) )
 		IF @@rowcount = 0
 		BEGIN
 			print 'No se ha podido ingresar el alta del afiliado'+@IdAfiReal

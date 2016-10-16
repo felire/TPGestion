@@ -130,7 +130,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 afiliado.registrarAltaHijo(numeroHijo, afiliadoPadre);
                 if (afiliado.id < 0)
                 {
-                    //existe
+                    MessageBox.Show("existe", "Exito", MessageBoxButtons.OK);
                 }
                 else
                 {
@@ -144,6 +144,10 @@ namespace ClinicaFrba.Abm_Afiliado
                     else
                     {
                         this.Hide();
+                    }
+                    if (numeroHijo > afiliadoPadre.familiaresACargo)
+                    {
+                        afiliadoPadre.actualizarFamACargo();
                     }
                 }
             }

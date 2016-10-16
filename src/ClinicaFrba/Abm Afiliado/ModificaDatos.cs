@@ -83,5 +83,30 @@ namespace ClinicaFrba.Abm_Afiliado
         {
 
         }
+
+        private void conyuge_Click(object sender, EventArgs e)
+        {
+            if (civilAnt.Text.Equals("Casado/a") || civilAnt.Text.Equals("Concubinato"))
+            {
+                MessageBox.Show("Actualmente esta en pareja, no puede dar de alta a otro", "Error");
+            }
+            else
+            {
+                if (afiliado.estuvoCasado())
+                {
+                    MessageBox.Show("Usted ya estuvo casado, para dar de alta a su nuevo conyuge en el mismo grupo familiar debe darse de baja y luego de alta nuevamente", "Error");
+                }
+                else
+                {
+                    //Pantalla conyuge
+                }
+            }
+        }
+
+        private void hijo_Click(object sender, EventArgs e)
+        {
+            AfiliadoAltaHijos afiHijos = new AfiliadoAltaHijos(afiliado.familiaresACargo + 1, afiliado);
+            afiHijos.Show();
+        }
     }
 }

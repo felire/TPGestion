@@ -38,7 +38,20 @@ namespace ClinicaFrba.UtilConexion
 
         public Afiliado() { }
 
-
+        public Boolean estuvoCasado()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@NumeroGrupo", numeroDeGrupo));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id FROM kernel_panic.Afiliados WHERE Numero_de_grupo = @NumeroGrupo AND Numero_en_el_grupo = 2", "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public void habilitar()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
@@ -53,6 +66,16 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(new SqlParameter("@Id", id));
             ListaParametros.Add(new SqlParameter("@Motivo", motivo));
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.baja_logica_afiliado", "SP", ListaParametros);
+            speaker.close();
+        }
+
+        public void actualizarFamACargo()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            this.familiaresACargo = this.familiaresACargo + 1;
+            ListaParametros.Add(new SqlParameter("@cantidad", this.familiaresACargo));
+            ListaParametros.Add(new SqlParameter("@NumGrupo", this.numeroDeGrupo));
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("UPDATE kernel_panic.Afiliados SET Familiares_a_cargo = @cantidad WHERE Numero_de_grupo = @NumGrupo AND (Numero_en_el_grupo = 1 OR Numero_en_el_grupo = 2)", "T", ListaParametros);
             speaker.close();
         }
 

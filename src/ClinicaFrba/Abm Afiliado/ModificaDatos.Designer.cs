@@ -332,6 +332,7 @@
             this.conyuge.TabIndex = 34;
             this.conyuge.Text = "Cónyuge";
             this.conyuge.UseVisualStyleBackColor = true;
+            this.conyuge.Click += new System.EventHandler(this.conyuge_Click);
             // 
             // hijo
             // 
@@ -341,6 +342,7 @@
             this.hijo.TabIndex = 35;
             this.hijo.Text = "Hijo";
             this.hijo.UseVisualStyleBackColor = true;
+            this.hijo.Click += new System.EventHandler(this.hijo_Click);
             // 
             // altaFamiliar
             // 
