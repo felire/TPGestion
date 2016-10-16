@@ -46,6 +46,15 @@ namespace ClinicaFrba.UtilConexion
             speaker.close();
         }
 
+        public void deshabilitar(string motivo)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@Id", id));
+            ListaParametros.Add(new SqlParameter("@Motivo", motivo));
+            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.baja_logica_afiliado", "SP", ListaParametros);
+            speaker.close();
+        }
+
         public void registrarAltaPrincipal()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();

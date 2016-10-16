@@ -98,3 +98,4 @@ C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\Clinica
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.ModificaDatos.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.ElegirAfiliadoDeshabilitado.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.ElegirAfiliado.resources
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.AfiliadoBajaPosta.resources

@@ -1,6 +1,6 @@
 ﻿namespace ClinicaFrba.Abm_Afiliado
 {
-    partial class ElegirAfiliado
+    partial class AfiliadoBajaPosta
     {
         /// <summary>
         /// Required designer variable.
@@ -41,16 +41,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.modificar = new System.Windows.Forms.Button();
-            //this.deshabilitar = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textMotivo = new System.Windows.Forms.TextBox();
+            this.eliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).BeginInit();
             this.filtros.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listaAfiliados
             // 
             this.listaAfiliados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.listaAfiliados.Location = new System.Drawing.Point(38, 149);
+            this.listaAfiliados.Location = new System.Drawing.Point(38, 162);
             this.listaAfiliados.MultiSelect = false;
             this.listaAfiliados.Name = "listaAfiliados";
             this.listaAfiliados.ReadOnly = true;
@@ -90,7 +92,7 @@
             // 
             this.buscar.Location = new System.Drawing.Point(309, 97);
             this.buscar.Name = "buscar";
-            this.buscar.Size = new System.Drawing.Size(115, 23);
+            this.buscar.Size = new System.Drawing.Size(115, 39);
             this.buscar.TabIndex = 10;
             this.buscar.Text = "Buscar";
             this.buscar.UseVisualStyleBackColor = true;
@@ -174,40 +176,51 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre: ";
             // 
-            // modificar
+            // groupBox2
             // 
-            this.modificar.Location = new System.Drawing.Point(38, 327);
-            this.modificar.Name = "modificar";
-            this.modificar.Size = new System.Drawing.Size(256, 35);
-            this.modificar.TabIndex = 16;
-            this.modificar.Text = "Modificar";
-            this.modificar.UseVisualStyleBackColor = true;
-            this.modificar.Click += new System.EventHandler(this.modificar_Click);
+            this.groupBox2.Controls.Add(this.textMotivo);
+            this.groupBox2.Controls.Add(this.eliminar);
+            this.groupBox2.Location = new System.Drawing.Point(38, 340);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(577, 68);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Motivo de Baja";
             // 
-            // habilitar
+            // textMotivo
             // 
-           /* this.deshabilitar.Location = new System.Drawing.Point(359, 327);
-            this.deshabilitar.Name = "habilitar";
-            this.deshabilitar.Size = new System.Drawing.Size(256, 35);
-            this.deshabilitar.TabIndex = 17;
-            this.deshabilitar.Text = "Habilitar Usuario";
-            this.deshabilitar.UseVisualStyleBackColor = true;
-            this.deshabilitar.Click += new System.EventHandler(this.habilitar_Click);*/
+            this.textMotivo.Location = new System.Drawing.Point(32, 19);
+            this.textMotivo.MaxLength = 400;
+            this.textMotivo.Multiline = true;
+            this.textMotivo.Name = "textMotivo";
+            this.textMotivo.Size = new System.Drawing.Size(402, 38);
+            this.textMotivo.TabIndex = 13;
             // 
-            // ElegirAfiliado
+            // eliminar
+            // 
+            this.eliminar.Location = new System.Drawing.Point(451, 19);
+            this.eliminar.Name = "eliminar";
+            this.eliminar.Size = new System.Drawing.Size(110, 35);
+            this.eliminar.TabIndex = 12;
+            this.eliminar.Text = "Eliminar";
+            this.eliminar.UseVisualStyleBackColor = true;
+            this.eliminar.Click += new System.EventHandler(this.eliminar_Click);
+            // 
+            // AfiliadoBajaPosta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 383);
-           // this.Controls.Add(this.deshabilitar);
-            this.Controls.Add(this.modificar);
+            this.ClientSize = new System.Drawing.Size(646, 424);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.listaAfiliados);
             this.Controls.Add(this.filtros);
-            this.Name = "ElegirAfiliado";
+            this.Name = "AfiliadoBajaPosta";
             this.Text = "ElegirAfiliado";
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).EndInit();
             this.filtros.ResumeLayout(false);
             this.filtros.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -227,7 +240,8 @@
         private System.Windows.Forms.TextBox nombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox grupo;
-        private System.Windows.Forms.Button modificar;
-        private System.Windows.Forms.Button habilitar;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox textMotivo;
+        private System.Windows.Forms.Button eliminar;
     }
 }

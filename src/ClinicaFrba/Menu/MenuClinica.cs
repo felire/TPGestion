@@ -34,7 +34,7 @@ namespace ClinicaFrba.Menu
 
         private void bajaToolStripMenuAF_Click(object sender, EventArgs e)
         {
-            Abm_Afiliado.AfiliadoBaja formAf = new Abm_Afiliado.AfiliadoBaja();
+            Abm_Afiliado.AfiliadoBajaPosta formAf = new Abm_Afiliado.AfiliadoBajaPosta();
             formAf.ShowDialog();
         }
 

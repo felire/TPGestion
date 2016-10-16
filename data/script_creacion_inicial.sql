@@ -996,7 +996,8 @@ AS
 GO
 
 --baja logica Afiliado
-create procedure kernel_panic.baja_logica_afiliado @Id int, @Motivo varchar(500) 
+DROP PROCEDURE kernel_panic.baja_logica_afiliado
+create procedure kernel_panic.baja_logica_afiliado @Id int, @Motivo varchar(400) 
 AS
 	declare @fec datetime
 	set @fec = GETDATE()
