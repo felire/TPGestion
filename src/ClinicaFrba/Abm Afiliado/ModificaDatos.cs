@@ -157,7 +157,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 }
                 else
                 {
-                    //Si no lo veo quiero cargar el plan que ya tenia, no me importa
+                    afiliado.plan = afiliado.planObjeto.codigo;
                 }
                 afiliado.estadoCivil = estadoCivil.Text;
                 if (afiliado.sexo == null)
