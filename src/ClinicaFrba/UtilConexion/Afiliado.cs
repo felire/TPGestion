@@ -52,6 +52,7 @@ namespace ClinicaFrba.UtilConexion
                 return false;
             }
         }
+
         public void habilitar()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
@@ -202,13 +203,14 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@Id", this.id));
-            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Numero_de_grupo, Numero_en_el_grupo, Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, "+
-                                                               "Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, GF.Plan_grupo FROM kernel_panic.Afiliados A JOIN kernel_panic.Grupos_Familiares GF ON (A.Numero_de_grupo=GF.Id) WHERE A.Id = @Id", "T", ListaParametros);
-
+            string query = "SELECT Numero_de_grupo, Numero_en_el_grupo, Nombre, Apellido, Tipo_doc, Numero_doc, Direccion, Telefono, Mail, Fecha_nacimiento, Sexo, Estado_civil, Familiares_a_cargo, GF.Plan_grupo "+
+                           "FROM kernel_panic.Afiliados A "+
+                           "JOIN kernel_panic.Grupos_Familiares GF ON (A.Numero_de_grupo=GF.Id) "+
+                           "WHERE A.Id = @Id";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
                     speaker.reader.Read();
-
                     this.numeroDeGrupo = (int)speaker.reader["Numero_de_grupo"];
                     this.numeroEnElGrupo = (int)speaker.reader["Numero_en_el_grupo"];
                     this.nombre = (string)speaker.reader["Nombre"];
@@ -239,7 +241,6 @@ namespace ClinicaFrba.UtilConexion
                     this.familiaresACargo = (int)speaker.reader["Familiares_a_cargo"];
             }
             speaker.close();
-
         }
 
         public void modificar(string motivo)
@@ -257,7 +258,7 @@ namespace ClinicaFrba.UtilConexion
             speaker.close();
         }
 
-        public static List<Afiliado> buscar(string nombre, string apellido, string grupo, string tipoDoc, string doc)
+        public static List<Afiliado> buscar(int activo, string nombre, string apellido, string grupo, string tipoDoc, string doc)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombre", "%" + nombre + "%"));

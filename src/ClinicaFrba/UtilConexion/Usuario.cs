@@ -65,7 +65,7 @@ namespace ClinicaFrba.UtilConexion
                 }
                 else
                 {
-                    formu.primerLogeo(this);
+                    formu.noContrasena();//primer logueo
                 }  
                 
             }

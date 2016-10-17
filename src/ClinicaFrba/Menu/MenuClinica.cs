@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClinicaFrba.LogeoPrimer;
 using ClinicaFrba.UtilConexion;
 
 namespace ClinicaFrba.Menu
@@ -20,41 +21,7 @@ namespace ClinicaFrba.Menu
             InitializeComponent();
             this.usuario = usuario;
         }
-        
-        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
- 
-        }
 
-        private void altaToolStripMenuAF_Click(object sender, EventArgs e)
-        {
-            Abm_Afiliado.AfiliadoAlta formAf = new Abm_Afiliado.AfiliadoAlta();
-            formAf.ShowDialog();
-        }
-
-        private void bajaToolStripMenuAF_Click(object sender, EventArgs e)
-        {
-            Abm_Afiliado.AfiliadoBajaPosta formAf = new Abm_Afiliado.AfiliadoBajaPosta();
-            formAf.ShowDialog();
-        }
-
-        private void visualizacionAficlick(object sender, EventArgs e)
-        {
-            Abm_Afiliado.AfiliadoVisualiza formAf = new Abm_Afiliado.AfiliadoVisualiza();
-            formAf.ShowDialog();
-        }
-
-        private void modificacionAficlick(object sender, EventArgs e)
-        {
-            Abm_Afiliado.ElegirAfiliado formAf = new Abm_Afiliado.ElegirAfiliado();
-            formAf.ShowDialog();
-        }
-
-        private void logsAficlick(object sender, EventArgs e)
-        {
-            Abm_Afiliado.Cambios formAf = new Abm_Afiliado.Cambios();
-            formAf.ShowDialog();
-        }
 
         private void MenuClinica_Load(object sender, EventArgs e)
         {
@@ -98,11 +65,11 @@ namespace ClinicaFrba.Menu
         private void mostrarMenuRol(Rol rol)
         {
             menuStrip1.Visible = true;
-            List<Funcionalidad> func = rol.getFuncionalidades();
+            List<Funcionalidad> funcionalidades = rol.getFuncionalidades();
             List<int> idFun = new List<int>();
-            foreach(Funcionalidad fun in func)
+            foreach (Funcionalidad funcionalidad in funcionalidades)
             {
-                idFun.Add(fun.funcionalidad_id);
+                idFun.Add(funcionalidad.funcionalidad_id);
             }
             rolesToolStripMenuItem.Visible = idFun.Contains(1);
             afiliadoToolStripMenuItem.Visible = idFun.Contains(2);
@@ -110,6 +77,7 @@ namespace ClinicaFrba.Menu
             pedirTurnoToolStripMenuItem.Visible = idFun.Contains(5);
             diagnosticoToolStripMenuItem.Visible = idFun.Contains(7);
             registrarLlegadaToolStripMenuItem.Visible = idFun.Contains(6);
+            primerLogueoToolStripMenuItem.Visible = rol.nombreRol.Equals("Administrativo");
             if (idFun.Contains(8))
             {
                 mostrarCancelacion(rol);
@@ -161,9 +129,10 @@ namespace ClinicaFrba.Menu
             labelFuncionalidades.Visible = false;
         }
 
-        private void listarFuncionalidades(List<Funcionalidad> funciones)
+        private void listarFuncionalidades(List<Funcionalidad> funcionalidades)
         {
-            foreach(Funcionalidad fun in funciones){
+            foreach (Funcionalidad fun in funcionalidades)
+            {
                 listaFunciones.Items.Add(fun.descripcion);
             }
         }
@@ -172,11 +141,45 @@ namespace ClinicaFrba.Menu
         private void cambioRolEvento(object sender, EventArgs e)
         {
             listaFunciones.Items.Clear();
-            Rol rol = (Rol) comboElegirRol.SelectedItem;            
-            listarFuncionalidades(rol.getFuncionalidades());           
+            Rol rol = (Rol)comboElegirRol.SelectedItem;
+            listarFuncionalidades(rol.getFuncionalidades());
         }
 
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+ 
+        }
 
+        private void altaToolStripMenuAF_Click(object sender, EventArgs e)
+        {
+            Abm_Afiliado.AfiliadoAlta formAf = new Abm_Afiliado.AfiliadoAlta();
+            formAf.ShowDialog();
+        }
+
+        private void bajaToolStripMenuAF_Click(object sender, EventArgs e)
+        {
+            Abm_Afiliado.AfiliadoBajaPosta formAf = new Abm_Afiliado.AfiliadoBajaPosta();
+            formAf.ShowDialog();
+        }
+
+        private void visualizacionAficlick(object sender, EventArgs e)
+        {
+            Abm_Afiliado.AfiliadoVisualiza formAf = new Abm_Afiliado.AfiliadoVisualiza();
+            formAf.ShowDialog();
+        }
+
+        private void modificacionAficlick(object sender, EventArgs e)
+        {
+            Abm_Afiliado.ElegirAfiliado formAf = new Abm_Afiliado.ElegirAfiliado();
+            formAf.ShowDialog();
+        }
+
+        private void logsAficlick(object sender, EventArgs e)
+        {
+            Abm_Afiliado.Cambios formAf = new Abm_Afiliado.Cambios();
+            formAf.ShowDialog();
+        }
+        
         private void botonElegirRol_Click(object sender, EventArgs e)
         {
             Rol rol = (Rol)comboElegirRol.SelectedItem;
@@ -269,6 +272,17 @@ namespace ClinicaFrba.Menu
         {
             ClinicaFrba.Abm_Afiliado.ElegirAfiliadoDeshabilitado desa = new ClinicaFrba.Abm_Afiliado.ElegirAfiliadoDeshabilitado();
             desa.Show();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void primerLogueoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SeleccionUsuario sel = new SeleccionUsuario();
+            sel.Show();
         }
     }
 }

@@ -67,7 +67,7 @@ namespace ClinicaFrba.Compra_Bono
 
         private void buscar_Click(object sender, EventArgs e)
         {
-           afiliadosActuales = Afiliado.buscar(nombre.Text, apellido.Text, grupo.Text, (string)tipoDoc.SelectedItem, numeroDoc.Text);
+           afiliadosActuales = Afiliado.buscar(1, nombre.Text, apellido.Text, grupo.Text, (string)tipoDoc.SelectedItem, numeroDoc.Text);
            listaAfiliados.DataSource = afiliadosActuales;
            listaAfiliados.ClearSelection();
         }

@@ -15,13 +15,11 @@ namespace ClinicaFrba.LogeoPrimer
     partial class PrimerLogeo : Form
     {
         private Usuario usuario;
-        private Logeo log;
 
-        public PrimerLogeo(Usuario usuario, Logeo log)
+        public PrimerLogeo(Usuario unUsuario)
         {
             InitializeComponent();
-            this.usuario = usuario;
-            this.log = log;
+            this.usuario = unUsuario;
             nombreUsuario.Text = usuario.usuario;
         }
 
@@ -36,7 +34,7 @@ namespace ClinicaFrba.LogeoPrimer
                 string pass = bytesDeHasheoToString(bytesDeHasheo).ToLower();
                 usuario.actualizarPass(pass);
                 this.Hide();
-                log.logeoExitoso(usuario);
+                MessageBox.Show("El usuario ya puede loguearse normalmente", "Éxito", MessageBoxButtons.OK);
             }
             else
             {

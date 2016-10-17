@@ -68,11 +68,11 @@
             // passNuevaRepe
             // 
             this.passNuevaRepe.AutoSize = true;
-            this.passNuevaRepe.Location = new System.Drawing.Point(29, 116);
+            this.passNuevaRepe.Location = new System.Drawing.Point(13, 116);
             this.passNuevaRepe.Name = "passNuevaRepe";
-            this.passNuevaRepe.Size = new System.Drawing.Size(103, 13);
+            this.passNuevaRepe.Size = new System.Drawing.Size(113, 13);
             this.passNuevaRepe.TabIndex = 3;
-            this.passNuevaRepe.Text = "Repetir contraseña: ";
+            this.passNuevaRepe.Text = "Confirmar contraseña: ";
             // 
             // passNuevaT
             // 
@@ -100,7 +100,7 @@
             this.Entrar.Name = "Entrar";
             this.Entrar.Size = new System.Drawing.Size(131, 23);
             this.Entrar.TabIndex = 6;
-            this.Entrar.Text = "Confirmar y Entrar";
+            this.Entrar.Text = "Aceptar";
             this.Entrar.UseVisualStyleBackColor = true;
             this.Entrar.Click += new System.EventHandler(this.Entrar_Click);
             // 

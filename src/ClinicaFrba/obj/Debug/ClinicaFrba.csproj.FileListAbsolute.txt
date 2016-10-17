@@ -2,7 +2,6 @@ C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.pdb
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
-C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.Afiliado.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.AltaRol.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.BajaRol.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.ModificarFuncionalidadesRol.resources
@@ -99,3 +98,10 @@ C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\Clinica
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.ElegirAfiliadoDeshabilitado.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.ElegirAfiliado.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.AfiliadoBajaPosta.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.AfiliadoAlta.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.AfiliadoAltaConyuge.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.AfiliadoAltaHijos.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.AfiliadoBajaPosta.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.ElegirAfiliadoDeshabilitado.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.ElegirAfiliado.resources
+C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.ModificaDatos.resources

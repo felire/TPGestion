@@ -55,6 +55,7 @@
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
+            this.primerLogueoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +77,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(970, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "Registrar llegada ";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // rolesToolStripMenuItem
             // 
@@ -117,7 +119,8 @@
             this.modifToolStripMenuItem,
             this.visuToolStripMenuItem1,
             this.registroDeCambiosToolStripMenuItem,
-            this.habilitarAfiliadoToolStripMenuItem});
+            this.habilitarAfiliadoToolStripMenuItem,
+            this.primerLogueoToolStripMenuItem});
             this.afiliadoToolStripMenuItem.Name = "afiliadoToolStripMenuItem";
             this.afiliadoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.afiliadoToolStripMenuItem.Text = "Afiliado";
@@ -282,6 +285,13 @@
             this.labelFuncionalidades.TabIndex = 5;
             this.labelFuncionalidades.Text = "Funcionalidades:";
             // 
+            // primerLogueoToolStripMenuItem
+            // 
+            this.primerLogueoToolStripMenuItem.Name = "primerLogueoToolStripMenuItem";
+            this.primerLogueoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.primerLogueoToolStripMenuItem.Text = "Primer Logueo";
+            this.primerLogueoToolStripMenuItem.Click += new System.EventHandler(this.primerLogueoToolStripMenuItem_Click);
+            // 
             // MenuClinica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,5 +343,6 @@
         private System.Windows.Forms.ToolStripMenuItem pedirTurnoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registrarLlegadaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem habilitarAfiliadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem primerLogueoToolStripMenuItem;
     }
 }

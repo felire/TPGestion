@@ -53,10 +53,8 @@ namespace ClinicaFrba
             this.Hide();
         }
 
-        public void primerLogeo(Usuario usuario)
+        public void primerLogeoo(Usuario usuario)
         {
-            /*PrimerLogeo primer = new PrimerLogeo(usuario, this);
-            primer.Show();*/
             MessageBox.Show("Es la primera vez que alguien esta intentando ingresar con este usuario. Por favor seleccion Primer logeo para poder entrar.", "Error!", MessageBoxButtons.OK);
         }
         private string bytesDeHasheoToString(byte[] array)
@@ -68,12 +66,5 @@ namespace ClinicaFrba
             }
             return salida.ToString();
         }
-
-        private void butPrimerLogeo_Click(object sender, EventArgs e)
-        {
-            SeleccionUsuario sel = new SeleccionUsuario(this);
-            sel.Show();
-        }
     }
 }
-

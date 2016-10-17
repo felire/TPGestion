@@ -67,7 +67,7 @@ namespace ClinicaFrba.Registro_Llegada
 
         private void buscar_Click(object sender, EventArgs e)
         {
-           listaAfiliados.DataSource = Afiliado.buscar(nombre.Text, apellido.Text, grupo.Text, (string)tipoDoc.SelectedItem, numeroDoc.Text);
+           listaAfiliados.DataSource = Afiliado.buscar(1, nombre.Text, apellido.Text, grupo.Text, (string)tipoDoc.SelectedItem, numeroDoc.Text);
            listaAfiliados.ClearSelection();
         }
 

@@ -16,11 +16,9 @@ namespace ClinicaFrba.LogeoPrimer
 {
     partial class SeleccionUsuario : Form
     {
-        public Logeo logeo { get; set; }
-        public SeleccionUsuario(Logeo logeo)
+        public SeleccionUsuario()
         {
             InitializeComponent();
-            this.logeo = logeo;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -31,14 +29,16 @@ namespace ClinicaFrba.LogeoPrimer
 
         public void primerLogeo(Usuario usuario)
         {
-            PrimerLogeo primer = new PrimerLogeo(usuario, logeo);
+            PrimerLogeo primer = new PrimerLogeo(usuario);
             primer.Show();
             this.Hide();
         }
+
         public void sinRoles()
         {
             MessageBox.Show("El usuario elegido no tiene roles asignados", "Error!", MessageBoxButtons.OK);
         }
+
         public void noEntra()
         {
             MessageBox.Show("No es posible logearse con este usuario", "Error!", MessageBoxButtons.OK);
