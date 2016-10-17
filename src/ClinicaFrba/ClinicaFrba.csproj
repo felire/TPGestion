@@ -289,6 +289,9 @@
     <EmbeddedResource Include="Abm Afiliado\AfiliadoBajaPosta.resx">
       <DependentUpon>AfiliadoBajaPosta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\Cambios.resx">
+      <DependentUpon>Cambios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\ElegirAfiliadoDeshabilitado.resx">
       <DependentUpon>ElegirAfiliadoDeshabilitado.cs</DependentUpon>
     </EmbeddedResource>

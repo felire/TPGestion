@@ -36,6 +36,7 @@ namespace ClinicaFrba
         {
             MessageBox.Show("El usuario elegido no tiene roles asignados", "Error!", MessageBoxButtons.OK);
         }
+
         public void noContrasena()
         {
             MessageBox.Show("Usuario o contraseña incorrectos", "Error!", MessageBoxButtons.OK);
@@ -43,7 +44,7 @@ namespace ClinicaFrba
 
         public void noHabilitado()
         {
-            MessageBox.Show("Usuario no habilitado", "Error!", MessageBoxButtons.OK);
+            MessageBox.Show("Este usuario fue deshabilitado", "Error!", MessageBoxButtons.OK);
         }
 
         public void logeoExitoso(Usuario usuario)

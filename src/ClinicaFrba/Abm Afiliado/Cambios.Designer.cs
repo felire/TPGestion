@@ -108,6 +108,7 @@
             // textBoxAF
             // 
             this.textBoxAF.Location = new System.Drawing.Point(106, 31);
+            this.textBoxAF.MaxLength = 5;
             this.textBoxAF.Name = "textBoxAF";
             this.textBoxAF.Size = new System.Drawing.Size(109, 20);
             this.textBoxAF.TabIndex = 1;
@@ -133,6 +134,7 @@
             // textBoxNM
             // 
             this.textBoxNM.Location = new System.Drawing.Point(292, 24);
+            this.textBoxNM.MaxLength = 255;
             this.textBoxNM.Name = "textBoxNM";
             this.textBoxNM.Size = new System.Drawing.Size(165, 20);
             this.textBoxNM.TabIndex = 3;
@@ -166,6 +168,7 @@
             // textBoxAP
             // 
             this.textBoxAP.Location = new System.Drawing.Point(292, 50);
+            this.textBoxAP.MaxLength = 255;
             this.textBoxAP.Name = "textBoxAP";
             this.textBoxAP.Size = new System.Drawing.Size(165, 20);
             this.textBoxAP.TabIndex = 5;

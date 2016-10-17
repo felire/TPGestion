@@ -30,6 +30,9 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBoxCasado = new System.Windows.Forms.ComboBox();
+            this.fechaNac = new System.Windows.Forms.DateTimePicker();
+            this.labelCasado = new System.Windows.Forms.Label();
             this.labelAp = new System.Windows.Forms.Label();
             this.textBoxNom = new System.Windows.Forms.TextBox();
             this.labelNom = new System.Windows.Forms.Label();
@@ -49,9 +52,6 @@
             this.labelMail = new System.Windows.Forms.Label();
             this.buttonRegistrar = new System.Windows.Forms.Button();
             this.buttonLimpiar = new System.Windows.Forms.Button();
-            this.fechaNac = new System.Windows.Forms.DateTimePicker();
-            this.comboBoxCasado = new System.Windows.Forms.ComboBox();
-            this.labelCasado = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -97,6 +97,30 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ingrese Datos";
             // 
+            // comboBoxCasado
+            // 
+            this.comboBoxCasado.FormattingEnabled = true;
+            this.comboBoxCasado.Location = new System.Drawing.Point(326, 133);
+            this.comboBoxCasado.Name = "comboBoxCasado";
+            this.comboBoxCasado.Size = new System.Drawing.Size(147, 21);
+            this.comboBoxCasado.TabIndex = 29;
+            // 
+            // fechaNac
+            // 
+            this.fechaNac.Location = new System.Drawing.Point(374, 109);
+            this.fechaNac.Name = "fechaNac";
+            this.fechaNac.Size = new System.Drawing.Size(97, 20);
+            this.fechaNac.TabIndex = 19;
+            // 
+            // labelCasado
+            // 
+            this.labelCasado.AutoSize = true;
+            this.labelCasado.Location = new System.Drawing.Point(259, 136);
+            this.labelCasado.Name = "labelCasado";
+            this.labelCasado.Size = new System.Drawing.Size(61, 13);
+            this.labelCasado.TabIndex = 28;
+            this.labelCasado.Text = "Estado civil";
+            // 
             // labelAp
             // 
             this.labelAp.AutoSize = true;
@@ -109,6 +133,7 @@
             // textBoxNom
             // 
             this.textBoxNom.Location = new System.Drawing.Point(85, 19);
+            this.textBoxNom.MaxLength = 255;
             this.textBoxNom.Name = "textBoxNom";
             this.textBoxNom.Size = new System.Drawing.Size(141, 20);
             this.textBoxNom.TabIndex = 0;
@@ -125,6 +150,7 @@
             // textBoxAp
             // 
             this.textBoxAp.Location = new System.Drawing.Point(85, 48);
+            this.textBoxAp.MaxLength = 255;
             this.textBoxAp.Name = "textBoxAp";
             this.textBoxAp.Size = new System.Drawing.Size(141, 20);
             this.textBoxAp.TabIndex = 2;
@@ -151,7 +177,7 @@
             this.textBoxIDdni.Location = new System.Drawing.Point(85, 102);
             this.textBoxIDdni.Name = "textBoxIDdni";
             this.textBoxIDdni.Size = new System.Drawing.Size(141, 20);
-            this.textBoxIDdni.TabIndex = 6;
+            this.textBoxIDdni.TabIndex = 8;
             // 
             // label1
             // 
@@ -173,6 +199,7 @@
             // textBoxDire
             // 
             this.textBoxDire.Location = new System.Drawing.Point(314, 19);
+            this.textBoxDire.MaxLength = 255;
             this.textBoxDire.Name = "textBoxDire";
             this.textBoxDire.Size = new System.Drawing.Size(157, 20);
             this.textBoxDire.TabIndex = 8;
@@ -198,6 +225,7 @@
             // textBoxTel
             // 
             this.textBoxTel.Location = new System.Drawing.Point(314, 48);
+            this.textBoxTel.MaxLength = 12;
             this.textBoxTel.Name = "textBoxTel";
             this.textBoxTel.Size = new System.Drawing.Size(157, 20);
             this.textBoxTel.TabIndex = 10;
@@ -223,6 +251,7 @@
             // textBoxMail
             // 
             this.textBoxMail.Location = new System.Drawing.Point(314, 77);
+            this.textBoxMail.MaxLength = 255;
             this.textBoxMail.Name = "textBoxMail";
             this.textBoxMail.Size = new System.Drawing.Size(157, 20);
             this.textBoxMail.TabIndex = 12;
@@ -254,30 +283,6 @@
             this.buttonLimpiar.TabIndex = 25;
             this.buttonLimpiar.Text = "Limpiar";
             this.buttonLimpiar.UseVisualStyleBackColor = true;
-            // 
-            // fechaNac
-            // 
-            this.fechaNac.Location = new System.Drawing.Point(374, 109);
-            this.fechaNac.Name = "fechaNac";
-            this.fechaNac.Size = new System.Drawing.Size(97, 20);
-            this.fechaNac.TabIndex = 19;
-            // 
-            // comboBoxCasado
-            // 
-            this.comboBoxCasado.FormattingEnabled = true;
-            this.comboBoxCasado.Location = new System.Drawing.Point(326, 133);
-            this.comboBoxCasado.Name = "comboBoxCasado";
-            this.comboBoxCasado.Size = new System.Drawing.Size(147, 21);
-            this.comboBoxCasado.TabIndex = 29;
-            // 
-            // labelCasado
-            // 
-            this.labelCasado.AutoSize = true;
-            this.labelCasado.Location = new System.Drawing.Point(259, 136);
-            this.labelCasado.Name = "labelCasado";
-            this.labelCasado.Size = new System.Drawing.Size(61, 13);
-            this.labelCasado.TabIndex = 28;
-            this.labelCasado.Text = "Estado civil";
             // 
             // AfiliadoAltaHijos
             // 

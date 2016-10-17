@@ -29,7 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.altaFamiliar = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.hijo = new System.Windows.Forms.Button();
+            this.conyuge = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.tipo = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.nroDoc = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,6 +49,12 @@
             this.motivo = new System.Windows.Forms.TextBox();
             this.ButtonLimpiar = new System.Windows.Forms.Button();
             this.groupDatos = new System.Windows.Forms.GroupBox();
+            this.comboBoxSexo = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.civilAnt = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.planAnt = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.plan = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.estadoCivil = new System.Windows.Forms.ComboBox();
@@ -53,23 +65,11 @@
             this.labelTel = new System.Windows.Forms.Label();
             this.mail = new System.Windows.Forms.TextBox();
             this.labelMail = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.conyuge = new System.Windows.Forms.Button();
-            this.hijo = new System.Windows.Forms.Button();
-            this.altaFamiliar = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tipo = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.planAnt = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.civilAnt = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.comboBoxSexo = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
+            this.altaFamiliar.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupDatos.SuspendLayout();
-            this.altaFamiliar.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -86,6 +86,47 @@
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Modificación de Afiliado";
+            // 
+            // altaFamiliar
+            // 
+            this.altaFamiliar.Controls.Add(this.label6);
+            this.altaFamiliar.Controls.Add(this.hijo);
+            this.altaFamiliar.Controls.Add(this.conyuge);
+            this.altaFamiliar.Location = new System.Drawing.Point(23, 323);
+            this.altaFamiliar.Name = "altaFamiliar";
+            this.altaFamiliar.Size = new System.Drawing.Size(521, 84);
+            this.altaFamiliar.TabIndex = 36;
+            this.altaFamiliar.TabStop = false;
+            this.altaFamiliar.Text = "Alta Familiar";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 43);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(176, 13);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "¿Desea dar de alta a algun familiar?";
+            // 
+            // hijo
+            // 
+            this.hijo.Location = new System.Drawing.Point(370, 38);
+            this.hijo.Name = "hijo";
+            this.hijo.Size = new System.Drawing.Size(117, 23);
+            this.hijo.TabIndex = 35;
+            this.hijo.Text = "Hijo";
+            this.hijo.UseVisualStyleBackColor = true;
+            this.hijo.Click += new System.EventHandler(this.hijo_Click);
+            // 
+            // conyuge
+            // 
+            this.conyuge.Location = new System.Drawing.Point(209, 38);
+            this.conyuge.Name = "conyuge";
+            this.conyuge.Size = new System.Drawing.Size(118, 23);
+            this.conyuge.TabIndex = 34;
+            this.conyuge.Text = "Cónyuge";
+            this.conyuge.UseVisualStyleBackColor = true;
+            this.conyuge.Click += new System.EventHandler(this.conyuge_Click);
             // 
             // groupBox5
             // 
@@ -105,6 +146,23 @@
             this.groupBox5.TabIndex = 32;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Datos de selección";
+            // 
+            // tipo
+            // 
+            this.tipo.Location = new System.Drawing.Point(86, 45);
+            this.tipo.Name = "tipo";
+            this.tipo.ReadOnly = true;
+            this.tipo.Size = new System.Drawing.Size(123, 20);
+            this.tipo.TabIndex = 34;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(22, 49);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(34, 13);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "Tipo: ";
             // 
             // label4
             // 
@@ -237,6 +295,58 @@
             this.groupDatos.TabStop = false;
             this.groupDatos.Text = "Ingrese datos a modificar";
             // 
+            // comboBoxSexo
+            // 
+            this.comboBoxSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSexo.FormattingEnabled = true;
+            this.comboBoxSexo.Location = new System.Drawing.Point(359, 117);
+            this.comboBoxSexo.Name = "comboBoxSexo";
+            this.comboBoxSexo.Size = new System.Drawing.Size(148, 21);
+            this.comboBoxSexo.TabIndex = 29;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(295, 120);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 13);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "Sexo: ";
+            // 
+            // civilAnt
+            // 
+            this.civilAnt.Location = new System.Drawing.Point(132, 30);
+            this.civilAnt.Name = "civilAnt";
+            this.civilAnt.ReadOnly = true;
+            this.civilAnt.Size = new System.Drawing.Size(111, 20);
+            this.civilAnt.TabIndex = 27;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(21, 33);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(105, 13);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Estado civil anterior: ";
+            // 
+            // planAnt
+            // 
+            this.planAnt.Location = new System.Drawing.Point(134, 87);
+            this.planAnt.Name = "planAnt";
+            this.planAnt.ReadOnly = true;
+            this.planAnt.Size = new System.Drawing.Size(109, 20);
+            this.planAnt.TabIndex = 25;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(21, 91);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(107, 13);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Plan Medico anterior:";
+            // 
             // plan
             // 
             this.plan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -276,6 +386,7 @@
             // direccion
             // 
             this.direccion.Location = new System.Drawing.Point(359, 31);
+            this.direccion.MaxLength = 255;
             this.direccion.Name = "direccion";
             this.direccion.Size = new System.Drawing.Size(148, 20);
             this.direccion.TabIndex = 8;
@@ -292,6 +403,7 @@
             // telefono
             // 
             this.telefono.Location = new System.Drawing.Point(359, 60);
+            this.telefono.MaxLength = 12;
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(148, 20);
             this.telefono.TabIndex = 10;
@@ -308,6 +420,7 @@
             // mail
             // 
             this.mail.Location = new System.Drawing.Point(359, 88);
+            this.mail.MaxLength = 255;
             this.mail.Name = "mail";
             this.mail.Size = new System.Drawing.Size(148, 20);
             this.mail.TabIndex = 12;
@@ -321,116 +434,6 @@
             this.labelMail.TabIndex = 13;
             this.labelMail.Text = "Mail";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 43);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(176, 13);
-            this.label6.TabIndex = 33;
-            this.label6.Text = "¿Desea dar de alta a algun familiar?";
-            // 
-            // conyuge
-            // 
-            this.conyuge.Location = new System.Drawing.Point(209, 38);
-            this.conyuge.Name = "conyuge";
-            this.conyuge.Size = new System.Drawing.Size(118, 23);
-            this.conyuge.TabIndex = 34;
-            this.conyuge.Text = "Cónyuge";
-            this.conyuge.UseVisualStyleBackColor = true;
-            this.conyuge.Click += new System.EventHandler(this.conyuge_Click);
-            // 
-            // hijo
-            // 
-            this.hijo.Location = new System.Drawing.Point(370, 38);
-            this.hijo.Name = "hijo";
-            this.hijo.Size = new System.Drawing.Size(117, 23);
-            this.hijo.TabIndex = 35;
-            this.hijo.Text = "Hijo";
-            this.hijo.UseVisualStyleBackColor = true;
-            this.hijo.Click += new System.EventHandler(this.hijo_Click);
-            // 
-            // altaFamiliar
-            // 
-            this.altaFamiliar.Controls.Add(this.label6);
-            this.altaFamiliar.Controls.Add(this.hijo);
-            this.altaFamiliar.Controls.Add(this.conyuge);
-            this.altaFamiliar.Location = new System.Drawing.Point(23, 323);
-            this.altaFamiliar.Name = "altaFamiliar";
-            this.altaFamiliar.Size = new System.Drawing.Size(521, 84);
-            this.altaFamiliar.TabIndex = 36;
-            this.altaFamiliar.TabStop = false;
-            this.altaFamiliar.Text = "Alta Familiar";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 49);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 13);
-            this.label5.TabIndex = 33;
-            this.label5.Text = "Tipo: ";
-            // 
-            // tipo
-            // 
-            this.tipo.Location = new System.Drawing.Point(86, 45);
-            this.tipo.Name = "tipo";
-            this.tipo.ReadOnly = true;
-            this.tipo.Size = new System.Drawing.Size(123, 20);
-            this.tipo.TabIndex = 34;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 91);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(107, 13);
-            this.label7.TabIndex = 24;
-            this.label7.Text = "Plan Medico anterior:";
-            // 
-            // planAnt
-            // 
-            this.planAnt.Location = new System.Drawing.Point(134, 87);
-            this.planAnt.Name = "planAnt";
-            this.planAnt.ReadOnly = true;
-            this.planAnt.Size = new System.Drawing.Size(109, 20);
-            this.planAnt.TabIndex = 25;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(21, 33);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(105, 13);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Estado civil anterior: ";
-            // 
-            // civilAnt
-            // 
-            this.civilAnt.Location = new System.Drawing.Point(132, 30);
-            this.civilAnt.Name = "civilAnt";
-            this.civilAnt.ReadOnly = true;
-            this.civilAnt.Size = new System.Drawing.Size(111, 20);
-            this.civilAnt.TabIndex = 27;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(295, 120);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 13);
-            this.label9.TabIndex = 28;
-            this.label9.Text = "Sexo: ";
-            // 
-            // comboBoxSexo
-            // 
-            this.comboBoxSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSexo.FormattingEnabled = true;
-            this.comboBoxSexo.Location = new System.Drawing.Point(359, 117);
-            this.comboBoxSexo.Name = "comboBoxSexo";
-            this.comboBoxSexo.Size = new System.Drawing.Size(148, 21);
-            this.comboBoxSexo.TabIndex = 29;
-            // 
             // ModificaDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -440,14 +443,14 @@
             this.Name = "ModificaDatos";
             this.Text = "ModificaDatos";
             this.groupBox1.ResumeLayout(false);
+            this.altaFamiliar.ResumeLayout(false);
+            this.altaFamiliar.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupDatos.ResumeLayout(false);
             this.groupDatos.PerformLayout();
-            this.altaFamiliar.ResumeLayout(false);
-            this.altaFamiliar.PerformLayout();
             this.ResumeLayout(false);
 
         }

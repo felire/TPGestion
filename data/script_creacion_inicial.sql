@@ -184,6 +184,9 @@ AS
 		FOREIGN KEY (EsquemaTrabajo) REFERENCES [kernel_panic].[Esquema_Trabajo] (Id));
 GO
 
+CREATE INDEX indice_afiliado
+ON [kernel_panic].[Afiliados](Nombre, Apellido)
+
 CREATE PROCEDURE kernel_panic.BorrarTablas
 AS
 	DROP TABLE [kernel_panic].[Franjas_Canceladas]

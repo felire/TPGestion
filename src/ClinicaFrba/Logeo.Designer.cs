@@ -44,7 +44,7 @@
             this.logearse.Location = new System.Drawing.Point(75, 183);
             this.logearse.Name = "logearse";
             this.logearse.Size = new System.Drawing.Size(117, 46);
-            this.logearse.TabIndex = 6;
+            this.logearse.TabIndex = 3;
             this.logearse.Text = "Loguearse";
             this.logearse.UseVisualStyleBackColor = true;
             this.logearse.Click += new System.EventHandler(this.logeoAccion);
@@ -81,8 +81,9 @@
             this.userName.Location = new System.Drawing.Point(123, 76);
             this.userName.MaxLength = 50;
             this.userName.Name = "userName";
+            this.userName.ShortcutsEnabled = false;
             this.userName.Size = new System.Drawing.Size(137, 20);
-            this.userName.TabIndex = 4;
+            this.userName.TabIndex = 1;
             // 
             // password
             // 
@@ -92,7 +93,7 @@
             this.password.PasswordChar = '•';
             this.password.ShortcutsEnabled = false;
             this.password.Size = new System.Drawing.Size(137, 20);
-            this.password.TabIndex = 5;
+            this.password.TabIndex = 2;
             // 
             // errorProvider1
             // 

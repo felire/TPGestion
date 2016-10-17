@@ -63,6 +63,7 @@
             // textBoxNom
             // 
             this.textBoxNom.Location = new System.Drawing.Point(85, 19);
+            this.textBoxNom.MaxLength = 255;
             this.textBoxNom.Name = "textBoxNom";
             this.textBoxNom.Size = new System.Drawing.Size(141, 20);
             this.textBoxNom.TabIndex = 0;
@@ -88,6 +89,7 @@
             // textBoxAp
             // 
             this.textBoxAp.Location = new System.Drawing.Point(85, 48);
+            this.textBoxAp.MaxLength = 255;
             this.textBoxAp.Name = "textBoxAp";
             this.textBoxAp.Size = new System.Drawing.Size(141, 20);
             this.textBoxAp.TabIndex = 2;
@@ -121,6 +123,7 @@
             // textBoxIDdni
             // 
             this.textBoxIDdni.Location = new System.Drawing.Point(85, 102);
+            this.textBoxIDdni.MaxLength = 8;
             this.textBoxIDdni.Name = "textBoxIDdni";
             this.textBoxIDdni.Size = new System.Drawing.Size(141, 20);
             this.textBoxIDdni.TabIndex = 6;
@@ -138,6 +141,7 @@
             // textBoxDire
             // 
             this.textBoxDire.Location = new System.Drawing.Point(314, 19);
+            this.textBoxDire.MaxLength = 255;
             this.textBoxDire.Name = "textBoxDire";
             this.textBoxDire.Size = new System.Drawing.Size(157, 20);
             this.textBoxDire.TabIndex = 8;
@@ -155,6 +159,7 @@
             // textBoxTel
             // 
             this.textBoxTel.Location = new System.Drawing.Point(314, 48);
+            this.textBoxTel.MaxLength = 12;
             this.textBoxTel.Name = "textBoxTel";
             this.textBoxTel.Size = new System.Drawing.Size(157, 20);
             this.textBoxTel.TabIndex = 10;
@@ -171,6 +176,7 @@
             // textBoxMail
             // 
             this.textBoxMail.Location = new System.Drawing.Point(314, 77);
+            this.textBoxMail.MaxLength = 255;
             this.textBoxMail.Name = "textBoxMail";
             this.textBoxMail.Size = new System.Drawing.Size(157, 20);
             this.textBoxMail.TabIndex = 12;
@@ -196,6 +202,7 @@
             // textBoxHijos
             // 
             this.textBoxHijos.Location = new System.Drawing.Point(126, 155);
+            this.textBoxHijos.MaxLength = 3;
             this.textBoxHijos.Name = "textBoxHijos";
             this.textBoxHijos.Size = new System.Drawing.Size(100, 20);
             this.textBoxHijos.TabIndex = 16;

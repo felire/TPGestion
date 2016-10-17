@@ -79,7 +79,7 @@
             // grupo
             // 
             this.grupo.Location = new System.Drawing.Point(86, 99);
-            this.grupo.MaxLength = 100;
+            this.grupo.MaxLength = 3;
             this.grupo.Name = "grupo";
             this.grupo.Size = new System.Drawing.Size(121, 20);
             this.grupo.TabIndex = 11;
@@ -107,7 +107,7 @@
             // numeroDoc
             // 
             this.numeroDoc.Location = new System.Drawing.Point(309, 58);
-            this.numeroDoc.MaxLength = 15;
+            this.numeroDoc.MaxLength = 8;
             this.numeroDoc.Name = "numeroDoc";
             this.numeroDoc.Size = new System.Drawing.Size(115, 20);
             this.numeroDoc.TabIndex = 7;
