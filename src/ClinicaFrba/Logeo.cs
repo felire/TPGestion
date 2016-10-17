@@ -53,10 +53,6 @@ namespace ClinicaFrba
             this.Hide();
         }
 
-        public void primerLogeoo(Usuario usuario)
-        {
-            MessageBox.Show("Es la primera vez que alguien esta intentando ingresar con este usuario. Por favor seleccion Primer logeo para poder entrar.", "Error!", MessageBoxButtons.OK);
-        }
         private string bytesDeHasheoToString(byte[] array)
         {
             StringBuilder salida = new StringBuilder("");

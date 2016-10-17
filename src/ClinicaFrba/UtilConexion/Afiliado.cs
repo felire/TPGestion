@@ -319,7 +319,6 @@ namespace ClinicaFrba.UtilConexion
                     speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
                 }
             }
-
             List<Afiliado> afiliados = new List<Afiliado>();
             if (speaker.reader.HasRows)
             {
