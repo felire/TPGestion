@@ -263,18 +263,31 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombre", "%" + nombre + "%"));
             ListaParametros.Add(new SqlParameter("@apellido", "%" + apellido + "%"));
+            ListaParametros.Add(new SqlParameter("@esta_activo", activo));
             SpeakerDB speaker;
+            string query;
             // pueden pasar el documento o no, y el numero de grupo podria ser 0 que significa que no busca por ese campo
             if (doc.Equals(""))
             {
                 if (grupo.Equals(""))
                 {
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Esta_activo = 1", "T", ListaParametros);
+                    query = "SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo " +
+                            "FROM kernel_panic.Afiliados " +
+                            "WHERE Nombre LIKE @nombre " +
+                            "AND  Apellido LIKE @apellido " +
+                            "AND Esta_activo = @esta_activo";
+                    speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
                 }
                 else
                 {
                     ListaParametros.Add(new SqlParameter("@grupo", Int16.Parse(grupo)));
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo LIKE @grupo AND Esta_activo = 1", "T", ListaParametros);
+                    query = "SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo " +
+                            "FROM kernel_panic.Afiliados " +
+                            "WHERE Nombre LIKE @nombre " +
+                            "AND  Apellido LIKE @apellido " +
+                            "AND Numero_de_grupo LIKE @grupo " +
+                            "AND Esta_activo = @esta_activo";
+                    speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
                 }
             }
             else
@@ -283,13 +296,27 @@ namespace ClinicaFrba.UtilConexion
                 ListaParametros.Add(new SqlParameter("@doc", Decimal.Parse(doc)));
                 if (grupo.Equals(""))
                 {
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Tipo_doc = @tipoDoc AND Numero_doc = @doc AND Esta_activo = 1", "T", ListaParametros);
-
+                    query = "SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo "+
+                            "FROM kernel_panic.Afiliados "+
+                            "WHERE Nombre LIKE @nombre "+
+                            "AND Apellido LIKE @apellido "+
+                            "AND Tipo_doc = @tipoDoc "+
+                            "AND Numero_doc = @doc "+
+                            "AND Esta_activo = @esta_activo";
+                    speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
                 }
                 else
                 {
                     ListaParametros.Add(new SqlParameter("@grupo", Int16.Parse(grupo)));
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo = @grupo AND Tipo_doc = @tipoDoc AND Numero_doc = @doc AND Esta_activo = 1", "T", ListaParametros);
+                    query = "SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo "+
+                            "FROM kernel_panic.Afiliados "+
+                            "WHERE Nombre LIKE @nombre "+
+                            "AND Apellido LIKE @apellido "+
+                            "AND Numero_de_grupo = @grupo "+
+                            "AND Tipo_doc = @tipoDoc "+
+                            "AND Numero_doc = @doc "+
+                            "AND Esta_activo = @esta_activo";
+                    speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
                 }
             }
 
@@ -314,111 +341,25 @@ namespace ClinicaFrba.UtilConexion
             return afiliados;
         }
 
-
-        public static List<Afiliado> buscarDeshabilitados(string nombre, string apellido, string grupo, string tipoDoc, string doc)
+        public Boolean tieneParesActivos()
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            ListaParametros.Add(new SqlParameter("@nombre", "%" + nombre + "%"));
-            ListaParametros.Add(new SqlParameter("@apellido", "%" + apellido + "%"));
-            SpeakerDB speaker;
-            // pueden pasar el documento o no, y el numero de grupo podria ser 0 que significa que no busca por ese campo
-            string query = "";
-            if (doc.Equals(""))
+            ListaParametros.Add(new SqlParameter("@Tipo_doc", this.tipoDoc));
+            ListaParametros.Add(new SqlParameter("@Numero_doc", this.documento));
+            string query ="SELECT Id "+
+                          "FROM kernel_panic.Afiliados "+
+                          "WHERE Esta_activo = 1 "+
+                          "AND Tipo_doc = @Tipo_doc "+
+                          "AND Numero_doc = @Numero_doc";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
+            if (speaker.reader.HasRows)
             {
-                if (grupo.Equals(""))
-                {
-                    query = "SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo "+
-                            "FROM kernel_panic.Afiliados a1 "+
-                            "WHERE Nombre LIKE @nombre "+ 
-                            "AND  Apellido LIKE @apellido "+
-                            "AND Esta_activo = 0 "+
-                            "AND (SELECT COUNT(*) "+
-                                 "FROM kernel_panic.Afiliados a2 "+
-                                 "WHERE a2.Esta_activo = 1 "+
-                                 "AND a2.Tipo_doc = a1.Tipo_doc "+
-                                 "AND a2.Numero_doc = a1.Numero_doc) = 0 ";
-                    speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
-                }
-                else
-                {
-                    ListaParametros.Add(new SqlParameter("@grupo", Int32.Parse(grupo)));
-                    query = "SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo " +
-                            "FROM kernel_panic.Afiliados a1 " +
-                            "WHERE Nombre LIKE @nombre " +
-                            "AND Nombre LIKE @nombre "+
-                            "AND  Apellido LIKE @apellido "+
-                            "AND Numero_de_grupo LIKE @grupo "+
-                            "AND Esta_activo = 0 " +
-                            "AND (SELECT COUNT(*) " +
-                                 "FROM kernel_panic.Afiliados a2 " +
-                                 "WHERE a2.Esta_activo = 1 " +
-                                 "AND a2.Tipo_doc = a1.Tipo_doc " +
-                                 "AND a2.Numero_doc = a1.Numero_doc) = 0 ";
-                    speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
-                }
+                return true;
             }
             else
             {
-                ListaParametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
-                ListaParametros.Add(new SqlParameter("@doc", Decimal.Parse(doc)));
-                if (grupo.Equals(""))
-                {
-                    query = "SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo " +
-                            "FROM kernel_panic.Afiliados a1 " +
-                            "WHERE Nombre LIKE @nombre " +
-                            "AND Nombre LIKE @nombre "+
-                            "AND  Apellido LIKE @apellido "+
-                            "AND Tipo_doc = @tipoDoc "+
-                            "AND Numero_doc = @doc "+
-                            "AND Esta_activo = 0 " +
-                            "AND (SELECT COUNT(*) " +
-                                 "FROM kernel_panic.Afiliados a2 " +
-                                 "WHERE a2.Esta_activo = 1 " +
-                                 "AND a2.Tipo_doc = a1.Tipo_doc " +
-                                 "AND a2.Numero_doc = a1.Numero_doc) = 0 ";
-                    speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
-
-                }
-                else
-                {
-                    ListaParametros.Add(new SqlParameter("@grupo", Int32.Parse(grupo)));
-                    query = "SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo " +
-                            "FROM kernel_panic.Afiliados a1 " +
-                            "WHERE Nombre LIKE @nombre " +
-                            "AND Nombre LIKE @nombre "+
-                            "AND  Apellido LIKE @apellido "+
-                            "AND Numero_de_grupo = @grupo "+
-                            "AND Tipo_doc = @tipoDoc "+
-                            "AND Numero_doc = @doc "+
-                            "AND Esta_activo = 0 " +
-                            "AND (SELECT COUNT(*) " +
-                                 "FROM kernel_panic.Afiliados a2 " +
-                                 "WHERE a2.Esta_activo = 1 " +
-                                 "AND a2.Tipo_doc = a1.Tipo_doc " +
-                                 "AND a2.Numero_doc = a1.Numero_doc) = 0 ";
-                    speaker = ConexionDB.ObtenerDataReader("SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Nombre LIKE @nombre AND  Apellido LIKE @apellido AND Numero_de_grupo = @grupo AND Tipo_doc = @tipoDoc AND Numero_doc = @doc AND Esta_activo = 1", "T", ListaParametros);
-                }
+                return false;
             }
-
-            List<Afiliado> afiliados = new List<Afiliado>();
-            if (speaker.reader.HasRows)
-            {
-                while (speaker.reader.Read())
-                {
-                    Afiliado afiliado = new Afiliado();
-                    afiliado.id = (int)speaker.reader["Id"];
-                    afiliado.numeroDeGrupo = (int)speaker.reader["Numero_de_grupo"];
-                    afiliado.numeroEnElGrupo = (int)speaker.reader["Numero_en_el_grupo"];
-                    afiliado.esta_activo = true;
-                    afiliado.apellido = (string)speaker.reader["Apellido"];
-                    afiliado.nombre = (string)speaker.reader["Nombre"];
-                    afiliado.tipoDoc = (string)speaker.reader["Tipo_doc"];
-                    afiliado.documento = (decimal)speaker.reader["Numero_doc"];
-                    afiliados.Add(afiliado);
-                }
-            }
-            speaker.close();
-            return afiliados;
         }
 
         public void cargarAfiliado(string nombreUsuario)

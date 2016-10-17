@@ -55,6 +55,7 @@ namespace ClinicaFrba.Abm_Afiliado
             ColNumero.Width = listaAfiliados.Width / 5 - 44;
             listaAfiliados.Columns.Add(ColNumero);
         }
+
         private void cargarFormulario()
         {
             tipoDoc.Items.Add("");
@@ -67,12 +68,11 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void buscar_Click(object sender, EventArgs e)
         {
-           afiliadosActuales = Afiliado.buscarDeshabilitados(nombre.Text, apellido.Text, grupo.Text, (string)tipoDoc.SelectedItem, numeroDoc.Text);
-           listaAfiliados.DataSource = afiliadosActuales;
-           listaAfiliados.ClearSelection();
+            afiliadosActuales = Afiliado.buscar(0, nombre.Text, apellido.Text, grupo.Text, (string)tipoDoc.SelectedItem, numeroDoc.Text);
+            afiliadosActuales.RemoveAll(afiliado => afiliado.tieneParesActivos());
+            listaAfiliados.DataSource = afiliadosActuales;
+            listaAfiliados.ClearSelection();
         }
-
-
 
         private Boolean seleccionValida()
         {
