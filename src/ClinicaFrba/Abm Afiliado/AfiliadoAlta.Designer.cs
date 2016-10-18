@@ -127,7 +127,7 @@
             this.textBoxIDdni.Name = "textBoxIDdni";
             this.textBoxIDdni.Size = new System.Drawing.Size(141, 20);
             this.textBoxIDdni.TabIndex = 6;
-            this.textBoxIDdni.TextChanged += new System.EventHandler(this.textBoxIDdni_TextChanged);
+            this.textBoxIDdni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros_dni);
             // 
             // labelDire
             // 
@@ -154,7 +154,6 @@
             this.labelTel.Size = new System.Drawing.Size(49, 13);
             this.labelTel.TabIndex = 11;
             this.labelTel.Text = "Teléfono";
-            this.labelTel.Click += new System.EventHandler(this.labelTel_Click);
             // 
             // textBoxTel
             // 
@@ -163,6 +162,7 @@
             this.textBoxTel.Name = "textBoxTel";
             this.textBoxTel.Size = new System.Drawing.Size(157, 20);
             this.textBoxTel.TabIndex = 10;
+            this.textBoxTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros_telefono);
             // 
             // labelMail
             // 
@@ -206,6 +206,7 @@
             this.textBoxHijos.Name = "textBoxHijos";
             this.textBoxHijos.Size = new System.Drawing.Size(100, 20);
             this.textBoxHijos.TabIndex = 16;
+            this.textBoxHijos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros_cantHijos);
             // 
             // comboBoxSexo
             // 

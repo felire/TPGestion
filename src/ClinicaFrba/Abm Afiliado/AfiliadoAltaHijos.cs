@@ -50,7 +50,6 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private Boolean formularioValido()
         {
-            uint i;
             string mensajeError = "";
 
             if (textBoxNom.Text == "")
@@ -61,7 +60,7 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 mensajeError = mensajeError + "\r\n" + "Complete el campo Apellido";
             }
-            if (!uint.TryParse(textBoxIDdni.Text, out i))
+            if (textBoxIDdni.Text == "")
             {
                 mensajeError = mensajeError + "\r\n" + "Ingrese un dni válido";
             }
@@ -81,7 +80,7 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 mensajeError = mensajeError + "\r\n" + "Complete el campo Mail";
             }
-            if (!uint.TryParse(textBoxTel.Text, out i))
+            if (textBoxTel.Text == "")
             {
                 mensajeError = mensajeError + "\r\n" + "Ingrese un Telefono válido";
             }
@@ -89,7 +88,6 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 mensajeError = mensajeError + "\r\n" + "Complete el domicilio";
             }
-
             if (mensajeError.Equals(""))
             {
                 afiliado.apellido = textBoxAp.Text;
@@ -109,18 +107,6 @@ namespace ClinicaFrba.Abm_Afiliado
                 MessageBox.Show(mensajeError, "Información");
                 return false;
             }
-        }
-
-
-
-        private void labelCantHij_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxHijos_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonRegistrar_Click(object sender, EventArgs e)
@@ -150,6 +136,26 @@ namespace ClinicaFrba.Abm_Afiliado
                         afiliadoPadre.actualizarFamACargo();
                     }
                 }
+            }
+        }
+
+        private void soloNumeros_dni(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void soloNumeros_telefono(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
             }
         }
     }

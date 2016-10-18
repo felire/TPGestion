@@ -86,7 +86,7 @@
             this.grupo.Name = "grupo";
             this.grupo.Size = new System.Drawing.Size(121, 20);
             this.grupo.TabIndex = 11;
-            this.grupo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros);
+            this.grupo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros_grupof);
             // 
             // buscar
             // 
@@ -114,6 +114,7 @@
             this.numeroDoc.Name = "numeroDoc";
             this.numeroDoc.Size = new System.Drawing.Size(115, 20);
             this.numeroDoc.TabIndex = 7;
+            this.numeroDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros_doc);
             // 
             // label4
             // 

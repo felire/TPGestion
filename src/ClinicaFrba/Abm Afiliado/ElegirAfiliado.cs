@@ -55,6 +55,7 @@ namespace ClinicaFrba.Abm_Afiliado
             ColNumero.Width = listaAfiliados.Width / 5 - 44;
             listaAfiliados.Columns.Add(ColNumero);
         }
+
         private void cargarFormulario()
         {
             tipoDoc.Items.Add("");
@@ -72,8 +73,6 @@ namespace ClinicaFrba.Abm_Afiliado
            listaAfiliados.ClearSelection();
         }
 
-
-
         private Boolean seleccionValida()
         {
             if (listaAfiliados.SelectedRows.Count == 1)
@@ -87,16 +86,6 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
-        private void soloNumeros(object sender, KeyPressEventArgs e)
-        {
-            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
-            {
-                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-                return;
-            }
-        }
-
         private void modificar_Click(object sender, EventArgs e)
         {
             if (seleccionValida())
@@ -106,6 +95,26 @@ namespace ClinicaFrba.Abm_Afiliado
                 ModificaDatos mod = new ModificaDatos(afiliado);
                 mod.Show();
                 this.Hide();
+            }
+        }
+
+        private void soloNumeros_doc(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void soloNumeros_grupoF(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
             }
         }
     }

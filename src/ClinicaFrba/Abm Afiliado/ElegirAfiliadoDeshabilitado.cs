@@ -87,7 +87,18 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
-        private void soloNumeros(object sender, KeyPressEventArgs e)
+        private void habilitar_Click(object sender, EventArgs e)
+        {
+            if (seleccionValida())
+            {
+                Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
+                afiliado.habilitar();
+                MessageBox.Show("Afiliado habilitado con exito", "Exito", MessageBoxButtons.OK);
+                this.Hide();
+            }
+        }
+
+        private void soloNumeros_doc(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
             {
@@ -97,14 +108,13 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
-        private void habilitar_Click(object sender, EventArgs e)
+        private void soloNumeros_grupoF(object sender, KeyPressEventArgs e)
         {
-            if (seleccionValida())
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
             {
-                Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
-                afiliado.habilitar();
-                MessageBox.Show("Afiliado habilitado con exito", "Exito", MessageBoxButtons.OK);
-                this.Hide();
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
             }
         }
     }

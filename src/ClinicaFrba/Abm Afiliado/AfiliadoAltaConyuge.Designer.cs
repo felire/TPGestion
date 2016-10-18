@@ -166,6 +166,7 @@
             this.textBoxIDdni.Name = "textBoxIDdni";
             this.textBoxIDdni.Size = new System.Drawing.Size(141, 20);
             this.textBoxIDdni.TabIndex = 6;
+            this.textBoxIDdni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros_dni);
             // 
             // label1
             // 
@@ -210,6 +211,7 @@
             this.textBoxTel.Name = "textBoxTel";
             this.textBoxTel.Size = new System.Drawing.Size(157, 20);
             this.textBoxTel.TabIndex = 10;
+            this.textBoxTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros_telefono);
             // 
             // labelFechNac
             // 

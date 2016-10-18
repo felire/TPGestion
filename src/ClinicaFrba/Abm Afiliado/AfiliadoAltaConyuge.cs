@@ -37,14 +37,11 @@ namespace ClinicaFrba.Abm_Afiliado
             comboBoxTDNI.Items.Add("LC");
             comboBoxTDNI.Items.Add("CI");
             comboBoxTDNI.SelectedIndex = 0;
-
-
         }
+
         private Boolean formularioValido()
         {
-            uint i;
             string mensajeError = "";
-
             if (textBoxNom.Text == "")
             {
                 mensajeError = "Complete el campo Nombre";
@@ -53,7 +50,7 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 mensajeError = mensajeError + "\r\n" + "Complete el campo Apellido";
             }
-            if (!uint.TryParse(textBoxIDdni.Text, out i))
+            if (textBoxIDdni.Text == "")
             {
                 mensajeError = mensajeError + "\r\n" + "Ingrese un dni válido";
             }
@@ -69,9 +66,9 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 mensajeError = mensajeError + "\r\n" + "Complete el campo Mail";
             }
-            if (!uint.TryParse(textBoxTel.Text, out i))
+            if (textBoxTel.Text == "")
             {
-                mensajeError = mensajeError + "\r\n" + "Ingrese un Telefono válido";
+                mensajeError = mensajeError + "\r\n" + "Ingrese un Telefono";
             }
             if (textBoxDire.Text == "")
             {
@@ -115,6 +112,26 @@ namespace ClinicaFrba.Abm_Afiliado
                     this.Hide();
                     formu.preguntarHijos();
                 }
+            }
+        }
+
+        private void soloNumeros_dni(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void soloNumeros_telefono(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
             }
         }
     }

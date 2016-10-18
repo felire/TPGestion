@@ -81,24 +81,22 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 mensaje = mensaje + "\r\n" + "Debe especificar un motivo";
             }
-            if (listaAfiliados.SelectedRows.Count == 1)
+            if (listaAfiliados.SelectedRows.Count != 1)
             {
-                //paja cambiar la logica
+                mensaje = mensaje + "\r\n" + "Debe seleccionar un afiliado";  
+            }
+            if (mensaje.Equals(""))
+            {
+                return true;
             }
             else
-            {
-                mensaje = mensaje + "\r\n" + "Debe seleccionar un afiliado";            
-                
-            }
-            if (!mensaje.Equals(""))
             {
                 MessageBox.Show(mensaje, "Error!", MessageBoxButtons.OK);
                 return false;
             }
-            return true;
         }
 
-        private void soloNumeros(object sender, KeyPressEventArgs e)
+        private void soloNumeros_grupof(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
             {
@@ -116,6 +114,16 @@ namespace ClinicaFrba.Abm_Afiliado
                 afiliado.deshabilitar(textMotivo.Text);
                 MessageBox.Show("Afiliado deshabilitado con exito", "Exito", MessageBoxButtons.OK);
                 this.Hide();
+            }
+        }
+
+        private void soloNumeros_doc(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
             }
         }
     }

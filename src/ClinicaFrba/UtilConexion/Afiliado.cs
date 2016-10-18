@@ -210,35 +210,42 @@ namespace ClinicaFrba.UtilConexion
             SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
             if (speaker.reader.HasRows)
             {
-                    speaker.reader.Read();
-                    this.numeroDeGrupo = (int)speaker.reader["Numero_de_grupo"];
-                    this.numeroEnElGrupo = (int)speaker.reader["Numero_en_el_grupo"];
-                    this.nombre = (string)speaker.reader["Nombre"];
-                    this.apellido = (string)speaker.reader["Apellido"];
-                    this.tipoDoc = (string)speaker.reader["Tipo_doc"];
-                    this.documento = (decimal)speaker.reader["Numero_doc"];
-                    this.domicilio = (string)speaker.reader["Direccion"];
-                    this.telefono = (decimal)speaker.reader["Telefono"];
-                    this.mail = (string)speaker.reader["Mail"];
-                    this.fechaNac = (DateTime)speaker.reader["Fecha_nacimiento"];                   
-                    if (speaker.reader["Estado_civil"] == DBNull.Value)
-                    {
-                        this.estadoCivil = null;
-                    }
-                    else
-                    {
-                        this.estadoCivil = (string)speaker.reader["Estado_civil"];
-                    }
-                    if (speaker.reader["Sexo"] == DBNull.Value)
-                    {
-                        this.sexo = null;
-                    }
-                    else
-                    {
-                        this.sexo = (string)speaker.reader["Sexo"];
-                    }
-                    this.planObjeto = new Plan((decimal)speaker.reader["Plan_grupo"]);
+                speaker.reader.Read();
+                this.numeroDeGrupo = (int)speaker.reader["Numero_de_grupo"];
+                this.numeroEnElGrupo = (int)speaker.reader["Numero_en_el_grupo"];
+                this.nombre = (string)speaker.reader["Nombre"];
+                this.apellido = (string)speaker.reader["Apellido"];
+                this.tipoDoc = (string)speaker.reader["Tipo_doc"];
+                this.documento = (decimal)speaker.reader["Numero_doc"];
+                this.domicilio = (string)speaker.reader["Direccion"];
+                this.telefono = (decimal)speaker.reader["Telefono"];
+                this.mail = (string)speaker.reader["Mail"];
+                this.fechaNac = (DateTime)speaker.reader["Fecha_nacimiento"];
+                this.planObjeto = new Plan((decimal)speaker.reader["Plan_grupo"]);
+                if (speaker.reader["Estado_civil"] == DBNull.Value)
+                {
+                    this.estadoCivil = null;
+                }
+                else
+                {
+                    this.estadoCivil = (string)speaker.reader["Estado_civil"];
+                }
+                if (speaker.reader["Sexo"] == DBNull.Value)
+                {
+                    this.sexo = null;
+                }
+                else
+                {
+                    this.sexo = (string)speaker.reader["Sexo"];
+                }
+                if (speaker.reader["Familiares_a_cargo"] == DBNull.Value)
+                {
+                    this.familiaresACargo = 0;
+                }
+                else
+                {
                     this.familiaresACargo = (int)speaker.reader["Familiares_a_cargo"];
+                }
             }
             speaker.close();
         }

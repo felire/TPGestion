@@ -407,6 +407,7 @@
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(148, 20);
             this.telefono.TabIndex = 10;
+            this.telefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNuemeros_tel);
             // 
             // labelTel
             // 

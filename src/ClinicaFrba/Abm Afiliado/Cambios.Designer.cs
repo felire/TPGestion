@@ -112,6 +112,7 @@
             this.textBoxAF.Name = "textBoxAF";
             this.textBoxAF.Size = new System.Drawing.Size(109, 20);
             this.textBoxAF.TabIndex = 1;
+            this.textBoxAF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros_id);
             // 
             // labelNM
             // 
@@ -214,7 +215,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(723, 241);
             this.dataGridView1.TabIndex = 16;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Id
             // 
