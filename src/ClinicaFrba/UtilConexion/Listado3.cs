@@ -22,9 +22,9 @@ namespace ClinicaFrba.UtilConexion
         public static List<Listado3> obtenerResultados(int anio, int semestre, decimal especialidad)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            ListaParametros.Add(new SqlParameter("@anio", anio));
+            ListaParametros.Add(new SqlParameter("@anio", anio.ToString()));
             ListaParametros.Add(new SqlParameter("@especialidad", especialidad));
-            //SELECT convert(date, '23/10/2016', 103)
+            
             SpeakerDB speaker;
                      
 
@@ -35,24 +35,42 @@ namespace ClinicaFrba.UtilConexion
             if (semestre == 1)
             {
 
-                speaker = ConexionDB.ObtenerDataReader("SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, E.Desde desde,E.Hasta hasta,SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) HorasTrabajadasEnFranja " +
+                speaker = ConexionDB.ObtenerDataReader("SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, E.Desde desde,E.Hasta hasta,CASE WHEN (E.Desde<='01-01-'+@anio AND E.Hasta>='30-06-'+@anio) " + //,SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) HorasTrabajadasEnFranja " +
+                                                                                                                                                                                                    "THEN SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, '01-01-'+@anio, '30-06-'+@anio) " +
+                                                                                                                                                                                                 "WHEN (E.Hasta>='01-01-'+@anio AND E.Hasta<='30-06-'+@anio) " +
+                                                                                                                                                                                                    "THEN SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, '01-01-'+@anio, E.Hasta) "+
+                                                                                                                                                                                                 "WHEN (E.Desde>='01-01-'+@anio AND E.Desde<='30-06-'+@anio) " +
+                                                                                                                                                                                                    "THEN SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, '30-06-'+@anio) "+
+                                                                                                                                                                                            "END HorasTrabajadasEnFranja " +
+
                                                    "FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Profesional = P.Id) " +
                                                                                        "JOIN kernel_panic.Agenda_Diaria AD ON (AD.EsquemaTrabajo = E.Id) " +
-                                                   "WHERE (YEAR(E.Desde)=@anio OR YEAR(E.Hasta)=@anio) AND MONTH(E.Desde)<7 " +
+                                                   "WHERE (E.Desde<='01-01-'+@anio AND E.Hasta>='30-06-'+@anio) OR " +
+                                                          "(E.Hasta>='01-01-'+@anio AND E.Hasta<='30-06-'+@anio) OR " +
+                                                          "(E.Desde>='01-01-'+@anio AND E.Desde<='30-06-'+@anio) " +
                                                    "AND AD.Especialidad = @especialidad " +
                                                    "GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta " +
-                                                   "ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) ASC", "T", ListaParametros);
+                                                   "ORDER BY HorasTrabajadasEnFranja ASC", "T", ListaParametros);
 
             }
             else
             {
-                speaker = ConexionDB.ObtenerDataReader("SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, E.Desde desde,E.Hasta hasta,SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, CASE WHEN MONTH(E.Desde) > 6 THEN E.Desde ELSE convert(date, '01/07/@anio', 103) END, CASE WHEN MONTH(E.Hasta)>6 THEN E.Hasta ELSE convert(date, '31/12/@anio',103) END) HorasTrabajadasEnFranja " +
-                                                   "FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Profesional = P.Id) " +
-                                                                                       "JOIN kernel_panic.Agenda_Diaria AD ON (AD.EsquemaTrabajo = E.Id) " +
-                                                   "WHERE (YEAR(E.Desde)=@anio OR YEAR(E.Hasta)=@anio) " +
-                                                   "AND AD.Especialidad = @especialidad " +
-                                                   "GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta " +
-                                                   "ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, CASE WHEN MONTH(E.Desde) > 6 THEN E.Desde ELSE convert(date, '01/07/@anio', 103) END, CASE WHEN MONTH(E.Hasta)>6 THEN E.Hasta ELSE convert(date, '31/12/@anio',103) END) ASC", "T", ListaParametros);
+                speaker = ConexionDB.ObtenerDataReader("SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, E.Desde desde,E.Hasta hasta,CASE WHEN (E.Desde<='01-07-'+@anio AND E.Hasta>='31-12-'+@anio) " + 
+                                                                                                                                                                                                           "THEN SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, '01-07-'+@anio, '31-12-'+@anio) " +
+                                                                                                                                                                                                        "WHEN (E.Hasta>='01-07-'+@anio AND E.Hasta<='30-06-'+@anio) " +
+                                                                                                                                                                                                           "THEN SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, '01-07-'+@anio, E.Hasta) " +
+                                                                                                                                                                                                        "WHEN (E.Desde>='01-07-'+@anio AND E.Desde<='31-12-'+@anio) " +
+                                                                                                                                                                                                           "THEN SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, '31-12-'+@anio) " +
+                                                                                                                                                                                                   "END HorasTrabajadasEnFranja " +
+
+                                                          "FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Profesional = P.Id) " +
+                                                                                              "JOIN kernel_panic.Agenda_Diaria AD ON (AD.EsquemaTrabajo = E.Id) " +
+                                                          "WHERE (E.Desde<='01-07-'+@anio AND E.Hasta>='31-12-'+@anio) OR " +
+                                                                 "(E.Hasta>='01-07-'+@anio AND E.Hasta<='31-12-'+@anio) OR " +
+                                                                 "(E.Desde>='01-07-'+@anio AND E.Desde<='31-12-'+@anio) " +
+                                                          "AND AD.Especialidad = @especialidad " +
+                                                          "GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta " +
+                                                          "ORDER BY HorasTrabajadasEnFranja ASC", "T", ListaParametros);
             }
             List<Listado3> lista = new List<Listado3>();
             if (speaker.reader.HasRows)
