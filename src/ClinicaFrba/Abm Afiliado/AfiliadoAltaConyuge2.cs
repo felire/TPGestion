@@ -11,33 +11,25 @@ using ClinicaFrba.UtilConexion;
 
 namespace ClinicaFrba.Abm_Afiliado
 {
-    partial class AfiliadoAltaHijos : Form
+    partial class AfiliadoAltaConyuge2 : Form
     {
-        public int numeroHijo { get; set; }
-        public Afiliado afiliadoPadre { get; set; }
         public Afiliado afiliado { get; set; }
+        public ModificaDatos formu { get; set; }
 
-        public AfiliadoAltaHijos(int numeroHijo, Afiliado afiliadoPadre)
+        public AfiliadoAltaConyuge2(ModificaDatos formulario)
         {
             this.afiliado = new Afiliado();
-            this.numeroHijo = numeroHijo;
-            this.afiliadoPadre = afiliadoPadre;
+            this.formu = formulario;
             InitializeComponent();
             this.cargarDatos();
         }
 
-        public void cargarDatos()
+        private void cargarDatos()
         {
+
             comboBoxSexo.Items.Add("M");
             comboBoxSexo.Items.Add("F");
             comboBoxSexo.SelectedIndex = 0;
-
-            comboBoxCasado.Items.Add("Soltero/a");
-            comboBoxCasado.Items.Add("Casado/a");
-            comboBoxCasado.Items.Add("Viudo/a");
-            comboBoxCasado.Items.Add("Concubinato");
-            comboBoxCasado.Items.Add("Divorciado/a");
-            comboBoxCasado.SelectedIndex = 0;
 
             comboBoxTDNI.Items.Add("");
             comboBoxTDNI.Items.Add("DNI");
@@ -45,13 +37,11 @@ namespace ClinicaFrba.Abm_Afiliado
             comboBoxTDNI.Items.Add("LC");
             comboBoxTDNI.Items.Add("CI");
             comboBoxTDNI.SelectedIndex = 0;
-
         }
 
         private Boolean formularioValido()
         {
             string mensajeError = "";
-
             if (textBoxNom.Text == "")
             {
                 mensajeError = "Complete el campo Nombre";
@@ -72,29 +62,27 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 mensajeError = mensajeError + "\r\n" + "Complete la fecha de nacimiento";
             }
-            if (comboBoxCasado.Text == "")
-            {
-                mensajeError = mensajeError + "\r\n" + "Complete el estado civil";
-            }
             if (textBoxMail.Text == "")
             {
                 mensajeError = mensajeError + "\r\n" + "Complete el campo Mail";
             }
             if (textBoxTel.Text == "")
             {
-                mensajeError = mensajeError + "\r\n" + "Ingrese un Telefono válido";
+                mensajeError = mensajeError + "\r\n" + "Ingrese un Telefono";
             }
             if (textBoxDire.Text == "")
             {
                 mensajeError = mensajeError + "\r\n" + "Complete el domicilio";
             }
+
             if (mensajeError.Equals(""))
             {
                 afiliado.apellido = textBoxAp.Text;
                 afiliado.nombre = textBoxNom.Text;
                 afiliado.documento = Decimal.Parse(textBoxIDdni.Text);
                 afiliado.tipoDoc = comboBoxTDNI.Text;
-                afiliado.estadoCivil = comboBoxCasado.Text;
+                afiliado.estadoCivil = formu.afiliado.estadoCivil;
+                afiliado.familiaresACargo = formu.afiliado.familiaresACargo;
                 afiliado.fechaNac = fechaNac.Value;
                 afiliado.mail = textBoxMail.Text;
                 afiliado.telefono = Decimal.Parse(textBoxTel.Text);
@@ -109,32 +97,19 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
-        private void buttonRegistrar_Click(object sender, EventArgs e)
+        private void buttonRegistrar_Click_1(object sender, EventArgs e)
         {
             if (formularioValido())
             {
-                afiliado.registrarAltaHijo(numeroHijo, afiliadoPadre);
+                afiliado.registrarAltaConyuge(formu.afiliado);
                 if (afiliado.id < 0)
                 {
-                    MessageBox.Show("Ya existe un afiliado con este DNI", "Error", MessageBoxButtons.OK);
+                    MessageBox.Show("Ya existe un afiliado con este DNI", "Exito", MessageBoxButtons.OK);
                 }
                 else
                 {
-                    MessageBox.Show("Hijo/a registrado/a con exito", "Exito", MessageBoxButtons.OK);
-                    if (numeroHijo < afiliadoPadre.familiaresACargo)
-                    {
-                        AfiliadoAltaHijos afiliadoAltaC = new AfiliadoAltaHijos(numeroHijo + 1, afiliado);
-                        this.Hide();
-                        afiliadoAltaC.Show();
-                    }
-                    else
-                    {
-                        this.Hide();
-                    }
-                    if (numeroHijo > afiliadoPadre.familiaresACargo)
-                    {
-                        afiliadoPadre.actualizarFamACargo();
-                    }
+                    MessageBox.Show("Conyuge registrado/a con exito", "Exito", MessageBoxButtons.OK);
+                    this.Hide();
                 }
             }
         }

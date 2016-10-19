@@ -37,9 +37,9 @@
             this.altaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bajaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.modifToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.visuToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.registroDeCambiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.habilitarAfiliadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.primerLogueoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seleccionarAfiliado = new System.Windows.Forms.ToolStripMenuItem();
             this.comprarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +55,6 @@
             this.botonElegirRol = new System.Windows.Forms.Button();
             this.listaFunciones = new System.Windows.Forms.ListView();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
-            this.primerLogueoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,21 +92,21 @@
             // altaToolStripMenuItem
             // 
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
-            this.altaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.altaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.altaToolStripMenuItem.Text = "Alta";
             this.altaToolStripMenuItem.Click += new System.EventHandler(this.altaToolStripMenuItem_Click);
             // 
             // bajaToolStripMenuItem
             // 
             this.bajaToolStripMenuItem.Name = "bajaToolStripMenuItem";
-            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.bajaToolStripMenuItem.Text = "Baja";
             this.bajaToolStripMenuItem.Click += new System.EventHandler(this.bajaToolStripMenuItem_Click);
             // 
             // modificaciónToolStripMenuItem
             // 
             this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
-            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.modificaciónToolStripMenuItem.Text = "Modificación";
             this.modificaciónToolStripMenuItem.Click += new System.EventHandler(this.modificaciónToolStripMenuItem_Click);
             // 
@@ -117,7 +116,6 @@
             this.altaToolStripMenuItem1,
             this.bajaToolStripMenuItem1,
             this.modifToolStripMenuItem,
-            this.visuToolStripMenuItem1,
             this.registroDeCambiosToolStripMenuItem,
             this.habilitarAfiliadoToolStripMenuItem,
             this.primerLogueoToolStripMenuItem});
@@ -146,13 +144,6 @@
             this.modifToolStripMenuItem.Text = "Modificar Afiliado";
             this.modifToolStripMenuItem.Click += new System.EventHandler(this.modificacionAficlick);
             // 
-            // visuToolStripMenuItem1
-            // 
-            this.visuToolStripMenuItem1.Name = "visuToolStripMenuItem1";
-            this.visuToolStripMenuItem1.Size = new System.Drawing.Size(183, 22);
-            this.visuToolStripMenuItem1.Text = "Visualización";
-            this.visuToolStripMenuItem1.Click += new System.EventHandler(this.visualizacionAficlick);
-            // 
             // registroDeCambiosToolStripMenuItem
             // 
             this.registroDeCambiosToolStripMenuItem.Name = "registroDeCambiosToolStripMenuItem";
@@ -166,6 +157,13 @@
             this.habilitarAfiliadoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.habilitarAfiliadoToolStripMenuItem.Text = "Habilitar Afiliado";
             this.habilitarAfiliadoToolStripMenuItem.Click += new System.EventHandler(this.habilitarAfiliadoToolStripMenuItem_Click);
+            // 
+            // primerLogueoToolStripMenuItem
+            // 
+            this.primerLogueoToolStripMenuItem.Name = "primerLogueoToolStripMenuItem";
+            this.primerLogueoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.primerLogueoToolStripMenuItem.Text = "Primer Logueo";
+            this.primerLogueoToolStripMenuItem.Click += new System.EventHandler(this.primerLogueoToolStripMenuItem_Click);
             // 
             // bonoToolStripMenuItem
             // 
@@ -285,13 +283,6 @@
             this.labelFuncionalidades.TabIndex = 5;
             this.labelFuncionalidades.Text = "Funcionalidades:";
             // 
-            // primerLogueoToolStripMenuItem
-            // 
-            this.primerLogueoToolStripMenuItem.Name = "primerLogueoToolStripMenuItem";
-            this.primerLogueoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.primerLogueoToolStripMenuItem.Text = "Primer Logueo";
-            this.primerLogueoToolStripMenuItem.Click += new System.EventHandler(this.primerLogueoToolStripMenuItem_Click);
-            // 
             // MenuClinica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,7 +324,6 @@
         private System.Windows.Forms.ToolStripMenuItem altaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem bajaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem modifToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem visuToolStripMenuItem1;
         private System.Windows.Forms.Label labelFuncionalidades;
         private System.Windows.Forms.ToolStripMenuItem agendaProfesional;
         private System.Windows.Forms.ToolStripMenuItem seleccionarAfiliado;

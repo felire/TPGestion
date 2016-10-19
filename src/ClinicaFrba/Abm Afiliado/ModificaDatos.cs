@@ -100,7 +100,8 @@ namespace ClinicaFrba.Abm_Afiliado
                 }
                 else
                 {
-                    //Pantalla conyuge
+                    AfiliadoAltaConyuge2 afi = new AfiliadoAltaConyuge2(this);
+                    afi.Show();
                 }
             }
         }
@@ -164,6 +165,7 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 afiliado.modificar(motivo.Text);
                 MessageBox.Show("Datos modificados con exito!", "Exito");
+                this.Hide();
             }
         }
 

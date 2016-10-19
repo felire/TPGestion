@@ -92,9 +92,15 @@ namespace ClinicaFrba.Abm_Afiliado
             if (seleccionValida())
             {
                 Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
-                afiliado.habilitar();
-                MessageBox.Show("Afiliado habilitado con exito", "Exito", MessageBoxButtons.OK);
-                this.Hide();
+                if (afiliado.habilitar())
+                {
+                    MessageBox.Show("Afiliado habilitado con exito", "Exito", MessageBoxButtons.OK);
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("No hay un afiliado principal habilitado", "Error", MessageBoxButtons.OK);
+                }               
             }
         }
 

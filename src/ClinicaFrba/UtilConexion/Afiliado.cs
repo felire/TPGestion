@@ -53,12 +53,38 @@ namespace ClinicaFrba.UtilConexion
             }
         }
 
-        public void habilitar()
+        public Boolean habilitar()
         {
-            List<SqlParameter> ListaParametros = new List<SqlParameter>();
-            ListaParametros.Add(new SqlParameter("@IdAfiliado", id));
-            SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.rehabilitar", "SP", ListaParametros);
-            speaker.close();
+            this.obtenerTodosLosDatos();
+            if (this.numeroEnElGrupo == 1)
+            {
+                List<SqlParameter> ListaParametros = new List<SqlParameter>();
+                ListaParametros.Add(new SqlParameter("@IdAfiliado", id));
+                SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.rehabilitar", "SP", ListaParametros);
+                speaker.close();
+                return true;
+            }
+            else //Me fijo que tenga padre activo
+            {
+                List<SqlParameter> ListaParametros = new List<SqlParameter>();
+                ListaParametros.Add(new SqlParameter("@numGrupo", numeroDeGrupo));
+                SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id FROM kernel_panic.Afiliados WHERE Numero_de_grupo = @numGrupo AND Numero_en_el_grupo = 1 AND Esta_activo = 1", "T", ListaParametros);
+                if (speaker.reader.HasRows)
+                {
+                    //Tiene afi principal tonces puede
+                    List<SqlParameter> ListaParametros2 = new List<SqlParameter>();
+                    ListaParametros2.Add(new SqlParameter("@IdAfiliado", id));
+                    SpeakerDB speaker2 = ConexionDB.ExecuteNoQuery("kernel_panic.rehabilitar", "SP", ListaParametros2);
+                    speaker2.close();
+                    speaker.close();
+                    return true;
+                }
+                else
+                {
+                    speaker.close();
+                    return false;
+                }
+            }
         }
 
         public void deshabilitar(string motivo)

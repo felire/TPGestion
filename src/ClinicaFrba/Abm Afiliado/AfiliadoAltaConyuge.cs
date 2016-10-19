@@ -104,7 +104,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 afiliado.registrarAltaConyuge(formu.afiliado);
                 if (afiliado.id < 0)
                 {
-                    //existe
+                    MessageBox.Show("Ya existe un afiliado con este DNI", "Exito", MessageBoxButtons.OK);
                 }
                 else
                 {
