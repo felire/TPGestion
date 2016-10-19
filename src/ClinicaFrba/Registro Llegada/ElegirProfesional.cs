@@ -118,5 +118,10 @@ namespace ClinicaFrba.Registro_Llegada
                 ListarTurnos listarTurnos = new ListarTurnos(profesionalElegido, this.afiliado, bonoAUsar, this);
             }
         }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

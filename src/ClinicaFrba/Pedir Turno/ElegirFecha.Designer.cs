@@ -35,6 +35,7 @@
             this.comboFecha = new System.Windows.Forms.ComboBox();
             this.comboHorario = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nombreProfesional
@@ -66,9 +67,9 @@
             // 
             // elegir
             // 
-            this.elegir.Location = new System.Drawing.Point(256, 84);
+            this.elegir.Location = new System.Drawing.Point(327, 121);
             this.elegir.Name = "elegir";
-            this.elegir.Size = new System.Drawing.Size(87, 23);
+            this.elegir.Size = new System.Drawing.Size(100, 29);
             this.elegir.TabIndex = 21;
             this.elegir.Text = "Aceptar";
             this.elegir.UseVisualStyleBackColor = true;
@@ -86,7 +87,7 @@
             // comboHorario
             // 
             this.comboHorario.FormattingEnabled = true;
-            this.comboHorario.Location = new System.Drawing.Point(103, 82);
+            this.comboHorario.Location = new System.Drawing.Point(307, 44);
             this.comboHorario.Name = "comboHorario";
             this.comboHorario.Size = new System.Drawing.Size(121, 21);
             this.comboHorario.TabIndex = 24;
@@ -94,17 +95,28 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 89);
+            this.label3.Location = new System.Drawing.Point(257, 47);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 25;
             this.label3.Text = "Horario:";
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(201, 121);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 30;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // ElegirFecha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(439, 129);
+            this.ClientSize = new System.Drawing.Size(439, 171);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboHorario);
             this.Controls.Add(this.comboFecha);
@@ -128,5 +140,6 @@
         private System.Windows.Forms.ComboBox comboFecha;
         private System.Windows.Forms.ComboBox comboHorario;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button cancelar;
     }
 }

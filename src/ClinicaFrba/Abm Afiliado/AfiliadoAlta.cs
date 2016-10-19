@@ -133,8 +133,8 @@ namespace ClinicaFrba.Abm_Afiliado
                 afiliado.registrarAltaPrincipal();
                 if (afiliado.id < 0)
                 {
-                    MessageBox.Show("Afiliado existente", "Exito", MessageBoxButtons.OK);
-                    this.Hide();
+                    MessageBox.Show("Afiliado existente", "Error", MessageBoxButtons.OK);
+                    this.Close();
                     return;
                 }
                 MessageBox.Show("Afiliado registrado/a con exito", "Exito", MessageBoxButtons.OK);
@@ -144,7 +144,7 @@ namespace ClinicaFrba.Abm_Afiliado
                     if (resultado == DialogResult.Yes)
                     {
                         AfiliadoAltaConyuge afiliadoAltaC = new AfiliadoAltaConyuge(this);
-                        this.Hide();
+                        this.Close();
                         afiliadoAltaC.Show();
                     }
                     else
@@ -166,12 +166,12 @@ namespace ClinicaFrba.Abm_Afiliado
             if (resultado == DialogResult.Yes)
             {
                 AfiliadoAltaHijos afiliadoAltaC = new AfiliadoAltaHijos(1, afiliado);
-                this.Hide();
                 afiliadoAltaC.Show();
+                this.Close();
             }
             else
             {
-                this.Hide();
+                this.Close();
             }
         }
 
@@ -207,7 +207,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void cancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

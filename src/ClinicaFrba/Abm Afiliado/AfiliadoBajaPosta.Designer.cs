@@ -44,6 +44,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textMotivo = new System.Windows.Forms.TextBox();
             this.eliminar = new System.Windows.Forms.Button();
+            this.cancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).BeginInit();
             this.filtros.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -61,6 +62,7 @@
             // 
             // filtros
             // 
+            this.filtros.Controls.Add(this.cancelar);
             this.filtros.Controls.Add(this.grupo);
             this.filtros.Controls.Add(this.buscar);
             this.filtros.Controls.Add(this.label5);
@@ -90,9 +92,9 @@
             // 
             // buscar
             // 
-            this.buscar.Location = new System.Drawing.Point(309, 97);
+            this.buscar.Location = new System.Drawing.Point(309, 107);
             this.buscar.Name = "buscar";
-            this.buscar.Size = new System.Drawing.Size(115, 39);
+            this.buscar.Size = new System.Drawing.Size(100, 29);
             this.buscar.TabIndex = 10;
             this.buscar.Text = "Buscar";
             this.buscar.UseVisualStyleBackColor = true;
@@ -199,13 +201,22 @@
             // 
             // eliminar
             // 
-            this.eliminar.Location = new System.Drawing.Point(451, 19);
+            this.eliminar.Location = new System.Drawing.Point(471, 28);
             this.eliminar.Name = "eliminar";
-            this.eliminar.Size = new System.Drawing.Size(110, 35);
+            this.eliminar.Size = new System.Drawing.Size(100, 29);
             this.eliminar.TabIndex = 12;
             this.eliminar.Text = "Deshabilitar";
             this.eliminar.UseVisualStyleBackColor = true;
             this.eliminar.Click += new System.EventHandler(this.eliminar_Click);
+            // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(471, 107);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 30;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
             // 
             // AfiliadoBajaPosta
             // 
@@ -244,5 +255,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textMotivo;
         private System.Windows.Forms.Button eliminar;
+        private System.Windows.Forms.Button cancelar;
     }
 }

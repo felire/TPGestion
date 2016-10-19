@@ -103,7 +103,7 @@ namespace ClinicaFrba.Registro_Llegada
                 if (bonoAUsar > 0)
                 {
                     ElegirProfesional elegirProfesinal = new ElegirProfesional(afiliado, bonoAUsar);
-                    this.Hide();
+                    this.Close();
                     elegirProfesinal.Show();
                 }
                 else
@@ -111,6 +111,11 @@ namespace ClinicaFrba.Registro_Llegada
                     MessageBox.Show("No tiene bonos disponibles", "Error!", MessageBoxButtons.OK);
                 }
             }
+        }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

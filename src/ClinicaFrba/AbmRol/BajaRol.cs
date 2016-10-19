@@ -59,12 +59,12 @@ namespace ClinicaFrba.AbmRol
             else if (cantidadSeleccionados == 1)
             {
                 MessageBox.Show("Baja realizada con exito!", "Exito", MessageBoxButtons.OK);
-                this.Hide();
+                this.Close();
             }
             else
             {
                 MessageBox.Show("Bajas realizadas con exito!", "Exito", MessageBoxButtons.OK);
-                this.Hide();
+                this.Close();
             }
         }
 
@@ -96,7 +96,7 @@ namespace ClinicaFrba.AbmRol
             // 
             // Eliminar
             // 
-            this.Eliminar.Location = new System.Drawing.Point(16, 202);
+            this.Eliminar.Location = new System.Drawing.Point(172, 202);
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.Size = new System.Drawing.Size(100, 29);
             this.Eliminar.TabIndex = 2;
@@ -106,7 +106,7 @@ namespace ClinicaFrba.AbmRol
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(172, 202);
+            this.cancelar.Location = new System.Drawing.Point(16, 202);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(100, 29);
             this.cancelar.TabIndex = 29;
@@ -129,7 +129,7 @@ namespace ClinicaFrba.AbmRol
 
         private void cancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

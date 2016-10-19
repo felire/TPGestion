@@ -76,7 +76,7 @@
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(422, 278);
+            this.cancelar.Location = new System.Drawing.Point(575, 278);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(100, 29);
             this.cancelar.TabIndex = 4;
@@ -104,7 +104,7 @@
             // 
             // salir
             // 
-            this.salir.Location = new System.Drawing.Point(575, 278);
+            this.salir.Location = new System.Drawing.Point(445, 278);
             this.salir.Name = "salir";
             this.salir.Size = new System.Drawing.Size(100, 29);
             this.salir.TabIndex = 29;

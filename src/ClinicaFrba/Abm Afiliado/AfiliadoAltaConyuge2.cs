@@ -109,7 +109,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 else
                 {
                     MessageBox.Show("Conyuge registrado/a con exito", "Exito", MessageBoxButtons.OK);
-                    this.Hide();
+                    this.Close();
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void cancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

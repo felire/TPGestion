@@ -113,10 +113,15 @@ namespace ClinicaFrba.Pedir_Turno
             {
                 profesionalElegido = (Profesional)listaProfesionales.CurrentRow.DataBoundItem;
                 turno.profesional = profesionalElegido;
-                this.Hide();
+                this.Close();
                 Pedir_Turno.ElegirEspecialidad elegirEspecialidad = new Pedir_Turno.ElegirEspecialidad(turno);
                 elegirEspecialidad.Show();
             }
+        }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

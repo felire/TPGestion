@@ -102,7 +102,7 @@ namespace ClinicaFrba.Pedir_Turno
             {
                 comboFecha.DataSource = fechasConHorariosDisponibles;
                 comboFecha.DisplayMember = "dia";
-                elegirEsp.Hide();
+                elegirEsp.Close();
                 this.Show();
             }
             else 
@@ -126,7 +126,12 @@ namespace ClinicaFrba.Pedir_Turno
             turno.fecha = new DateTime(turno.fecha.Year, turno.fecha.Month, turno.fecha.Day, hora.LaHora.Hours, hora.LaHora.Minutes, 0);
             turno.persistir();
             MessageBox.Show("Turno creado con exito", "Info", MessageBoxButtons.OK);
-            this.Hide();
+            this.Close();
+        }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

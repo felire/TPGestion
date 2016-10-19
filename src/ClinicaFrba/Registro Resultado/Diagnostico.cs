@@ -55,7 +55,7 @@ namespace ClinicaFrba.Registro_Resultado
                 consulta.fecha = new DateTime(dtpFechaAtencion.Value.Year, dtpFechaAtencion.Value.Month, dtpFechaAtencion.Value.Day, ((Hora)cmbHora.SelectedItem).LaHora.Hours, ((Hora)cmbHora.SelectedItem).LaHora.Minutes, 0);
                 consulta.actualizarConsulta();
                 MessageBox.Show("Diagnostico asignado con exito", "Éxito", MessageBoxButtons.OK);
-                this.Hide();
+                this.Close();
             }
         }
 
@@ -93,13 +93,18 @@ namespace ClinicaFrba.Registro_Resultado
             consulta.fecha = fecha2.Value;
             consulta.ausenciaConsulta();
             MessageBox.Show("Ausencia registrada corectamente", "Éxito!", MessageBoxButtons.OK);
-            this.Hide();
+            this.Close();
         }
 
         private void asignarDiagnostico_Click(object sender, EventArgs e)
         {
             datos1.Visible = false;
             gbDatos.Visible = true;
+        }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

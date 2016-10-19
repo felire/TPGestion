@@ -43,6 +43,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.listaProfesionales)).BeginInit();
             this.filtros.SuspendLayout();
             this.SuspendLayout();
@@ -58,9 +59,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(21, 341);
+            this.button2.Location = new System.Drawing.Point(498, 341);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(577, 23);
+            this.button2.Size = new System.Drawing.Size(100, 29);
             this.button2.TabIndex = 9;
             this.button2.Text = "Elegir";
             this.button2.UseVisualStyleBackColor = true;
@@ -98,9 +99,9 @@
             // 
             // buscar
             // 
-            this.buscar.Location = new System.Drawing.Point(309, 97);
+            this.buscar.Location = new System.Drawing.Point(309, 91);
             this.buscar.Name = "buscar";
-            this.buscar.Size = new System.Drawing.Size(115, 23);
+            this.buscar.Size = new System.Drawing.Size(100, 29);
             this.buscar.TabIndex = 10;
             this.buscar.Text = "Buscar";
             this.buscar.UseVisualStyleBackColor = true;
@@ -193,11 +194,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre: ";
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(330, 341);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 31;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // ElegirProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 394);
+            this.ClientSize = new System.Drawing.Size(621, 385);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listaProfesionales);
@@ -229,6 +241,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox nombre;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button cancelar;
 
     }
 }

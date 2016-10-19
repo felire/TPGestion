@@ -35,9 +35,9 @@ namespace ClinicaFrba.LogeoPrimer
                     byte[] bytesDeHasheo = hasher.ComputeHash(encoderHash.GetBytes(passConSalt));
                     string pass = bytesDeHasheoToString(bytesDeHasheo).ToLower();
                     usuario.actualizarPass(pass);
-                    this.Hide();
                     MessageBox.Show("El usuario ya puede loguearse normalmente", "Éxito", MessageBoxButtons.OK);
-                }
+                    this.Close();
+                }           
                 else
                 {
                     MessageBox.Show("Las contraseñas ingresadas no coinciden", "Error!", MessageBoxButtons.OK);

@@ -51,9 +51,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(15, 42);
+            this.button1.Location = new System.Drawing.Point(165, 50);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(250, 23);
+            this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Seleccionar usuario";
             this.button1.UseVisualStyleBackColor = true;
@@ -63,7 +63,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(289, 91);
+            this.ClientSize = new System.Drawing.Size(289, 85);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.nombreUser);
             this.Controls.Add(this.label1);

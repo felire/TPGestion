@@ -217,9 +217,9 @@
             // 
             // listar
             // 
-            this.listar.Location = new System.Drawing.Point(364, 42);
+            this.listar.Location = new System.Drawing.Point(364, 36);
             this.listar.Name = "listar";
-            this.listar.Size = new System.Drawing.Size(75, 23);
+            this.listar.Size = new System.Drawing.Size(100, 29);
             this.listar.TabIndex = 10;
             this.listar.Text = "Listar";
             this.listar.UseVisualStyleBackColor = true;

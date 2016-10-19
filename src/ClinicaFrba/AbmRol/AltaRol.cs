@@ -62,7 +62,7 @@ namespace ClinicaFrba.AbmRol
                 if (rol.darAlta())
                 {
                     MessageBox.Show("Rol agregado con exito!", "Exito", MessageBoxButtons.OK);
-                    this.Hide();
+                    this.Close();
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace ClinicaFrba.AbmRol
 
         private void cancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

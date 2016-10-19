@@ -48,7 +48,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (resultado == 1)
             {
                 MessageBox.Show("Franja cancelada con exito", "Exito!", MessageBoxButtons.OK);
-                this.Hide();
+                this.Close();
             }
             else
             {
@@ -76,7 +76,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (resultado == 1)
             {
                 MessageBox.Show("Dia cancelado con exito", "Éxito!", MessageBoxButtons.OK);
-                this.Hide();
+                this.Close();
             }
             else
             {
@@ -86,7 +86,7 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void salir_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

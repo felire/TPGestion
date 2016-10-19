@@ -42,7 +42,7 @@ namespace ClinicaFrba.Registro_Llegada
                 turnosGrid.MultiSelect = false;
                 turnosGrid.DataSource = turnos;
                 this.generarGrid();
-                this.elegirProfesinal.Hide();
+                this.elegirProfesinal.Close();
                 this.Show();
             }
             else
@@ -79,7 +79,7 @@ namespace ClinicaFrba.Registro_Llegada
                 Turno turno = ((Turno)turnosGrid.CurrentRow.DataBoundItem);
                 turno.registrarLlegada(bonoAUsar);
                 MessageBox.Show("Llegada registrada con exito", "Éxito!", MessageBoxButtons.OK);
-                this.Hide();
+                this.Close();
             }
         }
 
@@ -94,6 +94,11 @@ namespace ClinicaFrba.Registro_Llegada
             {
                 return true;
             }
+        }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

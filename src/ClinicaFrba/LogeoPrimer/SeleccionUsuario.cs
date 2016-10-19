@@ -11,7 +11,6 @@ using ClinicaFrba.UtilConexion;
 using ClinicaFrba.Menu;
 using ClinicaFrba.LogeoPrimer;
 
-
 namespace ClinicaFrba.LogeoPrimer
 {
     partial class SeleccionUsuario : Form
@@ -31,7 +30,7 @@ namespace ClinicaFrba.LogeoPrimer
         {
             PrimerLogeo primer = new PrimerLogeo(usuario);
             primer.Show();
-            this.Hide();
+            this.Close();
         }
 
         public void sinRoles()

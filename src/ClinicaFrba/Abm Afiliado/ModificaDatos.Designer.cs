@@ -89,7 +89,7 @@
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(423, 529);
+            this.cancelar.Location = new System.Drawing.Point(232, 529);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(100, 35);
             this.cancelar.TabIndex = 29;
@@ -120,9 +120,9 @@
             // 
             // hijo
             // 
-            this.hijo.Location = new System.Drawing.Point(370, 38);
+            this.hijo.Location = new System.Drawing.Point(370, 26);
             this.hijo.Name = "hijo";
-            this.hijo.Size = new System.Drawing.Size(117, 23);
+            this.hijo.Size = new System.Drawing.Size(100, 35);
             this.hijo.TabIndex = 35;
             this.hijo.Text = "Hijo";
             this.hijo.UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@
             // 
             // conyuge
             // 
-            this.conyuge.Location = new System.Drawing.Point(209, 38);
+            this.conyuge.Location = new System.Drawing.Point(209, 26);
             this.conyuge.Name = "conyuge";
-            this.conyuge.Size = new System.Drawing.Size(118, 23);
+            this.conyuge.Size = new System.Drawing.Size(100, 35);
             this.conyuge.TabIndex = 34;
             this.conyuge.Text = "Cónyuge";
             this.conyuge.UseVisualStyleBackColor = true;
@@ -244,9 +244,9 @@
             // 
             // ButtonModificar
             // 
-            this.ButtonModificar.Location = new System.Drawing.Point(257, 529);
+            this.ButtonModificar.Location = new System.Drawing.Point(393, 529);
             this.ButtonModificar.Name = "ButtonModificar";
-            this.ButtonModificar.Size = new System.Drawing.Size(110, 35);
+            this.ButtonModificar.Size = new System.Drawing.Size(100, 35);
             this.ButtonModificar.TabIndex = 29;
             this.ButtonModificar.Text = "Modificar";
             this.ButtonModificar.UseVisualStyleBackColor = true;

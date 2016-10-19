@@ -63,7 +63,7 @@ namespace ClinicaFrba.Cancelar_Atencion
                 Turno turno = (Turno)turnos.CurrentRow.DataBoundItem;
                 turno.cancelar(motivoCancelacion.Text, "Afiliado");
                 MessageBox.Show("Turno cancelado con exito!", "Exito!", MessageBoxButtons.OK);
-                this.Hide();
+                this.Close();
             }
         }
 
@@ -96,7 +96,7 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void salir_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

@@ -95,7 +95,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 if (afiliado.habilitar())
                 {
                     MessageBox.Show("Afiliado habilitado con exito", "Exito", MessageBoxButtons.OK);
-                    this.Hide();
+                    this.Close();
                 }
                 else
                 {
@@ -126,7 +126,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void cancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

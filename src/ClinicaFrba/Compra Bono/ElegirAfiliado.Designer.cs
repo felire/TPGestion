@@ -49,7 +49,7 @@
             // 
             // elegir
             // 
-            this.elegir.Location = new System.Drawing.Point(38, 325);
+            this.elegir.Location = new System.Drawing.Point(515, 325);
             this.elegir.Name = "elegir";
             this.elegir.Size = new System.Drawing.Size(100, 29);
             this.elegir.TabIndex = 5;
@@ -98,9 +98,9 @@
             // 
             // buscar
             // 
-            this.buscar.Location = new System.Drawing.Point(309, 97);
+            this.buscar.Location = new System.Drawing.Point(309, 91);
             this.buscar.Name = "buscar";
-            this.buscar.Size = new System.Drawing.Size(115, 23);
+            this.buscar.Size = new System.Drawing.Size(100, 29);
             this.buscar.TabIndex = 10;
             this.buscar.Text = "Buscar";
             this.buscar.UseVisualStyleBackColor = true;
@@ -186,7 +186,7 @@
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(515, 325);
+            this.cancelar.Location = new System.Drawing.Point(347, 325);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(100, 29);
             this.cancelar.TabIndex = 29;

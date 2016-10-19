@@ -43,6 +43,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.listaProfesionales = new System.Windows.Forms.DataGridView();
             this.registrarAgendaProfesional = new System.Windows.Forms.Button();
+            this.cancelar = new System.Windows.Forms.Button();
             this.filtros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listaProfesionales)).BeginInit();
             this.SuspendLayout();
@@ -69,9 +70,9 @@
             // 
             // buscar
             // 
-            this.buscar.Location = new System.Drawing.Point(309, 97);
+            this.buscar.Location = new System.Drawing.Point(309, 91);
             this.buscar.Name = "buscar";
-            this.buscar.Size = new System.Drawing.Size(115, 23);
+            this.buscar.Size = new System.Drawing.Size(100, 29);
             this.buscar.TabIndex = 10;
             this.buscar.Text = "Buscar";
             this.buscar.UseVisualStyleBackColor = true;
@@ -176,19 +177,30 @@
             // 
             // registrarAgendaProfesional
             // 
-            this.registrarAgendaProfesional.Location = new System.Drawing.Point(22, 356);
+            this.registrarAgendaProfesional.Location = new System.Drawing.Point(499, 350);
             this.registrarAgendaProfesional.Name = "registrarAgendaProfesional";
-            this.registrarAgendaProfesional.Size = new System.Drawing.Size(577, 23);
+            this.registrarAgendaProfesional.Size = new System.Drawing.Size(100, 29);
             this.registrarAgendaProfesional.TabIndex = 2;
             this.registrarAgendaProfesional.Text = "Registrar Agenda Profesional";
             this.registrarAgendaProfesional.UseVisualStyleBackColor = true;
             this.registrarAgendaProfesional.Click += new System.EventHandler(this.registrarAgendaProfesional_Click);
+            // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(331, 350);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 31;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // SeleccionarProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(645, 393);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.registrarAgendaProfesional);
             this.Controls.Add(this.listaProfesionales);
             this.Controls.Add(this.filtros);
@@ -218,5 +230,6 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.DataGridView listaProfesionales;
         private System.Windows.Forms.Button registrarAgendaProfesional;
+        private System.Windows.Forms.Button cancelar;
     }
 }

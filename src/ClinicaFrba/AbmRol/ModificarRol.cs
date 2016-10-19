@@ -113,7 +113,7 @@ namespace ClinicaFrba.AbmRol
 
         private void salir_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

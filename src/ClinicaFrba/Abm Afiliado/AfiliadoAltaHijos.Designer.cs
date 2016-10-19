@@ -70,7 +70,7 @@
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(440, 252);
+            this.cancelar.Location = new System.Drawing.Point(293, 252);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(100, 29);
             this.cancelar.TabIndex = 29;
@@ -279,7 +279,7 @@
             // 
             // buttonRegistrar
             // 
-            this.buttonRegistrar.Location = new System.Drawing.Point(293, 252);
+            this.buttonRegistrar.Location = new System.Drawing.Point(440, 252);
             this.buttonRegistrar.Name = "buttonRegistrar";
             this.buttonRegistrar.Size = new System.Drawing.Size(100, 29);
             this.buttonRegistrar.TabIndex = 24;

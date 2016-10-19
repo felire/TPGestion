@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.rangoFechas = new System.Windows.Forms.GroupBox();
+            this.cancelar = new System.Windows.Forms.Button();
             this.confirmarRango = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -56,12 +57,13 @@
             // 
             // rangoFechas
             // 
+            this.rangoFechas.Controls.Add(this.cancelar);
             this.rangoFechas.Controls.Add(this.confirmarRango);
             this.rangoFechas.Controls.Add(this.label6);
             this.rangoFechas.Controls.Add(this.label5);
             this.rangoFechas.Controls.Add(this.fechaHasta);
             this.rangoFechas.Controls.Add(this.fechaDesde);
-            this.rangoFechas.Location = new System.Drawing.Point(15, 314);
+            this.rangoFechas.Location = new System.Drawing.Point(15, 355);
             this.rangoFechas.Name = "rangoFechas";
             this.rangoFechas.Size = new System.Drawing.Size(558, 144);
             this.rangoFechas.TabIndex = 14;
@@ -69,11 +71,21 @@
             this.rangoFechas.Text = "Registrar Rango de Fechas";
             this.rangoFechas.Visible = false;
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(305, 109);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 31;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // confirmarRango
             // 
-            this.confirmarRango.Location = new System.Drawing.Point(255, 108);
+            this.confirmarRango.Location = new System.Drawing.Point(452, 109);
             this.confirmarRango.Name = "confirmarRango";
-            this.confirmarRango.Size = new System.Drawing.Size(75, 23);
+            this.confirmarRango.Size = new System.Drawing.Size(100, 29);
             this.confirmarRango.TabIndex = 4;
             this.confirmarRango.Text = "Confirmar";
             this.confirmarRango.UseVisualStyleBackColor = true;
@@ -113,9 +125,9 @@
             // 
             // confirmar
             // 
-            this.confirmar.Location = new System.Drawing.Point(396, 281);
+            this.confirmar.Location = new System.Drawing.Point(396, 301);
             this.confirmar.Name = "confirmar";
-            this.confirmar.Size = new System.Drawing.Size(75, 23);
+            this.confirmar.Size = new System.Drawing.Size(100, 29);
             this.confirmar.TabIndex = 13;
             this.confirmar.Text = "Confirmar";
             this.confirmar.UseVisualStyleBackColor = true;
@@ -123,9 +135,9 @@
             // 
             // eliminar
             // 
-            this.eliminar.Location = new System.Drawing.Point(123, 281);
+            this.eliminar.Location = new System.Drawing.Point(116, 301);
             this.eliminar.Name = "eliminar";
-            this.eliminar.Size = new System.Drawing.Size(75, 23);
+            this.eliminar.Size = new System.Drawing.Size(100, 29);
             this.eliminar.TabIndex = 12;
             this.eliminar.Text = "Eliminar";
             this.eliminar.UseVisualStyleBackColor = true;
@@ -136,9 +148,9 @@
             this.horarios.AllowUserToAddRows = false;
             this.horarios.AllowUserToDeleteRows = false;
             this.horarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.horarios.Location = new System.Drawing.Point(12, 117);
+            this.horarios.Location = new System.Drawing.Point(15, 142);
             this.horarios.Name = "horarios";
-            this.horarios.Size = new System.Drawing.Size(561, 150);
+            this.horarios.Size = new System.Drawing.Size(558, 150);
             this.horarios.TabIndex = 11;
             // 
             // groupBox1
@@ -152,9 +164,9 @@
             this.groupBox1.Controls.Add(this.dias);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.aceptar);
-            this.groupBox1.Location = new System.Drawing.Point(15, 31);
+            this.groupBox1.Location = new System.Drawing.Point(15, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(558, 82);
+            this.groupBox1.Size = new System.Drawing.Size(558, 108);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registrar Dias y Horarios";
@@ -235,9 +247,9 @@
             // 
             // aceptar
             // 
-            this.aceptar.Location = new System.Drawing.Point(471, 55);
+            this.aceptar.Location = new System.Drawing.Point(446, 58);
             this.aceptar.Name = "aceptar";
-            this.aceptar.Size = new System.Drawing.Size(75, 23);
+            this.aceptar.Size = new System.Drawing.Size(100, 29);
             this.aceptar.TabIndex = 0;
             this.aceptar.Text = "Agregar";
             this.aceptar.UseVisualStyleBackColor = true;
@@ -265,7 +277,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 483);
+            this.ClientSize = new System.Drawing.Size(588, 511);
             this.Controls.Add(this.rangoFechas);
             this.Controls.Add(this.confirmar);
             this.Controls.Add(this.eliminar);
@@ -308,5 +320,6 @@
         private System.Windows.Forms.Button aceptar;
         private System.Windows.Forms.Label nombreProfesional;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button cancelar;
     }
 }

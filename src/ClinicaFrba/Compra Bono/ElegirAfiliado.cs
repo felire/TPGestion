@@ -79,7 +79,7 @@ namespace ClinicaFrba.Compra_Bono
                 Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
                 CompraBono compraForm = new CompraBono(afiliado);
                 compraForm.Show();
-                this.Hide();
+                this.Close();
             }
         }
 
@@ -108,7 +108,7 @@ namespace ClinicaFrba.Compra_Bono
 
         private void cancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

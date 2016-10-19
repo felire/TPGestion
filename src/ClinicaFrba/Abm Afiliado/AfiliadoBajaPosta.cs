@@ -113,7 +113,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
                 afiliado.deshabilitar(textMotivo.Text);
                 MessageBox.Show("Afiliado deshabilitado con exito", "Exito", MessageBoxButtons.OK);
-                this.Hide();
+                this.Close();
             }
         }
 

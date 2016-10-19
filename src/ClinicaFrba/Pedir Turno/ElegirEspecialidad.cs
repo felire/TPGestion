@@ -56,5 +56,10 @@ namespace ClinicaFrba.Pedir_Turno
             }
             return true;
         }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

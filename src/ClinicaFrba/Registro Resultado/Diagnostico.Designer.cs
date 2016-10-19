@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.confirmar = new System.Windows.Forms.Button();
+            this.nombreAfi = new System.Windows.Forms.Label();
             this.lbl2 = new System.Windows.Forms.Label();
             this.cmbHora = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpFechaAtencion = new System.Windows.Forms.DateTimePicker();
-            this.nombreAfi = new System.Windows.Forms.Label();
             this.resultado = new System.Windows.Forms.GroupBox();
+            this.asignarDiag = new System.Windows.Forms.Button();
+            this.nombreEspecialidad = new System.Windows.Forms.Label();
+            this.asd = new System.Windows.Forms.Label();
             this.txtEnfermedad = new System.Windows.Forms.RichTextBox();
             this.txtSintomas = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nombreProf = new System.Windows.Forms.Label();
-            this.asignarDiag = new System.Windows.Forms.Button();
-            this.asd = new System.Windows.Forms.Label();
-            this.nombreEspecialidad = new System.Windows.Forms.Label();
-            this.confirmar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.fecha2 = new System.Windows.Forms.DateTimePicker();
             this.asignarDiagnostico = new System.Windows.Forms.Button();
@@ -53,6 +53,7 @@
             this.datos1 = new System.Windows.Forms.GroupBox();
             this.nombreAfi2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
             this.gbDatos.SuspendLayout();
             this.resultado.SuspendLayout();
             this.datos1.SuspendLayout();
@@ -73,6 +74,25 @@
             this.gbDatos.TabIndex = 5;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Atención";
+            // 
+            // confirmar
+            // 
+            this.confirmar.Location = new System.Drawing.Point(399, 64);
+            this.confirmar.Name = "confirmar";
+            this.confirmar.Size = new System.Drawing.Size(75, 23);
+            this.confirmar.TabIndex = 62;
+            this.confirmar.Text = "Confirmar";
+            this.confirmar.UseVisualStyleBackColor = true;
+            this.confirmar.Click += new System.EventHandler(this.confirmar_Click);
+            // 
+            // nombreAfi
+            // 
+            this.nombreAfi.AutoSize = true;
+            this.nombreAfi.Location = new System.Drawing.Point(56, 16);
+            this.nombreAfi.Name = "nombreAfi";
+            this.nombreAfi.Size = new System.Drawing.Size(35, 13);
+            this.nombreAfi.TabIndex = 61;
+            this.nombreAfi.Text = "label3";
             // 
             // lbl2
             // 
@@ -118,17 +138,9 @@
             this.dtpFechaAtencion.TabIndex = 5;
             this.dtpFechaAtencion.ValueChanged += new System.EventHandler(this.actualizarHoras);
             // 
-            // nombreAfi
-            // 
-            this.nombreAfi.AutoSize = true;
-            this.nombreAfi.Location = new System.Drawing.Point(56, 16);
-            this.nombreAfi.Name = "nombreAfi";
-            this.nombreAfi.Size = new System.Drawing.Size(35, 13);
-            this.nombreAfi.TabIndex = 61;
-            this.nombreAfi.Text = "label3";
-            // 
             // resultado
             // 
+            this.resultado.Controls.Add(this.cancelar);
             this.resultado.Controls.Add(this.asignarDiag);
             this.resultado.Controls.Add(this.nombreEspecialidad);
             this.resultado.Controls.Add(this.asd);
@@ -136,12 +148,40 @@
             this.resultado.Controls.Add(this.txtSintomas);
             this.resultado.Controls.Add(this.label5);
             this.resultado.Controls.Add(this.label4);
-            this.resultado.Location = new System.Drawing.Point(12, 146);
+            this.resultado.Location = new System.Drawing.Point(15, 163);
             this.resultado.Name = "resultado";
-            this.resultado.Size = new System.Drawing.Size(482, 197);
+            this.resultado.Size = new System.Drawing.Size(482, 212);
             this.resultado.TabIndex = 7;
             this.resultado.TabStop = false;
             this.resultado.Text = "Resultado";
+            // 
+            // asignarDiag
+            // 
+            this.asignarDiag.Location = new System.Drawing.Point(341, 168);
+            this.asignarDiag.Name = "asignarDiag";
+            this.asignarDiag.Size = new System.Drawing.Size(100, 29);
+            this.asignarDiag.TabIndex = 10;
+            this.asignarDiag.Text = "Asignar diagnostico";
+            this.asignarDiag.UseVisualStyleBackColor = true;
+            this.asignarDiag.Click += new System.EventHandler(this.asignarDiag_Click);
+            // 
+            // nombreEspecialidad
+            // 
+            this.nombreEspecialidad.AutoSize = true;
+            this.nombreEspecialidad.Location = new System.Drawing.Point(77, 20);
+            this.nombreEspecialidad.Name = "nombreEspecialidad";
+            this.nombreEspecialidad.Size = new System.Drawing.Size(102, 13);
+            this.nombreEspecialidad.TabIndex = 14;
+            this.nombreEspecialidad.Text = "nombreEspecialidad";
+            // 
+            // asd
+            // 
+            this.asd.AutoSize = true;
+            this.asd.Location = new System.Drawing.Point(7, 20);
+            this.asd.Name = "asd";
+            this.asd.Size = new System.Drawing.Size(73, 13);
+            this.asd.TabIndex = 13;
+            this.asd.Text = "Especialidad: ";
             // 
             // txtEnfermedad
             // 
@@ -180,7 +220,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 355);
+            this.label3.Location = new System.Drawing.Point(12, 378);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 8;
@@ -189,49 +229,11 @@
             // nombreProf
             // 
             this.nombreProf.AutoSize = true;
-            this.nombreProf.Location = new System.Drawing.Point(72, 355);
+            this.nombreProf.Location = new System.Drawing.Point(83, 378);
             this.nombreProf.Name = "nombreProf";
             this.nombreProf.Size = new System.Drawing.Size(35, 13);
             this.nombreProf.TabIndex = 9;
             this.nombreProf.Text = "label6";
-            // 
-            // asignarDiag
-            // 
-            this.asignarDiag.Location = new System.Drawing.Point(175, 168);
-            this.asignarDiag.Name = "asignarDiag";
-            this.asignarDiag.Size = new System.Drawing.Size(117, 23);
-            this.asignarDiag.TabIndex = 10;
-            this.asignarDiag.Text = "Asignar diagnostico";
-            this.asignarDiag.UseVisualStyleBackColor = true;
-            this.asignarDiag.Click += new System.EventHandler(this.asignarDiag_Click);
-            // 
-            // asd
-            // 
-            this.asd.AutoSize = true;
-            this.asd.Location = new System.Drawing.Point(7, 20);
-            this.asd.Name = "asd";
-            this.asd.Size = new System.Drawing.Size(73, 13);
-            this.asd.TabIndex = 13;
-            this.asd.Text = "Especialidad: ";
-            // 
-            // nombreEspecialidad
-            // 
-            this.nombreEspecialidad.AutoSize = true;
-            this.nombreEspecialidad.Location = new System.Drawing.Point(77, 20);
-            this.nombreEspecialidad.Name = "nombreEspecialidad";
-            this.nombreEspecialidad.Size = new System.Drawing.Size(102, 13);
-            this.nombreEspecialidad.TabIndex = 14;
-            this.nombreEspecialidad.Text = "nombreEspecialidad";
-            // 
-            // confirmar
-            // 
-            this.confirmar.Location = new System.Drawing.Point(399, 64);
-            this.confirmar.Name = "confirmar";
-            this.confirmar.Size = new System.Drawing.Size(75, 23);
-            this.confirmar.TabIndex = 62;
-            this.confirmar.Text = "Confirmar";
-            this.confirmar.UseVisualStyleBackColor = true;
-            this.confirmar.Click += new System.EventHandler(this.confirmar_Click);
             // 
             // label6
             // 
@@ -303,11 +305,21 @@
             this.label8.TabIndex = 67;
             this.label8.Text = "Afiliado:";
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(179, 168);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 67;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // Diagnostico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 379);
+            this.ClientSize = new System.Drawing.Size(526, 415);
             this.Controls.Add(this.datos1);
             this.Controls.Add(this.nombreProf);
             this.Controls.Add(this.label3);
@@ -353,5 +365,6 @@
         private System.Windows.Forms.GroupBox datos1;
         private System.Windows.Forms.Label nombreAfi2;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button cancelar;
     }
 }

@@ -32,6 +32,7 @@
             this.turnosGrid = new System.Windows.Forms.DataGridView();
             this.elegir = new System.Windows.Forms.Button();
             this.nombreAfiliado = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.turnosGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,9 +55,9 @@
             // 
             // elegir
             // 
-            this.elegir.Location = new System.Drawing.Point(16, 296);
+            this.elegir.Location = new System.Drawing.Point(336, 296);
             this.elegir.Name = "elegir";
-            this.elegir.Size = new System.Drawing.Size(75, 23);
+            this.elegir.Size = new System.Drawing.Size(100, 29);
             this.elegir.TabIndex = 2;
             this.elegir.Text = "Elegir";
             this.elegir.UseVisualStyleBackColor = true;
@@ -71,11 +72,22 @@
             this.nombreAfiliado.TabIndex = 3;
             this.nombreAfiliado.Text = "nombreAfiliado";
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(185, 296);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 31;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // ListarTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 350);
+            this.ClientSize = new System.Drawing.Size(456, 340);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.nombreAfiliado);
             this.Controls.Add(this.elegir);
             this.Controls.Add(this.turnosGrid);
@@ -94,5 +106,6 @@
         private System.Windows.Forms.DataGridView turnosGrid;
         private System.Windows.Forms.Button elegir;
         private System.Windows.Forms.Label nombreAfiliado;
+        private System.Windows.Forms.Button cancelar;
     }
 }

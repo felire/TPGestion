@@ -96,9 +96,9 @@
             // 
             // aceptar
             // 
-            this.aceptar.Location = new System.Drawing.Point(133, 162);
+            this.aceptar.Location = new System.Drawing.Point(133, 156);
             this.aceptar.Name = "aceptar";
-            this.aceptar.Size = new System.Drawing.Size(131, 23);
+            this.aceptar.Size = new System.Drawing.Size(100, 29);
             this.aceptar.TabIndex = 6;
             this.aceptar.Text = "Aceptar";
             this.aceptar.UseVisualStyleBackColor = true;

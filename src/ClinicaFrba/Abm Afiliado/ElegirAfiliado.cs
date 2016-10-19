@@ -94,7 +94,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 afiliado.obtenerTodosLosDatos();
                 ModificaDatos mod = new ModificaDatos(afiliado);
                 mod.Show();
-                this.Hide();
+                this.Close();
             }
         }
 
@@ -120,7 +120,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void cancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

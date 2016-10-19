@@ -60,7 +60,7 @@
             // 
             // agregarRol
             // 
-            this.agregarRol.Location = new System.Drawing.Point(144, 282);
+            this.agregarRol.Location = new System.Drawing.Point(352, 282);
             this.agregarRol.Name = "agregarRol";
             this.agregarRol.Size = new System.Drawing.Size(100, 29);
             this.agregarRol.TabIndex = 15;
@@ -125,7 +125,7 @@
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(352, 282);
+            this.cancelar.Location = new System.Drawing.Point(144, 282);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(100, 29);
             this.cancelar.TabIndex = 29;

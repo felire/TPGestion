@@ -184,7 +184,7 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
                         dia.persistirDiaAgenda();
                     }
                     MessageBox.Show("Agenda guardada con exito!", "Exito!", MessageBoxButtons.OK);
-                    this.Hide();
+                    this.Close();
                 }
                 else
                 {
@@ -201,6 +201,11 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
                 return false;
             } 
             return true;
+        }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -111,8 +111,13 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
                 Profesional profesional = (Profesional)listaProfesionales.CurrentRow.DataBoundItem;
                 RegAgendaMedico agenda = new RegAgendaMedico(profesional);
                 agenda.Show();
-                this.Hide();
+                this.Close();
             }
+        }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

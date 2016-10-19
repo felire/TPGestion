@@ -75,7 +75,7 @@
             // 
             // comprar
             // 
-            this.comprar.Location = new System.Drawing.Point(19, 171);
+            this.comprar.Location = new System.Drawing.Point(424, 171);
             this.comprar.Name = "comprar";
             this.comprar.Size = new System.Drawing.Size(100, 29);
             this.comprar.TabIndex = 5;
@@ -166,7 +166,7 @@
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(424, 171);
+            this.cancelar.Location = new System.Drawing.Point(292, 171);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(100, 29);
             this.cancelar.TabIndex = 29;

@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.listaEspecialidades = new System.Windows.Forms.ListView();
             this.Elegir = new System.Windows.Forms.Button();
+            this.cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -53,19 +54,30 @@
             // 
             // Elegir
             // 
-            this.Elegir.Location = new System.Drawing.Point(16, 260);
+            this.Elegir.Location = new System.Drawing.Point(273, 238);
             this.Elegir.Name = "Elegir";
-            this.Elegir.Size = new System.Drawing.Size(143, 23);
+            this.Elegir.Size = new System.Drawing.Size(100, 29);
             this.Elegir.TabIndex = 2;
             this.Elegir.Text = "Elegir";
             this.Elegir.UseVisualStyleBackColor = true;
             this.Elegir.Click += new System.EventHandler(this.Elegir_Click);
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(134, 238);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 30;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // ElegirEspecialidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 341);
+            this.ClientSize = new System.Drawing.Size(394, 283);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.Elegir);
             this.Controls.Add(this.listaEspecialidades);
             this.Controls.Add(this.label1);
@@ -81,5 +93,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView listaEspecialidades;
         private System.Windows.Forms.Button Elegir;
+        private System.Windows.Forms.Button cancelar;
     }
 }

@@ -89,7 +89,7 @@ namespace ClinicaFrba.Registro_Resultado
                 {
                     Diagnostico diag = new Diagnostico(consulta);
                     diag.Show();
-                    this.Hide();
+                    this.Close();
                 }                    
             }
         }
@@ -115,6 +115,11 @@ namespace ClinicaFrba.Registro_Resultado
                 e.Handled = true;
                 return;
             }
+        }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

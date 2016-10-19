@@ -124,12 +124,12 @@ namespace ClinicaFrba.Abm_Afiliado
                     if (numeroHijo < afiliadoPadre.familiaresACargo)
                     {
                         AfiliadoAltaHijos afiliadoAltaC = new AfiliadoAltaHijos(numeroHijo + 1, afiliado);
-                        this.Hide();
+                        this.Close();
                         afiliadoAltaC.Show();
                     }
                     else
                     {
-                        this.Hide();
+                        this.Close();
                     }
                     if (numeroHijo > afiliadoPadre.familiaresACargo)
                     {
@@ -161,7 +161,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void cancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }

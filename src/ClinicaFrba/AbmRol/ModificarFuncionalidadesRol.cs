@@ -86,7 +86,7 @@ namespace ClinicaFrba.AbmRol
             {
                 rol.actualizarFuncionalidades(funcionalidadesElegidas());
                 MessageBox.Show("Funcionalidades modificadas con exito!", "Info", MessageBoxButtons.OK);
-                this.Hide();
+                this.Close();
             }
         }
 
@@ -119,7 +119,7 @@ namespace ClinicaFrba.AbmRol
 
         private void cancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
     }
 }
