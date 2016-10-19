@@ -110,5 +110,10 @@ namespace ClinicaFrba.AbmRol
                 mod.Show();
             }
         }
+
+        private void salir_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

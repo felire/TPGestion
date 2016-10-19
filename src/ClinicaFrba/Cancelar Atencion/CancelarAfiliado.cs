@@ -93,5 +93,10 @@ namespace ClinicaFrba.Cancelar_Atencion
                 return false;
             }
         }
+
+        private void salir_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

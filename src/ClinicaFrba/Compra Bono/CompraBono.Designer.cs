@@ -40,6 +40,9 @@
             this.nombre = new System.Windows.Forms.Label();
             this.apellido = new System.Windows.Forms.Label();
             this.precio = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.precioTotal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadAComprar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,9 +75,9 @@
             // 
             // comprar
             // 
-            this.comprar.Location = new System.Drawing.Point(16, 177);
+            this.comprar.Location = new System.Drawing.Point(19, 171);
             this.comprar.Name = "comprar";
-            this.comprar.Size = new System.Drawing.Size(209, 23);
+            this.comprar.Size = new System.Drawing.Size(100, 29);
             this.comprar.TabIndex = 5;
             this.comprar.Text = "Comprar";
             this.comprar.UseVisualStyleBackColor = true;
@@ -132,6 +135,7 @@
             0,
             0,
             0});
+            this.cantidadAComprar.ValueChanged += new System.EventHandler(this.cambioCantidad);
             // 
             // nombre
             // 
@@ -160,11 +164,42 @@
             this.precio.TabIndex = 15;
             this.precio.Text = "label8";
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(424, 171);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(362, 80);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 13);
+            this.label8.TabIndex = 30;
+            this.label8.Text = "Precio total:";
+            // 
+            // precioTotal
+            // 
+            this.precioTotal.AutoSize = true;
+            this.precioTotal.Location = new System.Drawing.Point(432, 79);
+            this.precioTotal.Name = "precioTotal";
+            this.precioTotal.Size = new System.Drawing.Size(35, 13);
+            this.precioTotal.TabIndex = 31;
+            this.precioTotal.Text = "label9";
+            // 
             // CompraBono
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 262);
+            this.ClientSize = new System.Drawing.Size(536, 223);
+            this.Controls.Add(this.precioTotal);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.precio);
             this.Controls.Add(this.apellido);
             this.Controls.Add(this.nombre);
@@ -199,5 +234,8 @@
         private System.Windows.Forms.Label nombre;
         private System.Windows.Forms.Label apellido;
         private System.Windows.Forms.Label precio;
+        private System.Windows.Forms.Button cancelar;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label precioTotal;
     }
 }

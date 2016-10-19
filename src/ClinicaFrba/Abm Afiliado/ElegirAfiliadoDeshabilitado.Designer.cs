@@ -42,6 +42,7 @@
             this.nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.habilitar = new System.Windows.Forms.Button();
+            this.cancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).BeginInit();
             this.filtros.SuspendLayout();
             this.SuspendLayout();
@@ -176,19 +177,30 @@
             // 
             // habilitar
             // 
-            this.habilitar.Location = new System.Drawing.Point(38, 327);
+            this.habilitar.Location = new System.Drawing.Point(38, 333);
             this.habilitar.Name = "habilitar";
-            this.habilitar.Size = new System.Drawing.Size(577, 35);
+            this.habilitar.Size = new System.Drawing.Size(100, 29);
             this.habilitar.TabIndex = 17;
             this.habilitar.Text = "Habilitar Usuario";
             this.habilitar.UseVisualStyleBackColor = true;
             this.habilitar.Click += new System.EventHandler(this.habilitar_Click);
+            // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(172, 333);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // ElegirAfiliadoDeshabilitado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(653, 383);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.habilitar);
             this.Controls.Add(this.listaAfiliados);
             this.Controls.Add(this.filtros);
@@ -217,5 +229,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox grupo;
         private System.Windows.Forms.Button habilitar;
+        private System.Windows.Forms.Button cancelar;
     }
 }

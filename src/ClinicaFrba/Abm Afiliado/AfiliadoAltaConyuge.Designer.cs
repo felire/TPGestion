@@ -50,12 +50,14 @@
             this.labelMail = new System.Windows.Forms.Label();
             this.buttonRegistrar = new System.Windows.Forms.Button();
             this.buttonLimpiar = new System.Windows.Forms.Button();
+            this.cancelar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cancelar);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.buttonRegistrar);
             this.groupBox1.Controls.Add(this.buttonLimpiar);
@@ -267,6 +269,16 @@
             this.buttonLimpiar.Text = "Limpiar";
             this.buttonLimpiar.UseVisualStyleBackColor = true;
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(431, 252);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // AfiliadoAltaConyuge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -306,5 +318,6 @@
         private System.Windows.Forms.Button buttonLimpiar;
         private System.Windows.Forms.DateTimePicker fechaNac;
         private System.Windows.Forms.ComboBox comboBoxSexo;
+        private System.Windows.Forms.Button cancelar;
     }
 }

@@ -42,15 +42,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).BeginInit();
             this.filtros.SuspendLayout();
             this.SuspendLayout();
             // 
             // elegir
             // 
-            this.elegir.Location = new System.Drawing.Point(38, 331);
+            this.elegir.Location = new System.Drawing.Point(38, 325);
             this.elegir.Name = "elegir";
-            this.elegir.Size = new System.Drawing.Size(577, 23);
+            this.elegir.Size = new System.Drawing.Size(100, 29);
             this.elegir.TabIndex = 5;
             this.elegir.Text = "Elegir";
             this.elegir.UseVisualStyleBackColor = true;
@@ -183,11 +184,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre: ";
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(515, 325);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // ElegirAfiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(653, 383);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.elegir);
             this.Controls.Add(this.listaAfiliados);
             this.Controls.Add(this.filtros);
@@ -216,5 +228,6 @@
         private System.Windows.Forms.TextBox nombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox grupo;
+        private System.Windows.Forms.Button cancelar;
     }
 }

@@ -134,5 +134,10 @@ namespace ClinicaFrba.Abm_Afiliado
                 return;
             }
         }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

@@ -35,6 +35,7 @@
             this.cancelar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.motivoCancelacion = new System.Windows.Forms.TextBox();
+            this.salir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.turnos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,9 +76,9 @@
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(422, 284);
+            this.cancelar.Location = new System.Drawing.Point(422, 278);
             this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(176, 23);
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
             this.cancelar.TabIndex = 4;
             this.cancelar.Text = "Cancelar Turno";
             this.cancelar.UseVisualStyleBackColor = true;
@@ -101,11 +102,22 @@
             this.motivoCancelacion.Size = new System.Drawing.Size(397, 57);
             this.motivoCancelacion.TabIndex = 14;
             // 
+            // salir
+            // 
+            this.salir.Location = new System.Drawing.Point(575, 278);
+            this.salir.Name = "salir";
+            this.salir.Size = new System.Drawing.Size(100, 29);
+            this.salir.TabIndex = 29;
+            this.salir.Text = "Salir";
+            this.salir.UseVisualStyleBackColor = true;
+            this.salir.Click += new System.EventHandler(this.salir_Click);
+            // 
             // CancelarAfiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 319);
+            this.Controls.Add(this.salir);
             this.Controls.Add(this.motivoCancelacion);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cancelar);
@@ -130,5 +142,6 @@
         private System.Windows.Forms.Button cancelar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox motivoCancelacion;
+        private System.Windows.Forms.Button salir;
     }
 }

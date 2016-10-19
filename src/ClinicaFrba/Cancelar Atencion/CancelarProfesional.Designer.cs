@@ -42,6 +42,7 @@
             this.nombre = new System.Windows.Forms.Label();
             this.motivoCancelacion = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.salir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +65,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.salir);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.dia);
@@ -176,6 +178,16 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Motivo cancelacion: ";
             // 
+            // salir
+            // 
+            this.salir.Location = new System.Drawing.Point(272, 98);
+            this.salir.Name = "salir";
+            this.salir.Size = new System.Drawing.Size(98, 23);
+            this.salir.TabIndex = 29;
+            this.salir.Text = "Salir";
+            this.salir.UseVisualStyleBackColor = true;
+            this.salir.Click += new System.EventHandler(this.salir_Click);
+            // 
             // CancelarProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,5 +226,6 @@
         private System.Windows.Forms.Label nombre;
         private System.Windows.Forms.TextBox motivoCancelacion;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button salir;
     }
 }

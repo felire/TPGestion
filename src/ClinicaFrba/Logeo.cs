@@ -23,13 +23,38 @@ namespace ClinicaFrba
 
         private void logeoAccion(object sender, EventArgs e)
         {
-            UTF8Encoding encoderHash = new UTF8Encoding();
-            SHA256Managed hasher = new SHA256Managed();
-            string passConSalt = password.Text + "MeRluSsA";
-            byte[] bytesDeHasheo = hasher.ComputeHash(encoderHash.GetBytes(passConSalt));
-            string pass = bytesDeHasheoToString(bytesDeHasheo).ToLower();
-            string user = userName.Text;
-            Usuario usuario = new Usuario(user, pass, this);
+            if (formularioValido())
+            {
+                UTF8Encoding encoderHash = new UTF8Encoding();
+                SHA256Managed hasher = new SHA256Managed();
+                string passConSalt = password.Text + "MeRluSsA";
+                byte[] bytesDeHasheo = hasher.ComputeHash(encoderHash.GetBytes(passConSalt));
+                string pass = bytesDeHasheoToString(bytesDeHasheo).ToLower();
+                string user = userName.Text;
+                Usuario usuario = new Usuario(user, pass, this);
+            }
+        }
+
+        private Boolean formularioValido()
+        {
+            string mensajeError = "";
+            if (userName.Text.Length == 0)
+            {
+                mensajeError = "Ingrese su usuario";
+            }
+            if (password.Text.Length == 0)
+            {
+                mensajeError = mensajeError + "\r\n" + "Ingrese su contraseña";
+            }
+            if (mensajeError.Equals(""))
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(mensajeError, "Información");
+                return false;
+            }
         }
 
         public void sinRoles()

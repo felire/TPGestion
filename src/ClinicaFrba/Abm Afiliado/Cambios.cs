@@ -34,7 +34,7 @@ namespace ClinicaFrba.Abm_Afiliado
         private void FormCambios_Load(object sender, EventArgs e) {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             string query = "SELECT Numero_en_el_grupo, Nombre, Apellido, kernel_panic.LogsCambioAfiliados.Fecha, kernel_panic.LogsCambioAfiliados.Tipo, kernel_panic.LogsCambioAfiliados.Descripcion, Esta_activo FROM kernel_panic.Afiliados INNER JOIN kernel_panic.LogsCambioAfiliados ON  kernel_panic.Afiliados.Id = kernel_panic.LogsCambioAfiliados.Afiliado";
-            string tipo = "TD";
+            string tipo = "T";
             SpeakerDB speaker = ConexionDB.ObtenerDataReader (query, tipo, ListaParametros);
             this.dataGridView1.DataSource = speaker;
             speaker.close();
@@ -48,6 +48,11 @@ namespace ClinicaFrba.Abm_Afiliado
                 e.Handled = true;
                 return;
             }
+        }
+
+        private void salir_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

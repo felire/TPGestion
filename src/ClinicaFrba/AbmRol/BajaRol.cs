@@ -16,6 +16,7 @@ namespace ClinicaFrba.AbmRol
         private ListView rolesExistentes;
         private Button Eliminar;
         private Label label1;
+        private Button cancelar;
         private List<Rol> roles;
 
         public BajaRol()
@@ -72,6 +73,7 @@ namespace ClinicaFrba.AbmRol
             this.label1 = new System.Windows.Forms.Label();
             this.rolesExistentes = new System.Windows.Forms.ListView();
             this.Eliminar = new System.Windows.Forms.Button();
+            this.cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -94,17 +96,28 @@ namespace ClinicaFrba.AbmRol
             // 
             // Eliminar
             // 
-            this.Eliminar.Location = new System.Drawing.Point(80, 203);
+            this.Eliminar.Location = new System.Drawing.Point(16, 202);
             this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Size = new System.Drawing.Size(126, 23);
+            this.Eliminar.Size = new System.Drawing.Size(100, 29);
             this.Eliminar.TabIndex = 2;
             this.Eliminar.Text = "Eliminar";
             this.Eliminar.UseVisualStyleBackColor = true;
             this.Eliminar.Click += new System.EventHandler(this.Eliminar_Click);
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(172, 202);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // BajaRol
             // 
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.Eliminar);
             this.Controls.Add(this.rolesExistentes);
             this.Controls.Add(this.label1);
@@ -112,6 +125,11 @@ namespace ClinicaFrba.AbmRol
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

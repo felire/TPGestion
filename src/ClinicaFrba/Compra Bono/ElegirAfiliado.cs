@@ -105,5 +105,10 @@ namespace ClinicaFrba.Compra_Bono
                 return;
             }
         }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

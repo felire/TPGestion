@@ -34,7 +34,7 @@
             this.passNuevaRepe = new System.Windows.Forms.Label();
             this.passNuevaT = new System.Windows.Forms.TextBox();
             this.passRepeT = new System.Windows.Forms.TextBox();
-            this.Entrar = new System.Windows.Forms.Button();
+            this.aceptar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -94,15 +94,15 @@
             this.passRepeT.Size = new System.Drawing.Size(131, 20);
             this.passRepeT.TabIndex = 5;
             // 
-            // Entrar
+            // aceptar
             // 
-            this.Entrar.Location = new System.Drawing.Point(133, 162);
-            this.Entrar.Name = "Entrar";
-            this.Entrar.Size = new System.Drawing.Size(131, 23);
-            this.Entrar.TabIndex = 6;
-            this.Entrar.Text = "Aceptar";
-            this.Entrar.UseVisualStyleBackColor = true;
-            this.Entrar.Click += new System.EventHandler(this.Entrar_Click);
+            this.aceptar.Location = new System.Drawing.Point(133, 162);
+            this.aceptar.Name = "aceptar";
+            this.aceptar.Size = new System.Drawing.Size(131, 23);
+            this.aceptar.TabIndex = 6;
+            this.aceptar.Text = "Aceptar";
+            this.aceptar.UseVisualStyleBackColor = true;
+            this.aceptar.Click += new System.EventHandler(this.aceptar_Click);
             // 
             // label2
             // 
@@ -119,7 +119,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(317, 206);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.Entrar);
+            this.Controls.Add(this.aceptar);
             this.Controls.Add(this.passRepeT);
             this.Controls.Add(this.passNuevaT);
             this.Controls.Add(this.passNuevaRepe);
@@ -141,7 +141,7 @@
         private System.Windows.Forms.Label passNuevaRepe;
         private System.Windows.Forms.TextBox passNuevaT;
         private System.Windows.Forms.TextBox passRepeT;
-        private System.Windows.Forms.Button Entrar;
+        private System.Windows.Forms.Button aceptar;
         private System.Windows.Forms.Label label2;
     }
 }

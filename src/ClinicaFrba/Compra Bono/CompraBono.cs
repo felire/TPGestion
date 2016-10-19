@@ -27,6 +27,7 @@ namespace ClinicaFrba.Compra_Bono
             nombre.Text = afiliado.nombre;
             apellido.Text = afiliado.apellido;
             precio.Text = bono.precioUnitario.ToString();
+            precioTotal.Text = bono.precioUnitario.ToString();
         }
 
         private void comprar_Click(object sender, EventArgs e)
@@ -47,6 +48,16 @@ namespace ClinicaFrba.Compra_Bono
                 bono.comprar();
                 this.Hide();
             }
+        }
+
+        private void cambioCantidad(object sender, EventArgs e)
+        {
+            precioTotal.Text = (bono.precioUnitario * cantidadAComprar.Value).ToString();
+        }
+
+        private void cancelar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

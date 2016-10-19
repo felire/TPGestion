@@ -65,6 +65,7 @@
             this.labelTel = new System.Windows.Forms.Label();
             this.mail = new System.Windows.Forms.TextBox();
             this.labelMail = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.altaFamiliar.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -74,6 +75,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cancelar);
             this.groupBox1.Controls.Add(this.altaFamiliar);
             this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.ButtonModificar);
@@ -234,7 +236,7 @@
             // 
             // ButtonModificar
             // 
-            this.ButtonModificar.Location = new System.Drawing.Point(348, 529);
+            this.ButtonModificar.Location = new System.Drawing.Point(257, 529);
             this.ButtonModificar.Name = "ButtonModificar";
             this.ButtonModificar.Size = new System.Drawing.Size(110, 35);
             this.ButtonModificar.TabIndex = 29;
@@ -435,6 +437,16 @@
             this.labelMail.TabIndex = 13;
             this.labelMail.Text = "Mail";
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(423, 529);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 35);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // ModificaDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -495,5 +507,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBoxSexo;
+        private System.Windows.Forms.Button cancelar;
     }
 }

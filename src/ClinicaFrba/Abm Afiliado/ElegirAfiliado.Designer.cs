@@ -42,6 +42,7 @@
             this.nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.modificar = new System.Windows.Forms.Button();
+            this.cancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).BeginInit();
             this.filtros.SuspendLayout();
             this.SuspendLayout();
@@ -176,19 +177,30 @@
             // 
             // modificar
             // 
-            this.modificar.Location = new System.Drawing.Point(38, 327);
+            this.modificar.Location = new System.Drawing.Point(38, 333);
             this.modificar.Name = "modificar";
-            this.modificar.Size = new System.Drawing.Size(577, 35);
+            this.modificar.Size = new System.Drawing.Size(100, 29);
             this.modificar.TabIndex = 16;
             this.modificar.Text = "Modificar";
             this.modificar.UseVisualStyleBackColor = true;
             this.modificar.Click += new System.EventHandler(this.modificar_Click);
+            // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(515, 333);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // ElegirAfiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(653, 383);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.modificar);
             this.Controls.Add(this.listaAfiliados);
             this.Controls.Add(this.filtros);
@@ -218,5 +230,6 @@
         private System.Windows.Forms.TextBox grupo;
         private System.Windows.Forms.Button modificar;
         private System.Windows.Forms.Button habilitar;
+        private System.Windows.Forms.Button cancelar;
     }
 }

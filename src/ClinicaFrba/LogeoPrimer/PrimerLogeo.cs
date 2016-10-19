@@ -23,22 +23,49 @@ namespace ClinicaFrba.LogeoPrimer
             nombreUsuario.Text = usuario.usuario;
         }
 
-        private void Entrar_Click(object sender, EventArgs e)
+        private void aceptar_Click(object sender, EventArgs e)
         {
-            if (passNuevaT.Text == passRepeT.Text)
+            if (formularioValido())
             {
-                UTF8Encoding encoderHash = new UTF8Encoding();
-                SHA256Managed hasher = new SHA256Managed();
-                string passConSalt = passNuevaT.Text + "MeRluSsA";
-                byte[] bytesDeHasheo = hasher.ComputeHash(encoderHash.GetBytes(passConSalt));
-                string pass = bytesDeHasheoToString(bytesDeHasheo).ToLower();
-                usuario.actualizarPass(pass);
-                this.Hide();
-                MessageBox.Show("El usuario ya puede loguearse normalmente", "Éxito", MessageBoxButtons.OK);
+                if (passNuevaT.Text == passRepeT.Text)
+                {
+                    UTF8Encoding encoderHash = new UTF8Encoding();
+                    SHA256Managed hasher = new SHA256Managed();
+                    string passConSalt = passNuevaT.Text + "MeRluSsA";
+                    byte[] bytesDeHasheo = hasher.ComputeHash(encoderHash.GetBytes(passConSalt));
+                    string pass = bytesDeHasheoToString(bytesDeHasheo).ToLower();
+                    usuario.actualizarPass(pass);
+                    this.Hide();
+                    MessageBox.Show("El usuario ya puede loguearse normalmente", "Éxito", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show("Las contraseñas ingresadas no coinciden", "Error!", MessageBoxButtons.OK);
+                    passNuevaT.Clear();
+                    passRepeT.Clear();
+                }
+            }
+        }
+
+        private Boolean formularioValido()
+        {
+            string mensajeError = "";
+            if (passNuevaT.Text.Length == 0)
+            {
+                mensajeError = "Ingrese su nueva contraseña";
+            }
+            if (passRepeT.Text.Length == 0)
+            {
+                mensajeError = mensajeError + "\r\n" + "repita su contraseña";
+            }
+            if (mensajeError.Equals(""))
+            {
+                return true;
             }
             else
             {
-                MessageBox.Show("Las contraseñas ingresadas no coinciden", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(mensajeError, "Información");
+                return false;
             }
         }
 
@@ -51,6 +78,5 @@ namespace ClinicaFrba.LogeoPrimer
             }
             return salida.ToString();
         }
-
     }
 }

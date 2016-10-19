@@ -49,8 +49,9 @@
             this.comboBoxEspecialidades = new System.Windows.Forms.ComboBox();
             this.filtroEspecialidad = new System.Windows.Forms.GroupBox();
             this.filtrarEspYPlan = new System.Windows.Forms.GroupBox();
-            this.comboBoxEspecialidad2 = new System.Windows.Forms.ComboBox();
             this.comboBoxPlan = new System.Windows.Forms.ComboBox();
+            this.comboBoxEspecialidad2 = new System.Windows.Forms.ComboBox();
+            this.salir = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grilla1)).BeginInit();
@@ -262,15 +263,6 @@
             this.filtrarEspYPlan.TabStop = false;
             this.filtrarEspYPlan.Text = "Filtrar Especialidad y Plan";
             // 
-            // comboBoxEspecialidad2
-            // 
-            this.comboBoxEspecialidad2.FormattingEnabled = true;
-            this.comboBoxEspecialidad2.Location = new System.Drawing.Point(16, 28);
-            this.comboBoxEspecialidad2.Name = "comboBoxEspecialidad2";
-            this.comboBoxEspecialidad2.Size = new System.Drawing.Size(203, 21);
-            this.comboBoxEspecialidad2.TabIndex = 0;
-            this.comboBoxEspecialidad2.Text = "Especialidad";
-            // 
             // comboBoxPlan
             // 
             this.comboBoxPlan.FormattingEnabled = true;
@@ -280,12 +272,32 @@
             this.comboBoxPlan.TabIndex = 1;
             this.comboBoxPlan.Text = "Plan";
             // 
+            // comboBoxEspecialidad2
+            // 
+            this.comboBoxEspecialidad2.FormattingEnabled = true;
+            this.comboBoxEspecialidad2.Location = new System.Drawing.Point(16, 28);
+            this.comboBoxEspecialidad2.Name = "comboBoxEspecialidad2";
+            this.comboBoxEspecialidad2.Size = new System.Drawing.Size(203, 21);
+            this.comboBoxEspecialidad2.TabIndex = 0;
+            this.comboBoxEspecialidad2.Text = "Especialidad";
+            // 
+            // salir
+            // 
+            this.salir.Location = new System.Drawing.Point(716, 434);
+            this.salir.Name = "salir";
+            this.salir.Size = new System.Drawing.Size(100, 29);
+            this.salir.TabIndex = 30;
+            this.salir.Text = "Salir";
+            this.salir.UseVisualStyleBackColor = true;
+            this.salir.Click += new System.EventHandler(this.salir_Click);
+            // 
             // Listado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(840, 439);
+            this.ClientSize = new System.Drawing.Size(840, 468);
+            this.Controls.Add(this.salir);
             this.Controls.Add(this.filtrarEspYPlan);
             this.Controls.Add(this.anioElegido);
             this.Controls.Add(this.filtroEspecialidad);
@@ -342,5 +354,6 @@
         private System.Windows.Forms.GroupBox filtrarEspYPlan;
         private System.Windows.Forms.ComboBox comboBoxPlan;
         private System.Windows.Forms.ComboBox comboBoxEspecialidad2;
+        private System.Windows.Forms.Button salir;
     }
 }

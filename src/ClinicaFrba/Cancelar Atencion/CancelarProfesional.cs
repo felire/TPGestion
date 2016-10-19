@@ -83,5 +83,10 @@ namespace ClinicaFrba.Cancelar_Atencion
                 MessageBox.Show("El dia seleccionado no pertenece a ninguna franja!", "Error!", MessageBoxButtons.OK);
             }
         }
+
+        private void salir_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

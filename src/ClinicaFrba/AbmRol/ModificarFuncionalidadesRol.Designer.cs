@@ -37,6 +37,7 @@
             this.funcionalidadesAgregables = new System.Windows.Forms.ListView();
             this.nombreRol = new System.Windows.Forms.Label();
             this.nombreDeRol = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -59,9 +60,9 @@
             // 
             // agregarRol
             // 
-            this.agregarRol.Location = new System.Drawing.Point(91, 282);
+            this.agregarRol.Location = new System.Drawing.Point(144, 282);
             this.agregarRol.Name = "agregarRol";
-            this.agregarRol.Size = new System.Drawing.Size(427, 47);
+            this.agregarRol.Size = new System.Drawing.Size(100, 29);
             this.agregarRol.TabIndex = 15;
             this.agregarRol.Text = "Guardar cambios";
             this.agregarRol.UseVisualStyleBackColor = true;
@@ -122,11 +123,22 @@
             this.nombreDeRol.Size = new System.Drawing.Size(0, 13);
             this.nombreDeRol.TabIndex = 18;
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(352, 282);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // ModificarFuncionalidadesRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(630, 350);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.nombreDeRol);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -154,6 +166,7 @@
         private System.Windows.Forms.ListView funcionalidadesAgregables;
         private System.Windows.Forms.Label nombreRol;
         private System.Windows.Forms.Label nombreDeRol;
+        private System.Windows.Forms.Button cancelar;
 
     }
 }

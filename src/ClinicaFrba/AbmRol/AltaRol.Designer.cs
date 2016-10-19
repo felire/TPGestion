@@ -37,6 +37,7 @@
             this.agregarRol = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nombreRol
@@ -96,9 +97,9 @@
             // 
             // agregarRol
             // 
-            this.agregarRol.Location = new System.Drawing.Point(91, 287);
+            this.agregarRol.Location = new System.Drawing.Point(144, 305);
             this.agregarRol.Name = "agregarRol";
-            this.agregarRol.Size = new System.Drawing.Size(427, 47);
+            this.agregarRol.Size = new System.Drawing.Size(100, 29);
             this.agregarRol.TabIndex = 6;
             this.agregarRol.Text = "Agregar Rol";
             this.agregarRol.UseVisualStyleBackColor = true;
@@ -122,11 +123,22 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Funcionalidades agregadas:";
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(352, 305);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // AltaRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 351);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.agregarRol);
@@ -154,5 +166,6 @@
         private System.Windows.Forms.Button agregarRol;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button cancelar;
     }
 }

@@ -162,7 +162,7 @@ namespace ClinicaFrba.Listados
         {
             foreach (Especialidad esp in especialidades)
             {
-                if (esp.descripcion == comboBoxEspecialidades.SelectedItem) return esp.codigo;
+                if (esp.descripcion == (string)comboBoxEspecialidades.SelectedItem) return esp.codigo;
             }
             return 0;
         }
@@ -332,6 +332,9 @@ namespace ClinicaFrba.Listados
             grilla5.Columns.Add(ColCant);
         }
 
-
+        private void salir_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }
