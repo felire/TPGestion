@@ -176,7 +176,7 @@ namespace ClinicaFrba.Menu
 
         private void logsAficlick(object sender, EventArgs e)
         {
-            Abm_Afiliado.Cambios formAf = new Abm_Afiliado.Cambios();
+            Abm_Afiliado.Logs formAf = new Abm_Afiliado.Logs();
             formAf.ShowDialog();
         }
         

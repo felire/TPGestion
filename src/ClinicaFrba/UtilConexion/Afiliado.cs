@@ -53,6 +53,36 @@ namespace ClinicaFrba.UtilConexion
             }
         }
 
+        public List<Log> darLogsCambios()
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@Id", id));
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader("SELECT Id, Tipo, Fecha, Descripcion, Valor_anterior FROM kernel_panic.LogsCambioAfiliados WHERE Afiliado = @Id ORDER BY Id DESC", "T", ListaParametros);
+            List<Log> listaLogs = new List<Log>();
+            if (speaker.reader.HasRows)
+            {
+                while (speaker.reader.Read())
+                {
+                    Log log = new Log();
+                    log.idLog = (int)speaker.reader["Id"];
+                    log.tipo = (string)speaker.reader["Tipo"];
+                    log.fecha = (DateTime)speaker.reader["Fecha"];
+                    log.descripcion = (string)speaker.reader["Descripcion"];
+                    if(speaker.reader["Valor_anterior"] == DBNull.Value)
+                    {
+                        log.valorAnterior = null;
+                    }
+                    else
+                    {
+                        log.valorAnterior = (string)speaker.reader["Valor_anterior"];
+                    }
+                    listaLogs.Add(log);
+                }
+            }
+            speaker.close();
+            return listaLogs;
+        }
+
         public Boolean habilitar()
         {
             this.obtenerTodosLosDatos();

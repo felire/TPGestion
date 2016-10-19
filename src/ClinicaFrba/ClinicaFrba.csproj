@@ -68,12 +68,6 @@
     <Compile Include="Abm Afiliado\AfiliadoVisualiza.Designer.cs">
       <DependentUpon>AfiliadoVisualiza.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Afiliado\Cambios.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Afiliado\Cambios.Designer.cs">
-      <DependentUpon>Cambios.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Afiliado\AfiliadoBajaPosta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +79,12 @@
     </Compile>
     <Compile Include="Abm Afiliado\AfiliadoAltaConyuge2.Designer.cs">
       <DependentUpon>AfiliadoAltaConyuge2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Afiliado\Logs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\Logs.Designer.cs">
+      <DependentUpon>Logs.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Afiliado\ElegirAfiliadoDeshabilitado.cs">
       <SubType>Form</SubType>
@@ -276,6 +276,7 @@
     <Compile Include="UtilConexion\Listado3.cs" />
     <Compile Include="UtilConexion\Listado4.cs" />
     <Compile Include="UtilConexion\Listado5.cs" />
+    <Compile Include="UtilConexion\Log.cs" />
     <Compile Include="UtilConexion\Plan.cs" />
     <Compile Include="UtilConexion\Profesional.cs" />
     <Compile Include="UtilConexion\Rol.cs" />
@@ -295,11 +296,11 @@
     <EmbeddedResource Include="Abm Afiliado\AfiliadoBajaPosta.resx">
       <DependentUpon>AfiliadoBajaPosta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Afiliado\Cambios.resx">
-      <DependentUpon>Cambios.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\AfiliadoAltaConyuge2.resx">
       <DependentUpon>AfiliadoAltaConyuge2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\Logs.resx">
+      <DependentUpon>Logs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\ElegirAfiliadoDeshabilitado.resx">
       <DependentUpon>ElegirAfiliadoDeshabilitado.cs</DependentUpon>

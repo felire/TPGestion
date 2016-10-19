@@ -106,5 +106,5 @@ C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliad
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.ElegirAfiliado.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.ModificaDatos.resources
 C:\Users\ABM\Desktop\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.Cambios.resources
-C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.Cambios.resources
 C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.AfiliadoAltaConyuge2.resources
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.Logs.resources
