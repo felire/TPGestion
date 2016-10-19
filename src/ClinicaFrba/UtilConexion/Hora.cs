@@ -19,7 +19,7 @@ namespace ClinicaFrba.UtilConexion
 
         public static List<Hora> obtenerHorasFecha(Fecha dia)
         {
-            bool horaEnPunto = true;
+            bool horaEnPunto = (dia.horaDesde.Minutes == 0);
             List<Hora> lista = new List<Hora>();
             Hora ultima = null;
             for (int i = dia.horaDesde.Hours; i <= dia.horaHasta.Hours; i++)
@@ -48,7 +48,7 @@ namespace ClinicaFrba.UtilConexion
                     horaEnPunto = true;
                 }
             }
-            if(ultima != null) lista.Remove(ultima);
+            if(ultima != null) lista.Remove(ultima);//solo se pueden pedir turnos hasta 30 min hasta de cerrar la clinica
             return lista;
         }
 
@@ -56,13 +56,13 @@ namespace ClinicaFrba.UtilConexion
         {
             DateTime horaACheckear = new DateTime(fecha.dia.Year, fecha.dia.Month, fecha.dia.Day, unaHora.Hours, unaHora.Minutes, 0);
             Boolean noEsPasada = DateTime.Now.CompareTo(horaACheckear) < 0;
-            Boolean estaOcupada = fecha.horasOcupadas.Contains(unaHora);
-            return noEsPasada && !estaOcupada;
+            Boolean noEstaOcupada = !fecha.horasOcupadas.Contains(unaHora);
+            return noEsPasada && noEstaOcupada;
         }
 
         public static List<Hora> obtenerHorasDia(Dia dia)
         {
-            bool horaEnPunto = true;
+            bool horaEnPunto = (dia.horaDesde.Minutes == 0);
             List<Hora> lista = new List<Hora>();
             for (int i = dia.horaDesde.Hours; i <= dia.horaHasta.Hours; i++)
             {
@@ -105,52 +105,26 @@ namespace ClinicaFrba.UtilConexion
         public static List<Hora> ObtenerHorasAceptables(Turno turno)
         {
             List<Hora> lista = new List<Hora>();
-            if (turno.fecha.Minute == 0)
+            bool horaEnPunto = (turno.fecha.Minute == 0);
+            for (int i = turno.fecha.TimeOfDay.Hours; i <= turno.fecha.TimeOfDay.Hours + 3; i++)
             {
-                bool horaEnPunto = true;
-                for (int i = turno.fecha.TimeOfDay.Hours; i <= turno.fecha.TimeOfDay.Hours + 3; i++)
+                if (horaEnPunto)
                 {
-                    if (horaEnPunto)
-                    {
-                        TimeSpan unaHora = new TimeSpan(i, 00, 0);
-                        string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
-                        lista.Add(new Hora(unaHora, hora));
-                        horaEnPunto = false;
-                    }
-                    else
-                    {
-                        i--;
-                        TimeSpan unaHora = new TimeSpan(i, 30, 0);
-                        string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
-                        lista.Add(new Hora(unaHora, hora));
-                        horaEnPunto = true;
-                    }
+                    TimeSpan unaHora = new TimeSpan(i, 00, 0);
+                    string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
+                    lista.Add(new Hora(unaHora, hora));
+                    horaEnPunto = false;
                 }
-            }
-            else
-            {
-                bool horaEnPunto = false;
-                for (int i = turno.fecha.TimeOfDay.Hours + 1; i <= turno.fecha.TimeOfDay.Hours + 3; i++)
+                else
                 {
-                    if (horaEnPunto)
-                    {
-                        TimeSpan unaHora = new TimeSpan(i, 00, 0);
-                        string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
-                        lista.Add(new Hora(unaHora, hora));
-                        horaEnPunto = false;
-                    }
-                    else
-                    {
-                        i--;
-                        TimeSpan unaHora = new TimeSpan(i, 30, 0);
-                        string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
-                        lista.Add(new Hora(unaHora, hora));
-                        horaEnPunto = true;
-                    }
+                    i--;
+                    TimeSpan unaHora = new TimeSpan(i, 30, 0);
+                    string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
+                    lista.Add(new Hora(unaHora, hora));
+                    horaEnPunto = true;
                 }
             }
             return lista;
         }
     }
 }
-
