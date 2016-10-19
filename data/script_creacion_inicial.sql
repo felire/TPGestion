@@ -986,15 +986,38 @@ create procedure kernel_panic.baja_logica_afiliado @Id int, @Motivo varchar(400)
 AS
 	declare @fec datetime
 	set @fec = GETDATE()
-	UPDATE kernel_panic.Usuarios SET Habilitado = 0 where kernel_panic.Usuarios.Nombre_usuario = (CONVERT(VARCHAR(50), @Id))
-	update kernel_panic.Afiliados SET Esta_Activo = 0 where kernel_panic.Afiliados.Id = @Id
-	insert into kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('B',@Id, @Motivo+': Baja de Afiliado')
-	IF (select COUNT(kernel_panic.Turnos.Id)  from kernel_panic.Turnos where GD2C2016.kernel_panic.Turnos.Afiliado_Id = @Id 
-	AND kernel_panic.Turnos.Fecha > @fec and kernel_panic.Turnos.Cancelacion IS NULL ) > 0
-	Begin
-		INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES ('Afiliado', @Motivo+': Baja de Afiliado', @fec)
-		UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Id = @id
-	End
+	IF(SELECT Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Id = @Id) <> 1
+	BEGIN
+		UPDATE kernel_panic.Usuarios SET Habilitado = 0 where kernel_panic.Usuarios.Nombre_usuario = (CONVERT(VARCHAR(50), @Id))
+		update kernel_panic.Afiliados SET Esta_Activo = 0 where kernel_panic.Afiliados.Id = @Id
+		insert into kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('B',@Id, @Motivo+': Baja de Afiliado')
+		IF (select COUNT(kernel_panic.Turnos.Id)  from kernel_panic.Turnos where GD2C2016.kernel_panic.Turnos.Afiliado_Id = @Id 
+		AND kernel_panic.Turnos.Fecha > @fec and kernel_panic.Turnos.Cancelacion IS NULL ) > 0
+		Begin
+			INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES ('Afiliado', @Motivo+': Baja de Afiliado', @fec)
+			UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Afiliado_id = @id
+		End
+	END
+	ELSE
+	BEGIN
+		DECLARE @IdAfi INT
+		DECLARE afiliados CURSOR FOR SELECT Id FROM kernel_panic.Afiliados WHERE Numero_de_grupo = (SELECT Numero_de_grupo FROM kernel_panic.Afiliados WHERE Id = @Id)
+		OPEN afiliados
+		FETCH NEXT FROM afiliados INTO @idAfi
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			UPDATE kernel_panic.Usuarios SET Habilitado = 0 where kernel_panic.Usuarios.Nombre_usuario = (CONVERT(VARCHAR(50), @idAfi))
+			update kernel_panic.Afiliados SET Esta_Activo = 0 where kernel_panic.Afiliados.Id = @idAfi
+			insert into kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('B',@idAfi, @Motivo+': Baja de Afiliado Principal')
+			IF (select COUNT(kernel_panic.Turnos.Id)  from kernel_panic.Turnos where GD2C2016.kernel_panic.Turnos.Afiliado_Id = @idAfi 
+			AND kernel_panic.Turnos.Fecha > @fec and kernel_panic.Turnos.Cancelacion IS NULL ) > 0
+			Begin
+				INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES ('Afiliado', @Motivo+': Baja de Afiliado Principal', @fec)
+				UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Afiliado_id = @idAfi
+			End
+			FETCH NEXT FROM afiliados INTO @idAfi
+		END
+	END
 GO
 
 EXEC kernel_panic.BorrarTablas
