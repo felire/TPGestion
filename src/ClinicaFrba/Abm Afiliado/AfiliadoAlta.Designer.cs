@@ -52,11 +52,10 @@
             this.comboBoxPlan = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonRegistrar = new System.Windows.Forms.Button();
-            this.buttonLimpiar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cancelar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.fechaNac = new System.Windows.Forms.DateTimePicker();
-            this.cancelar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -270,27 +269,27 @@
             this.buttonRegistrar.UseVisualStyleBackColor = true;
             this.buttonRegistrar.Click += new System.EventHandler(this.buttonRegistrar_Click);
             // 
-            // buttonLimpiar
-            // 
-            this.buttonLimpiar.Location = new System.Drawing.Point(152, 252);
-            this.buttonLimpiar.Name = "buttonLimpiar";
-            this.buttonLimpiar.Size = new System.Drawing.Size(100, 29);
-            this.buttonLimpiar.TabIndex = 25;
-            this.buttonLimpiar.Text = "Limpiar";
-            this.buttonLimpiar.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cancelar);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.buttonRegistrar);
-            this.groupBox1.Controls.Add(this.buttonLimpiar);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(570, 302);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Alta de Afiliado";
+            // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(431, 252);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 28;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // groupBox2
             // 
@@ -331,16 +330,6 @@
             this.fechaNac.Name = "fechaNac";
             this.fechaNac.Size = new System.Drawing.Size(98, 20);
             this.fechaNac.TabIndex = 24;
-            // 
-            // cancelar
-            // 
-            this.cancelar.Location = new System.Drawing.Point(431, 252);
-            this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(100, 29);
-            this.cancelar.TabIndex = 28;
-            this.cancelar.Text = "Cancelar";
-            this.cancelar.UseVisualStyleBackColor = true;
-            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // AfiliadoAlta
             // 
@@ -383,7 +372,6 @@
         private System.Windows.Forms.ComboBox comboBoxPlan;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonRegistrar;
-        private System.Windows.Forms.Button buttonLimpiar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DateTimePicker fechaNac;

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cancelar = new System.Windows.Forms.Button();
             this.altaFamiliar = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.hijo = new System.Windows.Forms.Button();
@@ -47,7 +48,6 @@
             this.ButtonModificar = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.motivo = new System.Windows.Forms.TextBox();
-            this.ButtonLimpiar = new System.Windows.Forms.Button();
             this.groupDatos = new System.Windows.Forms.GroupBox();
             this.comboBoxSexo = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -65,7 +65,6 @@
             this.labelTel = new System.Windows.Forms.Label();
             this.mail = new System.Windows.Forms.TextBox();
             this.labelMail = new System.Windows.Forms.Label();
-            this.cancelar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.altaFamiliar.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -80,7 +79,6 @@
             this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.ButtonModificar);
             this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.ButtonLimpiar);
             this.groupBox1.Controls.Add(this.groupDatos);
             this.groupBox1.Location = new System.Drawing.Point(26, 12);
             this.groupBox1.Name = "groupBox1";
@@ -88,6 +86,16 @@
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Modificación de Afiliado";
+            // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(423, 529);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 35);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // altaFamiliar
             // 
@@ -263,15 +271,6 @@
             this.motivo.Size = new System.Drawing.Size(490, 72);
             this.motivo.TabIndex = 13;
             // 
-            // ButtonLimpiar
-            // 
-            this.ButtonLimpiar.Location = new System.Drawing.Point(91, 529);
-            this.ButtonLimpiar.Name = "ButtonLimpiar";
-            this.ButtonLimpiar.Size = new System.Drawing.Size(110, 35);
-            this.ButtonLimpiar.TabIndex = 12;
-            this.ButtonLimpiar.Text = "Limpiar";
-            this.ButtonLimpiar.UseVisualStyleBackColor = true;
-            // 
             // groupDatos
             // 
             this.groupDatos.Controls.Add(this.comboBoxSexo);
@@ -437,16 +436,6 @@
             this.labelMail.TabIndex = 13;
             this.labelMail.Text = "Mail";
             // 
-            // cancelar
-            // 
-            this.cancelar.Location = new System.Drawing.Point(423, 529);
-            this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(100, 35);
-            this.cancelar.TabIndex = 29;
-            this.cancelar.Text = "Cancelar";
-            this.cancelar.UseVisualStyleBackColor = true;
-            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
-            // 
             // ModificaDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,7 +474,6 @@
         private System.Windows.Forms.Button ButtonModificar;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox motivo;
-        private System.Windows.Forms.Button ButtonLimpiar;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox nroDoc;

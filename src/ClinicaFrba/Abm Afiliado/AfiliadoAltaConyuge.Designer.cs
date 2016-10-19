@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cancelar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.comboBoxSexo = new System.Windows.Forms.ComboBox();
             this.fechaNac = new System.Windows.Forms.DateTimePicker();
@@ -49,8 +50,6 @@
             this.textBoxMail = new System.Windows.Forms.TextBox();
             this.labelMail = new System.Windows.Forms.Label();
             this.buttonRegistrar = new System.Windows.Forms.Button();
-            this.buttonLimpiar = new System.Windows.Forms.Button();
-            this.cancelar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -60,13 +59,22 @@
             this.groupBox1.Controls.Add(this.cancelar);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.buttonRegistrar);
-            this.groupBox1.Controls.Add(this.buttonLimpiar);
             this.groupBox1.Location = new System.Drawing.Point(22, 22);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(570, 302);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Alta de Cónyuge";
+            // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(431, 252);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 29;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // groupBox2
             // 
@@ -260,25 +268,6 @@
             this.buttonRegistrar.UseVisualStyleBackColor = true;
             this.buttonRegistrar.Click += new System.EventHandler(this.buttonRegistrar_Click_1);
             // 
-            // buttonLimpiar
-            // 
-            this.buttonLimpiar.Location = new System.Drawing.Point(152, 252);
-            this.buttonLimpiar.Name = "buttonLimpiar";
-            this.buttonLimpiar.Size = new System.Drawing.Size(100, 29);
-            this.buttonLimpiar.TabIndex = 25;
-            this.buttonLimpiar.Text = "Limpiar";
-            this.buttonLimpiar.UseVisualStyleBackColor = true;
-            // 
-            // cancelar
-            // 
-            this.cancelar.Location = new System.Drawing.Point(431, 252);
-            this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(100, 29);
-            this.cancelar.TabIndex = 29;
-            this.cancelar.Text = "Cancelar";
-            this.cancelar.UseVisualStyleBackColor = true;
-            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
-            // 
             // AfiliadoAltaConyuge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -315,7 +304,6 @@
         private System.Windows.Forms.TextBox textBoxMail;
         private System.Windows.Forms.Label labelMail;
         private System.Windows.Forms.Button buttonRegistrar;
-        private System.Windows.Forms.Button buttonLimpiar;
         private System.Windows.Forms.DateTimePicker fechaNac;
         private System.Windows.Forms.ComboBox comboBoxSexo;
         private System.Windows.Forms.Button cancelar;

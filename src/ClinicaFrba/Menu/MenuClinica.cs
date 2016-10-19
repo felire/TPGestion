@@ -161,13 +161,6 @@ namespace ClinicaFrba.Menu
             Abm_Afiliado.AfiliadoBajaPosta formAf = new Abm_Afiliado.AfiliadoBajaPosta();
             formAf.ShowDialog();
         }
-
-        private void visualizacionAficlick(object sender, EventArgs e)
-        {
-            Abm_Afiliado.AfiliadoVisualiza formAf = new Abm_Afiliado.AfiliadoVisualiza();
-            formAf.ShowDialog();
-        }
-
         private void modificacionAficlick(object sender, EventArgs e)
         {
             Abm_Afiliado.ElegirAfiliado formAf = new Abm_Afiliado.ElegirAfiliado();
