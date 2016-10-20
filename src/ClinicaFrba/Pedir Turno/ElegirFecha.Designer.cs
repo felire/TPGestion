@@ -124,8 +124,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.nombreProfesional);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ElegirFecha";
-            this.Text = "ElegirFecha";
+            this.Text = "Elegir Fecha Y Horario";
             this.ResumeLayout(false);
             this.PerformLayout();
 

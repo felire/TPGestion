@@ -93,8 +93,11 @@
             this.Controls.Add(this.modifRol);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rolesExistentes);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ModificarRol";
-            this.Text = "ModificarRol";
+            this.Text = "Gestionar Roles";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -73,7 +73,7 @@
             this.cancelar.Location = new System.Drawing.Point(293, 252);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(100, 29);
-            this.cancelar.TabIndex = 29;
+            this.cancelar.TabIndex = 11;
             this.cancelar.Text = "Cancelar";
             this.cancelar.UseVisualStyleBackColor = true;
             this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
@@ -113,14 +113,14 @@
             this.comboBoxCasado.Location = new System.Drawing.Point(326, 133);
             this.comboBoxCasado.Name = "comboBoxCasado";
             this.comboBoxCasado.Size = new System.Drawing.Size(147, 21);
-            this.comboBoxCasado.TabIndex = 29;
+            this.comboBoxCasado.TabIndex = 9;
             // 
             // fechaNac
             // 
             this.fechaNac.Location = new System.Drawing.Point(374, 109);
             this.fechaNac.Name = "fechaNac";
             this.fechaNac.Size = new System.Drawing.Size(97, 20);
-            this.fechaNac.TabIndex = 19;
+            this.fechaNac.TabIndex = 8;
             // 
             // labelCasado
             // 
@@ -163,7 +163,7 @@
             this.textBoxAp.MaxLength = 255;
             this.textBoxAp.Name = "textBoxAp";
             this.textBoxAp.Size = new System.Drawing.Size(141, 20);
-            this.textBoxAp.TabIndex = 2;
+            this.textBoxAp.TabIndex = 1;
             // 
             // comboBoxTDNI
             // 
@@ -171,7 +171,7 @@
             this.comboBoxTDNI.Location = new System.Drawing.Point(85, 75);
             this.comboBoxTDNI.Name = "comboBoxTDNI";
             this.comboBoxTDNI.Size = new System.Drawing.Size(141, 21);
-            this.comboBoxTDNI.TabIndex = 4;
+            this.comboBoxTDNI.TabIndex = 2;
             // 
             // labelDNI
             // 
@@ -187,7 +187,7 @@
             this.textBoxIDdni.Location = new System.Drawing.Point(85, 102);
             this.textBoxIDdni.Name = "textBoxIDdni";
             this.textBoxIDdni.Size = new System.Drawing.Size(141, 20);
-            this.textBoxIDdni.TabIndex = 8;
+            this.textBoxIDdni.TabIndex = 3;
             this.textBoxIDdni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros_dni);
             // 
             // label1
@@ -205,7 +205,7 @@
             this.comboBoxSexo.Location = new System.Drawing.Point(86, 128);
             this.comboBoxSexo.Name = "comboBoxSexo";
             this.comboBoxSexo.Size = new System.Drawing.Size(140, 21);
-            this.comboBoxSexo.TabIndex = 18;
+            this.comboBoxSexo.TabIndex = 4;
             // 
             // textBoxDire
             // 
@@ -213,7 +213,7 @@
             this.textBoxDire.MaxLength = 255;
             this.textBoxDire.Name = "textBoxDire";
             this.textBoxDire.Size = new System.Drawing.Size(157, 20);
-            this.textBoxDire.TabIndex = 8;
+            this.textBoxDire.TabIndex = 5;
             // 
             // labelSex
             // 
@@ -239,7 +239,7 @@
             this.textBoxTel.MaxLength = 12;
             this.textBoxTel.Name = "textBoxTel";
             this.textBoxTel.Size = new System.Drawing.Size(157, 20);
-            this.textBoxTel.TabIndex = 10;
+            this.textBoxTel.TabIndex = 6;
             this.textBoxTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros_telefono);
             // 
             // labelFechNac
@@ -266,7 +266,7 @@
             this.textBoxMail.MaxLength = 255;
             this.textBoxMail.Name = "textBoxMail";
             this.textBoxMail.Size = new System.Drawing.Size(157, 20);
-            this.textBoxMail.TabIndex = 12;
+            this.textBoxMail.TabIndex = 7;
             // 
             // labelMail
             // 
@@ -282,7 +282,7 @@
             this.buttonRegistrar.Location = new System.Drawing.Point(440, 252);
             this.buttonRegistrar.Name = "buttonRegistrar";
             this.buttonRegistrar.Size = new System.Drawing.Size(100, 29);
-            this.buttonRegistrar.TabIndex = 24;
+            this.buttonRegistrar.TabIndex = 10;
             this.buttonRegistrar.Text = "Registrar";
             this.buttonRegistrar.UseVisualStyleBackColor = true;
             this.buttonRegistrar.Click += new System.EventHandler(this.buttonRegistrar_Click);
@@ -291,10 +291,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 365);
+            this.ClientSize = new System.Drawing.Size(626, 340);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AfiliadoAltaHijos";
-            this.Text = "Alta de Hijos";
+            this.Text = "Cargar Afiliado";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

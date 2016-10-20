@@ -41,9 +41,9 @@
             // 
             // logearse
             // 
-            this.logearse.Location = new System.Drawing.Point(75, 183);
+            this.logearse.Location = new System.Drawing.Point(92, 185);
             this.logearse.Name = "logearse";
-            this.logearse.Size = new System.Drawing.Size(117, 46);
+            this.logearse.Size = new System.Drawing.Size(100, 29);
             this.logearse.TabIndex = 3;
             this.logearse.Text = "Loguearse";
             this.logearse.UseVisualStyleBackColor = true;
@@ -109,6 +109,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logearse);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Logeo";
             this.Text = "Logeo";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

@@ -181,7 +181,7 @@
             this.habilitar.Name = "habilitar";
             this.habilitar.Size = new System.Drawing.Size(100, 29);
             this.habilitar.TabIndex = 17;
-            this.habilitar.Text = "Habilitar Usuario";
+            this.habilitar.Text = "Habilitar";
             this.habilitar.UseVisualStyleBackColor = true;
             this.habilitar.Click += new System.EventHandler(this.habilitar_Click);
             // 
@@ -204,8 +204,11 @@
             this.Controls.Add(this.habilitar);
             this.Controls.Add(this.listaAfiliados);
             this.Controls.Add(this.filtros);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ElegirAfiliadoDeshabilitado";
-            this.Text = "ElegirAfiliado";
+            this.Text = "Habilitar Afiliado";
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).EndInit();
             this.filtros.ResumeLayout(false);
             this.filtros.PerformLayout();

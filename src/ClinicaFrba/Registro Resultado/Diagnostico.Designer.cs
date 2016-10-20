@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtpFechaAtencion = new System.Windows.Forms.DateTimePicker();
             this.resultado = new System.Windows.Forms.GroupBox();
+            this.cancelar = new System.Windows.Forms.Button();
             this.asignarDiag = new System.Windows.Forms.Button();
             this.nombreEspecialidad = new System.Windows.Forms.Label();
             this.asd = new System.Windows.Forms.Label();
@@ -53,7 +54,6 @@
             this.datos1 = new System.Windows.Forms.GroupBox();
             this.nombreAfi2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.cancelar = new System.Windows.Forms.Button();
             this.gbDatos.SuspendLayout();
             this.resultado.SuspendLayout();
             this.datos1.SuspendLayout();
@@ -154,6 +154,16 @@
             this.resultado.TabIndex = 7;
             this.resultado.TabStop = false;
             this.resultado.Text = "Resultado";
+            // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(179, 168);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 67;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // asignarDiag
             // 
@@ -305,16 +315,6 @@
             this.label8.TabIndex = 67;
             this.label8.Text = "Afiliado:";
             // 
-            // cancelar
-            // 
-            this.cancelar.Location = new System.Drawing.Point(179, 168);
-            this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(100, 29);
-            this.cancelar.TabIndex = 67;
-            this.cancelar.Text = "Cancelar";
-            this.cancelar.UseVisualStyleBackColor = true;
-            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
-            // 
             // Diagnostico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -325,6 +325,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.resultado);
             this.Controls.Add(this.gbDatos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Diagnostico";
             this.Text = "Diagnostico";
             this.gbDatos.ResumeLayout(false);

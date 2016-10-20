@@ -204,6 +204,9 @@
             this.Controls.Add(this.registrarAgendaProfesional);
             this.Controls.Add(this.listaProfesionales);
             this.Controls.Add(this.filtros);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SeleccionarProfesional";
             this.Text = "SeleccionarProfesional";
             this.filtros.ResumeLayout(false);

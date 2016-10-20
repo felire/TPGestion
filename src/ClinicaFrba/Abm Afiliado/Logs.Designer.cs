@@ -238,8 +238,11 @@
             this.Controls.Add(this.verLogs);
             this.Controls.Add(this.listaAfiliados);
             this.Controls.Add(this.filtros);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Logs";
-            this.Text = "ElegirAfiliado";
+            this.Text = "Logs";
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).EndInit();
             this.filtros.ResumeLayout(false);
             this.filtros.PerformLayout();

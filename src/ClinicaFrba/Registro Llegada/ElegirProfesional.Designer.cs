@@ -214,8 +214,11 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listaProfesionales);
             this.Controls.Add(this.filtros);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ElegirProfesional";
-            this.Text = "ElegirProfesional";
+            this.Text = "Elegir Profesional";
             ((System.ComponentModel.ISupportInitialize)(this.listaProfesionales)).EndInit();
             this.filtros.ResumeLayout(false);
             this.filtros.PerformLayout();

@@ -125,8 +125,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.nombreAfiliado);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CancelarAfiliado";
-            this.Text = "CancelarAfiliado";
+            this.Text = "Cancelar Turno";
             ((System.ComponentModel.ISupportInitialize)(this.turnos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

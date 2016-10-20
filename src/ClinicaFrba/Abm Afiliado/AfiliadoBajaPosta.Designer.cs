@@ -30,6 +30,7 @@
         {
             this.listaAfiliados = new System.Windows.Forms.DataGridView();
             this.filtros = new System.Windows.Forms.GroupBox();
+            this.cancelar = new System.Windows.Forms.Button();
             this.grupo = new System.Windows.Forms.TextBox();
             this.buscar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -44,7 +45,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textMotivo = new System.Windows.Forms.TextBox();
             this.eliminar = new System.Windows.Forms.Button();
-            this.cancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).BeginInit();
             this.filtros.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -81,6 +81,15 @@
             this.filtros.TabStop = false;
             this.filtros.Text = "Filtros";
             // 
+            // cancelar
+            // 
+            this.cancelar.Location = new System.Drawing.Point(334, 107);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(100, 29);
+            this.cancelar.TabIndex = 30;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            // 
             // grupo
             // 
             this.grupo.Location = new System.Drawing.Point(86, 99);
@@ -92,7 +101,7 @@
             // 
             // buscar
             // 
-            this.buscar.Location = new System.Drawing.Point(309, 107);
+            this.buscar.Location = new System.Drawing.Point(471, 107);
             this.buscar.Name = "buscar";
             this.buscar.Size = new System.Drawing.Size(100, 29);
             this.buscar.TabIndex = 10;
@@ -209,15 +218,6 @@
             this.eliminar.UseVisualStyleBackColor = true;
             this.eliminar.Click += new System.EventHandler(this.eliminar_Click);
             // 
-            // cancelar
-            // 
-            this.cancelar.Location = new System.Drawing.Point(471, 107);
-            this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(100, 29);
-            this.cancelar.TabIndex = 30;
-            this.cancelar.Text = "Cancelar";
-            this.cancelar.UseVisualStyleBackColor = true;
-            // 
             // AfiliadoBajaPosta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,8 +226,11 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.listaAfiliados);
             this.Controls.Add(this.filtros);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AfiliadoBajaPosta";
-            this.Text = "ElegirAfiliado";
+            this.Text = "Deshabilitar Afiliado";
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).EndInit();
             this.filtros.ResumeLayout(false);
             this.filtros.PerformLayout();

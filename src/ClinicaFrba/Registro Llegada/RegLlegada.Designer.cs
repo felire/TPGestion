@@ -202,8 +202,11 @@
             this.Controls.Add(this.elegir);
             this.Controls.Add(this.listaAfiliados);
             this.Controls.Add(this.filtros);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "RegLlegada";
-            this.Text = "Form1";
+            this.Text = "Seleccionar Afiliado";
             ((System.ComponentModel.ISupportInitialize)(this.listaAfiliados)).EndInit();
             this.filtros.ResumeLayout(false);
             this.filtros.PerformLayout();

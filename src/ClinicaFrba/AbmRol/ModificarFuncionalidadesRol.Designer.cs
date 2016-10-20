@@ -137,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(630, 350);
+            this.ClientSize = new System.Drawing.Size(599, 331);
             this.Controls.Add(this.cancelar);
             this.Controls.Add(this.nombreDeRol);
             this.Controls.Add(this.label2);
@@ -148,8 +148,11 @@
             this.Controls.Add(this.agregarFun);
             this.Controls.Add(this.funcionalidadesAgregables);
             this.Controls.Add(this.nombreRol);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ModificarFuncionalidadesRol";
-            this.Text = "ModificarFuncionalidadesRol";
+            this.Text = "Modificar Rol";
             this.ResumeLayout(false);
             this.PerformLayout();
 

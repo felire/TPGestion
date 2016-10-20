@@ -126,8 +126,11 @@
             this.Controls.Add(this.passNueva);
             this.Controls.Add(this.nombreUsuario);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PrimerLogeo";
-            this.Text = "PrimerL";
+            this.Text = "Primer Logueo";
             this.ResumeLayout(false);
             this.PerformLayout();
 

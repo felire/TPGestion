@@ -285,8 +285,11 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.nombreProfesional);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "RegAgendaMedico";
-            this.Text = "Form1";
+            this.Text = "Registrar Agenda";
             this.rangoFechas.ResumeLayout(false);
             this.rangoFechas.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.horarios)).EndInit();

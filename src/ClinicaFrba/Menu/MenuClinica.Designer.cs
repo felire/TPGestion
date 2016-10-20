@@ -450,6 +450,8 @@
             this.Controls.Add(this.comboElegirRol);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MenuClinica";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.MenuClinica_Load);

@@ -442,8 +442,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(659, 618);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ModificaDatos";
-            this.Text = "ModificaDatos";
+            this.Text = "Modificar Datos";
             this.groupBox1.ResumeLayout(false);
             this.altaFamiliar.ResumeLayout(false);
             this.altaFamiliar.PerformLayout();

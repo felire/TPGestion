@@ -121,7 +121,11 @@ namespace ClinicaFrba.AbmRol
             this.Controls.Add(this.Eliminar);
             this.Controls.Add(this.rolesExistentes);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "BajaRol";
+            this.Text = "Borrar Rol";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dia = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.salir = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.nombre = new System.Windows.Forms.Label();
             this.motivoCancelacion = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.salir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +75,16 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cancelar Dia";
+            // 
+            // salir
+            // 
+            this.salir.Location = new System.Drawing.Point(266, 92);
+            this.salir.Name = "salir";
+            this.salir.Size = new System.Drawing.Size(98, 23);
+            this.salir.TabIndex = 29;
+            this.salir.Text = "Salir";
+            this.salir.UseVisualStyleBackColor = true;
+            this.salir.Click += new System.EventHandler(this.salir_Click);
             // 
             // button2
             // 
@@ -178,16 +188,6 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Motivo cancelacion: ";
             // 
-            // salir
-            // 
-            this.salir.Location = new System.Drawing.Point(272, 98);
-            this.salir.Name = "salir";
-            this.salir.Size = new System.Drawing.Size(98, 23);
-            this.salir.TabIndex = 29;
-            this.salir.Text = "Salir";
-            this.salir.UseVisualStyleBackColor = true;
-            this.salir.Click += new System.EventHandler(this.salir_Click);
-            // 
             // CancelarProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,8 +199,11 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CancelarProfesional";
-            this.Text = "CancelarProfesional";
+            this.Text = "Cancelar Asistencia";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

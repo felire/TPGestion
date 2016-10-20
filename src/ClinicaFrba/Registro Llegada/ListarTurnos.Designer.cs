@@ -92,8 +92,11 @@
             this.Controls.Add(this.elegir);
             this.Controls.Add(this.turnosGrid);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ListarTurnos";
-            this.Text = "ListarTurnos";
+            this.Text = "Elegir Turnos";
             ((System.ComponentModel.ISupportInitialize)(this.turnosGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

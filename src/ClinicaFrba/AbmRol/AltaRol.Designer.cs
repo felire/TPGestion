@@ -148,8 +148,11 @@
             this.Controls.Add(this.funcionalidadesAgregables);
             this.Controls.Add(this.nombreElegido);
             this.Controls.Add(this.nombreRol);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AltaRol";
-            this.Text = "AltaRol";
+            this.Text = "Crear Rol";
             this.ResumeLayout(false);
             this.PerformLayout();
 

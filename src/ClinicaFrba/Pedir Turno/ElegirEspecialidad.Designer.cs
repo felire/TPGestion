@@ -81,8 +81,11 @@
             this.Controls.Add(this.Elegir);
             this.Controls.Add(this.listaEspecialidades);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ElegirEspecialidad";
-            this.Text = "ElegirEspecialidad";
+            this.Text = "Elegir Especialidad";
             this.ResumeLayout(false);
             this.PerformLayout();
 

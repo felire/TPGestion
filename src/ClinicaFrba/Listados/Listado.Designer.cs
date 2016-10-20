@@ -306,6 +306,7 @@
             this.Controls.Add(this.semestreUno);
             this.Controls.Add(this.anio);
             this.Controls.Add(this.tabControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Listado";
