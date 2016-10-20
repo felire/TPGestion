@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ClinicaFrba.UtilConexion
 {
@@ -19,10 +20,16 @@ namespace ClinicaFrba.UtilConexion
 
         public static List<Hora> obtenerHorasFecha(Fecha dia)
         {
-            bool horaEnPunto = (dia.horaDesde.Minutes == 0);
             List<Hora> lista = new List<Hora>();
             Hora ultima = null;
-            for (int i = dia.horaDesde.Hours; i <= dia.horaHasta.Hours; i++)
+            bool horaEnPunto = true;
+            int i = dia.horaDesde.Hours;
+            if (dia.horaDesde.Minutes != 0)//arranca y media
+            {
+                horaEnPunto = false;
+                i++;
+            }
+            for ( ; i <= dia.horaHasta.Hours; i++)
             {
                 if (horaEnPunto)
                 {
@@ -62,9 +69,15 @@ namespace ClinicaFrba.UtilConexion
 
         public static List<Hora> obtenerHorasDia(Dia dia)
         {
-            bool horaEnPunto = (dia.horaDesde.Minutes == 0);
             List<Hora> lista = new List<Hora>();
-            for (int i = dia.horaDesde.Hours; i <= dia.horaHasta.Hours; i++)
+            bool horaEnPunto = true;
+            int i = dia.horaDesde.Hours;
+            if (dia.horaDesde.Minutes != 0)//arranca y media
+            {
+                horaEnPunto = false;
+                i++;
+            }
+            for ( ; i <= dia.horaHasta.Hours; i++)
             {
                 if (horaEnPunto)
                 {
@@ -101,12 +114,17 @@ namespace ClinicaFrba.UtilConexion
             }
         }
 
-
         public static List<Hora> ObtenerHorasAceptables(Turno turno)
         {
             List<Hora> lista = new List<Hora>();
-            bool horaEnPunto = (turno.fecha.Minute == 0);
-            for (int i = turno.fecha.TimeOfDay.Hours; i <= turno.fecha.TimeOfDay.Hours + 3; i++)
+            bool horaEnPunto = true;
+            int i = turno.fecha.Hour;
+            if (turno.fecha.Minute != 0)//arranca y media
+            {
+                horaEnPunto = false;
+                i++;
+            }
+            for ( ; i <= turno.fecha.TimeOfDay.Hours + 3; i++)
             {
                 if (horaEnPunto)
                 {
