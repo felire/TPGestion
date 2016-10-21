@@ -1,6 +1,6 @@
-USE [GD2C2016]
+/*USE [GD2C2016]
 GO
-
+*/
 CREATE SCHEMA [kernel_panic] AUTHORIZATION [gd]
 GO
 
@@ -598,7 +598,6 @@ GO
 
 --ALta Afiliado
 --Todas las ALTAS las hice con manejo de errores para luego probar todo bien en la app, dps se los vuelo o los metemos en un tabla magica de logs del sistema.
-DROP PROCEDURE kernel_panic.alta_afiliado
 create procedure kernel_panic.alta_afiliado
 --recibo parametros
 		@Nom VARCHAR(255),
@@ -676,7 +675,6 @@ GO
 
 --Alta Conyugue 
 
-DROP PROCEDURE kernel_panic.alta_conyuge
 create procedure kernel_panic.alta_conyuge
 		@Nom VARCHAR(255),
 		@Ape VARCHAR(255),
@@ -748,7 +746,6 @@ AS
 GO
 
 --Alta hermano
-DROP PROCEDURE kernel_panic.alta_hermano
 create procedure kernel_panic.alta_hermano
 		@Nom VARCHAR(255),
 		@Ape VARCHAR(255),
@@ -824,7 +821,6 @@ GO
 
 --Alta/Rehabilitación desde cero
 --Aca por si lo quisieron dar de baja y lo quieren rehabilitar de 0 y no simplemente (activarlo)
-DROP PROCEDURE kernel_panic.rehabilitacion_afiliado
 create procedure kernel_panic.rehabilitacion_afiliado
 		@Nom VARCHAR(255),
 		@Ape VARCHAR(255),
@@ -897,7 +893,6 @@ AS
 GO
 
 --Alta/Habilitacion usuario existente
-DROP PROCEDURE kernel_panic.rehabilitar
 create procedure kernel_panic.rehabilitar @IdAfiliado int
 AS
 	
@@ -981,7 +976,6 @@ AS
 GO
 
 --baja logica Afiliado
-DROP PROCEDURE kernel_panic.baja_logica_afiliado
 create procedure kernel_panic.baja_logica_afiliado @Id int, @Motivo varchar(400) 
 AS
 	declare @fec datetime
@@ -1020,7 +1014,7 @@ AS
 	END
 GO
 
-EXEC kernel_panic.BorrarTablas
+--EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
 EXEC kernel_panic.Cargar_planes
 EXEC kernel_panic.CargarRoles
@@ -1038,7 +1032,7 @@ EXEC kernel_panic.Cargar_transacciones
 EXEC kernel_panic.CargarBonos
 EXEC kernel_panic.agregarRegistroDeLogsInicial
 
-
+/*
 DROP PROCEDURE kernel_panic.BorrarTablas
 DROP PROCEDURE kernel_panic.CrearTablas
 DROP PROCEDURE kernel_panic.Cargar_planes
@@ -1064,56 +1058,5 @@ DROP PROCEDURE kernel_panic.cancelarDiaProfesional
 DROP PROCEDURE kernel_panic.cancelarFranjaProfesional
 DROP PROCEDURE kernel_panic.agregarRegistroDeLogsInicial
 DROP PROCEDURE kernel_panic.consultaNueva
-
-
-
---SELECT LISTADOS
-
---Listado 1
-SELECT TOP 5 E.Descripcion AS Especialidad, T.Descripcion AS Tipo, COUNT(Tu.Id) AS Cantidad_cancelaciones,MONTH(Tu.Fecha)
-FROM kernel_panic.Especialidades E JOIN kernel_panic.Tipo_Especialidad T ON (T.Codigo = E.Tipo)
-								   JOIN kernel_panic.Turnos Tu ON (Tu.Especialidad = E.Codigo)
-WHERE Tu.Cancelacion IS NOT NULL AND YEAR(Tu.Fecha)=2016	  
-GROUP BY E.Descripcion, T.Descripcion,MONTH(Tu.Fecha)
-ORDER BY cantidad_cancelaciones DESC
-
-
---Listado 2
-SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, COUNT(DISTINCT T.Id) Consultas
-FROM kernel_panic.Profesionales P JOIN kernel_panic.Diagnosticos T ON(T.Profesional_id = P.Id)
-								  JOIN kernel_panic.Afiliados A ON (T.Afiliado_id = A.Id)
-								  JOIN kernel_panic.Grupos_Familiares GF ON (A.Numero_de_grupo = GF.Id)
-								  JOIN kernel_panic.Turnos Tu ON (T.Turno_id = Tu.Id)
---WHERE Tu.Especialidad = @especialidad AND GF.Plan_grupo = @planGrupo AND YEAR(T.Fecha) = 2016 esto es para filtrar por año etc
-GROUP BY P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc
-ORDER BY COUNT(DISTINCT T.Id) DESC
-
---Listado 3
-SELECT TOP 5 P.Id Id, P.Nombre nombre, P.Apellido apellido, P.Tipo_doc tipoDoc, P.Numero_doc numeroDoc, E.Desde desde,E.Hasta hasta,SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, E.Hasta) HorasTrabajadasEnFranja
-FROM kernel_panic.Profesionales P JOIN kernel_panic.Esquema_Trabajo E ON (E.Profesional = P.Id)
-								  JOIN kernel_panic.Agenda_Diaria AD ON (AD.EsquemaTrabajo = E.Id)
---WHERE AD.Especialidad = @especialidad
-GROUP BY  P.Id, P.Nombre, P.Apellido, P.Tipo_doc, P.Numero_doc,E.Desde,E.Hasta
-ORDER BY SUM(DATEDIFF(hour,AD.Desde, AD.Hasta))*DATEDIFF(week, E.Desde, CASE WHEN MONTH(E.Desde) > 6 THEN E.Desde ELSE convert(date, '23/10/2016', 103) END) DESC
-
---Listado 4
-SELECT TOP 5 A.Nombre Nombre, A.Apellido Apellido, SUM(T.Cantidad) AS Cantidad_Comprados, A.Numero_de_grupo,(SELECT CAST(
-   CASE WHEN (SELECT COUNT(A2.Numero_de_grupo) FROM kernel_panic.Afiliados A2 WHERE A2.Numero_de_grupo = A.Numero_de_grupo) > 1 THEN 1 
-   ELSE 0 
-   END 
-AS BIT)) AS pertenece_a_grupo
-FROM kernel_panic.Afiliados A JOIN kernel_panic.Transacciones T ON (T.Afiliado = A.Id)
-WHERE YEAR(T.Fecha)=2015 AND MONTH(T.Fecha)>6
-GROUP BY A.Nombre, A.Apellido, A.Numero_de_grupo
-ORDER BY Cantidad_Comprados DESC, A.Numero_de_grupo ASC
-
---Listado 5
-
-SELECT TOP 5 E.Descripcion AS Especialidad,Ti.Descripcion AS Tipo,COUNT(B.Id) AS Bonos_Utilizados
-FROM kernel_panic.Turnos T 
-		JOIN kernel_panic.Bonos_Consultas B ON (T.Id=B.Turno)
-		JOIN kernel_panic.Especialidades E ON (T.Especialidad= E.Codigo)
-		JOIN kernel_panic.Tipo_Especialidad Ti ON (Ti.Codigo = E.Tipo)
-GROUP BY  Ti.Descripcion,E.Descripcion
-ORDER BY Bonos_Utilizados DESC
+*/
 
