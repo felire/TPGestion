@@ -77,6 +77,7 @@
             // 
             // comboFecha
             // 
+            this.comboFecha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboFecha.FormattingEnabled = true;
             this.comboFecha.Location = new System.Drawing.Point(103, 44);
             this.comboFecha.Name = "comboFecha";
@@ -86,6 +87,7 @@
             // 
             // comboHorario
             // 
+            this.comboHorario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboHorario.FormattingEnabled = true;
             this.comboHorario.Location = new System.Drawing.Point(307, 44);
             this.comboHorario.Name = "comboHorario";

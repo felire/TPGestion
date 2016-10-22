@@ -24,6 +24,8 @@ namespace ClinicaFrba.Abm_Afiliado
             this.afiliadoPadre = afiliadoPadre;
             InitializeComponent();
             this.cargarDatos();
+            fechaNac.MaxDate = DateTime.Now;
+            numero.Text = numeroHijo.ToString();
         }
 
         public void cargarDatos()
@@ -39,7 +41,6 @@ namespace ClinicaFrba.Abm_Afiliado
             comboBoxCasado.Items.Add("Divorciado/a");
             comboBoxCasado.SelectedIndex = 0;
 
-            comboBoxTDNI.Items.Add("");
             comboBoxTDNI.Items.Add("DNI");
             comboBoxTDNI.Items.Add("LD");
             comboBoxTDNI.Items.Add("LC");
@@ -123,7 +124,7 @@ namespace ClinicaFrba.Abm_Afiliado
                     MessageBox.Show("Hijo/a registrado/a con exito", "Exito", MessageBoxButtons.OK);
                     if (numeroHijo < afiliadoPadre.familiaresACargo)
                     {
-                        AfiliadoAltaHijos afiliadoAltaC = new AfiliadoAltaHijos(numeroHijo + 1, afiliado);
+                        AfiliadoAltaHijos afiliadoAltaC = new AfiliadoAltaHijos(numeroHijo + 1, afiliadoPadre);
                         this.Close();
                         afiliadoAltaC.Show();
                     }

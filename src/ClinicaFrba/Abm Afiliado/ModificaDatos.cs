@@ -88,20 +88,21 @@ namespace ClinicaFrba.Abm_Afiliado
      
         private void conyuge_Click(object sender, EventArgs e)
         {
-            if (civilAnt.Text.Equals("Casado/a") || civilAnt.Text.Equals("Concubinato"))
+            if (afiliado.estuvoCasado())
             {
-                MessageBox.Show("Actualmente esta en pareja, no puede dar de alta a otro", "Error");
+                MessageBox.Show("Usted ya estuvo casado, para dar de alta a su nuevo conyuge en el mismo grupo familiar debe darse de baja y luego de alta nuevamente", "Error");
             }
             else
             {
-                if (afiliado.estuvoCasado())
+                if (estadoCivil.Text.Equals("Casado/a") || estadoCivil.Text.Equals("Concubinato"))
                 {
-                    MessageBox.Show("Usted ya estuvo casado, para dar de alta a su nuevo conyuge en el mismo grupo familiar debe darse de baja y luego de alta nuevamente", "Error");
+                    afiliado.estadoCivil = estadoCivil.Text;
+                    AfiliadoAltaConyuge2 afi = new AfiliadoAltaConyuge2(this);
+                    afi.Show();
                 }
                 else
                 {
-                    AfiliadoAltaConyuge2 afi = new AfiliadoAltaConyuge2(this);
-                    afi.Show();
+                    MessageBox.Show("Debe marcar una relacion en pareja.", "Error");
                 }
             }
         }

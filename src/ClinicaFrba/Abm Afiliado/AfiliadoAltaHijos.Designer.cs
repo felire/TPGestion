@@ -52,12 +52,16 @@
             this.textBoxMail = new System.Windows.Forms.TextBox();
             this.labelMail = new System.Windows.Forms.Label();
             this.buttonRegistrar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numero = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numero);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.cancelar);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.buttonRegistrar);
@@ -109,6 +113,7 @@
             // 
             // comboBoxCasado
             // 
+            this.comboBoxCasado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCasado.FormattingEnabled = true;
             this.comboBoxCasado.Location = new System.Drawing.Point(326, 133);
             this.comboBoxCasado.Name = "comboBoxCasado";
@@ -167,6 +172,7 @@
             // 
             // comboBoxTDNI
             // 
+            this.comboBoxTDNI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTDNI.FormattingEnabled = true;
             this.comboBoxTDNI.Location = new System.Drawing.Point(85, 75);
             this.comboBoxTDNI.Name = "comboBoxTDNI";
@@ -201,6 +207,7 @@
             // 
             // comboBoxSexo
             // 
+            this.comboBoxSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSexo.FormattingEnabled = true;
             this.comboBoxSexo.Location = new System.Drawing.Point(86, 128);
             this.comboBoxSexo.Name = "comboBoxSexo";
@@ -287,6 +294,24 @@
             this.buttonRegistrar.UseVisualStyleBackColor = true;
             this.buttonRegistrar.Click += new System.EventHandler(this.buttonRegistrar_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(23, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Hijo número: ";
+            // 
+            // numero
+            // 
+            this.numero.AutoSize = true;
+            this.numero.Location = new System.Drawing.Point(86, 16);
+            this.numero.Name = "numero";
+            this.numero.Size = new System.Drawing.Size(35, 13);
+            this.numero.TabIndex = 29;
+            this.numero.Text = "label3";
+            // 
             // AfiliadoAltaHijos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,6 +324,7 @@
             this.Name = "AfiliadoAltaHijos";
             this.Text = "Cargar Afiliado";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -331,5 +357,7 @@
         private System.Windows.Forms.ComboBox comboBoxCasado;
         private System.Windows.Forms.Label labelCasado;
         private System.Windows.Forms.Button cancelar;
+        private System.Windows.Forms.Label numero;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -96,6 +96,7 @@
             // 
             // comboBoxTdoc
             // 
+            this.comboBoxTdoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTdoc.FormattingEnabled = true;
             this.comboBoxTdoc.Location = new System.Drawing.Point(85, 75);
             this.comboBoxTdoc.Name = "comboBoxTdoc";
@@ -210,6 +211,7 @@
             // 
             // comboBoxSexo
             // 
+            this.comboBoxSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSexo.FormattingEnabled = true;
             this.comboBoxSexo.Location = new System.Drawing.Point(86, 128);
             this.comboBoxSexo.Name = "comboBoxSexo";
@@ -236,6 +238,7 @@
             // 
             // comboBoxCasado
             // 
+            this.comboBoxCasado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCasado.FormattingEnabled = true;
             this.comboBoxCasado.Location = new System.Drawing.Point(326, 131);
             this.comboBoxCasado.Name = "comboBoxCasado";
@@ -244,6 +247,7 @@
             // 
             // comboBoxPlan
             // 
+            this.comboBoxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPlan.FormattingEnabled = true;
             this.comboBoxPlan.Location = new System.Drawing.Point(326, 158);
             this.comboBoxPlan.Name = "comboBoxPlan";

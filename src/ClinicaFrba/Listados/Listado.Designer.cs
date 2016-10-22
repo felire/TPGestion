@@ -235,17 +235,17 @@
             // 
             // comboBoxEspecialidades
             // 
+            this.comboBoxEspecialidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEspecialidades.FormattingEnabled = true;
             this.comboBoxEspecialidades.Location = new System.Drawing.Point(16, 35);
             this.comboBoxEspecialidades.Name = "comboBoxEspecialidades";
             this.comboBoxEspecialidades.Size = new System.Drawing.Size(203, 21);
             this.comboBoxEspecialidades.TabIndex = 0;
-            this.comboBoxEspecialidades.Text = "Especialidad";
             // 
             // filtroEspecialidad
             // 
             this.filtroEspecialidad.Controls.Add(this.comboBoxEspecialidades);
-            this.filtroEspecialidad.Location = new System.Drawing.Point(532, 8);
+            this.filtroEspecialidad.Location = new System.Drawing.Point(539, 8);
             this.filtroEspecialidad.Name = "filtroEspecialidad";
             this.filtroEspecialidad.Size = new System.Drawing.Size(237, 100);
             this.filtroEspecialidad.TabIndex = 0;
@@ -256,7 +256,7 @@
             // 
             this.filtrarEspYPlan.Controls.Add(this.comboBoxPlan);
             this.filtrarEspYPlan.Controls.Add(this.comboBoxEspecialidad2);
-            this.filtrarEspYPlan.Location = new System.Drawing.Point(532, 8);
+            this.filtrarEspYPlan.Location = new System.Drawing.Point(539, 12);
             this.filtrarEspYPlan.Name = "filtrarEspYPlan";
             this.filtrarEspYPlan.Size = new System.Drawing.Size(237, 100);
             this.filtrarEspYPlan.TabIndex = 12;
@@ -265,21 +265,21 @@
             // 
             // comboBoxPlan
             // 
+            this.comboBoxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPlan.FormattingEnabled = true;
             this.comboBoxPlan.Location = new System.Drawing.Point(16, 63);
             this.comboBoxPlan.Name = "comboBoxPlan";
             this.comboBoxPlan.Size = new System.Drawing.Size(203, 21);
             this.comboBoxPlan.TabIndex = 1;
-            this.comboBoxPlan.Text = "Plan";
             // 
             // comboBoxEspecialidad2
             // 
+            this.comboBoxEspecialidad2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEspecialidad2.FormattingEnabled = true;
             this.comboBoxEspecialidad2.Location = new System.Drawing.Point(16, 28);
             this.comboBoxEspecialidad2.Name = "comboBoxEspecialidad2";
             this.comboBoxEspecialidad2.Size = new System.Drawing.Size(203, 21);
             this.comboBoxEspecialidad2.TabIndex = 0;
-            this.comboBoxEspecialidad2.Text = "Especialidad";
             // 
             // salir
             // 

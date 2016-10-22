@@ -22,6 +22,7 @@ namespace ClinicaFrba.Abm_Afiliado
             this.formu = formulario;
             InitializeComponent();
             this.cargarDatos();
+            fechaNac.MaxDate = DateTime.Now;
         }
 
         private void cargarDatos()
@@ -31,7 +32,6 @@ namespace ClinicaFrba.Abm_Afiliado
             comboBoxSexo.Items.Add("F");
             comboBoxSexo.SelectedIndex = 0;
 
-            comboBoxTDNI.Items.Add("");
             comboBoxTDNI.Items.Add("DNI");
             comboBoxTDNI.Items.Add("LD");
             comboBoxTDNI.Items.Add("LC");

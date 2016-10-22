@@ -105,6 +105,7 @@
             // 
             // comboBoxSexo
             // 
+            this.comboBoxSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSexo.FormattingEnabled = true;
             this.comboBoxSexo.Location = new System.Drawing.Point(85, 128);
             this.comboBoxSexo.Name = "comboBoxSexo";
@@ -154,6 +155,7 @@
             // 
             // comboBoxTDNI
             // 
+            this.comboBoxTDNI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTDNI.FormattingEnabled = true;
             this.comboBoxTDNI.Location = new System.Drawing.Point(85, 75);
             this.comboBoxTDNI.Name = "comboBoxTDNI";

@@ -61,7 +61,7 @@ namespace ClinicaFrba.UtilConexion
             if (id == (int)DayOfWeek.Saturday)
             {
                 this.horaDesde = new TimeSpan(10, 00, 0);
-                this.horaHasta = new TimeSpan(15, 00, 0);
+                this.horaHasta = new TimeSpan(20, 00, 0); // 15
             }
         }
 

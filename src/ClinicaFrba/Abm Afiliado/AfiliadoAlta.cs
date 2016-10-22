@@ -20,6 +20,7 @@ namespace ClinicaFrba.Abm_Afiliado
             InitializeComponent();
             this.afiliado = new Afiliado();
             cargarComboBoxs();
+            fechaNac.MaxDate = DateTime.Now;
         }
 
         private void cargarComboBoxs()
@@ -35,7 +36,6 @@ namespace ClinicaFrba.Abm_Afiliado
             comboBoxSexo.Items.Add("F");
             comboBoxSexo.SelectedIndex = 0;
 
-            comboBoxTdoc.Items.Add("");
             comboBoxTdoc.Items.Add("DNI");
             comboBoxTdoc.Items.Add("LD");
             comboBoxTdoc.Items.Add("LC");
@@ -134,7 +134,6 @@ namespace ClinicaFrba.Abm_Afiliado
                 if (afiliado.id < 0)
                 {
                     MessageBox.Show("Afiliado existente", "Error", MessageBoxButtons.OK);
-                    this.Close();
                     return;
                 }
                 MessageBox.Show("Afiliado registrado/a con exito", "Exito", MessageBoxButtons.OK);
@@ -162,12 +161,19 @@ namespace ClinicaFrba.Abm_Afiliado
 
         public void preguntarHijos()
         {
-            DialogResult resultado = MessageBox.Show("Desea registrar a su/s "+afiliado.familiaresACargo+" hijo/s?", "Confirme", MessageBoxButtons.YesNo);
-            if (resultado == DialogResult.Yes)
+            if (afiliado.familiaresACargo > 0)
             {
-                AfiliadoAltaHijos afiliadoAltaC = new AfiliadoAltaHijos(1, afiliado);
-                afiliadoAltaC.Show();
-                this.Close();
+                DialogResult resultado = MessageBox.Show("Desea registrar a su/s " + afiliado.familiaresACargo + " hijo/s?", "Confirme", MessageBoxButtons.YesNo);
+                if (resultado == DialogResult.Yes)
+                {
+                    AfiliadoAltaHijos afiliadoAltaC = new AfiliadoAltaHijos(1, afiliado);
+                    afiliadoAltaC.Show();
+                    this.Close();
+                }
+                else
+                {
+                    this.Close();
+                }
             }
             else
             {
