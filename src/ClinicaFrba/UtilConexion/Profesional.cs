@@ -84,29 +84,16 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@nombre", "%" + nombre + "%"));
             ListaParametros.Add(new SqlParameter("@apellido", "%" + apellido + "%"));
-
+            ListaParametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
+            ListaParametros.Add(new SqlParameter("@doc", "%" + doc + "%"));
             SpeakerDB speaker;
-
-            if (doc.Equals("")) /*no quiere buscar por documento*/
-            {
-                string query = "SELECT Id, Nombre, Apellido, Tipo_doc, Numero_doc  "+
-                               "FROM kernel_panic.Profesionales "+
-                               "WHERE Nombre LIKE @nombre "+
-                               "AND  Apellido LIKE @apellido ";
-                speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
-            }
-            else /*busca por documento*/
-            {
-                ListaParametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
-                ListaParametros.Add(new SqlParameter("@doc", Decimal.Parse(doc)));
-                string query = "SELECT Id, Nombre, Apellido, Tipo_doc, Numero_doc  "+
-                               "FROM kernel_panic.Profesionales "+
-                               "WHERE Nombre LIKE @nombre "+
-                               "AND  Apellido LIKE @apellido "+
-                               "AND Tipo_doc = @tipoDoc "+
-                               "AND Numero_doc = @doc ";
-                speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
-            }
+            string query = "SELECT Id, Nombre, Apellido, Tipo_doc, Numero_doc  " +
+                            "FROM kernel_panic.Profesionales " +
+                            "WHERE Nombre LIKE @nombre " +
+                            "AND  Apellido LIKE @apellido " +
+                            "AND Tipo_doc = @tipoDoc " +
+                            "AND CAST (Numero_doc AS VARCHAR(20)) LIKE @doc ";
+            speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);            
             List<Profesional> profesionales = new List<Profesional>();
             if (speaker.reader.HasRows)
             {

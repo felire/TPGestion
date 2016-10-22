@@ -327,6 +327,7 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(new SqlParameter("@nombre", "%" + nombre + "%"));
             ListaParametros.Add(new SqlParameter("@apellido", "%" + apellido + "%"));
             ListaParametros.Add(new SqlParameter("@esta_activo", activo));
+            ListaParametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
             SpeakerDB speaker;
             string query;
             // pueden pasar el documento o no, y el numero de grupo podria ser 0 que significa que no busca por ese campo
@@ -338,6 +339,7 @@ namespace ClinicaFrba.UtilConexion
                             "FROM kernel_panic.Afiliados " +
                             "WHERE Nombre LIKE @nombre " +
                             "AND  Apellido LIKE @apellido " +
+                            "AND Tipo_doc = @tipoDoc " +
                             "AND Esta_activo = @esta_activo";
                     speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
                 }
@@ -349,14 +351,14 @@ namespace ClinicaFrba.UtilConexion
                             "WHERE Nombre LIKE @nombre " +
                             "AND  Apellido LIKE @apellido " +
                             "AND Numero_de_grupo LIKE @grupo " +
+                            "AND Tipo_doc = @tipoDoc " +
                             "AND Esta_activo = @esta_activo";
                     speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
                 }
             }
             else
             {
-                ListaParametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
-                ListaParametros.Add(new SqlParameter("@doc", Decimal.Parse(doc)));
+                ListaParametros.Add(new SqlParameter("@doc", "%" + doc + "%"));
                 if (grupo.Equals(""))
                 {
                     query = "SELECT Nombre, Apellido, Tipo_doc, Numero_doc, Id, Numero_de_grupo, Numero_en_el_grupo "+
@@ -364,7 +366,7 @@ namespace ClinicaFrba.UtilConexion
                             "WHERE Nombre LIKE @nombre "+
                             "AND Apellido LIKE @apellido "+
                             "AND Tipo_doc = @tipoDoc "+
-                            "AND Numero_doc = @doc "+
+                            "AND CAST(Numero_doc AS VARCHAR(20)) LIKE @doc "+
                             "AND Esta_activo = @esta_activo";
                     speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
                 }
@@ -377,7 +379,7 @@ namespace ClinicaFrba.UtilConexion
                             "AND Apellido LIKE @apellido "+
                             "AND Numero_de_grupo = @grupo "+
                             "AND Tipo_doc = @tipoDoc "+
-                            "AND Numero_doc = @doc "+
+                            "AND CAST(Numero_doc AS VARCHAR(20)) LIKE @doc "+
                             "AND Esta_activo = @esta_activo";
                     speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
                 }

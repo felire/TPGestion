@@ -157,10 +157,17 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
         {
             if (AgendaDiaria.agendaTotalLegal(agendaDeTrabajo))
             {
-                confirmar.Visible = false;
-                eliminar.Visible = false;
-                aceptar.Visible = false;
-                rangoFechas.Visible = true;
+                if (horarios.RowCount > 0)
+                {
+                    confirmar.Visible = false;
+                    eliminar.Visible = false;
+                    aceptar.Visible = false;
+                    rangoFechas.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("Debe tener al menos 1 dia de trabajo", "Error!", MessageBoxButtons.OK); 
+                }
             }
             else
             {

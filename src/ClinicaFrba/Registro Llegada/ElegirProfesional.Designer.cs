@@ -132,6 +132,7 @@
             this.numeroDoc.Name = "numeroDoc";
             this.numeroDoc.Size = new System.Drawing.Size(115, 20);
             this.numeroDoc.TabIndex = 7;
+            this.numeroDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros);
             // 
             // label4
             // 

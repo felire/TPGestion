@@ -58,7 +58,6 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void cargarFormulario()
         {
-            tipoDoc.Items.Add("");
             tipoDoc.Items.Add("DNI");
             tipoDoc.Items.Add("LD");
             tipoDoc.Items.Add("LC");

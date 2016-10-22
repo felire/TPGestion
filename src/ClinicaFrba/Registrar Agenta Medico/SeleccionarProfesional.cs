@@ -75,7 +75,6 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             comboEspecialidades.ValueMember = "codigo";
             comboEspecialidades.SelectedItem = noElige;
 
-            tipoDoc.Items.Add("");
             tipoDoc.Items.Add("DNI");
             tipoDoc.Items.Add("LD");
             tipoDoc.Items.Add("LC");
@@ -118,6 +117,16 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
         private void cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void soloNumeros(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
         }
     }
 }
