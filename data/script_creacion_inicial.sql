@@ -339,11 +339,10 @@ AS
 	GROUP BY A.Id, P.Id, M.Turno_Fecha, M.Consulta_Sintomas, M.Consulta_Enfermedades, M.Turno_Numero
 GO
 
-
 CREATE PROCEDURE kernel_panic.Cargar_transacciones
 AS
 	INSERT INTO kernel_panic.Transacciones (Cantidad, Precio, Fecha, Afiliado)
-	SELECT COUNT(Bono_Consulta_Numero) /2, SUM(Plan_Med_Precio_Bono_Farmacia)/2 , Bono_Consulta_Fecha_Impresion, A.Id
+	SELECT COUNT(Bono_Consulta_Numero) /2, SUM(Plan_Med_Precio_Bono_Consulta)/2 , Bono_Consulta_Fecha_Impresion, A.Id
 	FROM gd_esquema.Maestra M JOIN kernel_panic.Afiliados A ON (A.Numero_doc = M.Paciente_Dni)
 	WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL
 	GROUP BY Bono_Consulta_Fecha_Impresion,A.Id
