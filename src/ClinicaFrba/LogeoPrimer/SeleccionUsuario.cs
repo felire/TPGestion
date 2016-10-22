@@ -40,7 +40,7 @@ namespace ClinicaFrba.LogeoPrimer
 
         public void noEntra()
         {
-            MessageBox.Show("No es posible logearse con este usuario", "Error!", MessageBoxButtons.OK);
+            MessageBox.Show("El usuario no existe o ya se logueo por primera vez", "Error!", MessageBoxButtons.OK);
         }
     }
 }

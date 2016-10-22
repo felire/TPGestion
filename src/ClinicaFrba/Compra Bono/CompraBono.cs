@@ -46,6 +46,7 @@ namespace ClinicaFrba.Compra_Bono
             if (resultado == DialogResult.Yes)
             {
                 bono.comprar();
+                MessageBox.Show("Compra realizada con exito", "", MessageBoxButtons.OK);
                 this.Close();
             }
         }

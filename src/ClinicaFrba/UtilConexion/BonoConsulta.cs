@@ -61,14 +61,13 @@ namespace ClinicaFrba.UtilConexion
             }
             ListaParametros.Clear();
             ListaParametros.Add(new SqlParameter("@cantidad", cantidad));
-            ListaParametros.Add(new SqlParameter("@precioUnitario", (int)precioUnitario));
+            ListaParametros.Add(new SqlParameter("@precioTotal", (int)precioUnitario*cantidad ));
             ListaParametros.Add(new SqlParameter("@hoy", DateTime.Now));
             ListaParametros.Add(new SqlParameter("@afiliadoId", afiliado.id));
             query = "INSERT INTO kernel_panic.Transacciones (Cantidad, Precio, Fecha, Afiliado) " +
-                    "VALUES (@cantidad, @precioUnitario, @hoy, @afiliadoId)";
+                    "VALUES (@cantidad, @precioTotal, @hoy, @afiliadoId)";
             speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
-            MessageBox.Show("Compra realizada con exito", "", MessageBoxButtons.OK);
         }
     }
 }

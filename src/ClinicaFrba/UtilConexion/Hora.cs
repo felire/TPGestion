@@ -29,8 +29,9 @@ namespace ClinicaFrba.UtilConexion
                 horaEnPunto = false;
                 i++;
             }
+
             for ( ; i <= dia.horaHasta.Hours; i++)
-            {
+            {             
                 if (horaEnPunto)
                 {
                     TimeSpan unaHora = new TimeSpan(i, 00, 0);
@@ -55,7 +56,10 @@ namespace ClinicaFrba.UtilConexion
                     horaEnPunto = true;
                 }
             }
-            if(ultima != null) lista.Remove(ultima);//solo se pueden pedir turnos hasta 30 min hasta de cerrar la clinica
+            if (dia.horaHasta.Minutes == 0)
+            {
+                if (ultima != null) lista.Remove(ultima);//solo se pueden pedir turnos hasta 30 min hasta de cerrar la clinica
+            }
             return lista;
         }
 

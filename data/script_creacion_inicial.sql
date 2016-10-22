@@ -1014,7 +1014,7 @@ AS
 	END
 GO
 
---EXEC kernel_panic.BorrarTablas
+EXEC kernel_panic.BorrarTablas
 EXEC kernel_panic.CrearTablas
 EXEC kernel_panic.Cargar_planes
 EXEC kernel_panic.CargarRoles
