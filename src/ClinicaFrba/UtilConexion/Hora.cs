@@ -62,28 +62,30 @@ namespace ClinicaFrba.UtilConexion
         public static List<Hora> obtenerHorasDia(Dia dia)
         {
             List<Hora> lista = new List<Hora>();
-            int cantHoras = (dia.horaHasta.Hours - dia.horaDesde.Hours) * 2 + (dia.horaHasta.Minutes - dia.horaDesde.Minutes) / 30;
-            int hour = dia.horaDesde.Hours;
-            TimeSpan unaHora;
-            string hora;
-            bool horaEnPunto = (dia.horaDesde.Minutes == 0);
-            while (cantHoras > 0)
+            bool horaEnPunto = true;
+            int i = dia.horaDesde.Hours;
+            if (dia.horaDesde.Minutes != 0)//arranca y media
+            {
+                horaEnPunto = false;
+                i++;
+            }
+            for ( ; i <= dia.horaHasta.Hours; i++)
             {
                 if (horaEnPunto)
                 {
-                    unaHora = new TimeSpan(hour, 00, 0);
-                    hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
+                    TimeSpan unaHora = new TimeSpan(i, 00, 0);
+                    string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
+                    lista.Add(new Hora(unaHora, hora));
                     horaEnPunto = false;
                 }
                 else
-                {
-                    unaHora = new TimeSpan(hour, 30, 0);
-                    hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
-                    hour++;
+                {   
+                    i--;
+                    TimeSpan unaHora = new TimeSpan(i, 30, 0);
+                    string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
+                    lista.Add(new Hora(unaHora, hora));
                     horaEnPunto = true;
                 }
-                lista.Add(new Hora(unaHora, hora));
-                cantHoras--;
             }
             return lista;
         }
