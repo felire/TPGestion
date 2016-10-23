@@ -18,51 +18,39 @@ namespace ClinicaFrba.UtilConexion
             LaHora = hora;
         }
 
+
         public static List<Hora> obtenerHorasFecha(Fecha dia)
         {
             List<Hora> lista = new List<Hora>();
-            Hora ultima = null;
-            bool horaEnPunto = true;
-            int i = dia.horaDesde.Hours;
-            if (dia.horaDesde.Minutes != 0)//arranca y media
+            int cantHoras = (dia.horaHasta.Hours - dia.horaDesde.Hours) * 2 + (dia.horaHasta.Minutes - dia.horaDesde.Minutes) / 30;
+            int hour = dia.horaDesde.Hours;
+            TimeSpan unaHora;
+            string hora;
+            bool horaEnPunto = (dia.horaDesde.Minutes == 0);
+            while (cantHoras > 0)
             {
-                horaEnPunto = false;
-                i++;
-            }
-
-            for ( ; i <= dia.horaHasta.Hours; i++)
-            {             
                 if (horaEnPunto)
                 {
-                    TimeSpan unaHora = new TimeSpan(i, 00, 0);
-                    string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
-                    if (horaValida(dia, unaHora))
-                    {
-                        ultima = new Hora(unaHora, hora);
-                        lista.Add(ultima);
-                    }
+                    unaHora = new TimeSpan(hour, 00, 0);
+                    hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
                     horaEnPunto = false;
                 }
                 else
                 {
-                    i--;
-                    TimeSpan unaHora = new TimeSpan(i, 30, 0);
-                    string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
-                    if (horaValida(dia, unaHora))
-                    {
-                        ultima = new Hora(unaHora, hora);
-                        lista.Add(ultima);
-                    }
+                    unaHora = new TimeSpan(hour, 30, 0);
+                    hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
+                    hour++;
                     horaEnPunto = true;
                 }
-            }
-            if (dia.horaHasta.Minutes == 0)
-            {
-                if (ultima != null) lista.Remove(ultima);//solo se pueden pedir turnos hasta 30 min hasta de cerrar la clinica
+                if (horaValida(dia, unaHora))
+                {
+                    lista.Add(new Hora(unaHora, hora));
+                }
+                cantHoras--;
             }
             return lista;
         }
-
+        
         private static Boolean horaValida(Fecha fecha, TimeSpan unaHora)
         {
             DateTime horaACheckear = new DateTime(fecha.dia.Year, fecha.dia.Month, fecha.dia.Day, unaHora.Hours, unaHora.Minutes, 0);
@@ -74,34 +62,32 @@ namespace ClinicaFrba.UtilConexion
         public static List<Hora> obtenerHorasDia(Dia dia)
         {
             List<Hora> lista = new List<Hora>();
-            bool horaEnPunto = true;
-            int i = dia.horaDesde.Hours;
-            if (dia.horaDesde.Minutes != 0)//arranca y media
-            {
-                horaEnPunto = false;
-                i++;
-            }
-            for ( ; i <= dia.horaHasta.Hours; i++)
+            int cantHoras = (dia.horaHasta.Hours - dia.horaDesde.Hours) * 2 + (dia.horaHasta.Minutes - dia.horaDesde.Minutes) / 30;
+            int hour = dia.horaDesde.Hours;
+            TimeSpan unaHora;
+            string hora;
+            bool horaEnPunto = (dia.horaDesde.Minutes == 0);
+            while (cantHoras > 0)
             {
                 if (horaEnPunto)
                 {
-                    TimeSpan unaHora = new TimeSpan(i, 00, 0);
-                    string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
-                    lista.Add(new Hora(unaHora, hora));
+                    unaHora = new TimeSpan(hour, 00, 0);
+                    hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString() + "0";
                     horaEnPunto = false;
                 }
                 else
-                {   
-                    i--;
-                    TimeSpan unaHora = new TimeSpan(i, 30, 0);
-                    string hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
-                    lista.Add(new Hora(unaHora, hora));
+                {
+                    unaHora = new TimeSpan(hour, 30, 0);
+                    hora = unaHora.Hours.ToString() + ":" + unaHora.Minutes.ToString();
+                    hour++;
                     horaEnPunto = true;
                 }
+                lista.Add(new Hora(unaHora, hora));
+                cantHoras--;
             }
             return lista;
         }
-
+ 
         public static Boolean horasValidas(TimeSpan desde, TimeSpan hasta)
         {
             if(desde.Hours < hasta.Hours)
