@@ -911,7 +911,6 @@ begin
 end
 go
 --Modificacion padre puede implicar agregar hijos, lo que implica nueva alta
-
 create procedure kernel_panic.modificacion_Padre
 		@Dire VARCHAR(255),
 		@Tel numeric(18,0),
@@ -920,24 +919,59 @@ create procedure kernel_panic.modificacion_Padre
 		@Estado_civil VARCHAR(20),
 		@Plan_Medico numeric(18,0),
 		@Motivo VARCHAR(255),
-		@IdAfiInput int
+		@IdAfiInput int,	
+		@IdAfiReturn int OUTPUT
 AS
-	DECLARE @IdAfiReturn INT
-	SET @IdAfiReturn = @IdAfiInput
-	DECLARE @IdAfiEnPlan INT
-	SET @IdAfiEnPlan = (select Numero_de_grupo from kernel_panic.Afiliados where Id =  @IdAfiInput)
-	UPDATE kernel_panic.Afiliados SET Direccion = @Dire WHERE Id = @IdAfiInput
-	UPDATE kernel_panic.Afiliados SET Telefono = @Tel WHERE Id = @IdAfiInput
-	UPDATE kernel_panic.Afiliados SET Mail = @Mail WHERE Id = @IdAfiInput
-	UPDATE kernel_panic.Afiliados SET Sexo = @Sexo WHERE Id = @IdAfiInput
-	UPDATE kernel_panic.Afiliados SET Estado_civil = @Estado_civil WHERE Id = @IdAfiInput
-	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('M',@IdAfiInput, @Motivo+': Se actualizaron datos basicos')
-	IF (@Plan_Medico <> (SELECT Plan_grupo FROM kernel_panic.Grupos_Familiares WHERE Id = @IdAfiEnPlan))
+	IF (@IdAfiInput < 0)
 	BEGIN
-		UPDATE kernel_panic.Grupos_Familiares SET Plan_grupo = @Plan_Medico WHERE Id = @IdAfiEnPlan
-		INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion, Valor_anterior) VALUES ('M',@IdAfiInput, @Motivo+': Se actualizó el Plan', CONVERT(VARCHAR(20),(SELECT Plan_grupo from kernel_panic.Grupos_Familiares where Id = @IdAfiEnPlan)))
+		SET @IdAfiInput = -@IdAfiInput
 	END
-	RETURN @IdAfiReturn 
+	IF (@Estado_civil = 'Soltero/a' OR @Estado_civil = 'Viudo/a' OR @Estado_civil  = 'Divorciado/a')
+	BEGIN
+		DECLARE @ACTIVO INT
+		DECLARE @FLAG INT
+		SET @FLAG = 0
+		SET @ACTIVO = (SELECT TOP 1 Esta_activo from kernel_panic.Afiliados where Id = @IdAfiInput+1 group by Esta_activo order by Esta_activo DESC)
+		IF @@rowcount <> 0
+			BEGIN
+				IF @ACTIVO = 1
+				BEGIN
+					print 'No puede cambiar su estado civil si su pareja continúa activa'
+					SET @IdAfiReturn = -@IdAfiInput
+					RETURN
+				END
+				ELSE 
+				BEGIN 
+					SET @FLAG = 1
+				END
+			END
+		ELSE
+		BEGIN
+			SET @FLAG = 1
+		END
+	END
+	ELSE
+	BEGIN
+		SET @FLAG = 1
+	END
+	IF @FLAG = 1
+	BEGIN
+		SET @IdAfiReturn = @IdAfiInput
+		DECLARE @IdAfiEnPlan INT
+		SET @IdAfiEnPlan = (select Numero_de_grupo from kernel_panic.Afiliados where Id =  @IdAfiInput)
+		UPDATE kernel_panic.Afiliados SET Direccion = @Dire WHERE Id = @IdAfiInput
+		UPDATE kernel_panic.Afiliados SET Telefono = @Tel WHERE Id = @IdAfiInput
+		UPDATE kernel_panic.Afiliados SET Mail = @Mail WHERE Id = @IdAfiInput
+		UPDATE kernel_panic.Afiliados SET Sexo = @Sexo WHERE Id = @IdAfiInput
+		UPDATE kernel_panic.Afiliados SET Estado_civil = @Estado_civil WHERE Id = @IdAfiInput
+		INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('M',@IdAfiInput, @Motivo+': Se actualizaron datos basicos')
+		IF (@Plan_Medico <> (SELECT Plan_grupo FROM kernel_panic.Grupos_Familiares WHERE Id = @IdAfiEnPlan))
+			BEGIN
+			UPDATE kernel_panic.Grupos_Familiares SET Plan_grupo = @Plan_Medico WHERE Id = @IdAfiEnPlan
+			INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion, Valor_anterior) VALUES ('M',@IdAfiInput, @Motivo+': Se actualizó el Plan', CONVERT(VARCHAR(20),(SELECT Plan_grupo from kernel_panic.Grupos_Familiares where Id = @IdAfiEnPlan)))
+			END
+		RETURN  
+	END	
 GO
 
 --CREO QUE ESTE PROCEDURE NO ES NECESARIO, REUTILIZO EL ALTA HERMANO PARA QUE PUEDA AGREGAR NUEVOS HIJOS
