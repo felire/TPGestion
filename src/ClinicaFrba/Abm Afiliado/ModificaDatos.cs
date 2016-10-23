@@ -165,6 +165,11 @@ namespace ClinicaFrba.Abm_Afiliado
             if (formularioValido())
             {
                 afiliado.modificar(motivo.Text);
+                if (afiliado.id < 0)
+                {
+                    MessageBox.Show("Su pareja se encuentra activa. No puede modificar dicho estado civil!", "Error");
+                    return;
+                }    
                 MessageBox.Show("Datos modificados con exito!", "Exito");
                 this.Close();
             }

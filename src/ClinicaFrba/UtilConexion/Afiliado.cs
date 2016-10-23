@@ -317,7 +317,12 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(new SqlParameter("@Plan_Medico", plan));
             ListaParametros.Add(new SqlParameter("@Motivo", motivo));
             ListaParametros.Add(new SqlParameter("@IdAfiInput", id));
+            SqlParameter parametroSalida = new SqlParameter("@IdAfiReturn", 0);
+            parametroSalida.Direction = ParameterDirection.Output;
+            ListaParametros.Add(parametroSalida);
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.modificacion_Padre", "SP", ListaParametros);
+            int idAfiliado = Int32.Parse(speaker.comando.Parameters["@IdAfiReturn"].Value.ToString());
+            this.id = idAfiliado;
             speaker.close();
         }
 
