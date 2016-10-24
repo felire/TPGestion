@@ -92,7 +92,8 @@ namespace ClinicaFrba.Registro_Llegada
         {
             profesionalesActuales.Clear();
             profesionalesActuales = Profesional.buscar(nombre.Text, apellido.Text, ((Especialidad)comboEspecialidades.SelectedItem).descripcion, (string)tipoDoc.SelectedItem, numeroDoc.Text);
-            listaProfesionales.DataSource = profesionalesActuales;
+            List<Profesional> profesionales = profesionalesActuales.Where(pro => Turno.darTurnos(this.afiliado, pro).Count() > 0).ToList();
+            listaProfesionales.DataSource = profesionales;
             listaProfesionales.ClearSelection();
         }
 
