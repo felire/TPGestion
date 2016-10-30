@@ -98,16 +98,23 @@ namespace ClinicaFrba.Registro_Llegada
             if (seleccionValida())
             {
                 Afiliado afiliado = (Afiliado)listaAfiliados.CurrentRow.DataBoundItem;
-                int bonoAUsar = afiliado.bonoAUsar();
-                if (bonoAUsar > 0)
+                if (tieneTurnos(afiliado))
                 {
-                    ElegirProfesional elegirProfesinal = new ElegirProfesional(afiliado, bonoAUsar);
-                    this.Close();
-                    elegirProfesinal.Show();
+                    int bonoAUsar = afiliado.bonoAUsar();
+                    if (bonoAUsar > 0)
+                    {
+                        ElegirProfesional elegirProfesinal = new ElegirProfesional(afiliado, bonoAUsar);
+                        this.Close();
+                        elegirProfesinal.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No tiene bonos disponibles", "Error!", MessageBoxButtons.OK);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("No tiene bonos disponibles", "Error!", MessageBoxButtons.OK);
+                    MessageBox.Show("El afiliado no tiene turnos al dia de la fecha", "Error!", MessageBoxButtons.OK);
                 }
             }
         }
@@ -115,6 +122,11 @@ namespace ClinicaFrba.Registro_Llegada
         private void cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private Boolean tieneTurnos(Afiliado afiliado)
+        {
+            return (Turno.darTodosLosTurnosHoyDe(afiliado).Count > 0);
         }
     }
 }

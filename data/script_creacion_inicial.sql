@@ -1,11 +1,6 @@
-/*USE [GD2C2016]
-GO
-*/
-CREATE SCHEMA [kernel_panic] AUTHORIZATION [gd]
+CREATE SCHEMA kernel_panic AUTHORIZATION gd
 GO
 
-CREATE PROCEDURE kernel_panic.CrearTablas
-AS
 	CREATE TABLE [kernel_panic].[Roles] (
 		Id INT IDENTITY(1,1) PRIMARY KEY,
 		Nombre VARCHAR (20) NOT NULL UNIQUE,
@@ -182,10 +177,13 @@ AS
 		Desde DATE,
 		Hasta DATE,
 		FOREIGN KEY (EsquemaTrabajo) REFERENCES [kernel_panic].[Esquema_Trabajo] (Id));
-GO
 
 CREATE INDEX indice_afiliado
 ON [kernel_panic].[Afiliados](Nombre, Apellido)
+GO
+
+
+
 
 CREATE PROCEDURE kernel_panic.BorrarTablas
 AS
@@ -210,7 +208,8 @@ AS
 	DROP TABLE [kernel_panic].[Funciones_Roles]
 	DROP TABLE [kernel_panic].[Funciones]
 	DROP TABLE [kernel_panic].[Roles]
-GO					
+GO
+					
 
 CREATE PROCEDURE kernel_panic.Cargar_registro_afiliados
 AS
@@ -257,6 +256,7 @@ AS
 	DROP TABLE #auxiliarPaciente
 GO
 
+
 CREATE PROCEDURE kernel_panic.Cargar_tipo_especialidad
 AS
 	INSERT INTO kernel_panic.Tipo_Especialidad (Codigo, Descripcion) 
@@ -264,6 +264,7 @@ AS
 	FROM gd_esquema.Maestra
 	WHERE Tipo_Especialidad_Codigo IS NOT NULL
 GO
+
 
 CREATE PROCEDURE kernel_panic.Cargar_especialidades
 AS
@@ -273,12 +274,14 @@ AS
 	WHERE Especialidad_Codigo IS NOT NULL
 GO
 
+
 CREATE PROCEDURE kernel_panic.Cargar_planes
 AS
 	INSERT INTO kernel_panic.Planes (Codigo, Descripcion, Precio_bono_consulta)
 	SELECT DISTINCT Plan_Med_Codigo, Plan_Med_Descripcion, Plan_Med_Precio_Bono_Consulta
 	FROM gd_esquema.Maestra
 GO
+
 
 CREATE PROCEDURE kernel_panic.Cargar_profesionales
 AS
@@ -310,6 +313,7 @@ AS
 	
 GO
 
+
 CREATE PROCEDURE kernel_panic.Cargar_especialidad_profesional
 AS
 	INSERT INTO kernel_panic.Especialidad_Profesional (Especialidad_codigo, Profesional_id)
@@ -317,6 +321,7 @@ AS
 	FROM gd_esquema.Maestra AS M JOIN kernel_panic.Profesionales AS P ON (P.Numero_doc = M.Medico_Dni)
 	GROUP BY M.Especialidad_Codigo, P.Id
 GO
+
 
 CREATE PROCEDURE kernel_panic.Cargar_turnos
 AS
@@ -329,6 +334,7 @@ AS
 	SET IDENTITY_INSERT kernel_panic.Turnos OFF
 GO
 
+
 CREATE PROCEDURE kernel_panic.Cargar_diagnosticos
 AS
 	INSERT INTO kernel_panic.Diagnosticos (Afiliado_id, Profesional_id, Fecha, Sintoma, Enfermedad, Turno_id)
@@ -339,6 +345,7 @@ AS
 	GROUP BY A.Id, P.Id, M.Turno_Fecha, M.Consulta_Sintomas, M.Consulta_Enfermedades, M.Turno_Numero
 GO
 
+
 CREATE PROCEDURE kernel_panic.Cargar_transacciones
 AS
 	INSERT INTO kernel_panic.Transacciones (Cantidad, Precio, Fecha, Afiliado)
@@ -347,6 +354,7 @@ AS
 	WHERE Bono_Consulta_Fecha_Impresion IS NOT NULL
 	GROUP BY Bono_Consulta_Fecha_Impresion,A.Id
 GO
+
 
 CREATE PROCEDURE kernel_panic.CargarBonos
 AS
@@ -387,20 +395,24 @@ AS
 	SET IDENTITY_INSERT kernel_panic.Bonos_Consultas OFF
 GO
 
+
 CREATE PROCEDURE kernel_panic.CargarRoles
 AS
 	INSERT INTO kernel_panic.Roles (Nombre, Esta_activo) VALUES ('Administrativo',1), ('Afiliado',1), ('Profesional',1)
 GO
+
 
 CREATE PROCEDURE kernel_panic.CargarFuncionalidades
 AS
 	INSERT INTO kernel_panic.Funciones (Nombre) VALUES ('ABM Roles'), ('ABM Afiliado'), ('ABM Agenda'), ('ABM Bonos'), ('ABM Turnos'), ('Llegada afiliado'), ('Resultado atencion medica'), ('ABM Cancelaciones'), ('Listado Estadistico')
 GO
 
+
 CREATE PROCEDURE kernel_panic.CargarRoles_Funcionalidad
 AS
 	INSERT INTO kernel_panic.Funciones_Roles (Rol_id,Funcion_id) VALUES (1,1),(1,2),(1,3),(1,4),(1,6),(1,9),(2,4),(2,5),(2,8),(3,7),(3,8)
 GO
+
 
 CREATE PROCEDURE kernel_panic.chequearUsuario
 @nombreUsuario VARCHAR(50),
@@ -453,6 +465,7 @@ AS
 	DROP TABLE #user
 GO
 
+
 CREATE PROCEDURE kernel_panic.crearUsuarioYRolesxU
 AS
 INSERT INTO kernel_panic.Usuarios (Nombre_usuario, Password_usuario) VALUES ('afiliado', '6b3f098db13fa8125179e832290d47df03bc6964fc76438f369e7d521cf0f15d') -- feli1234 la pass
@@ -481,6 +494,7 @@ AS
 		END
 GO
 
+
 CREATE PROCEDURE kernel_panic.agregarEsquemaAgenda --Aca se podria validar si ya existe una franja con esos valores, etc..
 @profesional INT,
 @fechaDesde DATE,
@@ -499,6 +513,7 @@ AS
 GO
 
 
+
 CREATE PROCEDURE kernel_panic.agregarDiaAgenda
 @esquema INT,
 @dia INT,
@@ -509,6 +524,7 @@ AS
 	INSERT INTO kernel_panic.Agenda_Diaria (EsquemaTrabajo, Dia, Desde, Hasta, Especialidad) VALUES (@esquema, @dia, @horaDesde, @horaHasta, @especialidad)
 GO
 
+
 CREATE PROCEDURE kernel_panic.cancelarTurnoAfi
 @idTurno INT,
 @detalle VARCHAR(400),
@@ -517,6 +533,7 @@ AS
 	INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, GETDATE())
 	UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Id = @idTurno AND Cancelacion IS NULL
 GO
+
 
 CREATE PROCEDURE kernel_panic.cancelarDiaProfesional
 @dia DATE,
@@ -537,6 +554,7 @@ AS
 		SET @fallo = -1 --fallo
 		END
 GO
+
 
 CREATE PROCEDURE kernel_panic.cancelarFranjaProfesional
 @desde DATE,
@@ -559,6 +577,7 @@ AS
 		SET @fallo = -1
 		END
 GO
+
 
 
 CREATE PROCEDURE kernel_panic.consultaNueva
@@ -586,6 +605,7 @@ AS
 
 	DROP TABLE #consulta
 GO
+
 
 --ALta Afiliado
 --Todas las ALTAS las hice con manejo de errores para luego probar todo bien en la app, dps se los vuelo o los metemos en un tabla magica de logs del sistema.
@@ -664,6 +684,7 @@ AS
 	end
 GO
 
+
 --Alta Conyugue 
 
 create procedure kernel_panic.alta_conyuge
@@ -735,6 +756,7 @@ AS
 		 RETURN @IdAfiReal
 		 END
 GO
+
 
 --Alta hermano
 create procedure kernel_panic.alta_hermano
@@ -810,6 +832,7 @@ AS
 		 END
 GO
 
+
 --Alta/Rehabilitación desde cero
 --Aca por si lo quisieron dar de baja y lo quieren rehabilitar de 0 y no simplemente (activarlo)
 create procedure kernel_panic.rehabilitacion_afiliado
@@ -883,6 +906,7 @@ AS
 	RETURN @IdAfiReal
 GO
 
+
 --Alta/Habilitacion usuario existente
 create procedure kernel_panic.rehabilitar @IdAfiliado int
 AS
@@ -900,16 +924,7 @@ AS
 	RETURN @IdAfiliado
 GO
 
--- Trigger para Loggear las Altas
-Create trigger kernel_panic.Alta_AF_inserta_log
-on kernel_panic.Afiliados
-after insert as
-begin
-	declare @id numeric
-	set @id = (select top 1 Id from inserted order by id DESC)
-	insert into kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('A',@id,'Se ha registrado el alta de usuario')
-end
-go
+
 --Modificacion padre puede implicar agregar hijos, lo que implica nueva alta
 create procedure kernel_panic.modificacion_Padre
 		@Dire VARCHAR(255),
@@ -974,31 +989,6 @@ AS
 	END	
 GO
 
---CREO QUE ESTE PROCEDURE NO ES NECESARIO, REUTILIZO EL ALTA HERMANO PARA QUE PUEDA AGREGAR NUEVOS HIJOS
-create procedure kernel_panic.modificacion_familiares
-		@Dire VARCHAR(255),
-		@Tel numeric(18,0),
-		@Mail VARCHAR(255),
-		@Sexo CHAR(1),
-		@Estado_civil VARCHAR(20),
-		@NroHijo int, --Puede ser cualquier valor, no afecta.
-		@Estado bit,
-		@Motivo VARCHAR(255),
-		@IdAfiInput int
-AS
-	UPDATE kernel_panic.Afiliados SET Direccion = @Dire WHERE Id = @IdAfiInput
-	UPDATE kernel_panic.Afiliados SET Telefono = @Tel WHERE Id = @IdAfiInput
-	UPDATE kernel_panic.Afiliados SET Mail = @Mail WHERE Id = @IdAfiInput
-	UPDATE kernel_panic.Afiliados SET Sexo = @Sexo WHERE Id = @IdAfiInput
-	UPDATE kernel_panic.Afiliados SET Familiares_a_cargo = @NroHijo WHERE Id = @IdAfiInput
-	UPDATE kernel_panic.Afiliados SET Estado_civil = @Estado_civil WHERE Id = @IdAfiInput
-	INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) VALUES ('M',@IdAfiInput, @Motivo+': Se actualizaron datos basicos')
-	IF (@Estado = 1)
-	BEGIN
-		UPDATE kernel_panic.Afiliados SET Esta_activo = 1 WHERE Id = @IdAfiInput
-		INSERT INTO kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion, Valor_anterior) VALUES ('M',@IdAfiInput, @Motivo+': Se rehabilitó el usuario', CONVERT(VARCHAR(20),0))
-	END
-GO
 
 --baja logica Afiliado
 create procedure kernel_panic.baja_logica_afiliado @Id int, @Motivo varchar(400) 
@@ -1039,8 +1029,18 @@ AS
 	END
 GO
 
-EXEC kernel_panic.BorrarTablas
-EXEC kernel_panic.CrearTablas
+-- Trigger para Loggear las Altas
+Create trigger kernel_panic.Alta_AF_inserta_log
+on kernel_panic.Afiliados
+after insert as
+begin
+	declare @id numeric
+	set @id = (select top 1 Id from inserted order by id DESC)
+	insert into kernel_panic.LogsCambioAfiliados (Tipo, Afiliado, Descripcion) values ('A',@id,'Se ha registrado el alta de usuario')
+end
+GO
+
+
 EXEC kernel_panic.Cargar_planes
 EXEC kernel_panic.CargarRoles
 EXEC kernel_panic.CargarFuncionalidades
@@ -1056,9 +1056,12 @@ EXEC kernel_panic.Cargar_diagnosticos
 EXEC kernel_panic.Cargar_transacciones
 EXEC kernel_panic.CargarBonos
 
+
+
+
+
 /*
 DROP PROCEDURE kernel_panic.BorrarTablas
-DROP PROCEDURE kernel_panic.CrearTablas
 DROP PROCEDURE kernel_panic.Cargar_planes
 DROP PROCEDURE kernel_panic.Cargar_registro_afiliados
 DROP PROCEDURE kernel_panic.Cargar_tipo_especialidad
@@ -1080,7 +1083,14 @@ DROP PROCEDURE kernel_panic.agregarDiaAgenda
 DROP PROCEDURE kernel_panic.cancelarTurnoAfi
 DROP PROCEDURE kernel_panic.cancelarDiaProfesional
 DROP PROCEDURE kernel_panic.cancelarFranjaProfesional
-DROP PROCEDURE kernel_panic.agregarRegistroDeLogsInicial
 DROP PROCEDURE kernel_panic.consultaNueva
+DROP PROCEDURE kernel_panic.alta_afiliado
+DROP PROCEDURE kernel_panic.alta_conyuge
+DROP PROCEDURE kernel_panic.alta_hermano
+DROP PROCEDURE kernel_panic.baja_logica_afiliado
+DROP PROCEDURE kernel_panic.modificacion_Padre
+DROP PROCEDURE kernel_panic.rehabilitacion_afiliado
+DROP PROCEDURE kernel_panic.rehabilitar
+DROP TRIGGER kernel_panic.Alta_AF_inserta_log
 */
 

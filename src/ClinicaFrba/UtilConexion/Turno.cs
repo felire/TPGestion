@@ -77,6 +77,36 @@ namespace ClinicaFrba.UtilConexion
             return turnos;
         }
 
+        public static List<Turno> darTodosLosTurnosHoyDe(Afiliado afiliado)
+        {
+            List<SqlParameter> ListaParametros = new List<SqlParameter>();
+            ListaParametros.Add(new SqlParameter("@afiliadoId", afiliado.id));
+            List<Turno> turnos = new List<Turno>();
+            string query = "SELECT Id, Fecha, Especialidad, Profesional_id " +
+                           "FROM kernel_panic.Turnos " +
+                           "WHERE Afiliado_id = @afiliadoId AND CONVERT(DATE,Fecha) = CONVERT(DATE,GETDATE()) " +
+                           "AND Fecha_llegada IS NULL " +
+                           "AND Cancelacion IS NULL " +
+                           "ORDER BY Fecha ASC";
+            SpeakerDB speaker = ConexionDB.ObtenerDataReader(query, "T", ListaParametros);
+            if (speaker.reader.HasRows)
+            {
+                while (speaker.reader.Read())
+                {
+                    Turno turno = new Turno();
+                    turno.id = (int)speaker.reader["Id"];
+                    turno.fecha = (DateTime)speaker.reader["Fecha"];
+                    turno.especialidad = new Especialidad((decimal)speaker.reader["Especialidad"]);
+                    turno.profesional = new Profesional((int)speaker.reader["Profesional_id"]);
+                    turno.especialidadNombre = turno.especialidad.descripcion;
+                    turno.profesionalNombre = turno.profesional.apellido + ", " + turno.profesional.nombre;
+                    turnos.Add(turno);
+                }
+            }
+            speaker.close();
+            return turnos;
+        }
+
         public void cancelar(string motivoCancelacion, string tipo)
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
