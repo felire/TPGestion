@@ -209,6 +209,11 @@
     <Compile Include="Pedir Turno\ElegirProfesional.Designer.cs">
       <DependentUpon>ElegirProfesional.cs</DependentUpon>
     </Compile>
+    <Compile Include="ArchivoDeConfiguracion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>ArchivoDeConfiguracion.settings</DependentUpon>
+    </Compile>
     <Compile Include="UtilConexion\FranjaCancelada.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -395,6 +400,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="ArchivoDeConfiguracion.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>ArchivoDeConfiguracion.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

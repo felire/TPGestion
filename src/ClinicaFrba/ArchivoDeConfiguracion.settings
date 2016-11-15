@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ClinicaFrba" GeneratedClassName="ArchivoDeConfiguracion">
+  <Profiles />
+  <Settings>
+    <Setting Name="UserDB" Type="System.String" Scope="User">
+      <Value Profile="(Default)">gd</Value>
+    </Setting>
+    <Setting Name="PassDB" Type="System.String" Scope="User">
+      <Value Profile="(Default)">gd2016</Value>
+    </Setting>
+    <Setting Name="InitialCatalogDB" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GD2C2016</Value>
+    </Setting>
+    <Setting Name="SourceDB" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\SQLSERVER2012</Value>
+    </Setting>
+    <Setting Name="Fecha" Type="System.String" Scope="User">
+      <Value Profile="(Default)">15/02/2015</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

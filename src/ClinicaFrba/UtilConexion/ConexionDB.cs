@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Data;
 using System.Data.Sql;
+using System.Windows.Forms;
 
 namespace ClinicaFrba.UtilConexion
 {
@@ -14,10 +15,11 @@ namespace ClinicaFrba.UtilConexion
     {
         public static SqlConnection ObtenerConexion()
         {
-            string datosConexion = "Data Source=localhost\\SQLSERVER2012;" +"Initial Catalog=GD2C2016;User Id=gd; Password=gd2016";
+            
+            string datosConexion = "Data Source=" + ArchivoDeConfiguracion.Default.SourceDB + "; Initial Catalog=" + ArchivoDeConfiguracion.Default.InitialCatalogDB + "; User Id=" + ArchivoDeConfiguracion.Default.UserDB + "; Password=" + ArchivoDeConfiguracion.Default.PassDB;
             SqlConnection Conn = new SqlConnection(datosConexion);
             Conn.Open();
-            return Conn;                   
+            return Conn;
         }
 
         public static SpeakerDB ObtenerDataReader(string commandtext, string commandtype, List<SqlParameter> ListaParametro)
