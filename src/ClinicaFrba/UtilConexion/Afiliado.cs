@@ -122,6 +122,7 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@Id", id));
             ListaParametros.Add(new SqlParameter("@Motivo", motivo));
+            ListaParametros.Add(new SqlParameter("@fecha", DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date));
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.baja_logica_afiliado", "SP", ListaParametros);
             speaker.close();
         }

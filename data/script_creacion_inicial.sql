@@ -532,9 +532,10 @@ GO
 CREATE PROCEDURE kernel_panic.cancelarTurnoAfi
 @idTurno INT,
 @detalle VARCHAR(400),
-@tipo VARCHAR(30)
+@tipo VARCHAR(30),
+@fecha DATETIME
 AS
-	INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, GETDATE())
+	INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, @fecha) --En vez del GETDATE tiramos la fecha
 	UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Id = @idTurno AND Cancelacion IS NULL
 GO
 
@@ -544,11 +545,12 @@ CREATE PROCEDURE kernel_panic.cancelarDiaProfesional
 @profesional INT,
 @detalle VARCHAR(400),
 @tipo VARCHAR(30),
+@fecha DATETIME,
 @fallo INT OUTPUT
 AS
 	IF EXISTS (SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE (@dia BETWEEN EM.Desde AND EM.Hasta) AND Profesional = @profesional)
 		BEGIN
-		INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, GETDATE())
+		INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, @fecha)
 		UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Profesional_id = @profesional AND Cancelacion IS NULL AND CONVERT(DATE,Fecha) = @dia
 		INSERT INTO kernel_panic.Franjas_Canceladas (EsquemaTrabajo, Desde, Hasta) VALUES ((SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE (@dia BETWEEN EM.Desde AND EM.Hasta) AND Profesional = @profesional),@dia,@dia)
 		SET @fallo = 1 --funco
@@ -566,11 +568,12 @@ CREATE PROCEDURE kernel_panic.cancelarFranjaProfesional
 @profesional INT,
 @detalle VARCHAR(400),
 @tipo VARCHAR(30),
+@fecha DATETIME,
 @fallo INT OUTPUT
 AS
 	IF EXISTS (SELECT EM.Id FROM kernel_panic.Esquema_Trabajo EM WHERE (@desde BETWEEN EM.Desde AND EM.Hasta OR @hasta BETWEEN EM.Desde AND EM.Hasta) AND Profesional = @profesional)
 		BEGIN
-		INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, GETDATE())
+		INSERT INTO kernel_panic.Cancelaciones (Tipo, Detalle, Fecha) VALUES (@tipo, @detalle, @fecha)
 		UPDATE kernel_panic.Turnos SET Cancelacion = @@IDENTITY WHERE Profesional_id = @profesional AND Cancelacion IS NULL AND CAST(Fecha AS DATE) BETWEEN @desde AND @hasta
 		INSERT INTO kernel_panic.Franjas_Canceladas (EsquemaTrabajo, Desde, Hasta)
 		SELECT EM.Id,@desde,@hasta FROM kernel_panic.Esquema_Trabajo EM WHERE (@desde BETWEEN EM.Desde AND EM.Hasta OR @hasta BETWEEN EM.Desde AND EM.Hasta) AND Profesional = @profesional
@@ -995,10 +998,10 @@ GO
 
 
 --baja logica Afiliado
-create procedure kernel_panic.baja_logica_afiliado @Id int, @Motivo varchar(400) 
+create procedure kernel_panic.baja_logica_afiliado @Id int, @Motivo varchar(400), @fecha DATETIME 
 AS
 	declare @fec datetime
-	set @fec = GETDATE()
+	set @fec = @fecha
 	IF(SELECT Numero_en_el_grupo FROM kernel_panic.Afiliados WHERE Id = @Id) <> 1
 	BEGIN
 		UPDATE kernel_panic.Usuarios SET Habilitado = 0 where kernel_panic.Usuarios.Nombre_usuario = (CONVERT(VARCHAR(50), @Id))

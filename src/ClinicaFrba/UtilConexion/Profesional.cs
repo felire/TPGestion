@@ -163,6 +163,7 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(new SqlParameter("@profesional", this.id));
             ListaParametros.Add(new SqlParameter("@detalle", detalle));
             ListaParametros.Add(new SqlParameter("@tipo", tipo));
+            ListaParametros.Add(new SqlParameter("@fecha", DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date));
             SqlParameter parametroSalida = new SqlParameter("@fallo", 0);
             parametroSalida.Direction = ParameterDirection.Output;
             ListaParametros.Add(parametroSalida);
@@ -180,6 +181,7 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(new SqlParameter("@profesional", this.id));
             ListaParametros.Add(new SqlParameter("@detalle", detalle));
             ListaParametros.Add(new SqlParameter("@tipo", tipo));
+            ListaParametros.Add(new SqlParameter("@fecha", DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date));
             SqlParameter parametroSalida = new SqlParameter("@fallo", 0);
             parametroSalida.Direction = ParameterDirection.Output;
             ListaParametros.Add(parametroSalida);

@@ -51,10 +51,11 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@afiliadoId", afiliado.id));
+            ListaParametros.Add(new SqlParameter("@fecha", DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date));
             List<Turno> turnos = new List<Turno>();
             string query = "SELECT Id, Fecha, Especialidad, Profesional_id "+
                            "FROM kernel_panic.Turnos "+
-                           "WHERE Afiliado_id = @afiliadoId AND Fecha >= CONVERT(DATE,GETDATE()) "+
+                           "WHERE Afiliado_id = @afiliadoId AND Fecha >= CONVERT(DATE,@fecha) "+
                            "AND Fecha_llegada IS NULL "+
                            "AND Cancelacion IS NULL "+
                            "ORDER BY Fecha ASC";
@@ -81,10 +82,11 @@ namespace ClinicaFrba.UtilConexion
         {
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@afiliadoId", afiliado.id));
+            ListaParametros.Add(new SqlParameter("@fecha", DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date));
             List<Turno> turnos = new List<Turno>();
             string query = "SELECT Id, Fecha, Especialidad, Profesional_id " +
                            "FROM kernel_panic.Turnos " +
-                           "WHERE Afiliado_id = @afiliadoId AND CONVERT(DATE,Fecha) = CONVERT(DATE,GETDATE()) " +
+                           "WHERE Afiliado_id = @afiliadoId AND CONVERT(DATE,Fecha) = CONVERT(DATE,@fecha) " +
                            "AND Fecha_llegada IS NULL " +
                            "AND Cancelacion IS NULL " +
                            "ORDER BY Fecha ASC";
@@ -113,6 +115,7 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Add(new SqlParameter("@idTurno", this.id));
             ListaParametros.Add(new SqlParameter("@detalle", motivoCancelacion));
             ListaParametros.Add(new SqlParameter("@tipo", tipo));
+            ListaParametros.Add(new SqlParameter("@fecha", DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date));
             SpeakerDB speaker = ConexionDB.ExecuteNoQuery("kernel_panic.cancelarTurnoAfi", "SP", ListaParametros);
             speaker.close();
         }
@@ -122,11 +125,12 @@ namespace ClinicaFrba.UtilConexion
             List<SqlParameter> ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@idAfiliado", afiliado.id));
             ListaParametros.Add(new SqlParameter("@idProfesional", profesional.id));
+            ListaParametros.Add(new SqlParameter("@fecha", DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date));
             string query = "SELECT Id, Fecha, Especialidad "+
                            "FROM kernel_panic.Turnos "+
                            "WHERE Afiliado_id = @idAfiliado "+
                            "AND Profesional_id = @idProfesional "+
-                           "AND CONVERT(DATE,Fecha) = CONVERT(DATE,GETDATE()) "+
+                           "AND CONVERT(DATE,Fecha) = CONVERT(DATE,@fecha) "+
                            "AND Fecha_llegada IS NULL "+
                            "AND Cancelacion IS NULL "+
                            "ORDER BY Fecha ASC";
@@ -174,8 +178,9 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Clear();
             ListaParametros = new List<SqlParameter>();
             ListaParametros.Add(new SqlParameter("@idTurno", this.id));
+            ListaParametros.Add(new SqlParameter("@fecha", DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date));
             query = "UPDATE kernel_panic.Turnos "+
-                    "SET Fecha_llegada = GETDATE() "+
+                    "SET Fecha_llegada = @fecha "+
                     "WHERE Id = @idTurno";
             speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
             speaker.close();
