@@ -70,7 +70,7 @@ namespace ClinicaFrba.Listados
         private void cargarDatos()
         {
             anios= new List<int>();
-            for (int i = 2015; i <= DateTime.Now.Year; i++) anios.Add(i);
+            for (int i = 2015; i <= DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date.Year; i++) anios.Add(i);
             anioElegido.DataSource = anios;
             semestreUno.Checked=true;
             especialidades = Especialidad.darTodasEspecialidades();

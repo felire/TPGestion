@@ -79,7 +79,7 @@ namespace ClinicaFrba.Cancelar_Atencion
                 mensajeDeError = mensajeDeError + "\r\n" + "Debe especificar el motivo de la cancelacion";
             }
             Turno turno = (Turno)turnos.CurrentRow.DataBoundItem;
-            if ((turno.fecha.Date - DateTime.Now.Date).Days < 1)
+            if ((turno.fecha.Date - DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date).Days < 1)
             {
                 mensajeDeError = mensajeDeError + "\r\n" + "No puede cancelar un turno el dia que lo tiene";
             }

@@ -24,7 +24,7 @@ namespace ClinicaFrba.Abm_Afiliado
             this.afiliadoPadre = afiliadoPadre;
             InitializeComponent();
             this.cargarDatos();
-            fechaNac.MaxDate = DateTime.Now;
+            fechaNac.MaxDate = DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date;
             numero.Text = numeroHijo.ToString();
         }
 

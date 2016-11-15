@@ -22,7 +22,7 @@ namespace ClinicaFrba.Abm_Afiliado
             this.formu = formulario;
             InitializeComponent();
             this.cargarDatos();
-            fechaNac.MaxDate = DateTime.Now;
+            fechaNac.MaxDate = DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date;
         }
 
         private void cargarDatos()
