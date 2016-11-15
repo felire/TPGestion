@@ -15,7 +15,7 @@
       <Value Profile="(Default)">.\SQLSERVER2012</Value>
     </Setting>
     <Setting Name="Fecha" Type="System.String" Scope="User">
-      <Value Profile="(Default)">15/02/2015</Value>
+      <Value Profile="(Default)">20/11/2016</Value>
     </Setting>
   </Settings>
 </SettingsFile>
