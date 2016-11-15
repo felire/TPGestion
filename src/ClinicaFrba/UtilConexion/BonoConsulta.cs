@@ -53,7 +53,7 @@ namespace ClinicaFrba.UtilConexion
                 ListaParametros.Clear();
                 ListaParametros.Add(new SqlParameter("@grupo", afiliado.numeroDeGrupo));
                 ListaParametros.Add(new SqlParameter("@plan", plan));
-                ListaParametros.Add(new SqlParameter("@hoy", DateTime.Now));
+                ListaParametros.Add(new SqlParameter("@hoy", DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date));
                 query = "INSERT INTO kernel_panic.Bonos_Consultas (Nro_consulta, Grupo, Plan_asociado, Afiliado, Fecha_de_compra, Fecha_de_uso, Turno) " +
                         "VALUES (NULL, @grupo, @plan, NULL, @hoy, NULL, NULL)";
                 speaker = ConexionDB.ExecuteNoQuery(query, "T", ListaParametros);
@@ -62,7 +62,7 @@ namespace ClinicaFrba.UtilConexion
             ListaParametros.Clear();
             ListaParametros.Add(new SqlParameter("@cantidad", cantidad));
             ListaParametros.Add(new SqlParameter("@precioTotal", (int)precioUnitario*cantidad ));
-            ListaParametros.Add(new SqlParameter("@hoy", DateTime.Now));
+            ListaParametros.Add(new SqlParameter("@hoy", DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date));
             ListaParametros.Add(new SqlParameter("@afiliadoId", afiliado.id));
             query = "INSERT INTO kernel_panic.Transacciones (Cantidad, Precio, Fecha, Afiliado) " +
                     "VALUES (@cantidad, @precioTotal, @hoy, @afiliadoId)";

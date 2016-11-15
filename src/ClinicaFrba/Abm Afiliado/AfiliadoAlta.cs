@@ -20,7 +20,7 @@ namespace ClinicaFrba.Abm_Afiliado
             InitializeComponent();
             this.afiliado = new Afiliado();
             cargarComboBoxs();
-            fechaNac.MaxDate = DateTime.Now;
+            fechaNac.MaxDate = DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date;
         }
 
         private void cargarComboBoxs()
