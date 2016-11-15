@@ -20,12 +20,18 @@ namespace ClinicaFrba.Cancelar_Atencion
             InitializeComponent();
             this.profesional = profesional;
             this.nombre.Text = profesional.apellido + ", " + profesional.nombre;
-            this.desde.Value = DateTime.Now;
+            /*this.desde.Value = DateTime.Now;
             this.hasta.Value = DateTime.Now;
             this.dia.Value = DateTime.Now;
             this.desde.MinDate = DateTime.Now.AddDays(1);
             this.hasta.MinDate = DateTime.Now.AddDays(1);
-            this.dia.MinDate = DateTime.Now.AddDays(1);
+            this.dia.MinDate = DateTime.Now.AddDays(1);*/ //Fechas S.O
+            this.desde.Value = DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date; //Fechas de config
+            this.hasta.Value = DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date;
+            this.dia.Value = DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date;
+            this.desde.MinDate = DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date.AddDays(1);
+            this.hasta.MinDate = DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date.AddDays(1);
+            this.dia.MinDate = DateTime.Parse(ArchivoDeConfiguracion.Default.Fecha).Date.AddDays(1);
         }
 
         private void cancelarFranja_Click(object sender, EventArgs e)

@@ -109,3 +109,6 @@ C:\Users\admin\Documents\GitHub\TP2\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaF
 C:\Users\admin\Documents\GitHub\TP2\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Resultado.ElegirAfiliado.resources
 C:\Users\admin\Documents\GitHub\TP2\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.ElegirProfesional.resources
 C:\Users\admin\Documents\GitHub\TP2\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.exe
+C:\Users\Felipe\Desktop\Programas\3er-Ano\Gestion de Datos\TPGestion\src\ClinicaFrba\obj\Debug\ClinicaFrba.pdb

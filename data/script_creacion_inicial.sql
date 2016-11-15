@@ -413,6 +413,10 @@ AS
 	INSERT INTO kernel_panic.Funciones_Roles (Rol_id,Funcion_id) VALUES (1,1),(1,2),(1,3),(1,4),(1,6),(1,9),(2,4),(2,5),(2,8),(3,7),(3,8)
 GO
 
+CREATE PROCEDURE kernel_panic.CrearAgendasParaElBoludoDelAyudante
+AS
+	
+GO
 
 CREATE PROCEDURE kernel_panic.chequearUsuario
 @nombreUsuario VARCHAR(50),
